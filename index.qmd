@@ -1,6 +1,4 @@
 ---
-title: "MtG Kubbur"
-subtitle: "Cube draft stöðutafla"
 page-layout: article
 toc: false
 execute:

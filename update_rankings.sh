@@ -13,7 +13,7 @@ echo "=== Updating ELO Rankings ==="
 if [[ "$1" != "--skip-analysis" ]]; then
   echo "Step 1: Running analysis pipeline..."
   cd "$CUBE_RANKINGS_DIR"
-  Rscript run_analysis.R
+  Rscript run_historical_analysis.R
   echo ""
 else
   echo "Step 1: Skipped (--skip-analysis flag)"
