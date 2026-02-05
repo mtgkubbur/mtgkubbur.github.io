@@ -1,5 +1,39 @@
 ---
-title: "Magic: the Gathering Cube Drafts á Íslandi"
+title: "MtG Kubbur"
+subtitle: "Cube draft stöðutafla"
 page-layout: article
 toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
 ---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(posterior)
+library(cmdstanr)
+library(gt)
+library(gtExtras)
+library(scales)
+library(glue)
+library(googlesheets4)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+source("R/elo_table.R")
+```
+
+```{r}
+#| label: render-table
+
+table_players <- fetch_table_players()
+newest_date <- fetch_newest_date()
+
+render_elo_table(
+  top_n = Inf,
+  min_total_games = 18,
+  table_players = table_players,
+  newest_date = newest_date
+)
+```

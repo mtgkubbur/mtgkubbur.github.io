@@ -4,41 +4,24 @@ project:
 
 website:
   title: "MtG Kubbur"
-  description: "Magic: The Gathering Cube Draft Event in Iceland"
+  description: "Magic: The Gathering Cube Drafts á Íslandi"
   site-url: "https://mtgkubbur.is"
 
   navbar:
-    search: true
-    left:
-      - href: about.qmd
-        text: About
-      - href: cubes.qmd
-        text: Cubes
-      - href: events.qmd
-        text: Events
-      - href: contact.qmd
-        text: Contact
-
+    search: false
     right:
       - icon: github
         href: https://github.com/mtgkubbur/mtgkubbur.github.io
         aria-label: GitHub
 
   page-footer:
-    left: "© 2026 MtG Kubbur"
-    right:
-      - icon: github
-        href: https://github.com/mtgkubbur/mtgkubbur.github.io
-        aria-label: GitHub
+    center: "© 2026 MtG Kubbur"
 
 format:
   html:
     theme:
       light: [cosmo, theme.scss]
     css: styles.css
-    toc: true
-    toc-location: right
-    code-fold: true
+    toc: false
 
-editor: source
 engine: knitr
