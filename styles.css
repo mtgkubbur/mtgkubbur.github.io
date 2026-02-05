@@ -1,0 +1,38 @@
+/* IceCube Reykjavík - Additional Custom Styles */
+/* This file contains additional styles that supplement the main theme.scss */
+
+/* Any additional custom styles that don't fit into the SCSS theme structure can go here */
+
+/* Print styles */
+@media print {
+  .hero-banner {
+    background: #1e3a8a !important;
+    color: white !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  .hero-banner {
+    background: #000000 !important;
+    color: #ffffff !important;
+  }
+  
+  .event-card {
+    border-width: 3px !important;
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .hero-banner h1,
+  .g-col-md-4,
+  .btn-primary,
+  .fade-in {
+    animation: none !important;
+    transition: none !important;
+    transform: none !important;
+  }
+}

@@ -1,0 +1,5 @@
+---
+title: "Magic: the Gathering Cube Drafts á Íslandi"
+page-layout: article
+toc: false
+---
