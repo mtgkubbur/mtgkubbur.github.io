@@ -22,7 +22,7 @@ Quarto config: `_quarto.yml` · Styling: `theme.scss` + `styles.css` · Deploy: 
 
 - **`index.qmd`** — Stigatafla (score table): interactive reactable with ELO rankings, date badge, top-3 podium highlighting
 - **`throun.qmd`** — Leikmaður (player profile): player selector with summary card (ELO, rank, win rate, games, strongest cube type) + unified cube table showing per-category records (wins/losses/winrate) alongside gamma strength bars (red=negative, green=positive) + 5-chart dashboard (ELO full-width, rank + win rate, cube affinity over time + game count). R passes `combine_player_summaries()` data to OJS via `ojs_define()`; charts use Observable Plot. Gamma values are log-odds cube-type effects from the Bradley-Terry model.
-- **`einvigi.qmd`** — Einvígi (head-to-head): two player selectors, shows win totals with percentage bar + per-cube breakdown table. Reads directly from Google Sheets (not processed_data.rds) to preserve original cube names.
+- **`einvigi.qmd`** — Einvígi (head-to-head): two player selectors, shows win totals with percentage bar + per-cube breakdown table + ELO difference time series chart (green/red filled area split at y=0). Reads match data from Google Sheets (original cube names) and ELO history from `combine_player_summaries()`. OJS rendering logic looks up matches in both directions (p1→p2 and p2→p1) and inverts win counts for reverse matches.
 
 ## Conventions
 
@@ -30,6 +30,7 @@ Quarto config: `_quarto.yml` · Styling: `theme.scss` + `styles.css` · Deploy: 
 - Icelandic locale sorting for player names
 - MTG mana color system: blue (#0e68ab), green (#00733e), red (#d3202a), black (#150b00), white (#f9faf4), gold (#8b6914)
 - Navbar and footer framed with blue (Islands) borders
+- **Observable Plot version**: Quarto bundles Plot ~0.6.2 which lacks `Plot.clipY` and `Plot.differenceY`. Use `Math.max(0, val)`/`Math.min(0, val)` with two `areaY` marks as a workaround for split-color area charts.
 
 ## Available Data Assets (for future features)
 

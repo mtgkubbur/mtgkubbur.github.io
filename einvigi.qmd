@@ -168,7 +168,7 @@ viewof player2 = Inputs.select(["", ...players], {
         <div class="h2h-bar-fill h2h-bar-p2" style="width: ${p2Pct}%; background: ${p2Color}">${p2Pct}%</div>
       </div>
       <div class="h2h-total">${totalGames} leikir samtals</div>
-      ${cubeRows.length > 1 ? html`
+      ${cubeRows.length > 0 ? html`
         <div class="h2h-cube-breakdown">
           <div class="h2h-cube-title">Eftir kubb</div>
           <table class="h2h-cube-table">
