@@ -1,0 +1,264 @@
+---
+pagetitle: "Einvígi"
+title-block-style: none
+page-layout: article
+toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(googlesheets4)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+source("R/elo_table.R")
+
+table_players <- fetch_table_players()
+
+# Read raw match data from Google Sheets to keep original cube names
+# (processed_data.rds buckets cubes into High/Medium/Low/Other)
+sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
+games <- read_sheet(sheet_url) |>
+  mutate(date = as_date(date)) |>
+  pivot_longer(game1:game3, names_to = "game", values_to = "winner") |>
+  drop_na(winner) |>
+  mutate(
+    player1 = str_to_title(player1),
+    player2 = str_to_title(player2),
+    winner = str_to_title(winner),
+    cube = str_to_title(cube)
+  ) |>
+  filter(
+    str_to_lower(player1) %in% table_players,
+    str_to_lower(player2) %in% table_players
+  )
+
+# Head-to-head totals
+h2h <- games |>
+  group_by(player1, player2) |>
+  summarise(
+    games = n(),
+    p1_wins = sum(winner == player1),
+    .groups = "drop"
+  )
+
+# Cube-specific breakdown (original cube names)
+h2h_cube <- games |>
+  group_by(player1, player2, cube) |>
+  summarise(
+    games = n(),
+    p1_wins = sum(winner == player1),
+    .groups = "drop"
+  )
+
+# Player list for selectors (Icelandic sort)
+player_list <- sort(unique(c(h2h$player1, h2h$player2)),
+                    method = "radix")
+
+ojs_define(h2h_data = h2h)
+ojs_define(h2h_cube_data = h2h_cube)
+ojs_define(player_names = player_list)
+
+# Historical ELO for difference chart
+history <- combine_player_summaries() |>
+  filter(str_to_lower(player) %in% table_players) |>
+  select(date, player, score_median)
+
+ojs_define(elo_history = history)
+```
+
+```{ojs}
+//| label: data-prep
+h2h = transpose(h2h_data)
+h2hCube = transpose(h2h_cube_data)
+players = player_names
+
+eloHistory = {
+  const raw = transpose(elo_history);
+  return raw.map(d => ({
+    player: d.player,
+    date: new Date(d.date),
+    score_median: +d.score_median
+  }));
+}
+```
+
+```{ojs}
+//| label: player-selectors
+viewof player1 = Inputs.select(["", ...players], {
+  label: "Leikmaður 1:",
+  value: "",
+  format: d => d === "" ? "Veldu leikmann..." : d
+})
+
+viewof player2 = Inputs.select(["", ...players], {
+  label: "Leikmaður 2:",
+  value: "",
+  format: d => d === "" ? "Veldu leikmann..." : d
+})
+```
+
+```{ojs}
+//| label: h2h-results
+{
+  if (player1 === "" || player2 === "" || player1 === player2) {
+    const msg = player1 === player2 && player1 !== ""
+      ? "Veldu tvo ólíka leikmenn"
+      : "Veldu tvo leikmenn til að sjá einvígið";
+    return html`<div class="empty-state">
+      <div class="empty-icon">&#9876;</div>
+      <div>${msg}</div>
+    </div>`;
+  }
+
+  // Find records in both directions: p1→p2 and p2→p1
+  const forward = h2h.filter(d => d.player1 === player1 && d.player2 === player2);
+  const reverse = h2h.filter(d => d.player1 === player2 && d.player2 === player1);
+
+  const p1Wins = (forward[0] ? +forward[0].p1_wins : 0) +
+                 (reverse[0] ? (+reverse[0].games - +reverse[0].p1_wins) : 0);
+  const totalGames = (forward[0] ? +forward[0].games : 0) +
+                     (reverse[0] ? +reverse[0].games : 0);
+  const p2Wins = totalGames - p1Wins;
+
+  if (totalGames === 0) {
+    return html`<div class="empty-state">
+      <div class="empty-icon">&#10068;</div>
+      <div>Engir leikir fundust á milli ${player1} og ${player2}</div>
+    </div>`;
+  }
+
+  const p1Pct = Math.round((p1Wins / totalGames) * 100);
+  const p2Pct = 100 - p1Pct;
+  const p1Color = p1Wins >= p2Wins ? "#00733e" : "#d3202a";
+  const p2Color = p2Wins >= p1Wins ? "#00733e" : "#d3202a";
+
+  // Cube breakdown
+  const cubeForward = h2hCube.filter(d => d.player1 === player1 && d.player2 === player2);
+  const cubeReverse = h2hCube.filter(d => d.player1 === player2 && d.player2 === player1);
+
+  const cubeTypes = [...new Set([...cubeForward.map(d => d.cube), ...cubeReverse.map(d => d.cube)])].sort();
+  const cubeRows = cubeTypes.map(cube => {
+    const fwd = cubeForward.find(d => d.cube === cube);
+    const rev = cubeReverse.find(d => d.cube === cube);
+    const w1 = (fwd ? +fwd.p1_wins : 0) + (rev ? (+rev.games - +rev.p1_wins) : 0);
+    const total = (fwd ? +fwd.games : 0) + (rev ? +rev.games : 0);
+    return { cube, p1Wins: w1, p2Wins: total - w1, total };
+  });
+
+  return html`
+    <div class="h2h-card">
+      <div class="h2h-header">
+        <div class="h2h-player">
+          <div class="h2h-name">${player1}</div>
+          <div class="h2h-wins" style="color: ${p1Color}">${p1Wins} <span class="h2h-wins-label">sigrar</span></div>
+        </div>
+        <div class="h2h-vs">vs</div>
+        <div class="h2h-player">
+          <div class="h2h-name">${player2}</div>
+          <div class="h2h-wins" style="color: ${p2Color}">${p2Wins} <span class="h2h-wins-label">sigrar</span></div>
+        </div>
+      </div>
+      <div class="h2h-bar-container">
+        <div class="h2h-bar-fill h2h-bar-p1" style="width: ${p1Pct}%; background: ${p1Color}">${p1Pct}%</div>
+        <div class="h2h-bar-fill h2h-bar-p2" style="width: ${p2Pct}%; background: ${p2Color}">${p2Pct}%</div>
+      </div>
+      <div class="h2h-total">${totalGames} leikir samtals</div>
+      ${cubeRows.length > 1 ? html`
+        <div class="h2h-cube-breakdown">
+          <div class="h2h-cube-title">Eftir kubb</div>
+          <table class="h2h-cube-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>${player1}</th>
+                <th>${player2}</th>
+                <th>Samtals</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cubeRows.map(r => html`
+                <tr>
+                  <td>${r.cube}</td>
+                  <td style="color: ${r.p1Wins >= r.p2Wins ? '#00733e' : '#d3202a'}; font-weight: 600">${r.p1Wins}</td>
+                  <td style="color: ${r.p2Wins >= r.p1Wins ? '#00733e' : '#d3202a'}; font-weight: 600">${r.p2Wins}</td>
+                  <td>${r.total}</td>
+                </tr>
+              `)}
+            </tbody>
+          </table>
+        </div>
+      ` : html``}
+    </div>
+  `;
+}
+```
+
+```{ojs}
+//| label: elo-difference
+eloDiff = {
+  if (player1 === "" || player2 === "" || player1 === player2) return [];
+  const p1Map = new Map(
+    eloHistory.filter(d => d.player === player1).map(d => [+d.date, d.score_median])
+  );
+  return eloHistory
+    .filter(d => d.player === player2 && p1Map.has(+d.date))
+    .map(d => ({ date: d.date, diff: p1Map.get(+d.date) - d.score_median }))
+    .sort((a, b) => a.date - b.date);
+}
+```
+
+```{ojs}
+//| label: elo-diff-chart
+{
+  if (eloDiff.length < 2) return html``;
+
+  const latestPt = eloDiff[eloDiff.length - 1];
+  const latestColor = latestPt.diff >= 0 ? "#00733e" : "#d3202a";
+
+  const chart = Plot.plot({
+    width: 560, height: 280,
+    marginLeft: 55, marginBottom: 35, marginTop: 20,
+    style: { fontSize: "12px", fontFamily: "'Inter', system-ui, sans-serif", background: "transparent" },
+    x: {
+      type: "time", label: null,
+      tickFormat: d => d.toLocaleDateString("is-IS", { day: "numeric", month: "short" })
+    },
+    y: { label: "ELO munur", grid: true },
+    marks: [
+      Plot.ruleY([0], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
+      Plot.areaY(eloDiff, {
+        x: "date", y1: 0, y2: d => Math.max(0, d.diff), fill: "#00733e", fillOpacity: 0.3, curve: "monotone-x"
+      }),
+      Plot.areaY(eloDiff, {
+        x: "date", y1: 0, y2: d => Math.min(0, d.diff), fill: "#d3202a", fillOpacity: 0.3, curve: "monotone-x"
+      }),
+      Plot.lineY(eloDiff, { x: "date", y: "diff", stroke: "#2a1f14", strokeWidth: 1.5, curve: "monotone-x" }),
+      Plot.dot([latestPt], { x: "date", y: "diff", fill: latestColor, r: 4 }),
+      Plot.text([latestPt], {
+        x: "date", y: "diff",
+        text: d => (d.diff > 0 ? "+" : "") + d.diff,
+        dy: -12, fontSize: 13, fontWeight: "bold", fill: latestColor
+      })
+    ]
+  });
+
+  return html`<div class="h2h-elo-chart">
+    <div class="h2h-chart-title">ELO-munur yfir tíma</div>
+    <div class="h2h-chart-subtitle">${player1} og ${player2}</div>
+    ${chart}
+    <div class="h2h-chart-legend">
+      <span class="h2h-legend-item">
+        <span class="h2h-legend-pip" style="background: #00733e"></span>${player1} framar
+      </span>
+      <span class="h2h-legend-item">
+        <span class="h2h-legend-pip" style="background: #d3202a"></span>${player2} framar
+      </span>
+    </div>
+  </div>`;
+}
+```

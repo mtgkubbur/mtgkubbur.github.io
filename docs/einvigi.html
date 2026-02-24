@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Einvígi – MtG Kubbur</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2b52da2480b16aff0a6fdeb4d683d428.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="ojs-define">
+{"contents":[{"name":"h2h_data","value":{"player1":["Anna","Anna","Anna","Anna","Anna","Anna","Anna","Anna","Anna","Arnar","Arnar","Arnar","Arnar","Arnar","Arnar","Arnar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Daníel","Daníel","Daníel","Daníel","Daníel","Daníel","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Fjölnir","Fjölnir","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Luna","Luna","Luna","Luna","Luna","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Siggi","Siggi","Siggi","Styrmir","Styrmir","Styrmir","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Victor","Victor","Victor","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar"],"player2":["Aron Freyr","Aron Gauti","Aron Ívars","Atli","Binni","Diddi","Oddur","Victor","Ólafur","Anna","Aron Elvar","Atli","Einar","Oddur","Siggi","Örvar","Aron Freyr","Aron Ívars","Atli","Binni","Diddi","Einar","Hjalti","Ingvi","Luna","Oddur","Ólafur","Örvar","Anna","Aron Gauti","Aron Ívars","Atli","Diddi","Einar","Hjalti","Ingvi","Oddur","Tommi","Ólafur","Örvar","Anna","Aron Elvar","Aron Freyr","Atli","Daníel","Diddi","Einar","Hjalti","Oddur","Tommi","Ólafur","Aron Elvar","Aron Freyr","Binni","Daníel","Diddi","Tommi","Arnar","Aron Freyr","Aron Gauti","Aron Ívars","Daníel","Fjölnir","Hjalti","Tommi","Victor","Örvar","Anna","Arnar","Aron Elvar","Aron Freyr","Aron Gauti","Aron Ívars","Atli","Daníel","Diddi","Einar","Fjölnir","Hjalti","Ingvi","Oddur","Styrmir","Tommi","Victor","Örvar","Anna","Aron Elvar","Aron Gauti","Aron Ívars","Oddur","Siggi","Arnar","Aron Elvar","Aron Freyr","Aron Ívars","Binni","Daníel","Einar","Ingvi","Luna","Oddur","Styrmir","Tommi","Victor","Örvar","Anna","Arnar","Aron Elvar","Aron Freyr","Aron Gauti","Aron Ívars","Binni","Diddi","Fjölnir","Hjalti","Luna","Oddur","Victor","Ólafur","Binni","Diddi","Aron Elvar","Aron Freyr","Aron Ívars","Atli","Diddi","Ingvi","Luna","Siggi","Styrmir","Tommi","Örvar","Anna","Aron Freyr","Aron Gauti","Aron Ívars","Diddi","Einar","Styrmir","Tommi","Victor","Ólafur","Örvar","Anna","Aron Freyr","Einar","Ingvi","Oddur","Aron Elvar","Aron Freyr","Aron Ívars","Binni","Daníel","Diddi","Fjölnir","Hjalti","Siggi","Styrmir","Tommi","Ólafur","Örvar","Aron Gauti","Diddi","Einar","Arnar","Diddi","Oddur","Anna","Arnar","Aron Elvar","Aron Freyr","Aron Gauti","Aron Ívars","Atli","Binni","Diddi","Einar","Hjalti","Ingvi","Oddur","Siggi","Styrmir","Victor","Ólafur","Örvar","Diddi","Oddur","Örvar","Aron Elvar","Diddi","Einar","Fjölnir","Tommi","Victor","Örvar","Anna","Arnar","Aron Elvar","Aron Freyr","Aron Gauti","Atli","Binni","Daníel","Diddi","Einar","Hjalti","Ingvi","Luna","Oddur","Tommi","Victor"],"games":[3,6,2,2,3,2,3,3,2,2,2,3,5,2,3,3,5,3,2,3,5,3,3,2,2,5,2,7,5,8,4,7,2,3,2,3,7,3,3,5,3,2,2,2,2,4,3,3,2,2,5,2,2,6,2,2,5,3,3,3,2,3,7,2,6,4,5,3,3,12,9,3,8,8,3,3,3,3,3,2,5,2,4,4,4,3,2,5,2,3,3,3,2,14,9,8,8,3,2,5,5,3,7,9,4,2,3,3,12,3,2,2,5,2,3,3,2,3,2,2,2,9,11,7,4,2,2,2,2,2,2,3,3,5,3,2,6,2,2,6,2,3,3,1,2,5,3,3,3,3,3,2,2,12,2,3,3,5,8,2,2,2,3,6,2,3,3,3,5,10,13,3,2,2,8,7,8,2,3,7,2,5,2,2,14,3,3,4,2,6,3,2,2,2,5,2,3,5,6,2,2,3,6,4,4,3,4,2,5,5,2],"p1_wins":[2,4,2,0,1,0,1,2,2,2,2,2,4,2,1,2,1,1,0,2,4,1,2,2,0,1,2,3,3,5,0,5,0,1,2,2,6,2,2,2,2,0,0,1,0,2,1,2,0,0,1,0,0,3,0,0,2,1,1,2,2,2,6,2,2,3,4,2,2,7,5,2,3,6,2,1,2,1,1,0,4,2,2,4,0,1,2,4,0,2,1,2,2,6,5,5,6,1,2,3,4,2,3,4,1,2,2,2,3,2,2,2,3,2,1,2,2,1,2,2,0,4,6,6,0,0,0,2,2,0,2,2,1,4,2,0,3,2,2,3,2,2,2,1,0,1,1,2,1,1,2,0,2,5,2,1,2,1,3,0,0,2,2,4,0,1,1,1,3,6,5,0,2,2,4,3,4,2,2,4,2,4,2,2,8,2,2,2,0,0,2,2,2,0,2,2,2,4,3,1,2,1,3,4,2,2,4,2,4,5,2]}}]}
+</script>
+<script type="ojs-define">
+{"contents":[{"name":"h2h_cube_data","value":{"player1":["Anna","Anna","Anna","Anna","Anna","Anna","Anna","Anna","Anna","Anna","Arnar","Arnar","Arnar","Arnar","Arnar","Arnar","Arnar","Arnar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Daníel","Daníel","Daníel","Daníel","Daníel","Daníel","Daníel","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Fjölnir","Fjölnir","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Luna","Luna","Luna","Luna","Luna","Luna","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Siggi","Siggi","Siggi","Siggi","Styrmir","Styrmir","Styrmir","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Victor","Victor","Victor","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar"],"player2":["Aron Freyr","Aron Gauti","Aron Gauti","Aron Ívars","Atli","Binni","Diddi","Oddur","Victor","Ólafur","Anna","Aron Elvar","Atli","Einar","Einar","Oddur","Siggi","Örvar","Aron Freyr","Aron Freyr","Aron Ívars","Atli","Binni","Diddi","Einar","Hjalti","Ingvi","Luna","Oddur","Ólafur","Örvar","Örvar","Anna","Anna","Aron Gauti","Aron Gauti","Aron Gauti","Aron Ívars","Atli","Atli","Atli","Diddi","Einar","Hjalti","Ingvi","Oddur","Oddur","Oddur","Tommi","Ólafur","Örvar","Örvar","Anna","Aron Elvar","Aron Freyr","Atli","Daníel","Diddi","Diddi","Einar","Hjalti","Oddur","Tommi","Ólafur","Ólafur","Aron Elvar","Aron Freyr","Binni","Binni","Daníel","Diddi","Tommi","Tommi","Arnar","Aron Freyr","Aron Gauti","Aron Ívars","Daníel","Fjölnir","Fjölnir","Hjalti","Tommi","Tommi","Victor","Victor","Örvar","Örvar","Anna","Arnar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Gauti","Aron Ívars","Aron Ívars","Aron Ívars","Atli","Atli","Atli","Daníel","Diddi","Einar","Fjölnir","Hjalti","Ingvi","Oddur","Oddur","Styrmir","Tommi","Tommi","Victor","Victor","Örvar","Örvar","Anna","Aron Elvar","Aron Gauti","Aron Gauti","Aron Ívars","Oddur","Siggi","Arnar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Ívars","Aron Ívars","Binni","Binni","Daníel","Daníel","Daníel","Einar","Ingvi","Luna","Luna","Oddur","Oddur","Styrmir","Tommi","Tommi","Tommi","Victor","Victor","Örvar","Örvar","Anna","Arnar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Gauti","Aron Ívars","Binni","Diddi","Diddi","Fjölnir","Hjalti","Luna","Oddur","Victor","Ólafur","Binni","Diddi","Aron Elvar","Aron Elvar","Aron Freyr","Aron Ívars","Aron Ívars","Atli","Atli","Diddi","Ingvi","Luna","Siggi","Styrmir","Tommi","Örvar","Anna","Aron Freyr","Aron Freyr","Aron Gauti","Aron Ívars","Diddi","Diddi","Einar","Styrmir","Tommi","Tommi","Victor","Ólafur","Örvar","Anna","Aron Freyr","Einar","Einar","Ingvi","Oddur","Aron Elvar","Aron Freyr","Aron Ívars","Binni","Daníel","Diddi","Diddi","Diddi","Diddi","Diddi","Fjölnir","Hjalti","Siggi","Styrmir","Tommi","Tommi","Ólafur","Örvar","Aron Gauti","Diddi","Einar","Einar","Arnar","Diddi","Oddur","Anna","Arnar","Arnar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Gauti","Aron Ívars","Atli","Binni","Binni","Binni","Diddi","Diddi","Einar","Einar","Hjalti","Ingvi","Oddur","Oddur","Siggi","Styrmir","Styrmir","Victor","Ólafur","Örvar","Örvar","Örvar","Örvar","Örvar","Diddi","Oddur","Örvar","Aron Elvar","Diddi","Diddi","Diddi","Einar","Fjölnir","Tommi","Victor","Örvar","Örvar","Anna","Arnar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Gauti","Atli","Binni","Daníel","Daníel","Diddi","Diddi","Einar","Einar","Hjalti","Ingvi","Ingvi","Luna","Oddur","Oddur","Tommi","Tommi","Tommi","Victor"],"cube":["Synergy Cube","Ab Wheel","Synergy Cube","Synergy Cube","Ab Wheel","Stone Soup Cube","Nerva's Cube","Nerva's Cube","Kaldheim Cube","Nerva's Cube","Horror Cube","Bar Cube","Horror Cube","Khans Cube","Stone Soup Cube","Khans Cube","Bar Cube","Bar Cube","Meta Memories","Vintage Cube","Meta Memories","Meta Memories","Modern Stories","Meta Memories","Stone Soup Cube","Meta Memories","Vintage Cube","Meta Memories","Meta Memories","Stone Soup Cube","Meta Memories","Pauper Cube","Horror Cube","Stone Soup Cube","Bolti Vintage Cube","Old Border Cube","Vintage Cube","Bolti Vintage Cube","Boltalandið","Horror Cube","Meta Memories","Meta Memories","Old Border Cube","Bolti Vintage Cube","Nerva's Cube","Bar Cube","Meta Memories","Old Border Cube","Meta Memories","Nerva's Cube","Meta Memories","Vintage Cube","Khans Cube","Old Border Cube","Nerva's Cube","Stone Soup Cube","Stone Soup Cube","Nerva's Cube","Old Border Cube","Khans Cube","Vintage Cube","Khans Cube","Bolti Vintage Cube","Pauper Cube","Vintage Cube","Bar Cube","Vintage Cube","Bolti Vintage Cube","Vintage Cube","Old Border Cube","Vintage Cube","Bolti Vintage Cube","Meta Memories","Bar Cube","Bar Cube","Pauper Cube","Bar Cube","Meta Memories","Meta Memories","Vintage Cube","Boltalandið","Ab Wheel","Meta Memories","Pauper Cube","Vintage Cube","Horror Cube","Vintage Cube","Khans Cube","Stone Soup Cube","Meta Memories","Old Border Cube","Stone Soup Cube","Vintage Cube","Meta Memories","Modern Stories","Synergy Cube","Vintage Cube","Synergy Cube","Meta Memories","Synergy Cube","Vintage Cube","Meta Memories","Pauper Cube","Stone Soup Cube","Bolti Vintage Cube","Stone Soup Cube","Meta Memories","Vintage Cube","Meta Memories","Meta Memories","Old Border Cube","Super Turbo Time","Vintage Cube","Boltalandið","Khans Cube","Bolti Vintage Cube","Vintage Cube","Old Border Cube","Pauper Cube","Stone Soup Cube","Meta Memories","Bolti Vintage Cube","Old Border Cube","Meta Memories","Stone Soup Cube","Stone Soup Cube","Vintage Cube","Meta Memories","Boltalandið","Meta Memories","Modern Stories","Vintage Cube","Bolti Vintage Cube","Meta Memories","Boltalandið","Meta Memories","Bolti Vintage Cube","Meta Memories","Stone Soup Cube","Meta Memories","Meta Memories","Khans Cube","Meta Memories","Khans Cube","Meta Memories","Stone Soup Cube","Meta Memories","Nerva's Cube","Stone Soup Cube","Kaldheim Cube","Vintage Cube","Nerva's Cube","Vintage Cube","Stone Soup Cube","Vintage Cube","Old Border Cube","Bolti Vintage Cube","Meta Memories","Stone Soup Cube","Synergy Cube","Vintage Cube","Synergy Cube","Synergy Cube","Synergy Cube","Genesis","Modern Stories","Modern Stories","Genesis","Stone Soup Cube","Synergy Cube","Synergy Cube","Vintage Cube","Modern Stories","Meta Memories","Stone Soup Cube","Vintage Cube","Vintage Cube","Meta Memories","Vintage Cube","Ab Wheel","Stone Soup Cube","Bolti Vintage Cube","Vintage Cube","Meta Memories","Vintage Cube","Meta Memories","Genesis","Bolti Vintage Cube","Stone Soup Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Vintage Cube","Genesis","Nerva's Cube","Vintage Cube","Vintage Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Stone Soup Cube","Vintage Cube","Khans Cube","Nerva's Cube","Khans Cube","Meta Memories","Nerva's Cube","Meta Memories","Bar Cube","Nerva's Cube","Meta Memories","Stone Soup Cube","Meta Memories","Bar Cube","Genesis","Kaldheim Cube","Old Border Cube","Stone Soup Cube","Meta Memories","Genesis","Bar Cube","Stone Soup Cube","Meta Memories","Synergy Cube","Nerva's Cube","Stone Soup Cube","Vintage Cube","Bar Cube","Stone Soup Cube","Vintage Cube","Stone Soup Cube","Vintage Cube","Meta Memories","Kaldheim Cube","Bar Cube","Khans Cube","Bar Cube","Pauper Cube","Vintage Cube","Bar Cube","Meta Memories","Vintage Cube","Pauper Cube","Vintage Cube","Meta Memories","Meta Memories","Pauper Cube","Synergy Cube","Bar Cube","Stone Soup Cube","Meta Memories","Nerva's Cube","Boltalandið","Meta Memories","Bar Cube","Meta Memories","Stone Soup Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Vintage Cube","Bar Cube","Bolti Vintage Cube","Meta Memories","Stone Soup Cube","Vintage Cube","Kaldheim Cube","Synergy Cube","Pauper Cube","Modern Stories","Modern Stories","Nerva's Cube","Vintage Cube","Nerva's Cube","Modern Stories","Vintage Cube","Pauper Cube","Nerva's Cube","Pauper Cube","Kaldheim Cube","Vintage Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Ab Wheel","Meta Memories","Meta Memories","Bolti Vintage Cube","Stone Soup Cube","Old Border Cube","Vintage Cube","Genesis","Old Border Cube","Vintage Cube","Genesis","Vintage Cube","Nerva's Cube","Bar Cube","Kaldheim Cube","Ab Wheel","Genesis","Stone Soup Cube","Vintage Cube"],"games":[3,3,3,2,2,3,2,3,3,2,2,2,3,2,3,2,3,3,2,3,3,2,3,5,3,3,2,2,5,2,5,2,3,2,3,3,2,4,3,2,2,2,3,2,3,3,2,2,3,3,3,2,3,2,2,2,2,2,2,3,3,2,2,3,2,2,2,3,3,2,2,3,2,3,3,3,2,3,2,5,2,3,3,2,2,2,3,3,3,3,2,3,4,2,3,2,2,3,3,3,2,3,3,2,3,3,3,3,3,2,2,3,2,2,2,2,2,2,2,3,2,3,2,2,3,3,3,2,3,6,3,2,6,3,3,5,3,3,2,3,2,3,2,2,3,3,2,2,3,3,6,2,2,2,3,3,2,2,2,3,3,3,2,2,2,3,2,3,3,2,3,2,2,2,3,6,11,2,5,2,2,2,2,2,2,2,2,3,3,3,2,3,2,3,3,2,2,3,3,2,3,3,1,2,3,2,3,3,3,3,3,2,2,3,2,3,2,2,2,3,3,5,5,3,2,2,2,3,3,3,2,3,3,3,3,2,2,3,5,2,5,6,3,2,2,2,3,3,3,4,5,3,2,3,2,5,2,2,3,2,2,3,3,3,2,3,3,3,4,2,2,2,2,3,2,2,2,2,3,2,3,3,2,6,2,2,3,3,3,2,2,2,2,3,2,2,2,2,3,2,2,1,2],"p1_wins":[2,2,2,2,0,1,0,1,2,2,2,2,2,2,2,2,1,2,0,1,1,0,2,4,1,2,2,0,1,2,1,2,1,2,2,1,2,0,1,2,2,0,1,2,2,2,2,2,2,2,2,0,2,0,0,1,0,0,2,1,2,0,0,1,0,0,0,1,2,0,0,2,0,1,1,2,2,2,2,4,2,1,1,1,2,2,2,2,2,2,2,1,2,2,1,0,2,2,1,2,0,2,2,2,2,1,2,1,1,0,2,2,2,2,0,2,2,0,0,1,2,2,2,0,2,1,2,2,2,3,1,0,3,2,1,4,2,2,2,1,2,1,2,2,2,2,0,2,1,1,3,1,0,2,2,2,0,0,0,2,1,2,2,2,2,1,2,1,2,2,1,2,2,0,1,3,6,2,4,0,0,0,0,2,2,0,2,2,1,2,2,2,0,2,1,2,2,1,2,2,2,2,1,0,1,0,1,2,1,1,2,0,2,2,1,2,0,0,2,1,2,1,1,2,0,0,2,2,2,2,0,1,1,1,1,2,2,1,3,2,1,2,0,2,2,2,1,1,1,2,2,2,2,2,0,4,2,2,2,2,2,1,1,2,2,2,2,2,2,0,0,0,0,2,2,2,0,1,1,2,2,2,2,3,1,2,1,2,1,2,2,0,2,2,2,2,2,2,2,2,2,1,2]}}]}
+</script>
+<script type="ojs-define">
+{"contents":[{"name":"player_names","value":["Anna","Arnar","Aron Elvar","Aron Freyr","Aron Gauti","Aron Ívars","Atli","Binni","Daníel","Diddi","Einar","Fjölnir","Hjalti","Ingvi","Luna","Oddur","Siggi","Styrmir","Tommi","Victor","Ólafur","Örvar"]}]}
+</script>
+<script type="ojs-define">
+{"contents":[{"name":"elo_history","value":{"date":["2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14"],"player":["Örvar","Aron Freyr","Arnar","Tommi","Diddi","Atli","Binni","Ingvi","Einar","Siggi","Anna","Victor","Daníel","Aron Elvar","Hjalti","Aron Ívars","Ólafur","Styrmir","Fjölnir","Luna","Oddur","Aron Gauti","Örvar","Aron Freyr","Tommi","Diddi","Atli","Arnar","Binni","Ingvi","Einar","Siggi","Victor","Daníel","Aron Elvar","Anna","Hjalti","Aron Ívars","Ólafur","Styrmir","Fjölnir","Luna","Oddur","Aron Gauti","Örvar","Aron Freyr","Tommi","Atli","Diddi","Binni","Arnar","Ingvi","Einar","Aron Elvar","Siggi","Daníel","Victor","Anna","Hjalti","Aron Ívars","Ólafur","Fjölnir","Styrmir","Luna","Oddur","Aron Gauti","Örvar","Aron Freyr","Diddi","Arnar","Tommi","Atli","Binni","Victor","Einar","Aron Elvar","Ingvi","Siggi","Daníel","Anna","Hjalti","Aron Ívars","Styrmir","Ólafur","Luna","Fjölnir","Oddur","Aron Gauti","Örvar","Aron Freyr","Tommi","Diddi","Arnar","Binni","Victor","Atli","Einar","Ingvi","Aron Elvar","Siggi","Daníel","Hjalti","Anna","Aron Ívars","Styrmir","Ólafur","Luna","Fjölnir","Aron Gauti","Oddur","Örvar","Tommi","Arnar","Aron Freyr","Diddi","Binni","Atli","Victor","Einar","Ingvi","Siggi","Daníel","Anna","Hjalti","Aron Elvar","Aron Ívars","Styrmir","Ólafur","Luna","Fjölnir","Oddur","Aron Gauti","Örvar","Tommi","Arnar","Aron Freyr","Diddi","Atli","Binni","Victor","Einar","Ingvi","Siggi","Daníel","Fjölnir","Anna","Hjalti","Aron Elvar","Aron Ívars","Styrmir","Ólafur","Luna","Aron Gauti","Oddur","Örvar","Arnar","Aron Freyr","Diddi","Tommi","Binni","Einar","Victor","Ingvi","Siggi","Daníel","Atli","Anna","Aron Elvar","Hjalti","Aron Ívars","Ólafur","Styrmir","Luna","Aron Gauti","Oddur","Örvar","Tommi","Arnar","Diddi","Binni","Aron Freyr","Victor","Einar","Ingvi","Siggi","Atli","Daníel","Anna","Aron Ívars","Hjalti","Aron Elvar","Styrmir","Ólafur","Luna","Aron Gauti","Oddur","Örvar","Tommi","Arnar","Aron Freyr","Diddi","Victor","Binni","Einar","Ingvi","Siggi","Hjalti","Daníel","Anna","Atli","Aron Ívars","Aron Elvar","Styrmir","Ólafur","Luna","Aron Gauti","Oddur","Örvar","Aron Freyr","Diddi","Tommi","Victor","Binni","Arnar","Einar","Ingvi","Siggi","Aron Ívars","Hjalti","Daníel","Anna","Atli","Aron Elvar","Styrmir","Ólafur","Luna","Oddur","Aron Gauti","Örvar","Aron Freyr","Tommi","Victor","Binni","Arnar","Diddi","Einar","Hjalti","Ingvi","Aron Ívars","Siggi","Anna","Daníel","Atli","Styrmir","Aron Elvar","Ólafur","Luna","Aron Gauti","Oddur","Örvar","Aron Freyr","Einar","Victor","Tommi","Binni","Hjalti","Arnar","Diddi","Aron Ívars","Ingvi","Siggi","Daníel","Aron Elvar","Anna","Styrmir","Ólafur","Luna","Aron Gauti","Oddur","Örvar","Tommi","Aron Freyr","Diddi","Victor","Binni","Ingvi","Arnar","Aron Ívars","Einar","Siggi","Daníel","Hjalti","Aron Elvar","Anna","Styrmir","Ólafur","Luna","Aron Gauti","Oddur","Diddi","Aron Freyr","Tommi","Örvar","Victor","Ingvi","Arnar","Aron Ívars","Binni","Einar","Siggi","Daníel","Aron Elvar","Hjalti","Anna","Styrmir","Ólafur","Luna","Oddur","Aron Gauti","Aron Freyr","Tommi","Diddi","Örvar","Victor","Ingvi","Arnar","Binni","Einar","Hjalti","Siggi","Daníel","Aron Elvar","Aron Ívars","Anna","Styrmir","Ólafur","Luna","Oddur","Aron Gauti","Aron Freyr","Tommi","Diddi","Örvar","Victor","Arnar","Hjalti","Binni","Ingvi","Einar","Daníel","Aron Elvar","Siggi","Aron Ívars","Anna","Styrmir","Ólafur","Luna","Oddur","Aron Gauti","Aron Freyr","Örvar","Diddi","Victor","Tommi","Arnar","Hjalti","Binni","Daníel","Aron Ívars","Siggi","Anna","Einar","Ingvi","Aron Elvar","Styrmir","Ólafur","Oddur","Luna","Aron Gauti","Aron Freyr","Örvar","Tommi","Arnar","Diddi","Hjalti","Siggi","Victor","Anna","Aron Elvar","Binni","Luna","Ingvi","Einar","Daníel","Styrmir","Ólafur","Oddur","Aron Ívars","Aron Gauti","Aron Freyr","Örvar","Tommi","Arnar","Hjalti","Anna","Siggi","Victor","Aron Elvar","Einar","Ingvi","Diddi","Binni","Luna","Daníel","Styrmir","Oddur","Ólafur","Aron Ívars","Aron Gauti","Örvar","Aron Freyr","Tommi","Arnar","Hjalti","Binni","Anna","Siggi","Victor","Einar","Luna","Oddur","Ingvi","Diddi","Daníel","Styrmir","Aron Elvar","Ólafur","Aron Ívars","Aron Gauti","Örvar","Aron Freyr","Tommi","Arnar","Binni","Anna","Hjalti","Einar","Siggi","Victor","Luna","Oddur","Diddi","Daníel","Styrmir","Aron Elvar","Aron Gauti","Ingvi","Aron Ívars","Aron Freyr","Arnar","Tommi","Örvar","Diddi","Binni","Hjalti","Siggi","Einar","Anna","Luna","Oddur","Daníel","Styrmir","Aron Elvar","Aron Gauti","Aron Ívars","Ingvi","Tommi","Aron Freyr","Arnar","Binni","Diddi","Örvar","Hjalti","Siggi","Einar","Luna","Daníel","Styrmir","Anna","Aron Elvar","Aron Gauti","Aron Ívars","Oddur","Ingvi","Tommi","Arnar","Binni","Diddi","Hjalti","Aron Freyr","Siggi","Einar","Luna","Styrmir","Ingvi","Aron Ívars","Anna","Daníel","Aron Gauti","Aron Elvar","Oddur","Tommi","Diddi","Arnar","Hjalti","Luna","Aron Freyr","Styrmir","Binni","Einar","Ingvi","Aron Ívars","Oddur","Aron Gauti","Aron Elvar","Anna","Hjalti","Styrmir","Aron Freyr","Luna","Binni","Oddur","Diddi","Tommi","Einar","Ingvi","Aron Ívars","Aron Elvar"],"score_median":[1592,1580,1559,1557,1552,1544,1538,1529,1528,1518,1515,1515,1511,1510,1508,1496,1475,1473,1470,1468,1454,1452,1607,1571,1558,1553,1545,1540,1539,1528,1527,1517,1513,1511,1509,1509,1507,1495,1475,1471,1471,1469,1453,1452,1616,1569,1554,1553,1552,1541,1541,1531,1527,1523,1517,1513,1513,1510,1508,1496,1475,1469,1468,1467,1453,1452,1610,1564,1558,1558,1554,1546,1536,1536,1528,1522,1520,1518,1513,1510,1506,1494,1486,1475,1463,1457,1452,1450,1601,1553,1553,1552,1552,1542,1532,1531,1528,1517,1517,1516,1511,1505,1504,1494,1487,1486,1466,1465,1451,1450,1615,1582,1561,1557,1555,1545,1537,1532,1531,1521,1518,1512,1506,1504,1494,1492,1485,1484,1460,1457,1447,1434,1619,1568,1564,1554,1554,1551,1545,1532,1531,1522,1517,1512,1507,1505,1503,1490,1490,1483,1482,1456,1430,1429,1624,1565,1562,1562,1560,1537,1533,1524,1523,1517,1512,1510,1505,1502,1495,1490,1484,1481,1455,1429,1426,1599,1568,1567,1565,1560,1555,1542,1533,1522,1517,1512,1511,1503,1499,1490,1488,1482,1465,1452,1425,1420,1599,1566,1563,1561,1556,1542,1537,1533,1521,1518,1512,1510,1504,1502,1497,1488,1481,1465,1454,1424,1419,1594,1568,1559,1555,1543,1538,1538,1534,1522,1518,1516,1513,1511,1505,1493,1489,1482,1465,1455,1432,1423,1602,1571,1571,1546,1543,1540,1539,1538,1536,1524,1519,1519,1505,1502,1494,1480,1473,1462,1450,1430,1427,1612,1571,1549,1549,1548,1546,1540,1540,1537,1530,1528,1518,1514,1505,1502,1476,1460,1441,1430,1402,1609,1578,1572,1569,1554,1548,1548,1540,1538,1528,1520,1519,1512,1503,1501,1478,1459,1435,1429,1397,1595,1591,1579,1573,1556,1550,1544,1543,1536,1525,1520,1517,1515,1510,1499,1479,1454,1432,1430,1406,1601,1587,1580,1575,1558,1554,1544,1535,1527,1524,1523,1522,1519,1516,1500,1477,1453,1432,1427,1410,1625,1595,1588,1584,1563,1546,1541,1538,1536,1532,1528,1525,1525,1523,1499,1476,1451,1421,1421,1384,1599,1590,1578,1566,1549,1547,1540,1539,1533,1522,1522,1519,1515,1510,1510,1484,1463,1453,1422,1383,1602,1581,1573,1547,1546,1535,1518,1512,1511,1505,1504,1499,1497,1492,1488,1486,1482,1476,1434,1384,1605,1587,1575,1550,1537,1529,1522,1510,1508,1507,1502,1502,1500,1497,1488,1479,1479,1463,1427,1397,1580,1561,1548,1548,1539,1527,1523,1521,1508,1503,1496,1495,1491,1491,1487,1480,1472,1463,1427,1400,1581,1557,1552,1551,1530,1525,1524,1519,1518,1509,1498,1495,1489,1489,1480,1463,1458,1417,1417,1556,1554,1553,1532,1530,1529,1526,1523,1521,1512,1501,1492,1486,1482,1461,1453,1415,1412,1597,1573,1552,1543,1541,1541,1532,1504,1495,1494,1477,1476,1474,1467,1464,1453,1439,1411,1594,1556,1547,1542,1524,1523,1503,1494,1494,1485,1481,1480,1478,1477,1462,1450,1436,1566,1540,1540,1530,1526,1521,1518,1496,1496,1493,1479,1478,1459,1453,1445,1533,1521,1517,1516,1515,1505,1499,1497,1488,1485,1477,1447]}}]}
+</script>
+
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MtG Kubbur</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Stigatafla</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./throun.html"> 
+<span class="menu-text">Leikmaður</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./einvigi.html" aria-current="page"> 
+<span class="menu-text">Einvígi</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtgkubbur/mtgkubbur.github.io"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+<div id="data-prep" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="76" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 75;"><span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>h2h <span class="op">=</span> <span class="fu">transpose</span>(h2h_data)</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>h2hCube <span class="op">=</span> <span class="fu">transpose</span>(h2h_cube_data)</span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>players <span class="op">=</span> player_names</span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>eloHistory <span class="op">=</span> {</span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> raw <span class="op">=</span> <span class="fu">transpose</span>(elo_history)<span class="op">;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> raw<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    <span class="dt">player</span><span class="op">:</span> d<span class="op">.</span><span class="at">player</span><span class="op">,</span></span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="dt">date</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(d<span class="op">.</span><span class="at">date</span>)<span class="op">,</span></span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="dt">score_median</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">score_median</span></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-1">
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-2">
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-3">
+<div id="ojs-cell-1-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-4">
+<div id="ojs-cell-1-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div id="player-selectors" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="92" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 91;"><span id="cb2-92"><a href="#cb2-92" aria-hidden="true" tabindex="-1"></a>viewof player1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>players]<span class="op">,</span> {</span>
+<span id="cb2-93"><a href="#cb2-93" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Leikmaður 1:"</span><span class="op">,</span></span>
+<span id="cb2-94"><a href="#cb2-94" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb2-95"><a href="#cb2-95" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Veldu leikmann..."</span> <span class="op">:</span> d</span>
+<span id="cb2-96"><a href="#cb2-96" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb2-97"><a href="#cb2-97" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-98"><a href="#cb2-98" aria-hidden="true" tabindex="-1"></a>viewof player2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>players]<span class="op">,</span> {</span>
+<span id="cb2-99"><a href="#cb2-99" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Leikmaður 2:"</span><span class="op">,</span></span>
+<span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Veldu leikmann..."</span> <span class="op">:</span> d</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="player-selectors-1">
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="player-selectors-2">
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="106" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 105;"><span id="cb3-106"><a href="#cb3-106" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb3-107"><a href="#cb3-107" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player1 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player2 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player1 <span class="op">===</span> player2) {</span>
+<span id="cb3-108"><a href="#cb3-108" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> msg <span class="op">=</span> player1 <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> player1 <span class="op">!==</span> <span class="st">""</span></span>
+<span id="cb3-109"><a href="#cb3-109" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> <span class="st">"Veldu tvo ólíka leikmenn"</span></span>
+<span id="cb3-110"><a href="#cb3-110" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> <span class="st">"Veldu tvo leikmenn til að sjá einvígið"</span><span class="op">;</span></span>
+<span id="cb3-111"><a href="#cb3-111" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
+<span id="cb3-112"><a href="#cb3-112" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#9876;&lt;/div&gt;</span></span>
+<span id="cb3-113"><a href="#cb3-113" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span>msg<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb3-114"><a href="#cb3-114" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Find records in both directions: p1→p2 and p2→p1</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> forward <span class="op">=</span> h2h<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player1 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player2)<span class="op">;</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> reverse <span class="op">=</span> h2h<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player1)<span class="op">;</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Wins <span class="op">=</span> (forward[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>forward[<span class="dv">0</span>]<span class="op">.</span><span class="at">p1_wins</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>                 (reverse[<span class="dv">0</span>] <span class="op">?</span> (<span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">-</span> <span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">p1_wins</span>) <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> totalGames <span class="op">=</span> (forward[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>forward[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>                     (reverse[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Wins <span class="op">=</span> totalGames <span class="op">-</span> p1Wins<span class="op">;</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (totalGames <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#10068;&lt;/div&gt;</span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;Engir leikir fundust á milli </span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> og </span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Pct <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((p1Wins <span class="op">/</span> totalGames) <span class="op">*</span> <span class="dv">100</span>)<span class="op">;</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Pct <span class="op">=</span> <span class="dv">100</span> <span class="op">-</span> p1Pct<span class="op">;</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Color <span class="op">=</span> p1Wins <span class="op">&gt;=</span> p2Wins <span class="op">?</span> <span class="st">"#00733e"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">;</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Color <span class="op">=</span> p2Wins <span class="op">&gt;=</span> p1Wins <span class="op">?</span> <span class="st">"#00733e"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">;</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Cube breakdown</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeForward <span class="op">=</span> h2hCube<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player1 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player2)<span class="op">;</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeReverse <span class="op">=</span> h2hCube<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player1)<span class="op">;</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeTypes <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>([<span class="op">...</span>cubeForward<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>)<span class="op">,</span> <span class="op">...</span>cubeReverse<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>)])]<span class="op">.</span><span class="fu">sort</span>()<span class="op">;</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeRows <span class="op">=</span> cubeTypes<span class="op">.</span><span class="fu">map</span>(cube <span class="kw">=&gt;</span> {</span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> fwd <span class="op">=</span> cubeForward<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> cube)<span class="op">;</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rev <span class="op">=</span> cubeReverse<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> cube)<span class="op">;</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> w1 <span class="op">=</span> (fwd <span class="op">?</span> <span class="op">+</span>fwd<span class="op">.</span><span class="at">p1_wins</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span> (rev <span class="op">?</span> (<span class="op">+</span>rev<span class="op">.</span><span class="at">games</span> <span class="op">-</span> <span class="op">+</span>rev<span class="op">.</span><span class="at">p1_wins</span>) <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> total <span class="op">=</span> (fwd <span class="op">?</span> <span class="op">+</span>fwd<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span> (rev <span class="op">?</span> <span class="op">+</span>rev<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { cube<span class="op">,</span> <span class="dt">p1Wins</span><span class="op">:</span> w1<span class="op">,</span> <span class="dt">p2Wins</span><span class="op">:</span> total <span class="op">-</span> w1<span class="op">,</span> total }<span class="op">;</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-card"&gt;</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-header"&gt;</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-player"&gt;</span></span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-name"&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-wins" style="color: </span><span class="sc">${</span>p1Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p1Wins<span class="sc">}</span><span class="vs"> &lt;span class="h2h-wins-label"&gt;sigrar&lt;/span&gt;&lt;/div&gt;</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-vs"&gt;vs&lt;/div&gt;</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-player"&gt;</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-name"&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-wins" style="color: </span><span class="sc">${</span>p2Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p2Wins<span class="sc">}</span><span class="vs"> &lt;span class="h2h-wins-label"&gt;sigrar&lt;/span&gt;&lt;/div&gt;</span></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-bar-container"&gt;</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-bar-fill h2h-bar-p1" style="width: </span><span class="sc">${</span>p1Pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>p1Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p1Pct<span class="sc">}</span><span class="vs">%&lt;/div&gt;</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-bar-fill h2h-bar-p2" style="width: </span><span class="sc">${</span>p2Pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>p2Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p2Pct<span class="sc">}</span><span class="vs">%&lt;/div&gt;</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-total"&gt;</span><span class="sc">${</span>totalGames<span class="sc">}</span><span class="vs"> leikir samtals&lt;/div&gt;</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="vs">      </span><span class="sc">${</span>cubeRows<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">1</span> <span class="op">?</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-cube-breakdown"&gt;</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-cube-title"&gt;Eftir kubb&lt;/div&gt;</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;table class="h2h-cube-table"&gt;</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;thead&gt;</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;tr&gt;</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs">&lt;/th&gt;</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/th&gt;</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;Samtals&lt;/th&gt;</span></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;/tr&gt;</span></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/thead&gt;</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tbody&gt;</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="vs">              </span><span class="sc">${</span>cubeRows<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;tr&gt;</span></span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">cube</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">p1Wins</span> <span class="op">&gt;=</span> r<span class="op">.</span><span class="at">p2Wins</span> <span class="op">?</span> <span class="st">'#00733e'</span> <span class="op">:</span> <span class="st">'#d3202a'</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">p1Wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">p2Wins</span> <span class="op">&gt;=</span> r<span class="op">.</span><span class="at">p1Wins</span> <span class="op">?</span> <span class="st">'#00733e'</span> <span class="op">:</span> <span class="st">'#d3202a'</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">p2Wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">total</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;/tr&gt;</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="vs">              `</span>)<span class="sc">}</span></span>
+<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tbody&gt;</span></span>
+<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/table&gt;</span></span>
+<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span> <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span><span class="sc">}</span></span>
+<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="vs">  `</span><span class="op">;</span></span>
+<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="h2h-results" class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="202" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 201;"><span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a>eloDiff <span class="op">=</span> {</span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player1 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player2 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player1 <span class="op">===</span> player2) <span class="cf">return</span> []<span class="op">;</span></span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Map <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(</span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a>    eloHistory<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player</span> <span class="op">===</span> player1)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> [<span class="op">+</span>d<span class="op">.</span><span class="at">date</span><span class="op">,</span> d<span class="op">.</span><span class="at">score_median</span>])</span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> eloHistory</span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> p1Map<span class="op">.</span><span class="fu">has</span>(<span class="op">+</span>d<span class="op">.</span><span class="at">date</span>))</span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({ <span class="dt">date</span><span class="op">:</span> d<span class="op">.</span><span class="at">date</span><span class="op">,</span> <span class="dt">diff</span><span class="op">:</span> p1Map<span class="op">.</span><span class="fu">get</span>(<span class="op">+</span>d<span class="op">.</span><span class="at">date</span>) <span class="op">-</span> d<span class="op">.</span><span class="at">score_median</span> }))</span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">date</span> <span class="op">-</span> b<span class="op">.</span><span class="at">date</span>)<span class="op">;</span></span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="elo-difference" class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="216" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 215;"><span id="cb5-216"><a href="#cb5-216" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-217"><a href="#cb5-217" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (eloDiff<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">2</span>) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
+<span id="cb5-218"><a href="#cb5-218" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-219"><a href="#cb5-219" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> latestPt <span class="op">=</span> eloDiff[eloDiff<span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb5-220"><a href="#cb5-220" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> latestColor <span class="op">=</span> latestPt<span class="op">.</span><span class="at">diff</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"#00733e"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">;</span></span>
+<span id="cb5-221"><a href="#cb5-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-222"><a href="#cb5-222" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> chart <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb5-223"><a href="#cb5-223" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> <span class="dv">560</span><span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
+<span id="cb5-224"><a href="#cb5-224" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span> <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">35</span><span class="op">,</span> <span class="dt">marginTop</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb5-225"><a href="#cb5-225" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> { <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"12px"</span><span class="op">,</span> <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"'Inter', system-ui, sans-serif"</span><span class="op">,</span> <span class="dt">background</span><span class="op">:</span> <span class="st">"transparent"</span> }<span class="op">,</span></span>
+<span id="cb5-226"><a href="#cb5-226" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb5-227"><a href="#cb5-227" aria-hidden="true" tabindex="-1"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"time"</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb5-228"><a href="#cb5-228" aria-hidden="true" tabindex="-1"></a>      <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">toLocaleDateString</span>(<span class="st">"is-IS"</span><span class="op">,</span> { <span class="dt">day</span><span class="op">:</span> <span class="st">"numeric"</span><span class="op">,</span> <span class="dt">month</span><span class="op">:</span> <span class="st">"short"</span> })</span>
+<span id="cb5-229"><a href="#cb5-229" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb5-230"><a href="#cb5-230" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"ELO munur"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
+<span id="cb5-231"><a href="#cb5-231" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb5-232"><a href="#cb5-232" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]<span class="op">,</span> { <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#d4cfc9"</span><span class="op">,</span> <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span> })<span class="op">,</span></span>
+<span id="cb5-233"><a href="#cb5-233" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">areaY</span>(eloDiff<span class="op">,</span> {</span>
+<span id="cb5-234"><a href="#cb5-234" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">0</span><span class="op">,</span> d<span class="op">.</span><span class="at">diff</span>)<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#00733e"</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span></span>
+<span id="cb5-235"><a href="#cb5-235" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
+<span id="cb5-236"><a href="#cb5-236" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">areaY</span>(eloDiff<span class="op">,</span> {</span>
+<span id="cb5-237"><a href="#cb5-237" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="dv">0</span><span class="op">,</span> d<span class="op">.</span><span class="at">diff</span>)<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span></span>
+<span id="cb5-238"><a href="#cb5-238" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
+<span id="cb5-239"><a href="#cb5-239" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">lineY</span>(eloDiff<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#2a1f14"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.5</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span> })<span class="op">,</span></span>
+<span id="cb5-240"><a href="#cb5-240" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">dot</span>([latestPt]<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> latestColor<span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">4</span> })<span class="op">,</span></span>
+<span id="cb5-241"><a href="#cb5-241" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">text</span>([latestPt]<span class="op">,</span> {</span>
+<span id="cb5-242"><a href="#cb5-242" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span></span>
+<span id="cb5-243"><a href="#cb5-243" aria-hidden="true" tabindex="-1"></a>        <span class="dt">text</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">diff</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span>) <span class="op">+</span> d<span class="op">.</span><span class="at">diff</span><span class="op">,</span></span>
+<span id="cb5-244"><a href="#cb5-244" aria-hidden="true" tabindex="-1"></a>        <span class="dt">dy</span><span class="op">:</span> <span class="op">-</span><span class="dv">12</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">13</span><span class="op">,</span> <span class="dt">fontWeight</span><span class="op">:</span> <span class="st">"bold"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> latestColor</span>
+<span id="cb5-245"><a href="#cb5-245" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb5-246"><a href="#cb5-246" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="h2h-elo-chart"&gt;</span></span>
+<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-title"&gt;ELO-munur yfir tíma&lt;/div&gt;</span></span>
+<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-subtitle"&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> og </span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>chart<span class="sc">}</span></span>
+<span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-legend"&gt;</span></span>
+<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span class="h2h-legend-item"&gt;</span></span>
+<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;span class="h2h-legend-pip" style="background: #00733e"&gt;&lt;/span&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> framar</span></span>
+<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/span&gt;</span></span>
+<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span class="h2h-legend-item"&gt;</span></span>
+<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;span class="h2h-legend-pip" style="background: #d3202a"&gt;&lt;/span&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs"> framar</span></span>
+<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/span&gt;</span></span>
+<span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="elo-diff-chart" class="cell-output cell-output-display">
+<div id="ojs-cell-5" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImgyaCA9IHRyYW5zcG9zZShoMmhfZGF0YSlcbmgyaEN1YmUgPSB0cmFuc3Bvc2UoaDJoX2N1YmVfZGF0YSlcbnBsYXllcnMgPSBwbGF5ZXJfbmFtZXNcblxuZWxvSGlzdG9yeSA9IHtcbiAgY29uc3QgcmF3ID0gdHJhbnNwb3NlKGVsb19oaXN0b3J5KTtcbiAgcmV0dXJuIHJhdy5tYXAoZCA9PiAoe1xuICAgIHBsYXllcjogZC5wbGF5ZXIsXG4gICAgZGF0ZTogbmV3IERhdGUoZC5kYXRlKSxcbiAgICBzY29yZV9tZWRpYW46ICtkLnNjb3JlX21lZGlhblxuICB9KSk7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgcGxheWVyMSA9IElucHV0cy5zZWxlY3QoW1wiXCIsIC4uLnBsYXllcnNdLCB7XG4gIGxhYmVsOiBcIkxlaWttYcOwdXIgMTpcIixcbiAgdmFsdWU6IFwiXCIsXG4gIGZvcm1hdDogZCA9PiBkID09PSBcIlwiID8gXCJWZWxkdSBsZWlrbWFubi4uLlwiIDogZFxufSlcblxudmlld29mIHBsYXllcjIgPSBJbnB1dHMuc2VsZWN0KFtcIlwiLCAuLi5wbGF5ZXJzXSwge1xuICBsYWJlbDogXCJMZWlrbWHDsHVyIDI6XCIsXG4gIHZhbHVlOiBcIlwiLFxuICBmb3JtYXQ6IGQgPT4gZCA9PT0gXCJcIiA/IFwiVmVsZHUgbGVpa21hbm4uLi5cIiA6IGRcbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGlmIChwbGF5ZXIxID09PSBcIlwiIHx8IHBsYXllcjIgPT09IFwiXCIgfHwgcGxheWVyMSA9PT0gcGxheWVyMikge1xuICAgIGNvbnN0IG1zZyA9IHBsYXllcjEgPT09IHBsYXllcjIgJiYgcGxheWVyMSAhPT0gXCJcIlxuICAgICAgPyBcIlZlbGR1IHR2byDDs2zDrWthIGxlaWttZW5uXCJcbiAgICAgIDogXCJWZWxkdSB0dm8gbGVpa21lbm4gdGlsIGHDsCBzasOhIGVpbnbDrWdpw7BcIjtcbiAgICByZXR1cm4gaHRtbGA8ZGl2IGNsYXNzPVwiZW1wdHktc3RhdGVcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJlbXB0eS1pY29uXCI+JiM5ODc2OzwvZGl2PlxuICAgICAgPGRpdj4ke21zZ308L2Rpdj5cbiAgICA8L2Rpdj5gO1xuICB9XG5cbiAgLy8gRmluZCByZWNvcmRzIGluIGJvdGggZGlyZWN0aW9uczogcDHihpJwMiBhbmQgcDLihpJwMVxuICBjb25zdCBmb3J3YXJkID0gaDJoLmZpbHRlcihkID0+IGQucGxheWVyMSA9PT0gcGxheWVyMSAmJiBkLnBsYXllcjIgPT09IHBsYXllcjIpO1xuICBjb25zdCByZXZlcnNlID0gaDJoLmZpbHRlcihkID0+IGQucGxheWVyMSA9PT0gcGxheWVyMiAmJiBkLnBsYXllcjIgPT09IHBsYXllcjEpO1xuXG4gIGNvbnN0IHAxV2lucyA9IChmb3J3YXJkWzBdID8gK2ZvcndhcmRbMF0ucDFfd2lucyA6IDApICtcbiAgICAgICAgICAgICAgICAgKHJldmVyc2VbMF0gPyAoK3JldmVyc2VbMF0uZ2FtZXMgLSArcmV2ZXJzZVswXS5wMV93aW5zKSA6IDApO1xuICBjb25zdCB0b3RhbEdhbWVzID0gKGZvcndhcmRbMF0gPyArZm9yd2FyZFswXS5nYW1lcyA6IDApICtcbiAgICAgICAgICAgICAgICAgICAgIChyZXZlcnNlWzBdID8gK3JldmVyc2VbMF0uZ2FtZXMgOiAwKTtcbiAgY29uc3QgcDJXaW5zID0gdG90YWxHYW1lcyAtIHAxV2lucztcblxuICBpZiAodG90YWxHYW1lcyA9PT0gMCkge1xuICAgIHJldHVybiBodG1sYDxkaXYgY2xhc3M9XCJlbXB0eS1zdGF0ZVwiPlxuICAgICAgPGRpdiBjbGFzcz1cImVtcHR5LWljb25cIj4mIzEwMDY4OzwvZGl2PlxuICAgICAgPGRpdj5FbmdpciBsZWlraXIgZnVuZHVzdCDDoSBtaWxsaSAke3BsYXllcjF9IG9nICR7cGxheWVyMn08L2Rpdj5cbiAgICA8L2Rpdj5gO1xuICB9XG5cbiAgY29uc3QgcDFQY3QgPSBNYXRoLnJvdW5kKChwMVdpbnMgLyB0b3RhbEdhbWVzKSAqIDEwMCk7XG4gIGNvbnN0IHAyUGN0ID0gMTAwIC0gcDFQY3Q7XG4gIGNvbnN0IHAxQ29sb3IgPSBwMVdpbnMgPj0gcDJXaW5zID8gXCIjMDA3MzNlXCIgOiBcIiNkMzIwMmFcIjtcbiAgY29uc3QgcDJDb2xvciA9IHAyV2lucyA+PSBwMVdpbnMgPyBcIiMwMDczM2VcIiA6IFwiI2QzMjAyYVwiO1xuXG4gIC8vIEN1YmUgYnJlYWtkb3duXG4gIGNvbnN0IGN1YmVGb3J3YXJkID0gaDJoQ3ViZS5maWx0ZXIoZCA9PiBkLnBsYXllcjEgPT09IHBsYXllcjEgJiYgZC5wbGF5ZXIyID09PSBwbGF5ZXIyKTtcbiAgY29uc3QgY3ViZVJldmVyc2UgPSBoMmhDdWJlLmZpbHRlcihkID0+IGQucGxheWVyMSA9PT0gcGxheWVyMiAmJiBkLnBsYXllcjIgPT09IHBsYXllcjEpO1xuXG4gIGNvbnN0IGN1YmVUeXBlcyA9IFsuLi5uZXcgU2V0KFsuLi5jdWJlRm9yd2FyZC5tYXAoZCA9PiBkLmN1YmUpLCAuLi5jdWJlUmV2ZXJzZS5tYXAoZCA9PiBkLmN1YmUpXSldLnNvcnQoKTtcbiAgY29uc3QgY3ViZVJvd3MgPSBjdWJlVHlwZXMubWFwKGN1YmUgPT4ge1xuICAgIGNvbnN0IGZ3ZCA9IGN1YmVGb3J3YXJkLmZpbmQoZCA9PiBkLmN1YmUgPT09IGN1YmUpO1xuICAgIGNvbnN0IHJldiA9IGN1YmVSZXZlcnNlLmZpbmQoZCA9PiBkLmN1YmUgPT09IGN1YmUpO1xuICAgIGNvbnN0IHcxID0gKGZ3ZCA/ICtmd2QucDFfd2lucyA6IDApICsgKHJldiA/ICgrcmV2LmdhbWVzIC0gK3Jldi5wMV93aW5zKSA6IDApO1xuICAgIGNvbnN0IHRvdGFsID0gKGZ3ZCA/ICtmd2QuZ2FtZXMgOiAwKSArIChyZXYgPyArcmV2LmdhbWVzIDogMCk7XG4gICAgcmV0dXJuIHsgY3ViZSwgcDFXaW5zOiB3MSwgcDJXaW5zOiB0b3RhbCAtIHcxLCB0b3RhbCB9O1xuICB9KTtcblxuICByZXR1cm4gaHRtbGBcbiAgICA8ZGl2IGNsYXNzPVwiaDJoLWNhcmRcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJoMmgtaGVhZGVyXCI+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtcGxheWVyXCI+XG4gICAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1uYW1lXCI+JHtwbGF5ZXIxfTwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtd2luc1wiIHN0eWxlPVwiY29sb3I6ICR7cDFDb2xvcn1cIj4ke3AxV2luc30gPHNwYW4gY2xhc3M9XCJoMmgtd2lucy1sYWJlbFwiPnNpZ3Jhcjwvc3Bhbj48L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtdnNcIj52czwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXBsYXllclwiPlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtbmFtZVwiPiR7cGxheWVyMn08L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXdpbnNcIiBzdHlsZT1cImNvbG9yOiAke3AyQ29sb3J9XCI+JHtwMldpbnN9IDxzcGFuIGNsYXNzPVwiaDJoLXdpbnMtbGFiZWxcIj5zaWdyYXI8L3NwYW4+PC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgICA8ZGl2IGNsYXNzPVwiaDJoLWJhci1jb250YWluZXJcIj5cbiAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1iYXItZmlsbCBoMmgtYmFyLXAxXCIgc3R5bGU9XCJ3aWR0aDogJHtwMVBjdH0lOyBiYWNrZ3JvdW5kOiAke3AxQ29sb3J9XCI+JHtwMVBjdH0lPC9kaXY+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtYmFyLWZpbGwgaDJoLWJhci1wMlwiIHN0eWxlPVwid2lkdGg6ICR7cDJQY3R9JTsgYmFja2dyb3VuZDogJHtwMkNvbG9yfVwiPiR7cDJQY3R9JTwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgICA8ZGl2IGNsYXNzPVwiaDJoLXRvdGFsXCI+JHt0b3RhbEdhbWVzfSBsZWlraXIgc2FtdGFsczwvZGl2PlxuICAgICAgJHtjdWJlUm93cy5sZW5ndGggPiAxID8gaHRtbGBcbiAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1jdWJlLWJyZWFrZG93blwiPlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtY3ViZS10aXRsZVwiPkVmdGlyIGt1YmI8L2Rpdj5cbiAgICAgICAgICA8dGFibGUgY2xhc3M9XCJoMmgtY3ViZS10YWJsZVwiPlxuICAgICAgICAgICAgPHRoZWFkPlxuICAgICAgICAgICAgICA8dHI+XG4gICAgICAgICAgICAgICAgPHRoPjwvdGg+XG4gICAgICAgICAgICAgICAgPHRoPiR7cGxheWVyMX08L3RoPlxuICAgICAgICAgICAgICAgIDx0aD4ke3BsYXllcjJ9PC90aD5cbiAgICAgICAgICAgICAgICA8dGg+U2FtdGFsczwvdGg+XG4gICAgICAgICAgICAgIDwvdHI+XG4gICAgICAgICAgICA8L3RoZWFkPlxuICAgICAgICAgICAgPHRib2R5PlxuICAgICAgICAgICAgICAke2N1YmVSb3dzLm1hcChyID0+IGh0bWxgXG4gICAgICAgICAgICAgICAgPHRyPlxuICAgICAgICAgICAgICAgICAgPHRkPiR7ci5jdWJlfTwvdGQ+XG4gICAgICAgICAgICAgICAgICA8dGQgc3R5bGU9XCJjb2xvcjogJHtyLnAxV2lucyA+PSByLnAyV2lucyA/ICcjMDA3MzNlJyA6ICcjZDMyMDJhJ307IGZvbnQtd2VpZ2h0OiA2MDBcIj4ke3IucDFXaW5zfTwvdGQ+XG4gICAgICAgICAgICAgICAgICA8dGQgc3R5bGU9XCJjb2xvcjogJHtyLnAyV2lucyA+PSByLnAxV2lucyA/ICcjMDA3MzNlJyA6ICcjZDMyMDJhJ307IGZvbnQtd2VpZ2h0OiA2MDBcIj4ke3IucDJXaW5zfTwvdGQ+XG4gICAgICAgICAgICAgICAgICA8dGQ+JHtyLnRvdGFsfTwvdGQ+XG4gICAgICAgICAgICAgICAgPC90cj5cbiAgICAgICAgICAgICAgYCl9XG4gICAgICAgICAgICA8L3Rib2R5PlxuICAgICAgICAgIDwvdGFibGU+XG4gICAgICAgIDwvZGl2PlxuICAgICAgYCA6IGh0bWxgYH1cbiAgICA8L2Rpdj5cbiAgYDtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImVsb0RpZmYgPSB7XG4gIGlmIChwbGF5ZXIxID09PSBcIlwiIHx8IHBsYXllcjIgPT09IFwiXCIgfHwgcGxheWVyMSA9PT0gcGxheWVyMikgcmV0dXJuIFtdO1xuICBjb25zdCBwMU1hcCA9IG5ldyBNYXAoXG4gICAgZWxvSGlzdG9yeS5maWx0ZXIoZCA9PiBkLnBsYXllciA9PT0gcGxheWVyMSkubWFwKGQgPT4gWytkLmRhdGUsIGQuc2NvcmVfbWVkaWFuXSlcbiAgKTtcbiAgcmV0dXJuIGVsb0hpc3RvcnlcbiAgICAuZmlsdGVyKGQgPT4gZC5wbGF5ZXIgPT09IHBsYXllcjIgJiYgcDFNYXAuaGFzKCtkLmRhdGUpKVxuICAgIC5tYXAoZCA9PiAoeyBkYXRlOiBkLmRhdGUsIGRpZmY6IHAxTWFwLmdldCgrZC5kYXRlKSAtIGQuc2NvcmVfbWVkaWFuIH0pKVxuICAgIC5zb3J0KChhLCBiKSA9PiBhLmRhdGUgLSBiLmRhdGUpO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoie1xuICBpZiAoZWxvRGlmZi5sZW5ndGggPCAyKSByZXR1cm4gaHRtbGBgO1xuXG4gIGNvbnN0IGxhdGVzdFB0ID0gZWxvRGlmZltlbG9EaWZmLmxlbmd0aCAtIDFdO1xuICBjb25zdCBsYXRlc3RDb2xvciA9IGxhdGVzdFB0LmRpZmYgPj0gMCA/IFwiIzAwNzMzZVwiIDogXCIjZDMyMDJhXCI7XG5cbiAgY29uc3QgY2hhcnQgPSBQbG90LnBsb3Qoe1xuICAgIHdpZHRoOiA1NjAsIGhlaWdodDogMjgwLFxuICAgIG1hcmdpbkxlZnQ6IDU1LCBtYXJnaW5Cb3R0b206IDM1LCBtYXJnaW5Ub3A6IDIwLFxuICAgIHN0eWxlOiB7IGZvbnRTaXplOiBcIjEycHhcIiwgZm9udEZhbWlseTogXCInSW50ZXInLCBzeXN0ZW0tdWksIHNhbnMtc2VyaWZcIiwgYmFja2dyb3VuZDogXCJ0cmFuc3BhcmVudFwiIH0sXG4gICAgeDoge1xuICAgICAgdHlwZTogXCJ0aW1lXCIsIGxhYmVsOiBudWxsLFxuICAgICAgdGlja0Zvcm1hdDogZCA9PiBkLnRvTG9jYWxlRGF0ZVN0cmluZyhcImlzLUlTXCIsIHsgZGF5OiBcIm51bWVyaWNcIiwgbW9udGg6IFwic2hvcnRcIiB9KVxuICAgIH0sXG4gICAgeTogeyBsYWJlbDogXCJFTE8gbXVudXJcIiwgZ3JpZDogdHJ1ZSB9LFxuICAgIG1hcmtzOiBbXG4gICAgICBQbG90LnJ1bGVZKFswXSwgeyBzdHJva2U6IFwiI2Q0Y2ZjOVwiLCBzdHJva2VEYXNoYXJyYXk6IFwiNCw0XCIgfSksXG4gICAgICBQbG90LmFyZWFZKGVsb0RpZmYsIHtcbiAgICAgICAgeDogXCJkYXRlXCIsIHkxOiAwLCB5MjogZCA9PiBNYXRoLm1heCgwLCBkLmRpZmYpLCBmaWxsOiBcIiMwMDczM2VcIiwgZmlsbE9wYWNpdHk6IDAuMywgY3VydmU6IFwibW9ub3RvbmUteFwiXG4gICAgICB9KSxcbiAgICAgIFBsb3QuYXJlYVkoZWxvRGlmZiwge1xuICAgICAgICB4OiBcImRhdGVcIiwgeTE6IDAsIHkyOiBkID0+IE1hdGgubWluKDAsIGQuZGlmZiksIGZpbGw6IFwiI2QzMjAyYVwiLCBmaWxsT3BhY2l0eTogMC4zLCBjdXJ2ZTogXCJtb25vdG9uZS14XCJcbiAgICAgIH0pLFxuICAgICAgUGxvdC5saW5lWShlbG9EaWZmLCB7IHg6IFwiZGF0ZVwiLCB5OiBcImRpZmZcIiwgc3Ryb2tlOiBcIiMyYTFmMTRcIiwgc3Ryb2tlV2lkdGg6IDEuNSwgY3VydmU6IFwibW9ub3RvbmUteFwiIH0pLFxuICAgICAgUGxvdC5kb3QoW2xhdGVzdFB0XSwgeyB4OiBcImRhdGVcIiwgeTogXCJkaWZmXCIsIGZpbGw6IGxhdGVzdENvbG9yLCByOiA0IH0pLFxuICAgICAgUGxvdC50ZXh0KFtsYXRlc3RQdF0sIHtcbiAgICAgICAgeDogXCJkYXRlXCIsIHk6IFwiZGlmZlwiLFxuICAgICAgICB0ZXh0OiBkID0+IChkLmRpZmYgPiAwID8gXCIrXCIgOiBcIlwiKSArIGQuZGlmZixcbiAgICAgICAgZHk6IC0xMiwgZm9udFNpemU6IDEzLCBmb250V2VpZ2h0OiBcImJvbGRcIiwgZmlsbDogbGF0ZXN0Q29sb3JcbiAgICAgIH0pXG4gICAgXVxuICB9KTtcblxuICByZXR1cm4gaHRtbGA8ZGl2IGNsYXNzPVwiaDJoLWVsby1jaGFydFwiPlxuICAgIDxkaXYgY2xhc3M9XCJoMmgtY2hhcnQtdGl0bGVcIj5FTE8tbXVudXIgeWZpciB0w61tYTwvZGl2PlxuICAgIDxkaXYgY2xhc3M9XCJoMmgtY2hhcnQtc3VidGl0bGVcIj4ke3BsYXllcjF9IG9nICR7cGxheWVyMn08L2Rpdj5cbiAgICAke2NoYXJ0fVxuICAgIDxkaXYgY2xhc3M9XCJoMmgtY2hhcnQtbGVnZW5kXCI+XG4gICAgICA8c3BhbiBjbGFzcz1cImgyaC1sZWdlbmQtaXRlbVwiPlxuICAgICAgICA8c3BhbiBjbGFzcz1cImgyaC1sZWdlbmQtcGlwXCIgc3R5bGU9XCJiYWNrZ3JvdW5kOiAjMDA3MzNlXCI+PC9zcGFuPiR7cGxheWVyMX0gZnJhbWFyXG4gICAgICA8L3NwYW4+XG4gICAgICA8c3BhbiBjbGFzcz1cImgyaC1sZWdlbmQtaXRlbVwiPlxuICAgICAgICA8c3BhbiBjbGFzcz1cImgyaC1sZWdlbmQtcGlwXCIgc3R5bGU9XCJiYWNrZ3JvdW5kOiAjZDMyMDJhXCI+PC9zcGFuPiR7cGxheWVyMn0gZnJhbWFyXG4gICAgICA8L3NwYW4+XG4gICAgPC9kaXY+XG4gIDwvZGl2PmA7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3BsYXllcjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncGxheWVyMicpIn1dfQ==
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mtgkubbur\.is");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 MtG Kubbur</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>
