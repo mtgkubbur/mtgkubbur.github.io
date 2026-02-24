@@ -1,14 +1,24 @@
 project:
   type: website
   output-dir: docs
+  render:
+    - "*.qmd"
 
 website:
   title: "MtG Kubbur"
+  favicon: favicon.svg
   description: "Magic: The Gathering Cube Drafts á Íslandi"
   site-url: "https://mtgkubbur.is"
 
   navbar:
     search: false
+    left:
+      - text: "Stigatafla"
+        href: index.qmd
+      - text: "Leikmaður"
+        href: throun.qmd
+      - text: "Einvígi"
+        href: einvigi.qmd
     right:
       - icon: github
         href: https://github.com/mtgkubbur/mtgkubbur.github.io

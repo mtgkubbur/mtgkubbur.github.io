@@ -17,21 +17,33 @@ library(gtExtras)
 library(scales)
 library(glue)
 library(googlesheets4)
+library(reactable)
+library(htmltools)
 
 gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
 source("R/elo_table.R")
-```
-
-```{r}
-#| label: render-table
 
 table_players <- fetch_table_players()
 newest_date <- fetch_newest_date()
+```
 
-render_elo_table(
+:::: {.page-header}
+
+[ELO-stigaröðun MtG Kubbur leikja]{.subtitle}
+
+[Uppfært `r newest_date`]{.date-badge}
+
+::::
+
+```{r}
+#| label: render-table-widget
+#| column: page
+
+render_score_table_interactive(
   top_n = Inf,
   min_total_games = 18,
   table_players = table_players,
-  newest_date = newest_date
+  newest_date = NULL
 )
 ```
+

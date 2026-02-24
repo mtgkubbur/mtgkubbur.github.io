@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Statistical Methods – MtG Kubbur</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-061ee8df0a41b194efdb4e30dedba9e1.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+  <script src="https://cdnjs.cloudflare.com/polyfill/v3/polyfill.min.js?features=es6"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml-full.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+const typesetMath = (el) => {
+  if (window.MathJax) {
+    // MathJax Typeset
+    window.MathJax.typeset([el]);
+  } else if (window.katex) {
+    // KaTeX Render
+    var mathElements = el.getElementsByClassName("math");
+    var macros = [];
+    for (var i = 0; i < mathElements.length; i++) {
+      var texText = mathElements[i].firstChild;
+      if (mathElements[i].tagName == "SPAN" && texText && texText.data) {
+        window.katex.render(texText.data, mathElements[i], {
+          displayMode: mathElements[i].classList.contains('display'),
+          throwOnError: false,
+          macros: macros,
+          fleqn: false
+        });
+      }
+    }
+  }
+}
+window.Quarto = {
+  typesetMath
+};
+</script>
+
+<link rel="stylesheet" href="styles.css">
+</head>
+
+<body class="nav-fixed quarto-light">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MtG Kubbur</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Stigatafla</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./throun.html"> 
+<span class="menu-text">Leikmaður</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./einvigi.html"> 
+<span class="menu-text">Einvígi</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtgkubbur/mtgkubbur.github.io"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
+  <li><a href="#the-bradley-terry-model" id="toc-the-bradley-terry-model" class="nav-link" data-scroll-target="#the-bradley-terry-model">The Bradley-Terry Model</a></li>
+  <li><a href="#temporal-dynamics-ornstein-uhlenbeck-process" id="toc-temporal-dynamics-ornstein-uhlenbeck-process" class="nav-link" data-scroll-target="#temporal-dynamics-ornstein-uhlenbeck-process">Temporal Dynamics: Ornstein-Uhlenbeck Process</a>
+  <ul class="collapse">
+  <li><a href="#attendance-based-mean-reversion" id="toc-attendance-based-mean-reversion" class="nav-link" data-scroll-target="#attendance-based-mean-reversion">Attendance-Based Mean Reversion</a></li>
+  <li><a href="#half-life-interpretation" id="toc-half-life-interpretation" class="nav-link" data-scroll-target="#half-life-interpretation">Half-Life Interpretation</a></li>
+  </ul></li>
+  <li><a href="#cube-effects" id="toc-cube-effects" class="nav-link" data-scroll-target="#cube-effects">Cube Effects</a></li>
+  <li><a href="#prior-distributions" id="toc-prior-distributions" class="nav-link" data-scroll-target="#prior-distributions">Prior Distributions</a></li>
+  <li><a href="#score-scale-0-100" id="toc-score-scale-0-100" class="nav-link" data-scroll-target="#score-scale-0-100">Score Scale (0-100)</a>
+  <ul class="collapse">
+  <li><a href="#uncertainty-propagation" id="toc-uncertainty-propagation" class="nav-link" data-scroll-target="#uncertainty-propagation">Uncertainty Propagation</a></li>
+  </ul></li>
+  <li><a href="#identifiability" id="toc-identifiability" class="nav-link" data-scroll-target="#identifiability">Identifiability</a></li>
+  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference">Inference</a></li>
+  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
+  <li><a href="#limitations-and-future-directions" id="toc-limitations-and-future-directions" class="nav-link" data-scroll-target="#limitations-and-future-directions">Limitations and Future Directions</a></li>
+  </ul>
+</nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">Statistical Methods</h1>
+<p class="subtitle lead">Time-Varying Bradley-Terry Model with Attendance-Based Mean Reversion and Cube Effects</p>
+</div>
+
+
+
+<div class="quarto-title-meta">
+
+    
+  
+    
+  </div>
+  
+
+
+</header>
+
+
+<section id="overview" class="level2">
+<h2 class="anchored" data-anchor-id="overview">Overview</h2>
+<p>The ranking system uses a Bayesian Bradley-Terry model to estimate relative player strength from head-to-head match results. The model has three key components:</p>
+<ol type="1">
+<li><strong>Time-varying baseline strength</strong> — Player skill evolves over time via an Ornstein-Uhlenbeck process</li>
+<li><strong>Attendance-based mean reversion</strong> — Players who show up maintain their ratings; absent players regress toward the mean</li>
+<li><strong>Cube effects</strong> — Players can be relatively stronger or weaker in specific cube formats</li>
+</ol>
+</section>
+<section id="the-bradley-terry-model" class="level2">
+<h2 class="anchored" data-anchor-id="the-bradley-terry-model">The Bradley-Terry Model</h2>
+<p>For a match between player <span class="math inline">\(i\)</span> and player <span class="math inline">\(j\)</span>, the probability that <span class="math inline">\(i\)</span> wins is:</p>
+<p><span class="math display">\[
+P(i \text{ wins}) = \text{logit}^{-1}(\alpha_i - \alpha_j) = \frac{\exp(\alpha_i - \alpha_j)}{1 + \exp(\alpha_i - \alpha_j)}
+\]</span></p>
+<p>where <span class="math inline">\(\alpha_k\)</span> is player <span class="math inline">\(k\)</span>’s strength on the log-odds scale. When <span class="math inline">\(\alpha_i = \alpha_j\)</span>, win probability is 50%. Each unit difference in <span class="math inline">\(\alpha\)</span> corresponds to odds ratio of <span class="math inline">\(e^1 \approx 2.7\)</span> in favor of the stronger player.</p>
+</section>
+<section id="temporal-dynamics-ornstein-uhlenbeck-process" class="level2">
+<h2 class="anchored" data-anchor-id="temporal-dynamics-ornstein-uhlenbeck-process">Temporal Dynamics: Ornstein-Uhlenbeck Process</h2>
+<p>Player strength evolves over time according to an Ornstein-Uhlenbeck (OU) process that combines two forces:</p>
+<ol type="1">
+<li><strong>Random drift</strong> — Strength can fluctuate due to practice, form changes, metagame shifts, etc.</li>
+<li><strong>Mean reversion</strong> — Strength gradually pulls back toward the population average</li>
+</ol>
+<p>The evolution equation is:</p>
+<p><span class="math display">\[
+\alpha_{k,t} = \phi_k(t)^{\Delta t} \cdot \alpha_{k,t-1} + \sqrt{\Delta t} \cdot \sigma \cdot z_{k,t}
+\]</span></p>
+<p>where:</p>
+<ul>
+<li><span class="math inline">\(\Delta t\)</span> is the time gap (in weeks) since the previous game night</li>
+<li><span class="math inline">\(\sigma\)</span> is a shared volatility parameter</li>
+<li><span class="math inline">\(z_{k,t} \sim \text{Normal}(0, 1)\)</span> are standardized innovations</li>
+<li><span class="math inline">\(\phi_k(t) \in [0, 1]\)</span> is the mean-reversion rate, which depends on attendance</li>
+</ul>
+<section id="attendance-based-mean-reversion" class="level3">
+<h3 class="anchored" data-anchor-id="attendance-based-mean-reversion">Attendance-Based Mean Reversion</h3>
+<p>The key innovation is that the mean-reversion rate depends on whether a player attended:</p>
+<p><span class="math display">\[
+\phi_k(t) = \begin{cases}
+\phi_{\text{present}} &amp; \text{if player } k \text{ played at time } t \\
+\phi_{\text{absent}} &amp; \text{if player } k \text{ was absent}
+\end{cases}
+\]</span></p>
+<p>where typically <span class="math inline">\(\phi_{\text{present}} &gt; \phi_{\text{absent}}\)</span>. This creates asymmetric dynamics:</p>
+<ul>
+<li><strong>Players who attend</strong> maintain their ratings (weak mean reversion, <span class="math inline">\(\phi \approx 1\)</span>)</li>
+<li><strong>Players who are absent</strong> regress toward the mean faster (stronger mean reversion, smaller <span class="math inline">\(\phi\)</span>)</li>
+</ul>
+<p>This reflects the intuition that if you don’t show up to prove yourself, the system should become more uncertain about your true current strength—and in the Bradley-Terry framework, increased uncertainty manifests as regression toward the mean.</p>
+</section>
+<section id="half-life-interpretation" class="level3">
+<h3 class="anchored" data-anchor-id="half-life-interpretation">Half-Life Interpretation</h3>
+<p>The half-life tells us how long it takes for a player’s “excess strength” (distance from the mean) to decay by 50%:</p>
+<p><span class="math display">\[
+t_{1/2} = -\frac{\ln(2)}{\ln(\phi)}
+\]</span></p>
+<p>For example, if <span class="math inline">\(\phi_{\text{absent}} = 0.85\)</span>, the half-life is approximately 4 weeks. This means that if a strong player misses a month of cube nights, they lose about half of their rating advantage over the average player.</p>
+</section>
+</section>
+<section id="cube-effects" class="level2">
+<h2 class="anchored" data-anchor-id="cube-effects">Cube Effects</h2>
+<p>Some players are relatively stronger in certain cube formats (e.g., Vintage Cube vs.&nbsp;Pauper Cube). The model captures this with cube-specific effects <span class="math inline">\(\gamma_{k,c}\)</span>:</p>
+<p><span class="math display">\[
+\eta_{ijc,t} = \alpha_{i,t} + \gamma_{i,c} - \alpha_{j,t} - \gamma_{j,c}
+\]</span></p>
+<p>where <span class="math inline">\(\gamma_{k,c}\)</span> represents player <span class="math inline">\(k\)</span>’s relative strength in cube format <span class="math inline">\(c\)</span>. The cube effects are constrained so that <span class="math inline">\(\sum_c \gamma_{k,c} = 0\)</span> for each player, ensuring that <span class="math inline">\(\alpha_{k,t}\)</span> represents average strength across all cube types.</p>
+<p>Cube formats are categorized as:</p>
+<table class="caption-top table">
+<thead>
+<tr class="header">
+<th>Category</th>
+<th>Cubes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>High</td>
+<td>Vintage Cube, Bolti Vintage Cube, Nerva’s Cube</td>
+</tr>
+<tr class="even">
+<td>Medium</td>
+<td>Modern Cube, Synergy Cube, Bar Cube</td>
+</tr>
+<tr class="odd">
+<td>Low</td>
+<td>Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube</td>
+</tr>
+<tr class="even">
+<td>Other</td>
+<td>Miscellaneous cubes</td>
+</tr>
+</tbody>
+</table>
+<p>The cube effects are treated as static (not time-varying), which is reasonable since a player’s relative affinity for different formats is unlikely to change dramatically week-to-week.</p>
+</section>
+<section id="prior-distributions" class="level2">
+<h2 class="anchored" data-anchor-id="prior-distributions">Prior Distributions</h2>
+<p>The model uses the following priors:</p>
+<table class="caption-top table">
+<colgroup>
+<col style="width: 37%">
+<col style="width: 24%">
+<col style="width: 37%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Parameter</th>
+<th>Prior</th>
+<th>Rationale</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td><span class="math inline">\(\alpha_0\)</span></td>
+<td><span class="math inline">\(\text{Normal}(0, 1)\)</span></td>
+<td>Initial strengths on log-odds scale</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\sigma\)</span></td>
+<td><span class="math inline">\(\text{Exponential}(1)\)</span></td>
+<td>Volatility; kept moderate</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\phi_{\text{present}}\)</span></td>
+<td><span class="math inline">\(\text{Beta}(15, 1)\)</span></td>
+<td>Concentrated near 1 (weak reversion)</td>
+</tr>
+<tr class="even">
+<td><span class="math inline">\(\phi_{\text{absent}}\)</span></td>
+<td><span class="math inline">\(\text{Beta}(2, 2)\)</span></td>
+<td>Symmetric, allows stronger reversion</td>
+</tr>
+<tr class="odd">
+<td><span class="math inline">\(\gamma_{k,c}\)</span></td>
+<td><span class="math inline">\(\text{Normal}(0, 0.3)\)</span></td>
+<td>Small cube effects centered at zero</td>
+</tr>
+</tbody>
+</table>
+<p>The prior on <span class="math inline">\(\phi_{\text{present}}\)</span> being concentrated near 1 reflects the belief that players who consistently show up should maintain their ratings well. The prior on <span class="math inline">\(\phi_{\text{absent}}\)</span> is more diffuse, allowing the data to inform how quickly absent players should regress.</p>
+</section>
+<section id="score-scale-0-100" class="level2">
+<h2 class="anchored" data-anchor-id="score-scale-0-100">Score Scale (0-100)</h2>
+<p>For interpretability, results are displayed on a normalized 0-100 scale rather than raw log-odds or traditional ELO. The normalization is performed <strong>within each posterior draw</strong>:</p>
+<p><span class="math display">\[
+\text{Score}_k = \frac{\alpha_k - \min_j(\alpha_j)}{\max_j(\alpha_j) - \min_j(\alpha_j)} \times 100
+\]</span></p>
+<p>This means:</p>
+<ul>
+<li>A score of <strong>100</strong> corresponds to the strongest player (in that posterior sample)</li>
+<li>A score of <strong>0</strong> corresponds to the weakest player (in that posterior sample)</li>
+<li>A score of <strong>50</strong> represents middle-of-the-pack performance</li>
+</ul>
+<p>The advantage of this approach is that scores are always interpretable as “where does this player fall in the distribution of player skill?” regardless of the overall spread of abilities. With an Ornstein-Uhlenbeck mean-reversion process, traditional ELO scores would become compressed toward the mean, making differences harder to interpret.</p>
+<section id="uncertainty-propagation" class="level3">
+<h3 class="anchored" data-anchor-id="uncertainty-propagation">Uncertainty Propagation</h3>
+<p>Because normalization happens within each posterior draw, uncertainty is properly propagated:</p>
+<ul>
+<li>If there’s high certainty about who’s best, the top player’s score distribution will be tightly concentrated near 100</li>
+<li>If two players are close in skill, both might have score distributions spanning 85-100, reflecting uncertainty about who’s actually stronger</li>
+</ul>
+<p>The reported score intervals (5th and 95th percentiles) capture this uncertainty. Overlapping intervals indicate that the ranking between those players is uncertain.</p>
+</section>
+</section>
+<section id="identifiability" class="level2">
+<h2 class="anchored" data-anchor-id="identifiability">Identifiability</h2>
+<p>The Bradley-Terry model has a location non-identifiability: we can add any constant to all <span class="math inline">\(\alpha_k\)</span> without changing the likelihood. We handle this by:</p>
+<ol type="1">
+<li>Constraining <span class="math inline">\(\alpha_0\)</span> (initial strengths) to sum to zero</li>
+<li>Re-centering <span class="math inline">\(\alpha_t\)</span> after each time step to maintain the constraint</li>
+</ol>
+<p>This ensures the mean player strength is always zero on the log-odds scale. The normalized 0-100 score transformation then maps this to an interpretable scale where relative position is clear.</p>
+</section>
+<section id="inference" class="level2">
+<h2 class="anchored" data-anchor-id="inference">Inference</h2>
+<p>The model is fit using Hamiltonian Monte Carlo (HMC) via Stan, called from R using <code>cmdstanr</code>. Default settings:</p>
+<ul>
+<li>4 chains</li>
+<li>1,500 warmup iterations</li>
+<li>3,000 sampling iterations</li>
+<li><code>adapt_delta = 0.9</code> to reduce divergent transitions</li>
+</ul>
+<p>The high dimensionality (player strengths at each time point plus cube effects) requires careful tuning, but the non-centered parameterization of the OU process helps with sampling efficiency.</p>
+</section>
+<section id="model-comparison" class="level2">
+<h2 class="anchored" data-anchor-id="model-comparison">Model Comparison</h2>
+<p>The model includes generated quantities for leave-one-out cross-validation (LOO-CV) via the <code>loo</code> package. This allows comparison against simpler alternatives:</p>
+<ol type="1">
+<li><strong>Static Bradley-Terry</strong> — No temporal dynamics</li>
+<li><strong>OU without attendance effects</strong> — Single <span class="math inline">\(\phi\)</span> for everyone</li>
+<li><strong>No cube effects</strong> — Only time-varying <span class="math inline">\(\alpha\)</span></li>
+</ol>
+</section>
+<section id="limitations-and-future-directions" class="level2">
+<h2 class="anchored" data-anchor-id="limitations-and-future-directions">Limitations and Future Directions</h2>
+<p><strong>Current limitations:</strong></p>
+<ul>
+<li>Cube effects are static (don’t evolve over time)</li>
+<li>No player-vs-player specific effects (some players might consistently beat others)</li>
+<li>Limited data per player can lead to high uncertainty</li>
+<li>The model doesn’t distinguish between “hasn’t played recently” and “new player”</li>
+</ul>
+<p><strong>Potential extensions:</strong></p>
+<ul>
+<li>Glicko-style uncertainty inflation for inactive players (increase variance rather than shift mean)</li>
+<li>Separate ranking tables for different cube categories</li>
+<li>Time-varying cube effects</li>
+<li>Hierarchical priors on player-specific volatility</li>
+</ul>
+
+
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mtgkubbur\.is");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+      &nbsp;
+    </div>   
+    <div class="nav-footer-center">
+<p>© 2026 MtG Kubbur</p>
+</div>
+    <div class="nav-footer-right">
+      &nbsp;
+    </div>
+  </div>
+</footer>
+
+
+
+
+</body></html>

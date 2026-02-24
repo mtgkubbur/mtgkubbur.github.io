@@ -1,0 +1,418 @@
+---
+pagetitle: "Leikmaður"
+title-block-style: none
+page-layout: article
+toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(lubridate)
+library(googlesheets4)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+source("R/elo_table.R")
+
+# Only include opted-in players
+table_players <- fetch_table_players()
+
+history <- combine_player_summaries() |>
+  filter(str_to_lower(player) %in% table_players)
+
+# Per-player per-category records from processed_data (High/Medium/Low/Other)
+latest <- load_results_set(rank = 1)
+cube_records <- bind_rows(
+  latest$processed_data |> transmute(
+    player = str_to_title(player1), cube,
+    win = as.integer(str_to_title(winner) == str_to_title(player1))
+  ),
+  latest$processed_data |> transmute(
+    player = str_to_title(player2), cube,
+    win = as.integer(str_to_title(winner) == str_to_title(player2))
+  )
+) |>
+  filter(str_to_lower(player) %in% table_players) |>
+  group_by(player, cube) |>
+  summarise(
+    wins = sum(win),
+    losses = n() - sum(win),
+    total = n(),
+    .groups = "drop"
+  ) |>
+  mutate(winrate = round(wins / total * 100))
+
+# Pass to OJS
+ojs_define(player_history = history)
+ojs_define(cube_records_data = cube_records)
+```
+
+```{ojs}
+//| label: data-prep
+cubeRecords = transpose(cube_records_data).map(d => ({
+  ...d,
+  wins: +d.wins,
+  losses: +d.losses,
+  total: +d.total,
+  winrate: +d.winrate
+}))
+
+data = {
+  const raw = transpose(player_history);
+  return raw.map(d => ({
+    ...d,
+    date: new Date(d.date),
+    score_median: +d.score_median,
+    score_q25: +d.score_q25,
+    score_q75: +d.score_q75,
+    score_lower: +d.score_lower,
+    score_upper: +d.score_upper,
+    wins: +d.wins,
+    losses: +d.losses,
+    total: +d.total,
+    winRate: +d.total > 0 ? (+d.wins / +d.total) * 100 : 0,
+    gamma_High: d.gamma_High != null ? +d.gamma_High : null,
+    gamma_Medium: d.gamma_Medium != null ? +d.gamma_Medium : null,
+    gamma_Low: d.gamma_Low != null ? +d.gamma_Low : null,
+    gamma_Other: d.gamma_Other != null ? +d.gamma_Other : null
+  }));
+}
+
+// Get sorted unique player names
+players = [...new Set(data.map(d => d.player))].sort((a, b) =>
+  a.localeCompare(b, "is")
+)
+
+// Compute placement (rank by score_median descending) per date
+ranks = {
+  const byDate = d3.group(data, d => +d.date);
+  const result = new Map();
+  for (const [dateKey, rows] of byDate) {
+    const sorted = [...rows].sort((a, b) => b.score_median - a.score_median);
+    sorted.forEach((d, i) => {
+      result.set(`${d.player}_${dateKey}`, i + 1);
+    });
+  }
+  return result;
+}
+
+// Add rank to each data point
+dataWithRank = data.map(d => ({
+  ...d,
+  rank: ranks.get(`${d.player}_${+d.date}`) || null
+}))
+
+// Global domains
+xDomain = d3.extent(data, d => d.date)
+
+yDomain = [
+  d3.min(data, d => d.score_lower),
+  d3.max(data, d => d.score_upper)
+]
+
+maxPlayers = d3.max([...d3.group(data, d => +d.date).values()], rows => rows.length)
+```
+
+```{ojs}
+//| label: player-selector
+viewof selectedPlayer = Inputs.select(["", ...players], {
+  label: "Leikmaður:",
+  value: "",
+  format: d => d === "" ? "Veldu leikmann..." : d
+})
+```
+
+```{ojs}
+//| label: selected-data
+playerData = selectedPlayer === ""
+  ? []
+  : dataWithRank
+      .filter(d => d.player === selectedPlayer)
+      .sort((a, b) => a.date - b.date)
+
+latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
+```
+
+```{ojs}
+//| label: player-summary
+{
+  if (!latest) {
+    return html`<div class="empty-state">
+      <div class="empty-icon">&#9876;</div>
+      <div>Veldu leikmann til að sjá upplýsingar</div>
+    </div>`;
+  }
+
+  const cubeTypes = [
+    { key: "gamma_High", label: "High", color: "#d3202a" },
+    { key: "gamma_Medium", label: "Medium", color: "#0e68ab" },
+    { key: "gamma_Low", label: "Low", color: "#00733e" },
+    { key: "gamma_Other", label: "Annað", color: "#8b6914" }
+  ];
+
+  // Find strongest cube type
+  const gammas = cubeTypes
+    .map(c => ({ ...c, value: latest[c.key] }))
+    .filter(c => c.value != null);
+  const best = gammas.length > 0
+    ? gammas.reduce((a, b) => a.value > b.value ? a : b)
+    : null;
+
+  return html`<div class="player-summary">
+    <div class="stat">
+      <div class="stat-value" style="color: #0e68ab;">${latest.score_median}</div>
+      <div class="stat-label">ELO</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: #d3202a;">#${latest.rank}</div>
+      <div class="stat-label">Sæti</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: #00733e;">${latest.winRate.toFixed(0)}%</div>
+      <div class="stat-label">Sigurhlutfall</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: #8b6914;">${latest.total}</div>
+      <div class="stat-label">Leikir</div>
+    </div>
+    ${best ? html`<div class="stat">
+      <div class="stat-value" style="color: ${best.color};">${best.label}</div>
+      <div class="stat-label">Sterkasti kubbur</div>
+    </div>` : html``}
+  </div>`;
+}
+```
+
+```{ojs}
+//| label: cube-table
+{
+  if (!latest) return html``;
+
+  const cubeTypes = [
+    { key: "gamma_High", cube: "High", label: "High", color: "#d3202a" },
+    { key: "gamma_Medium", cube: "Medium", label: "Medium", color: "#0e68ab" },
+    { key: "gamma_Low", cube: "Low", label: "Low", color: "#00733e" },
+    { key: "gamma_Other", cube: "Other", label: "Annað", color: "#8b6914" }
+  ];
+
+  const records = cubeRecords
+    .filter(d => d.player === selectedPlayer);
+
+  // Merge gamma + records into unified rows
+  const rows = cubeTypes.map(c => {
+    const rec = records.find(r => r.cube === c.cube);
+    const gamma = latest[c.key];
+    return {
+      label: c.label,
+      color: c.color,
+      wins: rec ? rec.wins : 0,
+      losses: rec ? rec.losses : 0,
+      total: rec ? rec.total : 0,
+      winrate: rec ? rec.winrate : null,
+      gamma: gamma != null ? gamma : null
+    };
+  }).filter(r => r.total > 0 || r.gamma != null);
+
+  if (rows.length === 0) return html``;
+
+  const maxAbs = Math.max(0.15, d3.max(rows, d => d.gamma != null ? Math.abs(d.gamma) : 0));
+
+  return html`<div class="cube-combined-card">
+    <div class="cube-affinity-title">Árangur og styrkur eftir flokkum</div>
+    <table class="cube-combined-table">
+      <thead>
+        <tr>
+          <th></th>
+          <th>S</th>
+          <th>T</th>
+          <th>%</th>
+          <th>Styrkur</th>
+        </tr>
+      </thead>
+      <tbody>
+        ${rows.map(r => {
+          const barPct = r.gamma != null ? Math.abs(r.gamma) / maxAbs * 40 : 0;
+          const isPositive = r.gamma >= 0;
+          return html`
+          <tr>
+            <td class="cube-record-name">
+              <span class="cube-record-pip" style="background: ${r.color}"></span>
+              ${r.label}
+            </td>
+            <td>${r.total > 0 ? r.wins : '–'}</td>
+            <td>${r.total > 0 ? r.losses : '–'}</td>
+            <td style="color: ${r.winrate != null ? (r.winrate >= 50 ? '#00733e' : '#d3202a') : '#5c4f42'}; font-weight: 600">${r.winrate != null ? r.winrate + '%' : '–'}</td>
+            <td class="gamma-cell">
+              ${r.gamma != null ? html`
+                <div class="gamma-bar-inline">
+                  <div class="gamma-bar-neg-side">${!isPositive ? html`<div class="gamma-bar-fill" style="width: ${barPct}%; background: #d3202a;"></div>` : html``}</div>
+                  <div class="gamma-bar-mid"></div>
+                  <div class="gamma-bar-pos-side">${isPositive ? html`<div class="gamma-bar-fill" style="width: ${barPct}%; background: #00733e;"></div>` : html``}</div>
+                </div>
+                <span class="gamma-val" style="color: ${r.gamma >= 0 ? '#00733e' : '#d3202a'}">${r.gamma >= 0 ? '+' : ''}${r.gamma.toFixed(2)}</span>
+              ` : html`<span style="color: #5c4f42">–</span>`}
+            </td>
+          </tr>`;
+        })}
+      </tbody>
+    </table>
+    <div class="cube-footnote">
+      <strong>High:</strong> Vintage Cube, Bolti Vintage Cube, Nerva's Cube | <strong>Medium:</strong> Meta Memories, Modern Stories, Synergy Cube, Bar Cube | <strong>Low:</strong> Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube, Ab Wheel, Horror Cube | <strong>Annað:</strong> Boltalandið, Genesis, Stone Soup Cube, Super Turbo Time
+    </div>
+  </div>`;
+}
+```
+
+::: {.column-screen-inset .dashboard-grid style="display: none;"}
+:::
+
+```{ojs}
+//| label: charts-container
+{
+  if (!latest) return html``;
+
+  const chartStyle = {
+    fontSize: "12px",
+    fontFamily: "'Inter', system-ui, sans-serif",
+    background: "transparent"
+  };
+
+  const xConfig = {
+    type: "time",
+    domain: xDomain,
+    label: null,
+    tickFormat: d => d.toLocaleDateString("is-IS", { day: "numeric", month: "short" })
+  };
+
+  const eloChart = Plot.plot({
+    width: 700, height: 300, marginLeft: 55, marginBottom: 35,
+    style: chartStyle,
+    x: xConfig,
+    y: { label: "ELO", domain: yDomain, grid: true },
+    color: {
+      domain: ["90% bil", "50% bil", "Miðgildi"],
+      range: ["rgba(14,104,171,0.12)", "rgba(14,104,171,0.25)", "#0e68ab"],
+      legend: true
+    },
+    marks: [
+      Plot.areaY(playerData, { x: "date", y1: "score_lower", y2: "score_upper", fill: "rgba(14,104,171,0.12)", curve: "monotone-x" }),
+      Plot.areaY(playerData, { x: "date", y1: "score_q25", y2: "score_q75", fill: "rgba(14,104,171,0.25)", curve: "monotone-x" }),
+      Plot.lineY(playerData, { x: "date", y: "score_median", stroke: "#0e68ab", strokeWidth: 2.5, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "score_median", fill: "#0e68ab", r: 4 }),
+      Plot.text([latest], { x: "date", y: "score_median", text: d => `${d.score_median}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#0e68ab" })
+    ]
+  });
+
+  const winrateChart = Plot.plot({
+    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    style: chartStyle,
+    x: xConfig,
+    y: { label: "Sigurhlutfall (%)", domain: [0, 100], grid: true },
+    marks: [
+      Plot.ruleY([50], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
+      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: "#00733e", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "winRate", fill: "#00733e", r: 4 }),
+      Plot.text([latest], { x: "date", y: "winRate", text: d => `${d.winRate.toFixed(0)}%`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#00733e" })
+    ]
+  });
+
+  const placementChart = Plot.plot({
+    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    style: chartStyle,
+    x: xConfig,
+    y: { label: "Sæti", domain: [maxPlayers, 1], grid: true },
+    marks: [
+      Plot.lineY(playerData, { x: "date", y: "rank", stroke: "#d3202a", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "rank", fill: "#d3202a", r: 4 }),
+      Plot.text([latest], { x: "date", y: "rank", text: d => `#${d.rank}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#d3202a" })
+    ]
+  });
+
+  // Cube affinity evolution chart
+  const cubeTypes = [
+    { key: "gamma_High", label: "High", color: "#d3202a" },
+    { key: "gamma_Medium", label: "Medium", color: "#0e68ab" },
+    { key: "gamma_Low", label: "Low", color: "#00733e" },
+    { key: "gamma_Other", label: "Annað", color: "#8b6914" }
+  ];
+
+  // Reshape gamma data to long format for Plot
+  const gammaData = playerData.flatMap(d =>
+    cubeTypes
+      .filter(c => d[c.key] != null)
+      .map(c => ({
+        date: d.date,
+        cube: c.label,
+        gamma: d[c.key],
+        color: c.color
+      }))
+  );
+
+  const gammaChart = gammaData.length > 0 ? Plot.plot({
+    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    style: chartStyle,
+    x: xConfig,
+    y: { label: "Kubbaáhrif (γ)", grid: true },
+    color: {
+      domain: cubeTypes.map(c => c.label),
+      range: cubeTypes.map(c => c.color),
+      legend: true
+    },
+    marks: [
+      Plot.ruleY([0], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
+      Plot.lineY(gammaData, { x: "date", y: "gamma", stroke: "cube", strokeWidth: 2, curve: "monotone-x" }),
+      // Latest dots for each cube type
+      ...cubeTypes
+        .filter(c => latest[c.key] != null)
+        .map(c => Plot.dot([{ date: latest.date, gamma: latest[c.key] }], {
+          x: "date", y: "gamma", fill: c.color, r: 3.5
+        }))
+    ]
+  }) : null;
+
+  const gamesChart = Plot.plot({
+    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    style: chartStyle,
+    x: xConfig,
+    y: { label: "Fjöldi leikja", domain: [0, d3.max(playerData, d => d.total) * 1.1 || 10], grid: true },
+    marks: [
+      Plot.lineY(playerData, { x: "date", y: "total", stroke: "#8b6914", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "total", fill: "#8b6914", r: 4 }),
+      Plot.text([latest], { x: "date", y: "total", text: d => `${d.total}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#8b6914" })
+    ]
+  });
+
+  return html`<div class="profile-charts">
+    <div class="chart-row-full">
+      <div class="cell">
+        <div class="chart-title">ELO-stig</div>
+        ${eloChart}
+      </div>
+    </div>
+    <div class="dashboard-grid">
+      <div class="cell">
+        <div class="chart-title">Sæti</div>
+        ${placementChart}
+      </div>
+      <div class="cell">
+        <div class="chart-title">Sigurhlutfall</div>
+        ${winrateChart}
+      </div>
+    </div>
+    <div class="dashboard-grid">
+      ${gammaChart ? html`<div class="cell">
+        <div class="chart-title">Kubbastyrkur yfir tíma</div>
+        ${gammaChart}
+      </div>` : html``}
+      <div class="cell">
+        <div class="chart-title">Fjöldi leikja</div>
+        ${gamesChart}
+      </div>
+    </div>
+  </div>`;
+}
+```

@@ -1,7 +1,19 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>https://mtgkubbur.is/throun.html</loc>
+    <lastmod>2026-02-24T18:59:00.720Z</lastmod>
+  </url>
+  <url>
     <loc>https://mtgkubbur.is/index.html</loc>
-    <lastmod>2026-02-05T15:45:59.029Z</lastmod>
+    <lastmod>2026-02-24T19:22:27.172Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtgkubbur.is/einvigi.html</loc>
+    <lastmod>2026-02-24T19:40:47.859Z</lastmod>
+  </url>
+  <url>
+    <loc>https://mtgkubbur.is/methods.html</loc>
+    <lastmod>2026-02-06T09:56:13.735Z</lastmod>
   </url>
 </urlset>

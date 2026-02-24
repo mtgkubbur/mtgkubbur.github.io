@@ -1,4 +1,4 @@
-/* MtG Kubbur - Custom Styles */
+/* MtG Kubbur - Custom Styles (MTG Mana Color Identity) */
 
 /* Let the table be wider */
 .cell-output-display {
@@ -11,7 +11,571 @@
   margin: 0 auto;
 }
 
-/* Reduced motion support */
+/* Wider content for pages with dashboard grids */
+body:has(.dashboard-grid) #quarto-content {
+  max-width: 1100px;
+}
+
+/* ─── Homepage header ─── */
+.page-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  padding-top: 1rem;
+}
+
+.page-header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2a1f14;
+  margin: 0 0 0.25rem;
+}
+
+.page-header .subtitle {
+  color: #5c4f42;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.date-badge {
+  display: inline-block;
+  background: #e8f1f8;
+  color: #0e68ab;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 10px;
+  border-radius: 12px;
+  margin-top: 0.5rem;
+}
+
+/* ─── Reactable interactive table ─── */
+.score-table {
+  font-size: 16px;
+  max-width: 960px;
+  margin: 0 auto;
+  background: #ffffff;
+  border: 1px solid #d4cfc9;
+  border-radius: 10px;
+  padding: 16px 12px 8px;
+  box-shadow: 0 1px 4px rgba(42, 31, 20, 0.06);
+}
+
+.score-table .rt-search {
+  margin-bottom: 16px;
+}
+
+.score-table .rt-search input {
+  border-radius: 8px;
+  border: 1px solid #d4cfc9;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235c4f42' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: 10px center;
+  background-size: 14px;
+  padding-left: 32px;
+  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+}
+
+.score-table .rt-search input:focus {
+  border-color: #0e68ab;
+  box-shadow: 0 0 0 3px rgba(14, 104, 171, 0.12);
+  outline: none;
+}
+
+.score-table .rt-search input::placeholder {
+  color: #b0a99f;
+}
+
+.score-table .rt-tr:hover .rt-td {
+  background-color: #e8f1f8;
+}
+
+.score-table .rt-thead {
+  border-bottom: 2px solid #0e68ab;
+}
+
+/* Column group headers */
+.score-table .rt-th-group {
+  font-size: 11px !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #5c4f42;
+  border-bottom: 1px solid #d4cfc9 !important;
+  padding-bottom: 4px;
+}
+
+/* ─── Mobile: horizontal scroll table with sticky player column ─── */
+@media (max-width: 768px) {
+  .cell-output-display {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .score-table {
+    font-size: 14px;
+    max-width: none;
+    width: max-content;
+    min-width: 100%;
+  }
+
+  /* Sticky first column (player name) */
+  .score-table .rt-th:first-child,
+  .score-table .rt-td:first-child {
+    position: sticky;
+    left: 0;
+    z-index: 1;
+    background-color: inherit;
+    box-shadow: 2px 0 4px rgba(42, 31, 20, 0.06);
+    clip-path: inset(0 -4px 0 0);
+  }
+
+  .score-table .rt-tr:hover .rt-td:first-child {
+    background-color: #e8f1f8;
+  }
+}
+
+/* ─── OJS dropdown styling ─── */
+form.oi-3a86ea label {
+  font-weight: 600;
+  color: #2a1f14;
+}
+
+form.oi-3a86ea select {
+  border: 1px solid #d4cfc9;
+  border-radius: 6px;
+  padding: 6px 10px;
+  font-size: 14px;
+  color: #2a1f14;
+  transition: box-shadow 0.15s ease;
+}
+
+form.oi-3a86ea select:focus {
+  box-shadow: 0 0 0 2px rgba(14, 104, 171, 0.15);
+  outline: none;
+}
+
+/* ─── Dashboard grid layout ─── */
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem 1.5rem;
+}
+
+.dashboard-grid .cell,
+.chart-row-full .cell {
+  min-width: 0;
+  background: #fff;
+  border: 1px solid #d4cfc9;
+  border-radius: 8px;
+  padding: 1rem;
+  box-shadow: 0 1px 3px rgba(42, 31, 20, 0.04);
+}
+
+.chart-row-full {
+  margin-bottom: 1rem;
+}
+
+.profile-charts {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ─── Combined cube table ─── */
+.cube-combined-card {
+  max-width: 580px;
+  margin: 0 auto 1.5rem;
+  background: #fff;
+  border: 1px solid #d4cfc9;
+  border-radius: 8px;
+  padding: 1rem 1.25rem;
+  box-shadow: 0 1px 3px rgba(42, 31, 20, 0.04);
+}
+
+.cube-affinity-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c4f42;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.75rem;
+  text-align: center;
+}
+
+.cube-combined-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+
+.cube-combined-table th {
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+  color: #5c4f42;
+  padding: 4px 8px;
+  border-bottom: 1px solid #d4cfc9;
+}
+
+.cube-combined-table th:first-child {
+  text-align: left;
+}
+
+.cube-combined-table td {
+  text-align: center;
+  padding: 8px 8px;
+  vertical-align: middle;
+}
+
+.cube-combined-table tr:hover td {
+  background: #f9faf4;
+}
+
+.cube-record-name {
+  text-align: left !important;
+  font-weight: 500;
+}
+
+.cube-record-pip {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  margin-right: 6px;
+  vertical-align: middle;
+}
+
+/* Inline gamma bar inside table cell */
+.gamma-cell {
+  min-width: 130px;
+}
+
+.gamma-bar-inline {
+  display: inline-flex;
+  align-items: center;
+  width: 70px;
+  height: 14px;
+  vertical-align: middle;
+}
+
+.gamma-bar-neg-side {
+  flex: 1;
+  display: flex;
+  justify-content: flex-end;
+  height: 100%;
+}
+
+.gamma-bar-pos-side {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+  height: 100%;
+}
+
+.gamma-bar-mid {
+  width: 1px;
+  height: 100%;
+  background: #d4cfc9;
+  flex-shrink: 0;
+}
+
+.gamma-bar-fill {
+  height: 100%;
+  border-radius: 2px;
+  min-width: 2px;
+}
+
+.gamma-val {
+  font-size: 12px;
+  font-weight: 600;
+  margin-left: 6px;
+  vertical-align: middle;
+}
+
+@media (max-width: 768px) {
+  .cube-combined-card {
+    max-width: none;
+  }
+}
+
+/* Cube category footnote */
+.cube-footnote {
+  max-width: 700px;
+  margin: 1.5rem auto 0;
+  font-size: 12px;
+  color: #5c4f42;
+  line-height: 1.6;
+  text-align: center;
+}
+
+/* Chart card titles */
+.chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a1f14;
+  margin: 0 0 0.5rem;
+  text-align: center;
+}
+
+/* ─── Player summary card ─── */
+.player-summary {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  padding: 0.75rem 1rem;
+  margin-bottom: 1rem;
+  background: #f9faf4;
+  border: 1px solid #d4cfc9;
+  border-radius: 8px;
+}
+
+.player-summary .stat {
+  text-align: center;
+}
+
+.player-summary .stat-value {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #2a1f14;
+  line-height: 1.2;
+}
+
+.player-summary .stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  color: #5c4f42;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Empty state for charts */
+.empty-state {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: #5c4f42;
+  font-size: 1rem;
+}
+
+.empty-state .empty-icon {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  opacity: 0.4;
+}
+
+@media (max-width: 768px) {
+  .player-summary {
+    gap: 1rem;
+    flex-wrap: wrap;
+  }
+  .player-summary .stat-value {
+    font-size: 1.25rem;
+  }
+}
+
+/* ─── Head-to-Head (Einvígi) ─── */
+.h2h-card {
+  max-width: 560px;
+  margin: 1.5rem auto;
+  background: #fff;
+  border: 1px solid #d4cfc9;
+  border-radius: 10px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(42, 31, 20, 0.06);
+}
+
+.h2h-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.25rem;
+}
+
+.h2h-player {
+  text-align: center;
+  flex: 1;
+}
+
+.h2h-name {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #2a1f14;
+}
+
+.h2h-wins {
+  font-size: 1.75rem;
+  font-weight: 700;
+  line-height: 1.3;
+}
+
+.h2h-wins-label {
+  font-size: 0.75rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.h2h-vs {
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #5c4f42;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.h2h-bar-container {
+  display: flex;
+  border-radius: 6px;
+  overflow: hidden;
+  height: 28px;
+  margin-bottom: 0.5rem;
+}
+
+.h2h-bar-fill {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 12px;
+  font-weight: 600;
+  min-width: 32px;
+  transition: width 0.3s ease;
+}
+
+.h2h-total {
+  text-align: center;
+  font-size: 13px;
+  color: #5c4f42;
+  margin-bottom: 1rem;
+}
+
+.h2h-cube-breakdown {
+  border-top: 1px solid #d4cfc9;
+  padding-top: 1rem;
+}
+
+.h2h-cube-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #5c4f42;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 0.5rem;
+}
+
+.h2h-cube-table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+
+.h2h-cube-table th {
+  text-align: center;
+  font-weight: 600;
+  font-size: 12px;
+  color: #5c4f42;
+  padding: 4px 8px;
+  border-bottom: 1px solid #d4cfc9;
+}
+
+.h2h-cube-table th:first-child {
+  text-align: left;
+}
+
+.h2h-cube-table td {
+  text-align: center;
+  padding: 6px 8px;
+}
+
+.h2h-cube-table td:first-child {
+  text-align: left;
+}
+
+.h2h-cube-table tr:hover td {
+  background: #f9faf4;
+}
+
+@media (max-width: 768px) {
+  .h2h-card {
+    margin: 1rem auto;
+    padding: 1rem;
+  }
+  .h2h-name {
+    font-size: 1rem;
+  }
+  .h2h-wins {
+    font-size: 1.35rem;
+  }
+  .h2h-header {
+    gap: 0.75rem;
+  }
+}
+
+/* ─── ELO difference chart (Einvígi) ─── */
+.h2h-elo-chart {
+  max-width: 560px;
+  margin: 1.5rem auto 0;
+  background: #fff;
+  border: 1px solid #d4cfc9;
+  border-radius: 10px;
+  padding: 1.25rem;
+  box-shadow: 0 2px 6px rgba(42, 31, 20, 0.06);
+  text-align: center;
+}
+
+.h2h-chart-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: #2a1f14;
+  margin-bottom: 2px;
+}
+
+.h2h-chart-subtitle {
+  font-size: 12px;
+  color: #5c4f42;
+  margin-bottom: 0.75rem;
+}
+
+.h2h-chart-legend {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+  font-size: 12px;
+  color: #5c4f42;
+}
+
+.h2h-legend-item {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.h2h-legend-pip {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  opacity: 0.6;
+}
+
+/* ─── OJS chart container ─── */
+.observablehq figure {
+  margin: 0 auto;
+}
+
+/* OJS legend */
+.observablehq svg[class*="plot"] {
+  margin: 0 auto;
+  display: block;
+}
+
+/* ─── Reduced motion support ─── */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation: none !important;
