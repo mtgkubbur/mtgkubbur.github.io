@@ -88,6 +88,49 @@ body {
 .footer {
   border-top: 3px solid $mtg-blue;
   color: $text-muted;
-  font-size: 0.875rem;
-  padding-top: 1rem;
+  font-size: 0.8rem;
+  padding: 1.25rem 0 1rem;
+  background: #faf9f7;
+}
+
+.footer-brand {
+  font-weight: 700;
+  color: $text-primary;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.footer-tagline {
+  font-size: 0.75rem;
+  color: $text-muted;
+}
+
+.footer-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  a {
+    color: $text-muted;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $mtg-blue;
+    }
+  }
+}
+
+.footer-dot {
+  color: $border-color;
+  font-size: 0.7rem;
+}
+
+.footer-mana-sep {
+  font-size: 0.65rem;
+  opacity: 0.35;
+  vertical-align: middle;
 }

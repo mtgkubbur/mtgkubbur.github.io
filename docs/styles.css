@@ -17,26 +17,88 @@ body:has(.h2h-layout) #quarto-content {
   max-width: 1300px;
 }
 
-/* ─── Page hero header (all pages) ─── */
+/* ─── Page hero header — card-back-inspired texture ─── */
 .page-header {
   text-align: center;
-  margin-bottom: 2rem;
-  padding: 2.5rem 1rem 2rem;
-  background: linear-gradient(180deg, #f5f0eb 0%, #fefefe 100%);
-  border-bottom: 1px solid #e8e3dd;
+  margin-bottom: 2.5rem;
+  padding: 3rem 1.5rem 2.25rem;
+  position: relative;
+  overflow: hidden;
+  z-index: 0;
+
+  /* Layered card-back-inspired background:
+     1. Central radial glow (the "orb")
+     2. Warm amber base gradient */
+  background:
+    radial-gradient(ellipse 50% 80% at 50% 50%, rgba(180, 140, 60, 0.10) 0%, transparent 70%),
+    linear-gradient(180deg, #e8ddd0 0%, #f4efe8 60%, #fefefe 100%);
+  border-bottom: 2px solid #c9b99a;
 }
 
+/* Central oval — evokes the card-back's iconic ellipse */
+.page-header::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 380px;
+  height: 120px;
+  border-radius: 50%;
+  border: 1.5px solid rgba(139, 105, 20, 0.10);
+  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Outer frame ring — layered depth like the card back's border */
+.page-header::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 160px;
+  border-radius: 50%;
+  border: 1px solid rgba(139, 105, 20, 0.06);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Mana color pips row (rendered via ::before on .subtitle) */
+.page-header .mana-pips {
+  display: flex;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  opacity: 0.3;
+}
+
+.page-header .mana-pips .ms {
+  font-size: 14px;
+}
+
+.page-header .mana-pip-w { color: #c9a84c; }
+.page-header .mana-pip-u { color: #0e68ab; }
+.page-header .mana-pip-b { color: #3d3028; }
+.page-header .mana-pip-r { color: #d3202a; }
+.page-header .mana-pip-g { color: #00733e; }
+
 .page-header h1 {
-  font-size: 2rem;
+  font-size: 2.25rem;
   font-weight: 700;
   color: #2a1f14;
-  margin: 0 0 0.3rem;
+  margin: 0 0 0.4rem;
+  letter-spacing: -0.01em;
 }
 
 .page-header .subtitle {
   color: #5c4f42;
-  font-size: 1.05rem;
+  font-size: 1.1rem;
   margin: 0;
+  font-weight: 400;
 }
 
 .page-header .page-desc {
@@ -46,14 +108,35 @@ body:has(.h2h-layout) #quarto-content {
 }
 
 .date-badge {
-  display: inline-block;
-  background: #e8f1f8;
-  color: #0e68ab;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  background: rgba(139, 105, 20, 0.08);
+  color: #8b6914;
   font-size: 12px;
-  font-weight: 500;
-  padding: 3px 10px;
+  font-weight: 600;
+  padding: 4px 12px;
   border-radius: 12px;
-  margin-top: 0.75rem;
+  margin-top: 1rem;
+  letter-spacing: 0.01em;
+  border: 1px solid rgba(139, 105, 20, 0.12);
+}
+
+/* ─── Shared card elevation ─── */
+.score-table,
+.h2h-card,
+.h2h-elo-chart,
+.cube-combined-card,
+.player-summary {
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.score-table:hover,
+.h2h-card:hover,
+.h2h-elo-chart:hover,
+.cube-combined-card:hover {
+  box-shadow: 0 4px 12px rgba(42, 31, 20, 0.10);
+  border-color: #c4bfb9;
 }
 
 /* ─── Reactable interactive table ─── */
@@ -68,17 +151,51 @@ body:has(.h2h-layout) #quarto-content {
   box-shadow: 0 1px 4px rgba(42, 31, 20, 0.06);
 }
 
-/* Podium highlight for top 3 rows — left border on first cell only */
-.score-table .rt-tr:nth-child(1) .rt-td:first-child {
+/* Podium highlight for top 3 rows — left accent + medal pip */
+.score-table .rt-tr-group:nth-child(-n+3) .rt-td:first-child {
+  position: relative;
+  padding-left: 28px;
+}
+
+.score-table .rt-tr-group:nth-child(-n+3) .rt-td:first-child .rt-td-inner::before {
+  content: "";
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+}
+
+/* Gold — 1st */
+.score-table .rt-tr-group:nth-child(1) .rt-td:first-child {
   border-left: 4px solid #c9a84c;
 }
-.score-table .rt-tr:nth-child(2) .rt-td:first-child {
+.score-table .rt-tr-group:nth-child(1) .rt-td:first-child .rt-td-inner::before {
+  background: linear-gradient(135deg, #e8c84a, #b8941c);
+  box-shadow: 0 0 4px rgba(201, 168, 76, 0.4);
+}
+
+/* Silver — 2nd */
+.score-table .rt-tr-group:nth-child(2) .rt-td:first-child {
   border-left: 4px solid #a8a8a8;
 }
-.score-table .rt-tr:nth-child(3) .rt-td:first-child {
+.score-table .rt-tr-group:nth-child(2) .rt-td:first-child .rt-td-inner::before {
+  background: linear-gradient(135deg, #c8c8c8, #909090);
+  box-shadow: 0 0 4px rgba(168, 168, 168, 0.4);
+}
+
+/* Bronze — 3rd */
+.score-table .rt-tr-group:nth-child(3) .rt-td:first-child {
   border-left: 4px solid #b87333;
 }
-.score-table .rt-tr:nth-child(n+4) .rt-td:first-child {
+.score-table .rt-tr-group:nth-child(3) .rt-td:first-child .rt-td-inner::before {
+  background: linear-gradient(135deg, #d4944a, #9a5e22);
+  box-shadow: 0 0 4px rgba(184, 115, 51, 0.4);
+}
+
+.score-table .rt-tr-group:nth-child(n+4) .rt-td:first-child {
   border-left: 4px solid transparent;
 }
 
@@ -192,6 +309,13 @@ form.oi-3a86ea select:focus {
   border-radius: 8px;
   padding: 1rem;
   box-shadow: 0 1px 3px rgba(42, 31, 20, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.dashboard-grid .cell:hover,
+.chart-row-full .cell:hover {
+  box-shadow: 0 4px 12px rgba(42, 31, 20, 0.10);
+  border-color: #c4bfb9;
 }
 
 .chart-row-full {
@@ -199,15 +323,22 @@ form.oi-3a86ea select:focus {
 }
 
 .profile-charts {
-  max-width: 1300px;
+  max-width: 1400px;
   margin: 0 auto;
 }
 
 /* Make OJS charts fill their container */
-.profile-charts .cell svg,
-.h2h-elo-chart svg {
+.profile-charts .cell svg[viewBox],
+.h2h-elo-chart svg[viewBox] {
   width: 100%;
   height: auto;
+}
+
+/* Grid charts: override aspect ratio so they don't get squished */
+.dashboard-grid .cell svg[viewBox] {
+  width: 100%;
+  height: auto;
+  min-height: 280px;
 }
 
 @media (max-width: 768px) {

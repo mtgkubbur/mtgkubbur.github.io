@@ -119,6 +119,16 @@ maxPlayers = d3.max([...d3.group(data, d => +d.date).values()], rows => rows.len
 
 :::: {.page-header}
 
+```{=html}
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+```
+
 # Leikmaður {.title}
 
 [Þróun og tölfræði einstakra leikmanna]{.page-desc}
@@ -280,11 +290,12 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
 
 ```{ojs}
 //| label: charts-container
+//| column: screen-inset
 {
   if (!latest) return html``;
 
   const chartStyle = {
-    fontSize: "12px",
+    fontSize: "13px",
     fontFamily: "'Inter', system-ui, sans-serif",
     background: "transparent"
   };
@@ -297,7 +308,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   };
 
   const eloChart = Plot.plot({
-    width: width, height: 340, marginLeft: 55, marginBottom: 35,
+    width: width, height: 380, marginLeft: 55, marginBottom: 40,
     style: chartStyle,
     x: xConfig,
     y: { label: "ELO", domain: yDomain, grid: true },
@@ -316,25 +327,25 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   });
 
   const winrateChart = Plot.plot({
-    width: width, height: 280, marginLeft: 55, marginBottom: 35,
+    width: width, height: 360, marginLeft: 55, marginBottom: 40,
     style: chartStyle,
     x: xConfig,
     y: { label: "Sigurhlutfall (%)", domain: [0, 100], grid: true },
     marks: [
       Plot.ruleY([50], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
-      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: "#00733e", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: "#00733e", strokeWidth: 2.5, curve: "monotone-x" }),
       Plot.dot([latest], { x: "date", y: "winRate", fill: "#00733e", r: 4 }),
       Plot.text([latest], { x: "date", y: "winRate", text: d => `${d.winRate.toFixed(0)}%`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#00733e" })
     ]
   });
 
   const placementChart = Plot.plot({
-    width: width, height: 280, marginLeft: 55, marginBottom: 35,
+    width: width, height: 360, marginLeft: 55, marginBottom: 40,
     style: chartStyle,
     x: xConfig,
     y: { label: "Sæti", domain: [maxPlayers, 1], grid: true },
     marks: [
-      Plot.lineY(playerData, { x: "date", y: "rank", stroke: "#d3202a", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.lineY(playerData, { x: "date", y: "rank", stroke: "#d3202a", strokeWidth: 2.5, curve: "monotone-x" }),
       Plot.dot([latest], { x: "date", y: "rank", fill: "#d3202a", r: 4 }),
       Plot.text([latest], { x: "date", y: "rank", text: d => `#${d.rank}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#d3202a" })
     ]
@@ -361,7 +372,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   );
 
   const gammaChart = gammaData.length > 0 ? Plot.plot({
-    width: width, height: 280, marginLeft: 55, marginBottom: 35,
+    width: width, height: 360, marginLeft: 55, marginBottom: 40,
     style: chartStyle,
     x: xConfig,
     y: { label: "Kubbaáhrif (γ)", grid: true },
@@ -372,7 +383,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     },
     marks: [
       Plot.ruleY([0], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
-      Plot.lineY(gammaData, { x: "date", y: "gamma", stroke: "cube", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.lineY(gammaData, { x: "date", y: "gamma", stroke: "cube", strokeWidth: 2.5, curve: "monotone-x" }),
       // Latest dots for each cube type
       ...cubeTypes
         .filter(c => latest[c.key] != null)
@@ -383,12 +394,12 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   }) : null;
 
   const gamesChart = Plot.plot({
-    width: width, height: 280, marginLeft: 55, marginBottom: 35,
+    width: width, height: 360, marginLeft: 55, marginBottom: 40,
     style: chartStyle,
     x: xConfig,
     y: { label: "Fjöldi leikja", domain: [0, d3.max(playerData, d => d.total) * 1.1 || 10], grid: true },
     marks: [
-      Plot.lineY(playerData, { x: "date", y: "total", stroke: "#8b6914", strokeWidth: 2, curve: "monotone-x" }),
+      Plot.lineY(playerData, { x: "date", y: "total", stroke: "#8b6914", strokeWidth: 2.5, curve: "monotone-x" }),
       Plot.dot([latest], { x: "date", y: "total", fill: "#8b6914", r: 4 }),
       Plot.text([latest], { x: "date", y: "total", text: d => `${d.total}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#8b6914" })
     ]

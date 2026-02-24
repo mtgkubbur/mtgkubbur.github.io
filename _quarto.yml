@@ -25,7 +25,18 @@ website:
         aria-label: GitHub
 
   page-footer:
-    center: "© 2026 MtG Kubbur"
+    left: |
+      <span class="footer-brand">MtG Kubbur</span>
+      <span class="footer-tagline">Magic: The Gathering Cube Drafts á Íslandi</span>
+    center: |
+      <nav class="footer-nav">
+        <a href="index.html">Stigatafla</a>
+        <i class="ms ms-u footer-mana-sep" aria-hidden="true"></i>
+        <a href="throun.html">Leikmaður</a>
+        <i class="ms ms-r footer-mana-sep" aria-hidden="true"></i>
+        <a href="einvigi.html">Einvígi</a>
+      </nav>
+    right: "© 2026 MtG Kubbur"
 
 format:
   html:
@@ -33,5 +44,8 @@ format:
       light: [cosmo, theme.scss]
     css: styles.css
     toc: false
+    include-in-header:
+      text: |
+        <link href="https://cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
 
 engine: knitr

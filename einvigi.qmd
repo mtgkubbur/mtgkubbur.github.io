@@ -89,6 +89,16 @@ eloHistory = {
 
 :::: {.page-header}
 
+```{=html}
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+```
+
 # Einvígi {.title}
 
 [Beint samanburður milli tveggja leikmanna]{.page-desc}
