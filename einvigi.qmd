@@ -87,6 +87,14 @@ eloHistory = {
 }
 ```
 
+:::: {.page-header}
+
+# Einvígi {.title}
+
+[Beint samanburður milli tveggja leikmanna]{.page-desc}
+
+::::
+
 ```{ojs}
 //| label: player-selectors
 viewof player1 = Inputs.select(["", ...players], {
@@ -101,6 +109,9 @@ viewof player2 = Inputs.select(["", ...players], {
   format: d => d === "" ? "Veldu leikmann..." : d
 })
 ```
+
+
+::: {.h2h-layout}
 
 ```{ojs}
 //| label: h2h-results
@@ -199,29 +210,25 @@ viewof player2 = Inputs.select(["", ...players], {
 ```
 
 ```{ojs}
-//| label: elo-difference
-eloDiff = {
-  if (player1 === "" || player2 === "" || player1 === player2) return [];
+//| label: elo-diff-chart
+{
+  if (player1 === "" || player2 === "" || player1 === player2) return html``;
+
   const p1Map = new Map(
     eloHistory.filter(d => d.player === player1).map(d => [+d.date, d.score_median])
   );
-  return eloHistory
+  const eloDiff = eloHistory
     .filter(d => d.player === player2 && p1Map.has(+d.date))
     .map(d => ({ date: d.date, diff: p1Map.get(+d.date) - d.score_median }))
     .sort((a, b) => a.date - b.date);
-}
-```
 
-```{ojs}
-//| label: elo-diff-chart
-{
   if (eloDiff.length < 2) return html``;
 
   const latestPt = eloDiff[eloDiff.length - 1];
   const latestColor = latestPt.diff >= 0 ? "#00733e" : "#d3202a";
 
   const chart = Plot.plot({
-    width: 560, height: 280,
+    width: width, height: 280,
     marginLeft: 55, marginBottom: 35, marginTop: 20,
     style: { fontSize: "12px", fontFamily: "'Inter', system-ui, sans-serif", background: "transparent" },
     x: {
@@ -262,3 +269,5 @@ eloDiff = {
   </div>`;
 }
 ```
+
+:::

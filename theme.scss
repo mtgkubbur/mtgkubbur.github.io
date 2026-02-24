@@ -53,10 +53,18 @@ body {
 
   .nav-link {
     color: rgba($mtg-white, 0.85);
+    padding-bottom: 0.4rem;
+    border-bottom: 2px solid transparent;
+    transition: color 0.15s ease, border-color 0.15s ease;
 
-    &:hover,
+    &:hover {
+      color: $mtg-white;
+      border-bottom-color: rgba($mtg-white, 0.4);
+    }
+
     &.active {
       color: $mtg-white;
+      border-bottom-color: $mtg-blue;
     }
   }
 }

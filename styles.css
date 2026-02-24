@@ -7,33 +7,42 @@
 }
 
 #quarto-content {
-  max-width: 900px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
 /* Wider content for pages with dashboard grids */
-body:has(.dashboard-grid) #quarto-content {
-  max-width: 1100px;
+body:has(.dashboard-grid) #quarto-content,
+body:has(.h2h-layout) #quarto-content {
+  max-width: 1300px;
 }
 
-/* ─── Homepage header ─── */
+/* ─── Page hero header (all pages) ─── */
 .page-header {
   text-align: center;
-  margin-bottom: 1.5rem;
-  padding-top: 1rem;
+  margin-bottom: 2rem;
+  padding: 2.5rem 1rem 2rem;
+  background: linear-gradient(180deg, #f5f0eb 0%, #fefefe 100%);
+  border-bottom: 1px solid #e8e3dd;
 }
 
 .page-header h1 {
   font-size: 2rem;
   font-weight: 700;
   color: #2a1f14;
-  margin: 0 0 0.25rem;
+  margin: 0 0 0.3rem;
 }
 
 .page-header .subtitle {
   color: #5c4f42;
-  font-size: 1rem;
+  font-size: 1.05rem;
   margin: 0;
+}
+
+.page-header .page-desc {
+  color: #7a7068;
+  font-size: 0.875rem;
+  margin: 0.25rem 0 0;
 }
 
 .date-badge {
@@ -44,19 +53,33 @@ body:has(.dashboard-grid) #quarto-content {
   font-weight: 500;
   padding: 3px 10px;
   border-radius: 12px;
-  margin-top: 0.5rem;
+  margin-top: 0.75rem;
 }
 
 /* ─── Reactable interactive table ─── */
 .score-table {
   font-size: 16px;
-  max-width: 960px;
+  max-width: 1100px;
   margin: 0 auto;
   background: #ffffff;
   border: 1px solid #d4cfc9;
   border-radius: 10px;
-  padding: 16px 12px 8px;
+  padding: 16px 20px 8px;
   box-shadow: 0 1px 4px rgba(42, 31, 20, 0.06);
+}
+
+/* Podium highlight for top 3 rows — left border on first cell only */
+.score-table .rt-tr:nth-child(1) .rt-td:first-child {
+  border-left: 4px solid #c9a84c;
+}
+.score-table .rt-tr:nth-child(2) .rt-td:first-child {
+  border-left: 4px solid #a8a8a8;
+}
+.score-table .rt-tr:nth-child(3) .rt-td:first-child {
+  border-left: 4px solid #b87333;
+}
+.score-table .rt-tr:nth-child(n+4) .rt-td:first-child {
+  border-left: 4px solid transparent;
 }
 
 .score-table .rt-search {
@@ -176,8 +199,15 @@ form.oi-3a86ea select:focus {
 }
 
 .profile-charts {
-  max-width: 1100px;
+  max-width: 1300px;
   margin: 0 auto;
+}
+
+/* Make OJS charts fill their container */
+.profile-charts .cell svg,
+.h2h-elo-chart svg {
+  width: 100%;
+  height: auto;
 }
 
 @media (max-width: 768px) {
@@ -378,9 +408,45 @@ form.oi-3a86ea select:focus {
 }
 
 /* ─── Head-to-Head (Einvígi) ─── */
+
+/* Desktop: side-by-side card + chart */
+.h2h-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
+  align-items: start;
+}
+
+@media (max-width: 900px) {
+  .h2h-layout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Horizontal selector row — targets the OJS cell containing both selectors */
+#player-selectors {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+#player-selectors form.oi-3a86ea {
+  flex: 0 1 260px;
+}
+
+@media (max-width: 600px) {
+  #player-selectors {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+}
+
 .h2h-card {
-  max-width: 560px;
-  margin: 1.5rem auto;
+  max-width: none;
+  margin: 0;
   background: #fff;
   border: 1px solid #d4cfc9;
   border-radius: 10px;
@@ -518,8 +584,8 @@ form.oi-3a86ea select:focus {
 
 /* ─── ELO difference chart (Einvígi) ─── */
 .h2h-elo-chart {
-  max-width: 560px;
-  margin: 1.5rem auto 0;
+  max-width: none;
+  margin: 0;
   background: #fff;
   border: 1px solid #d4cfc9;
   border-radius: 10px;

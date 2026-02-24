@@ -117,6 +117,14 @@ yDomain = [
 maxPlayers = d3.max([...d3.group(data, d => +d.date).values()], rows => rows.length)
 ```
 
+:::: {.page-header}
+
+# Leikmaður {.title}
+
+[Þróun og tölfræði einstakra leikmanna]{.page-desc}
+
+::::
+
 ```{ojs}
 //| label: player-selector
 viewof selectedPlayer = Inputs.select(["", ...players], {
@@ -289,7 +297,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   };
 
   const eloChart = Plot.plot({
-    width: 700, height: 300, marginLeft: 55, marginBottom: 35,
+    width: width, height: 340, marginLeft: 55, marginBottom: 35,
     style: chartStyle,
     x: xConfig,
     y: { label: "ELO", domain: yDomain, grid: true },
@@ -308,7 +316,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   });
 
   const winrateChart = Plot.plot({
-    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    width: width, height: 280, marginLeft: 55, marginBottom: 35,
     style: chartStyle,
     x: xConfig,
     y: { label: "Sigurhlutfall (%)", domain: [0, 100], grid: true },
@@ -321,7 +329,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   });
 
   const placementChart = Plot.plot({
-    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    width: width, height: 280, marginLeft: 55, marginBottom: 35,
     style: chartStyle,
     x: xConfig,
     y: { label: "Sæti", domain: [maxPlayers, 1], grid: true },
@@ -353,7 +361,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   );
 
   const gammaChart = gammaData.length > 0 ? Plot.plot({
-    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    width: width, height: 280, marginLeft: 55, marginBottom: 35,
     style: chartStyle,
     x: xConfig,
     y: { label: "Kubbaáhrif (γ)", grid: true },
@@ -375,7 +383,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   }) : null;
 
   const gamesChart = Plot.plot({
-    width: 620, height: 300, marginLeft: 55, marginBottom: 35,
+    width: width, height: 280, marginLeft: 55, marginBottom: 35,
     style: chartStyle,
     x: xConfig,
     y: { label: "Fjöldi leikja", domain: [0, d3.max(playerData, d => d.total) * 1.1 || 10], grid: true },
