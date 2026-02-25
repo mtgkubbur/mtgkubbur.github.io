@@ -1,0 +1,200 @@
+/*-- scss:defaults --*/
+
+// MTG Mana Colors — brighter for dark backgrounds
+$mtg-blue:   #3b9edd;
+$mtg-green:  #2ecc71;
+$mtg-red:    #e74c3c;
+$mtg-black:  #0a0a0f;
+$mtg-white:  #f0ece4;
+$mtg-gold:   #d4a843;
+
+// Dark theme base
+$bg-deep:     #0e0e14;
+$bg-surface:  #16161e;
+
+// Text on dark
+$text-primary: #e8e4dc;
+$text-body:    #c8c4bc;
+$text-muted:   #7a7670;
+$text-dim:     #4a4640;
+
+// Borders on dark
+$border-color:       rgba(255, 255, 255, 0.08);
+
+// Typography — Inter
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+$font-family-sans-serif: 'Inter', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+$headings-font-weight: 700;
+
+// Body
+$body-color: $text-body;
+$body-bg: $bg-deep;
+
+// Links
+$link-color: $mtg-blue;
+$link-decoration: none;
+$link-hover-color: lighten($mtg-blue, 12%);
+$link-hover-decoration: none;
+
+// Navbar
+$navbar-bg: $bg-deep;
+$navbar-fg: $text-primary;
+
+/*-- scss:rules --*/
+
+body {
+  line-height: 1.6;
+}
+
+/* ─── Navbar — sleek dark with gold accents ─── */
+.navbar {
+  background: linear-gradient(180deg, rgba(18, 18, 26, 0.97) 0%, rgba(14, 14, 20, 0.99) 100%) !important;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: none;
+  box-shadow: 0 1px 0 0 rgba($mtg-gold, 0.15);
+  padding: 0.5rem 0;
+  position: relative;
+
+  /* Gold accent line */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($mtg-gold, 0.4) 30%,
+      rgba($mtg-gold, 0.6) 50%,
+      rgba($mtg-gold, 0.4) 70%,
+      transparent
+    );
+  }
+
+  .navbar-brand {
+    font-weight: 800;
+    font-size: 1.1rem;
+    letter-spacing: 0.02em;
+    background: linear-gradient(135deg, #f0dca0, $mtg-gold, #c49630);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .nav-link {
+    color: rgba($text-primary, 0.55);
+    font-weight: 500;
+    font-size: 0.88rem;
+    padding: 0.4rem 0.75rem;
+    border-radius: 6px;
+    transition: color 0.2s ease, background 0.2s ease;
+    letter-spacing: 0.01em;
+
+    &:hover {
+      color: $text-primary;
+      background: rgba(255, 255, 255, 0.05);
+    }
+
+    &.active {
+      color: $mtg-gold;
+      background: rgba($mtg-gold, 0.08);
+      font-weight: 600;
+    }
+  }
+
+  .nav-link .bi-github {
+    opacity: 0.4;
+    transition: opacity 0.2s ease;
+  }
+  .nav-link:hover .bi-github {
+    opacity: 0.8;
+  }
+}
+
+/* ─── Quarto title ─── */
+.quarto-title {
+  margin-bottom: 1.5rem;
+
+  h1.title {
+    font-size: 1.75rem;
+    color: $text-primary;
+    margin-bottom: 0.25rem;
+  }
+
+  .subtitle {
+    color: $text-muted;
+    font-size: 1rem;
+  }
+}
+
+/* ─── Footer — dark with gold accent ─── */
+.footer {
+  border-top: none;
+  color: $text-muted;
+  font-size: 0.8rem;
+  padding: 1.5rem 0 1.25rem;
+  background: linear-gradient(180deg, $bg-surface 0%, $bg-deep 100%);
+  position: relative;
+
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 10%;
+    right: 10%;
+    height: 1px;
+    background: linear-gradient(
+      90deg,
+      transparent,
+      rgba($mtg-gold, 0.2) 30%,
+      rgba($mtg-gold, 0.35) 50%,
+      rgba($mtg-gold, 0.2) 70%,
+      transparent
+    );
+  }
+}
+
+.footer-brand {
+  font-weight: 700;
+  color: $text-primary;
+  font-size: 0.9rem;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.footer-tagline {
+  font-size: 0.75rem;
+  color: $text-muted;
+}
+
+.footer-nav {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+
+  a {
+    color: $text-muted;
+    font-weight: 500;
+    font-size: 0.8rem;
+    text-decoration: none;
+    transition: color 0.15s ease;
+
+    &:hover {
+      color: $mtg-gold;
+    }
+  }
+}
+
+.footer-dot {
+  color: rgba(255, 255, 255, 0.15);
+  font-size: 0.7rem;
+}
+
+.footer-mana-sep {
+  font-size: 0.65rem;
+  opacity: 0.25;
+  vertical-align: middle;
+}

@@ -73,10 +73,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-html/tippy.umd.min.js"></script>
 <script src="site_libs/quarto-html/anchor.min.js"></script>
 <link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
-<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
 <script src="site_libs/bootstrap/bootstrap.min.js"></script>
 <link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
-<link href="site_libs/bootstrap/bootstrap-2809080f8b6389ee96ae8948de1ba7fd.min.css" rel="stylesheet" append-hash="true" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-2809080f8b6389ee96ae8948de1ba7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-50dfa8c009a1a8093ab416c812260a34.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2809080f8b6389ee96ae8948de1ba7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
 <script id="quarto-search-options" type="application/json">{
   "location": "navbar",
   "copy-button": false,
@@ -124,7 +128,169 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link rel="stylesheet" href="styles.css">
 </head>
 
-<body class="nav-fixed fullcontent quarto-light">
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
 
 <div id="quarto-search-results"></div>
   <header id="quarto-header" class="headroom fixed-top">
@@ -162,6 +328,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </ul>
           </div> <!-- /navcollapse -->
             <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
 </div>
       </div> <!-- /container-fluid -->
     </nav>
@@ -177,43 +344,80 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 
 
-<div id="data-prep" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="76" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 75;"><span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>h2h <span class="op">=</span> <span class="fu">transpose</span>(h2h_data)</span>
-<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>h2hCube <span class="op">=</span> <span class="fu">transpose</span>(h2h_cube_data)</span>
-<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>players <span class="op">=</span> player_names</span>
-<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>eloHistory <span class="op">=</span> {</span>
-<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> raw <span class="op">=</span> <span class="fu">transpose</span>(elo_history)<span class="op">;</span></span>
-<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> raw<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
-<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>    <span class="dt">player</span><span class="op">:</span> d<span class="op">.</span><span class="at">player</span><span class="op">,</span></span>
-<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>    <span class="dt">date</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(d<span class="op">.</span><span class="at">date</span>)<span class="op">,</span></span>
-<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a>    <span class="dt">score_median</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">score_median</span></span>
-<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
-<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+
+<div id="theme-detect" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="76" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 75;"><span id="cb1-76"><a href="#cb1-76" aria-hidden="true" tabindex="-1"></a>isDark <span class="op">=</span> {</span>
+<span id="cb1-77"><a href="#cb1-77" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> dark <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">"quarto-dark"</span>)<span class="op">;</span></span>
+<span id="cb1-78"><a href="#cb1-78" aria-hidden="true" tabindex="-1"></a>  <span class="kw">yield</span> dark<span class="op">;</span></span>
+<span id="cb1-79"><a href="#cb1-79" aria-hidden="true" tabindex="-1"></a>  <span class="cf">while</span> (<span class="kw">true</span>) {</span>
+<span id="cb1-80"><a href="#cb1-80" aria-hidden="true" tabindex="-1"></a>    <span class="cf">await</span> <span class="kw">new</span> <span class="bu">Promise</span>(r <span class="kw">=&gt;</span> <span class="pp">setTimeout</span>(r<span class="op">,</span> <span class="dv">150</span>))<span class="op">;</span></span>
+<span id="cb1-81"><a href="#cb1-81" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> now <span class="op">=</span> <span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">"quarto-dark"</span>)<span class="op">;</span></span>
+<span id="cb1-82"><a href="#cb1-82" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (now <span class="op">!==</span> dark) { dark <span class="op">=</span> now<span class="op">;</span> <span class="kw">yield</span> dark<span class="op">;</span> }</span>
+<span id="cb1-83"><a href="#cb1-83" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb1-84"><a href="#cb1-84" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb1-85"><a href="#cb1-85" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-86"><a href="#cb1-86" aria-hidden="true" tabindex="-1"></a>themeColors <span class="op">=</span> ({</span>
+<span id="cb1-87"><a href="#cb1-87" aria-hidden="true" tabindex="-1"></a>  <span class="dt">blue</span><span class="op">:</span>    isDark <span class="op">?</span> <span class="st">"#3b9edd"</span> <span class="op">:</span> <span class="st">"#0e68ab"</span><span class="op">,</span></span>
+<span id="cb1-88"><a href="#cb1-88" aria-hidden="true" tabindex="-1"></a>  <span class="dt">green</span><span class="op">:</span>   isDark <span class="op">?</span> <span class="st">"#2ecc71"</span> <span class="op">:</span> <span class="st">"#00733e"</span><span class="op">,</span></span>
+<span id="cb1-89"><a href="#cb1-89" aria-hidden="true" tabindex="-1"></a>  <span class="dt">red</span><span class="op">:</span>     isDark <span class="op">?</span> <span class="st">"#e74c3c"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">,</span></span>
+<span id="cb1-90"><a href="#cb1-90" aria-hidden="true" tabindex="-1"></a>  <span class="dt">gold</span><span class="op">:</span>    isDark <span class="op">?</span> <span class="st">"#d4a843"</span> <span class="op">:</span> <span class="st">"#8b6914"</span><span class="op">,</span></span>
+<span id="cb1-91"><a href="#cb1-91" aria-hidden="true" tabindex="-1"></a>  <span class="dt">text</span><span class="op">:</span>    isDark <span class="op">?</span> <span class="st">"#c8c4bc"</span> <span class="op">:</span> <span class="st">"#2a1f14"</span><span class="op">,</span></span>
+<span id="cb1-92"><a href="#cb1-92" aria-hidden="true" tabindex="-1"></a>  <span class="dt">muted</span><span class="op">:</span>   isDark <span class="op">?</span> <span class="st">"#7a7670"</span> <span class="op">:</span> <span class="st">"#5c4f42"</span><span class="op">,</span></span>
+<span id="cb1-93"><a href="#cb1-93" aria-hidden="true" tabindex="-1"></a>  <span class="dt">grid</span><span class="op">:</span>    isDark <span class="op">?</span> <span class="st">"rgba(255,255,255,0.1)"</span> <span class="op">:</span> <span class="st">"#d4cfc9"</span><span class="op">,</span></span>
+<span id="cb1-94"><a href="#cb1-94" aria-hidden="true" tabindex="-1"></a>  <span class="dt">line</span><span class="op">:</span>    isDark <span class="op">?</span> <span class="st">"#c8c4bc"</span> <span class="op">:</span> <span class="st">"#2a1f14"</span></span>
+<span id="cb1-95"><a href="#cb1-95" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
-<div id="data-prep-1">
+<div id="theme-detect-1">
 <div id="ojs-cell-1-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
-<div id="data-prep-2">
+<div id="theme-detect-2">
 <div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div id="data-prep" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="100" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 99;"><span id="cb2-100"><a href="#cb2-100" aria-hidden="true" tabindex="-1"></a>h2h <span class="op">=</span> <span class="fu">transpose</span>(h2h_data)</span>
+<span id="cb2-101"><a href="#cb2-101" aria-hidden="true" tabindex="-1"></a>h2hCube <span class="op">=</span> <span class="fu">transpose</span>(h2h_cube_data)</span>
+<span id="cb2-102"><a href="#cb2-102" aria-hidden="true" tabindex="-1"></a>players <span class="op">=</span> player_names</span>
+<span id="cb2-103"><a href="#cb2-103" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-104"><a href="#cb2-104" aria-hidden="true" tabindex="-1"></a>eloHistory <span class="op">=</span> {</span>
+<span id="cb2-105"><a href="#cb2-105" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> raw <span class="op">=</span> <span class="fu">transpose</span>(elo_history)<span class="op">;</span></span>
+<span id="cb2-106"><a href="#cb2-106" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> raw<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-107"><a href="#cb2-107" aria-hidden="true" tabindex="-1"></a>    <span class="dt">player</span><span class="op">:</span> d<span class="op">.</span><span class="at">player</span><span class="op">,</span></span>
+<span id="cb2-108"><a href="#cb2-108" aria-hidden="true" tabindex="-1"></a>    <span class="dt">date</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(d<span class="op">.</span><span class="at">date</span>)<span class="op">,</span></span>
+<span id="cb2-109"><a href="#cb2-109" aria-hidden="true" tabindex="-1"></a>    <span class="dt">score_median</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">score_median</span></span>
+<span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>  }))<span class="op">;</span></span>
+<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-1">
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-2">
+<div id="ojs-cell-2-2" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div id="data-prep-3">
-<div id="ojs-cell-1-3" data-nodetype="declaration">
+<div id="ojs-cell-2-3" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div id="data-prep-4">
-<div id="ojs-cell-1-4" data-nodetype="declaration">
+<div id="ojs-cell-2-4" data-nodetype="declaration">
 
 </div>
 </div>
@@ -233,27 +437,27 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </section>
 </div>
 <div id="player-selectors" class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="110" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 109;"><span id="cb2-110"><a href="#cb2-110" aria-hidden="true" tabindex="-1"></a>viewof player1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>players]<span class="op">,</span> {</span>
-<span id="cb2-111"><a href="#cb2-111" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Leikmaður 1:"</span><span class="op">,</span></span>
-<span id="cb2-112"><a href="#cb2-112" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
-<span id="cb2-113"><a href="#cb2-113" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Veldu leikmann..."</span> <span class="op">:</span> d</span>
-<span id="cb2-114"><a href="#cb2-114" aria-hidden="true" tabindex="-1"></a>})</span>
-<span id="cb2-115"><a href="#cb2-115" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb2-116"><a href="#cb2-116" aria-hidden="true" tabindex="-1"></a>viewof player2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>players]<span class="op">,</span> {</span>
-<span id="cb2-117"><a href="#cb2-117" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Leikmaður 2:"</span><span class="op">,</span></span>
-<span id="cb2-118"><a href="#cb2-118" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
-<span id="cb2-119"><a href="#cb2-119" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Veldu leikmann..."</span> <span class="op">:</span> d</span>
-<span id="cb2-120"><a href="#cb2-120" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="134" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 133;"><span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>viewof player1 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>players]<span class="op">,</span> {</span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Leikmaður 1:"</span><span class="op">,</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Veldu leikmann..."</span> <span class="op">:</span> d</span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>viewof player2 <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>players]<span class="op">,</span> {</span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Leikmaður 2:"</span><span class="op">,</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Veldu leikmann..."</span> <span class="op">:</span> d</span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div class="cell-output cell-output-display">
 <div id="player-selectors-1">
-<div id="ojs-cell-2-1" data-nodetype="declaration">
+<div id="ojs-cell-3-1" data-nodetype="declaration">
 
 </div>
 </div>
 </div>
 <div class="cell-output cell-output-display">
 <div id="player-selectors-2">
-<div id="ojs-cell-2-2" data-nodetype="declaration">
+<div id="ojs-cell-3-2" data-nodetype="declaration">
 
 </div>
 </div>
@@ -261,164 +465,164 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="h2h-layout">
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="127" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 126;"><span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player1 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player2 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player1 <span class="op">===</span> player2) {</span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> msg <span class="op">=</span> player1 <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> player1 <span class="op">!==</span> <span class="st">""</span></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> <span class="st">"Veldu tvo ólíka leikmenn"</span></span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> <span class="st">"Veldu tvo leikmenn til að sjá einvígið"</span><span class="op">;</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#9876;&lt;/div&gt;</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span>msg<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Find records in both directions: p1→p2 and p2→p1</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> forward <span class="op">=</span> h2h<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player1 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player2)<span class="op">;</span></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> reverse <span class="op">=</span> h2h<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player1)<span class="op">;</span></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Wins <span class="op">=</span> (forward[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>forward[<span class="dv">0</span>]<span class="op">.</span><span class="at">p1_wins</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a>                 (reverse[<span class="dv">0</span>] <span class="op">?</span> (<span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">-</span> <span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">p1_wins</span>) <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> totalGames <span class="op">=</span> (forward[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>forward[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span></span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a>                     (reverse[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Wins <span class="op">=</span> totalGames <span class="op">-</span> p1Wins<span class="op">;</span></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (totalGames <span class="op">===</span> <span class="dv">0</span>) {</span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#10068;&lt;/div&gt;</span></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;Engir leikir fundust á milli </span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> og </span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Pct <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((p1Wins <span class="op">/</span> totalGames) <span class="op">*</span> <span class="dv">100</span>)<span class="op">;</span></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Pct <span class="op">=</span> <span class="dv">100</span> <span class="op">-</span> p1Pct<span class="op">;</span></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Color <span class="op">=</span> p1Wins <span class="op">&gt;=</span> p2Wins <span class="op">?</span> <span class="st">"#00733e"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">;</span></span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Color <span class="op">=</span> p2Wins <span class="op">&gt;=</span> p1Wins <span class="op">?</span> <span class="st">"#00733e"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">;</span></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Cube breakdown</span></span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeForward <span class="op">=</span> h2hCube<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player1 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player2)<span class="op">;</span></span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeReverse <span class="op">=</span> h2hCube<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player1)<span class="op">;</span></span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeTypes <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>([<span class="op">...</span>cubeForward<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>)<span class="op">,</span> <span class="op">...</span>cubeReverse<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>)])]<span class="op">.</span><span class="fu">sort</span>()<span class="op">;</span></span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeRows <span class="op">=</span> cubeTypes<span class="op">.</span><span class="fu">map</span>(cube <span class="kw">=&gt;</span> {</span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> fwd <span class="op">=</span> cubeForward<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> cube)<span class="op">;</span></span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rev <span class="op">=</span> cubeReverse<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> cube)<span class="op">;</span></span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> w1 <span class="op">=</span> (fwd <span class="op">?</span> <span class="op">+</span>fwd<span class="op">.</span><span class="at">p1_wins</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span> (rev <span class="op">?</span> (<span class="op">+</span>rev<span class="op">.</span><span class="at">games</span> <span class="op">-</span> <span class="op">+</span>rev<span class="op">.</span><span class="at">p1_wins</span>) <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> total <span class="op">=</span> (fwd <span class="op">?</span> <span class="op">+</span>fwd<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span> (rev <span class="op">?</span> <span class="op">+</span>rev<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { cube<span class="op">,</span> <span class="dt">p1Wins</span><span class="op">:</span> w1<span class="op">,</span> <span class="dt">p2Wins</span><span class="op">:</span> total <span class="op">-</span> w1<span class="op">,</span> total }<span class="op">;</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-card"&gt;</span></span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-header"&gt;</span></span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-player"&gt;</span></span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-name"&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-wins" style="color: </span><span class="sc">${</span>p1Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p1Wins<span class="sc">}</span><span class="vs"> &lt;span class="h2h-wins-label"&gt;sigrar&lt;/span&gt;&lt;/div&gt;</span></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-vs"&gt;vs&lt;/div&gt;</span></span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-player"&gt;</span></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-name"&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-wins" style="color: </span><span class="sc">${</span>p2Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p2Wins<span class="sc">}</span><span class="vs"> &lt;span class="h2h-wins-label"&gt;sigrar&lt;/span&gt;&lt;/div&gt;</span></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;</span></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-bar-container"&gt;</span></span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-bar-fill h2h-bar-p1" style="width: </span><span class="sc">${</span>p1Pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>p1Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p1Pct<span class="sc">}</span><span class="vs">%&lt;/div&gt;</span></span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-bar-fill h2h-bar-p2" style="width: </span><span class="sc">${</span>p2Pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>p2Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p2Pct<span class="sc">}</span><span class="vs">%&lt;/div&gt;</span></span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;</span></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-total"&gt;</span><span class="sc">${</span>totalGames<span class="sc">}</span><span class="vs"> leikir samtals&lt;/div&gt;</span></span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="vs">      </span><span class="sc">${</span>cubeRows<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-cube-breakdown"&gt;</span></span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-cube-title"&gt;Eftir kubbi&lt;/div&gt;</span></span>
-<span id="cb3-194"><a href="#cb3-194" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;table class="h2h-cube-table"&gt;</span></span>
-<span id="cb3-195"><a href="#cb3-195" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;thead&gt;</span></span>
-<span id="cb3-196"><a href="#cb3-196" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;tr&gt;</span></span>
-<span id="cb3-197"><a href="#cb3-197" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;&lt;/th&gt;</span></span>
-<span id="cb3-198"><a href="#cb3-198" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs">&lt;/th&gt;</span></span>
-<span id="cb3-199"><a href="#cb3-199" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/th&gt;</span></span>
-<span id="cb3-200"><a href="#cb3-200" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;Samtals&lt;/th&gt;</span></span>
-<span id="cb3-201"><a href="#cb3-201" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;/tr&gt;</span></span>
-<span id="cb3-202"><a href="#cb3-202" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/thead&gt;</span></span>
-<span id="cb3-203"><a href="#cb3-203" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tbody&gt;</span></span>
-<span id="cb3-204"><a href="#cb3-204" aria-hidden="true" tabindex="-1"></a><span class="vs">              </span><span class="sc">${</span>cubeRows<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;tr&gt;</span></span>
-<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">cube</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">p1Wins</span> <span class="op">&gt;=</span> r<span class="op">.</span><span class="at">p2Wins</span> <span class="op">?</span> <span class="st">'#00733e'</span> <span class="op">:</span> <span class="st">'#d3202a'</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">p1Wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">p2Wins</span> <span class="op">&gt;=</span> r<span class="op">.</span><span class="at">p1Wins</span> <span class="op">?</span> <span class="st">'#00733e'</span> <span class="op">:</span> <span class="st">'#d3202a'</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">p2Wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">total</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-210"><a href="#cb3-210" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;/tr&gt;</span></span>
-<span id="cb3-211"><a href="#cb3-211" aria-hidden="true" tabindex="-1"></a><span class="vs">              `</span>)<span class="sc">}</span></span>
-<span id="cb3-212"><a href="#cb3-212" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tbody&gt;</span></span>
-<span id="cb3-213"><a href="#cb3-213" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/table&gt;</span></span>
-<span id="cb3-214"><a href="#cb3-214" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
-<span id="cb3-215"><a href="#cb3-215" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span> <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span><span class="sc">}</span></span>
-<span id="cb3-216"><a href="#cb3-216" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
-<span id="cb3-217"><a href="#cb3-217" aria-hidden="true" tabindex="-1"></a><span class="vs">  `</span><span class="op">;</span></span>
-<span id="cb3-218"><a href="#cb3-218" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="151" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 150;"><span id="cb4-151"><a href="#cb4-151" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-152"><a href="#cb4-152" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player1 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player2 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player1 <span class="op">===</span> player2) {</span>
+<span id="cb4-153"><a href="#cb4-153" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> msg <span class="op">=</span> player1 <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> player1 <span class="op">!==</span> <span class="st">""</span></span>
+<span id="cb4-154"><a href="#cb4-154" aria-hidden="true" tabindex="-1"></a>      <span class="op">?</span> <span class="st">"Veldu tvo ólíka leikmenn"</span></span>
+<span id="cb4-155"><a href="#cb4-155" aria-hidden="true" tabindex="-1"></a>      <span class="op">:</span> <span class="st">"Veldu tvo leikmenn til að sjá einvígið"</span><span class="op">;</span></span>
+<span id="cb4-156"><a href="#cb4-156" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
+<span id="cb4-157"><a href="#cb4-157" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#9876;&lt;/div&gt;</span></span>
+<span id="cb4-158"><a href="#cb4-158" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;</span><span class="sc">${</span>msg<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-159"><a href="#cb4-159" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-160"><a href="#cb4-160" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-161"><a href="#cb4-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-162"><a href="#cb4-162" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Find records in both directions: p1→p2 and p2→p1</span></span>
+<span id="cb4-163"><a href="#cb4-163" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> forward <span class="op">=</span> h2h<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player1 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player2)<span class="op">;</span></span>
+<span id="cb4-164"><a href="#cb4-164" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> reverse <span class="op">=</span> h2h<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player1)<span class="op">;</span></span>
+<span id="cb4-165"><a href="#cb4-165" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-166"><a href="#cb4-166" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Wins <span class="op">=</span> (forward[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>forward[<span class="dv">0</span>]<span class="op">.</span><span class="at">p1_wins</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb4-167"><a href="#cb4-167" aria-hidden="true" tabindex="-1"></a>                 (reverse[<span class="dv">0</span>] <span class="op">?</span> (<span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">-</span> <span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">p1_wins</span>) <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-168"><a href="#cb4-168" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> totalGames <span class="op">=</span> (forward[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>forward[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span></span>
+<span id="cb4-169"><a href="#cb4-169" aria-hidden="true" tabindex="-1"></a>                     (reverse[<span class="dv">0</span>] <span class="op">?</span> <span class="op">+</span>reverse[<span class="dv">0</span>]<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-170"><a href="#cb4-170" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Wins <span class="op">=</span> totalGames <span class="op">-</span> p1Wins<span class="op">;</span></span>
+<span id="cb4-171"><a href="#cb4-171" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-172"><a href="#cb4-172" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (totalGames <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb4-173"><a href="#cb4-173" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
+<span id="cb4-174"><a href="#cb4-174" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#10068;&lt;/div&gt;</span></span>
+<span id="cb4-175"><a href="#cb4-175" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;Engir leikir fundust á milli </span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> og </span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-176"><a href="#cb4-176" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-177"><a href="#cb4-177" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-178"><a href="#cb4-178" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-179"><a href="#cb4-179" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Pct <span class="op">=</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>((p1Wins <span class="op">/</span> totalGames) <span class="op">*</span> <span class="dv">100</span>)<span class="op">;</span></span>
+<span id="cb4-180"><a href="#cb4-180" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Pct <span class="op">=</span> <span class="dv">100</span> <span class="op">-</span> p1Pct<span class="op">;</span></span>
+<span id="cb4-181"><a href="#cb4-181" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Color <span class="op">=</span> p1Wins <span class="op">&gt;=</span> p2Wins <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="op">;</span></span>
+<span id="cb4-182"><a href="#cb4-182" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p2Color <span class="op">=</span> p2Wins <span class="op">&gt;=</span> p1Wins <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="op">;</span></span>
+<span id="cb4-183"><a href="#cb4-183" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-184"><a href="#cb4-184" aria-hidden="true" tabindex="-1"></a>  <span class="co">// Cube breakdown</span></span>
+<span id="cb4-185"><a href="#cb4-185" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeForward <span class="op">=</span> h2hCube<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player1 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player2)<span class="op">;</span></span>
+<span id="cb4-186"><a href="#cb4-186" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeReverse <span class="op">=</span> h2hCube<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player1</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> d<span class="op">.</span><span class="at">player2</span> <span class="op">===</span> player1)<span class="op">;</span></span>
+<span id="cb4-187"><a href="#cb4-187" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-188"><a href="#cb4-188" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeTypes <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>([<span class="op">...</span>cubeForward<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>)<span class="op">,</span> <span class="op">...</span>cubeReverse<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>)])]<span class="op">.</span><span class="fu">sort</span>()<span class="op">;</span></span>
+<span id="cb4-189"><a href="#cb4-189" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeRows <span class="op">=</span> cubeTypes<span class="op">.</span><span class="fu">map</span>(cube <span class="kw">=&gt;</span> {</span>
+<span id="cb4-190"><a href="#cb4-190" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> fwd <span class="op">=</span> cubeForward<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> cube)<span class="op">;</span></span>
+<span id="cb4-191"><a href="#cb4-191" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> rev <span class="op">=</span> cubeReverse<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> cube)<span class="op">;</span></span>
+<span id="cb4-192"><a href="#cb4-192" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> w1 <span class="op">=</span> (fwd <span class="op">?</span> <span class="op">+</span>fwd<span class="op">.</span><span class="at">p1_wins</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span> (rev <span class="op">?</span> (<span class="op">+</span>rev<span class="op">.</span><span class="at">games</span> <span class="op">-</span> <span class="op">+</span>rev<span class="op">.</span><span class="at">p1_wins</span>) <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-193"><a href="#cb4-193" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> total <span class="op">=</span> (fwd <span class="op">?</span> <span class="op">+</span>fwd<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>) <span class="op">+</span> (rev <span class="op">?</span> <span class="op">+</span>rev<span class="op">.</span><span class="at">games</span> <span class="op">:</span> <span class="dv">0</span>)<span class="op">;</span></span>
+<span id="cb4-194"><a href="#cb4-194" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { cube<span class="op">,</span> <span class="dt">p1Wins</span><span class="op">:</span> w1<span class="op">,</span> <span class="dt">p2Wins</span><span class="op">:</span> total <span class="op">-</span> w1<span class="op">,</span> total }<span class="op">;</span></span>
+<span id="cb4-195"><a href="#cb4-195" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb4-196"><a href="#cb4-196" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-197"><a href="#cb4-197" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-198"><a href="#cb4-198" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-card"&gt;</span></span>
+<span id="cb4-199"><a href="#cb4-199" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-header"&gt;</span></span>
+<span id="cb4-200"><a href="#cb4-200" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-player"&gt;</span></span>
+<span id="cb4-201"><a href="#cb4-201" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-name"&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-202"><a href="#cb4-202" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-wins" style="color: </span><span class="sc">${</span>p1Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p1Wins<span class="sc">}</span><span class="vs"> &lt;span class="h2h-wins-label"&gt;sigrar&lt;/span&gt;&lt;/div&gt;</span></span>
+<span id="cb4-203"><a href="#cb4-203" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb4-204"><a href="#cb4-204" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-vs"&gt;vs&lt;/div&gt;</span></span>
+<span id="cb4-205"><a href="#cb4-205" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-player"&gt;</span></span>
+<span id="cb4-206"><a href="#cb4-206" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-name"&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-207"><a href="#cb4-207" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-wins" style="color: </span><span class="sc">${</span>p2Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p2Wins<span class="sc">}</span><span class="vs"> &lt;span class="h2h-wins-label"&gt;sigrar&lt;/span&gt;&lt;/div&gt;</span></span>
+<span id="cb4-208"><a href="#cb4-208" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb4-209"><a href="#cb4-209" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;</span></span>
+<span id="cb4-210"><a href="#cb4-210" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-bar-container"&gt;</span></span>
+<span id="cb4-211"><a href="#cb4-211" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-bar-fill h2h-bar-p1" style="width: </span><span class="sc">${</span>p1Pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>p1Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p1Pct<span class="sc">}</span><span class="vs">%&lt;/div&gt;</span></span>
+<span id="cb4-212"><a href="#cb4-212" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-bar-fill h2h-bar-p2" style="width: </span><span class="sc">${</span>p2Pct<span class="sc">}</span><span class="vs">%; background: </span><span class="sc">${</span>p2Color<span class="sc">}</span><span class="vs">"&gt;</span><span class="sc">${</span>p2Pct<span class="sc">}</span><span class="vs">%&lt;/div&gt;</span></span>
+<span id="cb4-213"><a href="#cb4-213" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/div&gt;</span></span>
+<span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="h2h-total"&gt;</span><span class="sc">${</span>totalGames<span class="sc">}</span><span class="vs"> leikir samtals&lt;/div&gt;</span></span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a><span class="vs">      </span><span class="sc">${</span>cubeRows<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;div class="h2h-cube-breakdown"&gt;</span></span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;div class="h2h-cube-title"&gt;Eftir kubbi&lt;/div&gt;</span></span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;table class="h2h-cube-table"&gt;</span></span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;thead&gt;</span></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;tr&gt;</span></span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs">&lt;/th&gt;</span></span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/th&gt;</span></span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;th&gt;Samtals&lt;/th&gt;</span></span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;/tr&gt;</span></span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/thead&gt;</span></span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tbody&gt;</span></span>
+<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a><span class="vs">              </span><span class="sc">${</span>cubeRows<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;tr&gt;</span></span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">cube</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">p1Wins</span> <span class="op">&gt;=</span> r<span class="op">.</span><span class="at">p2Wins</span> <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">p1Wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">p2Wins</span> <span class="op">&gt;=</span> r<span class="op">.</span><span class="at">p1Wins</span> <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">p2Wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a><span class="vs">                  &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">total</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;/tr&gt;</span></span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a><span class="vs">              `</span>)<span class="sc">}</span></span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tbody&gt;</span></span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/table&gt;</span></span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/div&gt;</span></span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a><span class="vs">      `</span> <span class="op">:</span> <span class="fu">html</span><span class="vs">``</span><span class="sc">}</span></span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a><span class="vs">  `</span><span class="op">;</span></span>
+<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="h2h-results" class="cell-output cell-output-display">
-<div id="ojs-cell-3" data-nodetype="expression">
+<div id="ojs-cell-4" data-nodetype="expression">
 
 </div>
 </div>
 </div>
 <div class="cell">
-<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="223" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 222;"><span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player1 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player2 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player1 <span class="op">===</span> player2) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
-<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Map <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(</span>
-<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a>    eloHistory<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player</span> <span class="op">===</span> player1)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> [<span class="op">+</span>d<span class="op">.</span><span class="at">date</span><span class="op">,</span> d<span class="op">.</span><span class="at">score_median</span>])</span>
-<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
-<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> eloDiff <span class="op">=</span> eloHistory</span>
-<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> p1Map<span class="op">.</span><span class="fu">has</span>(<span class="op">+</span>d<span class="op">.</span><span class="at">date</span>))</span>
-<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({ <span class="dt">date</span><span class="op">:</span> d<span class="op">.</span><span class="at">date</span><span class="op">,</span> <span class="dt">diff</span><span class="op">:</span> p1Map<span class="op">.</span><span class="fu">get</span>(<span class="op">+</span>d<span class="op">.</span><span class="at">date</span>) <span class="op">-</span> d<span class="op">.</span><span class="at">score_median</span> }))</span>
-<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">date</span> <span class="op">-</span> b<span class="op">.</span><span class="at">date</span>)<span class="op">;</span></span>
-<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (eloDiff<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">2</span>) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
-<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> latestPt <span class="op">=</span> eloDiff[eloDiff<span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></span>
-<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> latestColor <span class="op">=</span> latestPt<span class="op">.</span><span class="at">diff</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"#00733e"</span> <span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">;</span></span>
-<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> chart <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
-<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> width<span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
-<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span> <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">35</span><span class="op">,</span> <span class="dt">marginTop</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
-<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> { <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"12px"</span><span class="op">,</span> <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"'Inter', system-ui, sans-serif"</span><span class="op">,</span> <span class="dt">background</span><span class="op">:</span> <span class="st">"transparent"</span> }<span class="op">,</span></span>
-<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> {</span>
-<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"time"</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
-<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a>      <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">toLocaleDateString</span>(<span class="st">"is-IS"</span><span class="op">,</span> { <span class="dt">day</span><span class="op">:</span> <span class="st">"numeric"</span><span class="op">,</span> <span class="dt">month</span><span class="op">:</span> <span class="st">"short"</span> })</span>
-<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
-<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"ELO munur"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
-<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
-<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]<span class="op">,</span> { <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#d4cfc9"</span><span class="op">,</span> <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span> })<span class="op">,</span></span>
-<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">areaY</span>(eloDiff<span class="op">,</span> {</span>
-<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">0</span><span class="op">,</span> d<span class="op">.</span><span class="at">diff</span>)<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#00733e"</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span></span>
-<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
-<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">areaY</span>(eloDiff<span class="op">,</span> {</span>
-<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="dv">0</span><span class="op">,</span> d<span class="op">.</span><span class="at">diff</span>)<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> <span class="st">"#d3202a"</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span></span>
-<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
-<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">lineY</span>(eloDiff<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> <span class="st">"#2a1f14"</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.5</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span> })<span class="op">,</span></span>
-<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">dot</span>([latestPt]<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> latestColor<span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">4</span> })<span class="op">,</span></span>
-<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">text</span>([latestPt]<span class="op">,</span> {</span>
-<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span></span>
-<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a>        <span class="dt">text</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">diff</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span>) <span class="op">+</span> d<span class="op">.</span><span class="at">diff</span><span class="op">,</span></span>
-<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a>        <span class="dt">dy</span><span class="op">:</span> <span class="op">-</span><span class="dv">12</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">13</span><span class="op">,</span> <span class="dt">fontWeight</span><span class="op">:</span> <span class="st">"bold"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> latestColor</span>
-<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a>      })</span>
-<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a>    ]</span>
-<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
-<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="h2h-elo-chart"&gt;</span></span>
-<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-title"&gt;ELO-munur yfir tíma&lt;/div&gt;</span></span>
-<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-subtitle"&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> og </span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
-<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>chart<span class="sc">}</span></span>
-<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-legend"&gt;</span></span>
-<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span class="h2h-legend-item"&gt;</span></span>
-<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;span class="h2h-legend-pip" style="background: #00733e"&gt;&lt;/span&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> framar</span></span>
-<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/span&gt;</span></span>
-<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span class="h2h-legend-item"&gt;</span></span>
-<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;span class="h2h-legend-pip" style="background: #d3202a"&gt;&lt;/span&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs"> framar</span></span>
-<span id="cb4-276"><a href="#cb4-276" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/span&gt;</span></span>
-<span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
-<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="247" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 246;"><span id="cb5-247"><a href="#cb5-247" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb5-248"><a href="#cb5-248" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (player1 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player2 <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> player1 <span class="op">===</span> player2) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
+<span id="cb5-249"><a href="#cb5-249" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-250"><a href="#cb5-250" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> p1Map <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>(</span>
+<span id="cb5-251"><a href="#cb5-251" aria-hidden="true" tabindex="-1"></a>    eloHistory<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player</span> <span class="op">===</span> player1)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> [<span class="op">+</span>d<span class="op">.</span><span class="at">date</span><span class="op">,</span> d<span class="op">.</span><span class="at">score_median</span>])</span>
+<span id="cb5-252"><a href="#cb5-252" aria-hidden="true" tabindex="-1"></a>  )<span class="op">;</span></span>
+<span id="cb5-253"><a href="#cb5-253" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> eloDiff <span class="op">=</span> eloHistory</span>
+<span id="cb5-254"><a href="#cb5-254" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">player</span> <span class="op">===</span> player2 <span class="op">&amp;&amp;</span> p1Map<span class="op">.</span><span class="fu">has</span>(<span class="op">+</span>d<span class="op">.</span><span class="at">date</span>))</span>
+<span id="cb5-255"><a href="#cb5-255" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({ <span class="dt">date</span><span class="op">:</span> d<span class="op">.</span><span class="at">date</span><span class="op">,</span> <span class="dt">diff</span><span class="op">:</span> p1Map<span class="op">.</span><span class="fu">get</span>(<span class="op">+</span>d<span class="op">.</span><span class="at">date</span>) <span class="op">-</span> d<span class="op">.</span><span class="at">score_median</span> }))</span>
+<span id="cb5-256"><a href="#cb5-256" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> a<span class="op">.</span><span class="at">date</span> <span class="op">-</span> b<span class="op">.</span><span class="at">date</span>)<span class="op">;</span></span>
+<span id="cb5-257"><a href="#cb5-257" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-258"><a href="#cb5-258" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (eloDiff<span class="op">.</span><span class="at">length</span> <span class="op">&lt;</span> <span class="dv">2</span>) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
+<span id="cb5-259"><a href="#cb5-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-260"><a href="#cb5-260" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> latestPt <span class="op">=</span> eloDiff[eloDiff<span class="op">.</span><span class="at">length</span> <span class="op">-</span> <span class="dv">1</span>]<span class="op">;</span></span>
+<span id="cb5-261"><a href="#cb5-261" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> latestColor <span class="op">=</span> latestPt<span class="op">.</span><span class="at">diff</span> <span class="op">&gt;=</span> <span class="dv">0</span> <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="op">;</span></span>
+<span id="cb5-262"><a href="#cb5-262" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-263"><a href="#cb5-263" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> chart <span class="op">=</span> Plot<span class="op">.</span><span class="fu">plot</span>({</span>
+<span id="cb5-264"><a href="#cb5-264" aria-hidden="true" tabindex="-1"></a>    <span class="dt">width</span><span class="op">:</span> width<span class="op">,</span> <span class="dt">height</span><span class="op">:</span> <span class="dv">280</span><span class="op">,</span></span>
+<span id="cb5-265"><a href="#cb5-265" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marginLeft</span><span class="op">:</span> <span class="dv">55</span><span class="op">,</span> <span class="dt">marginBottom</span><span class="op">:</span> <span class="dv">35</span><span class="op">,</span> <span class="dt">marginTop</span><span class="op">:</span> <span class="dv">20</span><span class="op">,</span></span>
+<span id="cb5-266"><a href="#cb5-266" aria-hidden="true" tabindex="-1"></a>    <span class="dt">style</span><span class="op">:</span> { <span class="dt">fontSize</span><span class="op">:</span> <span class="st">"12px"</span><span class="op">,</span> <span class="dt">fontFamily</span><span class="op">:</span> <span class="st">"'Inter', system-ui, sans-serif"</span><span class="op">,</span> <span class="dt">background</span><span class="op">:</span> <span class="st">"transparent"</span><span class="op">,</span> <span class="dt">color</span><span class="op">:</span> themeColors<span class="op">.</span><span class="at">text</span> }<span class="op">,</span></span>
+<span id="cb5-267"><a href="#cb5-267" aria-hidden="true" tabindex="-1"></a>    <span class="dt">x</span><span class="op">:</span> {</span>
+<span id="cb5-268"><a href="#cb5-268" aria-hidden="true" tabindex="-1"></a>      <span class="dt">type</span><span class="op">:</span> <span class="st">"time"</span><span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="kw">null</span><span class="op">,</span></span>
+<span id="cb5-269"><a href="#cb5-269" aria-hidden="true" tabindex="-1"></a>      <span class="dt">tickFormat</span><span class="op">:</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">toLocaleDateString</span>(<span class="st">"is-IS"</span><span class="op">,</span> { <span class="dt">day</span><span class="op">:</span> <span class="st">"numeric"</span><span class="op">,</span> <span class="dt">month</span><span class="op">:</span> <span class="st">"short"</span> })</span>
+<span id="cb5-270"><a href="#cb5-270" aria-hidden="true" tabindex="-1"></a>    }<span class="op">,</span></span>
+<span id="cb5-271"><a href="#cb5-271" aria-hidden="true" tabindex="-1"></a>    <span class="dt">y</span><span class="op">:</span> { <span class="dt">label</span><span class="op">:</span> <span class="st">"ELO munur"</span><span class="op">,</span> <span class="dt">grid</span><span class="op">:</span> <span class="kw">true</span> }<span class="op">,</span></span>
+<span id="cb5-272"><a href="#cb5-272" aria-hidden="true" tabindex="-1"></a>    <span class="dt">marks</span><span class="op">:</span> [</span>
+<span id="cb5-273"><a href="#cb5-273" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">ruleY</span>([<span class="dv">0</span>]<span class="op">,</span> { <span class="dt">stroke</span><span class="op">:</span> themeColors<span class="op">.</span><span class="at">grid</span><span class="op">,</span> <span class="dt">strokeDasharray</span><span class="op">:</span> <span class="st">"4,4"</span> })<span class="op">,</span></span>
+<span id="cb5-274"><a href="#cb5-274" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">areaY</span>(eloDiff<span class="op">,</span> {</span>
+<span id="cb5-275"><a href="#cb5-275" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">max</span>(<span class="dv">0</span><span class="op">,</span> d<span class="op">.</span><span class="at">diff</span>)<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> themeColors<span class="op">.</span><span class="at">green</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> isDark <span class="op">?</span> <span class="fl">0.25</span> <span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span></span>
+<span id="cb5-276"><a href="#cb5-276" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
+<span id="cb5-277"><a href="#cb5-277" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">areaY</span>(eloDiff<span class="op">,</span> {</span>
+<span id="cb5-278"><a href="#cb5-278" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y1</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">y2</span><span class="op">:</span> d <span class="kw">=&gt;</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">min</span>(<span class="dv">0</span><span class="op">,</span> d<span class="op">.</span><span class="at">diff</span>)<span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="op">,</span> <span class="dt">fillOpacity</span><span class="op">:</span> isDark <span class="op">?</span> <span class="fl">0.25</span> <span class="op">:</span> <span class="fl">0.3</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span></span>
+<span id="cb5-279"><a href="#cb5-279" aria-hidden="true" tabindex="-1"></a>      })<span class="op">,</span></span>
+<span id="cb5-280"><a href="#cb5-280" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">lineY</span>(eloDiff<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span> <span class="dt">stroke</span><span class="op">:</span> themeColors<span class="op">.</span><span class="at">line</span><span class="op">,</span> <span class="dt">strokeWidth</span><span class="op">:</span> <span class="fl">1.5</span><span class="op">,</span> <span class="dt">curve</span><span class="op">:</span> <span class="st">"monotone-x"</span> })<span class="op">,</span></span>
+<span id="cb5-281"><a href="#cb5-281" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">dot</span>([latestPt]<span class="op">,</span> { <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> latestColor<span class="op">,</span> <span class="dt">r</span><span class="op">:</span> <span class="dv">4</span> })<span class="op">,</span></span>
+<span id="cb5-282"><a href="#cb5-282" aria-hidden="true" tabindex="-1"></a>      Plot<span class="op">.</span><span class="fu">text</span>([latestPt]<span class="op">,</span> {</span>
+<span id="cb5-283"><a href="#cb5-283" aria-hidden="true" tabindex="-1"></a>        <span class="dt">x</span><span class="op">:</span> <span class="st">"date"</span><span class="op">,</span> <span class="dt">y</span><span class="op">:</span> <span class="st">"diff"</span><span class="op">,</span></span>
+<span id="cb5-284"><a href="#cb5-284" aria-hidden="true" tabindex="-1"></a>        <span class="dt">text</span><span class="op">:</span> d <span class="kw">=&gt;</span> (d<span class="op">.</span><span class="at">diff</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="st">"+"</span> <span class="op">:</span> <span class="st">""</span>) <span class="op">+</span> d<span class="op">.</span><span class="at">diff</span><span class="op">,</span></span>
+<span id="cb5-285"><a href="#cb5-285" aria-hidden="true" tabindex="-1"></a>        <span class="dt">dy</span><span class="op">:</span> <span class="op">-</span><span class="dv">12</span><span class="op">,</span> <span class="dt">fontSize</span><span class="op">:</span> <span class="dv">13</span><span class="op">,</span> <span class="dt">fontWeight</span><span class="op">:</span> <span class="st">"bold"</span><span class="op">,</span> <span class="dt">fill</span><span class="op">:</span> latestColor</span>
+<span id="cb5-286"><a href="#cb5-286" aria-hidden="true" tabindex="-1"></a>      })</span>
+<span id="cb5-287"><a href="#cb5-287" aria-hidden="true" tabindex="-1"></a>    ]</span>
+<span id="cb5-288"><a href="#cb5-288" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-289"><a href="#cb5-289" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-290"><a href="#cb5-290" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="h2h-elo-chart"&gt;</span></span>
+<span id="cb5-291"><a href="#cb5-291" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-title"&gt;ELO-munur yfir tíma&lt;/div&gt;</span></span>
+<span id="cb5-292"><a href="#cb5-292" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-subtitle"&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> og </span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb5-293"><a href="#cb5-293" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>chart<span class="sc">}</span></span>
+<span id="cb5-294"><a href="#cb5-294" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="h2h-chart-legend"&gt;</span></span>
+<span id="cb5-295"><a href="#cb5-295" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span class="h2h-legend-item"&gt;</span></span>
+<span id="cb5-296"><a href="#cb5-296" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;span class="h2h-legend-pip" style="background: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">green</span><span class="sc">}</span><span class="vs">"&gt;&lt;/span&gt;</span><span class="sc">${</span>player1<span class="sc">}</span><span class="vs"> framar</span></span>
+<span id="cb5-297"><a href="#cb5-297" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/span&gt;</span></span>
+<span id="cb5-298"><a href="#cb5-298" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;span class="h2h-legend-item"&gt;</span></span>
+<span id="cb5-299"><a href="#cb5-299" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;span class="h2h-legend-pip" style="background: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">red</span><span class="sc">}</span><span class="vs">"&gt;&lt;/span&gt;</span><span class="sc">${</span>player2<span class="sc">}</span><span class="vs"> framar</span></span>
+<span id="cb5-300"><a href="#cb5-300" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/span&gt;</span></span>
+<span id="cb5-301"><a href="#cb5-301" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb5-302"><a href="#cb5-302" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb5-303"><a href="#cb5-303" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="elo-diff-chart" class="cell-output cell-output-display">
-<div id="ojs-cell-4" data-nodetype="expression">
+<div id="ojs-cell-5" data-nodetype="expression">
 
 </div>
 </div>
@@ -429,7 +633,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImgyaCA9IHRyYW5zcG9zZShoMmhfZGF0YSlcbmgyaEN1YmUgPSB0cmFuc3Bvc2UoaDJoX2N1YmVfZGF0YSlcbnBsYXllcnMgPSBwbGF5ZXJfbmFtZXNcblxuZWxvSGlzdG9yeSA9IHtcbiAgY29uc3QgcmF3ID0gdHJhbnNwb3NlKGVsb19oaXN0b3J5KTtcbiAgcmV0dXJuIHJhdy5tYXAoZCA9PiAoe1xuICAgIHBsYXllcjogZC5wbGF5ZXIsXG4gICAgZGF0ZTogbmV3IERhdGUoZC5kYXRlKSxcbiAgICBzY29yZV9tZWRpYW46ICtkLnNjb3JlX21lZGlhblxuICB9KSk7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTIiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2YgcGxheWVyMSA9IElucHV0cy5zZWxlY3QoW1wiXCIsIC4uLnBsYXllcnNdLCB7XG4gIGxhYmVsOiBcIkxlaWttYcOwdXIgMTpcIixcbiAgdmFsdWU6IFwiXCIsXG4gIGZvcm1hdDogZCA9PiBkID09PSBcIlwiID8gXCJWZWxkdSBsZWlrbWFubi4uLlwiIDogZFxufSlcblxudmlld29mIHBsYXllcjIgPSBJbnB1dHMuc2VsZWN0KFtcIlwiLCAuLi5wbGF5ZXJzXSwge1xuICBsYWJlbDogXCJMZWlrbWHDsHVyIDI6XCIsXG4gIHZhbHVlOiBcIlwiLFxuICBmb3JtYXQ6IGQgPT4gZCA9PT0gXCJcIiA/IFwiVmVsZHUgbGVpa21hbm4uLi5cIiA6IGRcbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGlmIChwbGF5ZXIxID09PSBcIlwiIHx8IHBsYXllcjIgPT09IFwiXCIgfHwgcGxheWVyMSA9PT0gcGxheWVyMikge1xuICAgIGNvbnN0IG1zZyA9IHBsYXllcjEgPT09IHBsYXllcjIgJiYgcGxheWVyMSAhPT0gXCJcIlxuICAgICAgPyBcIlZlbGR1IHR2byDDs2zDrWthIGxlaWttZW5uXCJcbiAgICAgIDogXCJWZWxkdSB0dm8gbGVpa21lbm4gdGlsIGHDsCBzasOhIGVpbnbDrWdpw7BcIjtcbiAgICByZXR1cm4gaHRtbGA8ZGl2IGNsYXNzPVwiZW1wdHktc3RhdGVcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJlbXB0eS1pY29uXCI+JiM5ODc2OzwvZGl2PlxuICAgICAgPGRpdj4ke21zZ308L2Rpdj5cbiAgICA8L2Rpdj5gO1xuICB9XG5cbiAgLy8gRmluZCByZWNvcmRzIGluIGJvdGggZGlyZWN0aW9uczogcDHihpJwMiBhbmQgcDLihpJwMVxuICBjb25zdCBmb3J3YXJkID0gaDJoLmZpbHRlcihkID0+IGQucGxheWVyMSA9PT0gcGxheWVyMSAmJiBkLnBsYXllcjIgPT09IHBsYXllcjIpO1xuICBjb25zdCByZXZlcnNlID0gaDJoLmZpbHRlcihkID0+IGQucGxheWVyMSA9PT0gcGxheWVyMiAmJiBkLnBsYXllcjIgPT09IHBsYXllcjEpO1xuXG4gIGNvbnN0IHAxV2lucyA9IChmb3J3YXJkWzBdID8gK2ZvcndhcmRbMF0ucDFfd2lucyA6IDApICtcbiAgICAgICAgICAgICAgICAgKHJldmVyc2VbMF0gPyAoK3JldmVyc2VbMF0uZ2FtZXMgLSArcmV2ZXJzZVswXS5wMV93aW5zKSA6IDApO1xuICBjb25zdCB0b3RhbEdhbWVzID0gKGZvcndhcmRbMF0gPyArZm9yd2FyZFswXS5nYW1lcyA6IDApICtcbiAgICAgICAgICAgICAgICAgICAgIChyZXZlcnNlWzBdID8gK3JldmVyc2VbMF0uZ2FtZXMgOiAwKTtcbiAgY29uc3QgcDJXaW5zID0gdG90YWxHYW1lcyAtIHAxV2lucztcblxuICBpZiAodG90YWxHYW1lcyA9PT0gMCkge1xuICAgIHJldHVybiBodG1sYDxkaXYgY2xhc3M9XCJlbXB0eS1zdGF0ZVwiPlxuICAgICAgPGRpdiBjbGFzcz1cImVtcHR5LWljb25cIj4mIzEwMDY4OzwvZGl2PlxuICAgICAgPGRpdj5FbmdpciBsZWlraXIgZnVuZHVzdCDDoSBtaWxsaSAke3BsYXllcjF9IG9nICR7cGxheWVyMn08L2Rpdj5cbiAgICA8L2Rpdj5gO1xuICB9XG5cbiAgY29uc3QgcDFQY3QgPSBNYXRoLnJvdW5kKChwMVdpbnMgLyB0b3RhbEdhbWVzKSAqIDEwMCk7XG4gIGNvbnN0IHAyUGN0ID0gMTAwIC0gcDFQY3Q7XG4gIGNvbnN0IHAxQ29sb3IgPSBwMVdpbnMgPj0gcDJXaW5zID8gXCIjMDA3MzNlXCIgOiBcIiNkMzIwMmFcIjtcbiAgY29uc3QgcDJDb2xvciA9IHAyV2lucyA+PSBwMVdpbnMgPyBcIiMwMDczM2VcIiA6IFwiI2QzMjAyYVwiO1xuXG4gIC8vIEN1YmUgYnJlYWtkb3duXG4gIGNvbnN0IGN1YmVGb3J3YXJkID0gaDJoQ3ViZS5maWx0ZXIoZCA9PiBkLnBsYXllcjEgPT09IHBsYXllcjEgJiYgZC5wbGF5ZXIyID09PSBwbGF5ZXIyKTtcbiAgY29uc3QgY3ViZVJldmVyc2UgPSBoMmhDdWJlLmZpbHRlcihkID0+IGQucGxheWVyMSA9PT0gcGxheWVyMiAmJiBkLnBsYXllcjIgPT09IHBsYXllcjEpO1xuXG4gIGNvbnN0IGN1YmVUeXBlcyA9IFsuLi5uZXcgU2V0KFsuLi5jdWJlRm9yd2FyZC5tYXAoZCA9PiBkLmN1YmUpLCAuLi5jdWJlUmV2ZXJzZS5tYXAoZCA9PiBkLmN1YmUpXSldLnNvcnQoKTtcbiAgY29uc3QgY3ViZVJvd3MgPSBjdWJlVHlwZXMubWFwKGN1YmUgPT4ge1xuICAgIGNvbnN0IGZ3ZCA9IGN1YmVGb3J3YXJkLmZpbmQoZCA9PiBkLmN1YmUgPT09IGN1YmUpO1xuICAgIGNvbnN0IHJldiA9IGN1YmVSZXZlcnNlLmZpbmQoZCA9PiBkLmN1YmUgPT09IGN1YmUpO1xuICAgIGNvbnN0IHcxID0gKGZ3ZCA/ICtmd2QucDFfd2lucyA6IDApICsgKHJldiA/ICgrcmV2LmdhbWVzIC0gK3Jldi5wMV93aW5zKSA6IDApO1xuICAgIGNvbnN0IHRvdGFsID0gKGZ3ZCA/ICtmd2QuZ2FtZXMgOiAwKSArIChyZXYgPyArcmV2LmdhbWVzIDogMCk7XG4gICAgcmV0dXJuIHsgY3ViZSwgcDFXaW5zOiB3MSwgcDJXaW5zOiB0b3RhbCAtIHcxLCB0b3RhbCB9O1xuICB9KTtcblxuICByZXR1cm4gaHRtbGBcbiAgICA8ZGl2IGNsYXNzPVwiaDJoLWNhcmRcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJoMmgtaGVhZGVyXCI+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtcGxheWVyXCI+XG4gICAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1uYW1lXCI+JHtwbGF5ZXIxfTwvZGl2PlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtd2luc1wiIHN0eWxlPVwiY29sb3I6ICR7cDFDb2xvcn1cIj4ke3AxV2luc30gPHNwYW4gY2xhc3M9XCJoMmgtd2lucy1sYWJlbFwiPnNpZ3Jhcjwvc3Bhbj48L2Rpdj5cbiAgICAgICAgPC9kaXY+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtdnNcIj52czwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXBsYXllclwiPlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtbmFtZVwiPiR7cGxheWVyMn08L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXdpbnNcIiBzdHlsZT1cImNvbG9yOiAke3AyQ29sb3J9XCI+JHtwMldpbnN9IDxzcGFuIGNsYXNzPVwiaDJoLXdpbnMtbGFiZWxcIj5zaWdyYXI8L3NwYW4+PC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgICA8ZGl2IGNsYXNzPVwiaDJoLWJhci1jb250YWluZXJcIj5cbiAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1iYXItZmlsbCBoMmgtYmFyLXAxXCIgc3R5bGU9XCJ3aWR0aDogJHtwMVBjdH0lOyBiYWNrZ3JvdW5kOiAke3AxQ29sb3J9XCI+JHtwMVBjdH0lPC9kaXY+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtYmFyLWZpbGwgaDJoLWJhci1wMlwiIHN0eWxlPVwid2lkdGg6ICR7cDJQY3R9JTsgYmFja2dyb3VuZDogJHtwMkNvbG9yfVwiPiR7cDJQY3R9JTwvZGl2PlxuICAgICAgPC9kaXY+XG4gICAgICA8ZGl2IGNsYXNzPVwiaDJoLXRvdGFsXCI+JHt0b3RhbEdhbWVzfSBsZWlraXIgc2FtdGFsczwvZGl2PlxuICAgICAgJHtjdWJlUm93cy5sZW5ndGggPiAwID8gaHRtbGBcbiAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1jdWJlLWJyZWFrZG93blwiPlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtY3ViZS10aXRsZVwiPkVmdGlyIGt1YmJpPC9kaXY+XG4gICAgICAgICAgPHRhYmxlIGNsYXNzPVwiaDJoLWN1YmUtdGFibGVcIj5cbiAgICAgICAgICAgIDx0aGVhZD5cbiAgICAgICAgICAgICAgPHRyPlxuICAgICAgICAgICAgICAgIDx0aD48L3RoPlxuICAgICAgICAgICAgICAgIDx0aD4ke3BsYXllcjF9PC90aD5cbiAgICAgICAgICAgICAgICA8dGg+JHtwbGF5ZXIyfTwvdGg+XG4gICAgICAgICAgICAgICAgPHRoPlNhbXRhbHM8L3RoPlxuICAgICAgICAgICAgICA8L3RyPlxuICAgICAgICAgICAgPC90aGVhZD5cbiAgICAgICAgICAgIDx0Ym9keT5cbiAgICAgICAgICAgICAgJHtjdWJlUm93cy5tYXAociA9PiBodG1sYFxuICAgICAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgICAgIDx0ZD4ke3IuY3ViZX08L3RkPlxuICAgICAgICAgICAgICAgICAgPHRkIHN0eWxlPVwiY29sb3I6ICR7ci5wMVdpbnMgPj0gci5wMldpbnMgPyAnIzAwNzMzZScgOiAnI2QzMjAyYSd9OyBmb250LXdlaWdodDogNjAwXCI+JHtyLnAxV2luc308L3RkPlxuICAgICAgICAgICAgICAgICAgPHRkIHN0eWxlPVwiY29sb3I6ICR7ci5wMldpbnMgPj0gci5wMVdpbnMgPyAnIzAwNzMzZScgOiAnI2QzMjAyYSd9OyBmb250LXdlaWdodDogNjAwXCI+JHtyLnAyV2luc308L3RkPlxuICAgICAgICAgICAgICAgICAgPHRkPiR7ci50b3RhbH08L3RkPlxuICAgICAgICAgICAgICAgIDwvdHI+XG4gICAgICAgICAgICAgIGApfVxuICAgICAgICAgICAgPC90Ym9keT5cbiAgICAgICAgICA8L3RhYmxlPlxuICAgICAgICA8L2Rpdj5cbiAgICAgIGAgOiBodG1sYGB9XG4gICAgPC9kaXY+XG4gIGA7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGlmIChwbGF5ZXIxID09PSBcIlwiIHx8IHBsYXllcjIgPT09IFwiXCIgfHwgcGxheWVyMSA9PT0gcGxheWVyMikgcmV0dXJuIGh0bWxgYDtcblxuICBjb25zdCBwMU1hcCA9IG5ldyBNYXAoXG4gICAgZWxvSGlzdG9yeS5maWx0ZXIoZCA9PiBkLnBsYXllciA9PT0gcGxheWVyMSkubWFwKGQgPT4gWytkLmRhdGUsIGQuc2NvcmVfbWVkaWFuXSlcbiAgKTtcbiAgY29uc3QgZWxvRGlmZiA9IGVsb0hpc3RvcnlcbiAgICAuZmlsdGVyKGQgPT4gZC5wbGF5ZXIgPT09IHBsYXllcjIgJiYgcDFNYXAuaGFzKCtkLmRhdGUpKVxuICAgIC5tYXAoZCA9PiAoeyBkYXRlOiBkLmRhdGUsIGRpZmY6IHAxTWFwLmdldCgrZC5kYXRlKSAtIGQuc2NvcmVfbWVkaWFuIH0pKVxuICAgIC5zb3J0KChhLCBiKSA9PiBhLmRhdGUgLSBiLmRhdGUpO1xuXG4gIGlmIChlbG9EaWZmLmxlbmd0aCA8IDIpIHJldHVybiBodG1sYGA7XG5cbiAgY29uc3QgbGF0ZXN0UHQgPSBlbG9EaWZmW2Vsb0RpZmYubGVuZ3RoIC0gMV07XG4gIGNvbnN0IGxhdGVzdENvbG9yID0gbGF0ZXN0UHQuZGlmZiA+PSAwID8gXCIjMDA3MzNlXCIgOiBcIiNkMzIwMmFcIjtcblxuICBjb25zdCBjaGFydCA9IFBsb3QucGxvdCh7XG4gICAgd2lkdGg6IHdpZHRoLCBoZWlnaHQ6IDI4MCxcbiAgICBtYXJnaW5MZWZ0OiA1NSwgbWFyZ2luQm90dG9tOiAzNSwgbWFyZ2luVG9wOiAyMCxcbiAgICBzdHlsZTogeyBmb250U2l6ZTogXCIxMnB4XCIsIGZvbnRGYW1pbHk6IFwiJ0ludGVyJywgc3lzdGVtLXVpLCBzYW5zLXNlcmlmXCIsIGJhY2tncm91bmQ6IFwidHJhbnNwYXJlbnRcIiB9LFxuICAgIHg6IHtcbiAgICAgIHR5cGU6IFwidGltZVwiLCBsYWJlbDogbnVsbCxcbiAgICAgIHRpY2tGb3JtYXQ6IGQgPT4gZC50b0xvY2FsZURhdGVTdHJpbmcoXCJpcy1JU1wiLCB7IGRheTogXCJudW1lcmljXCIsIG1vbnRoOiBcInNob3J0XCIgfSlcbiAgICB9LFxuICAgIHk6IHsgbGFiZWw6IFwiRUxPIG11bnVyXCIsIGdyaWQ6IHRydWUgfSxcbiAgICBtYXJrczogW1xuICAgICAgUGxvdC5ydWxlWShbMF0sIHsgc3Ryb2tlOiBcIiNkNGNmYzlcIiwgc3Ryb2tlRGFzaGFycmF5OiBcIjQsNFwiIH0pLFxuICAgICAgUGxvdC5hcmVhWShlbG9EaWZmLCB7XG4gICAgICAgIHg6IFwiZGF0ZVwiLCB5MTogMCwgeTI6IGQgPT4gTWF0aC5tYXgoMCwgZC5kaWZmKSwgZmlsbDogXCIjMDA3MzNlXCIsIGZpbGxPcGFjaXR5OiAwLjMsIGN1cnZlOiBcIm1vbm90b25lLXhcIlxuICAgICAgfSksXG4gICAgICBQbG90LmFyZWFZKGVsb0RpZmYsIHtcbiAgICAgICAgeDogXCJkYXRlXCIsIHkxOiAwLCB5MjogZCA9PiBNYXRoLm1pbigwLCBkLmRpZmYpLCBmaWxsOiBcIiNkMzIwMmFcIiwgZmlsbE9wYWNpdHk6IDAuMywgY3VydmU6IFwibW9ub3RvbmUteFwiXG4gICAgICB9KSxcbiAgICAgIFBsb3QubGluZVkoZWxvRGlmZiwgeyB4OiBcImRhdGVcIiwgeTogXCJkaWZmXCIsIHN0cm9rZTogXCIjMmExZjE0XCIsIHN0cm9rZVdpZHRoOiAxLjUsIGN1cnZlOiBcIm1vbm90b25lLXhcIiB9KSxcbiAgICAgIFBsb3QuZG90KFtsYXRlc3RQdF0sIHsgeDogXCJkYXRlXCIsIHk6IFwiZGlmZlwiLCBmaWxsOiBsYXRlc3RDb2xvciwgcjogNCB9KSxcbiAgICAgIFBsb3QudGV4dChbbGF0ZXN0UHRdLCB7XG4gICAgICAgIHg6IFwiZGF0ZVwiLCB5OiBcImRpZmZcIixcbiAgICAgICAgdGV4dDogZCA9PiAoZC5kaWZmID4gMCA/IFwiK1wiIDogXCJcIikgKyBkLmRpZmYsXG4gICAgICAgIGR5OiAtMTIsIGZvbnRTaXplOiAxMywgZm9udFdlaWdodDogXCJib2xkXCIsIGZpbGw6IGxhdGVzdENvbG9yXG4gICAgICB9KVxuICAgIF1cbiAgfSk7XG5cbiAgcmV0dXJuIGh0bWxgPGRpdiBjbGFzcz1cImgyaC1lbG8tY2hhcnRcIj5cbiAgICA8ZGl2IGNsYXNzPVwiaDJoLWNoYXJ0LXRpdGxlXCI+RUxPLW11bnVyIHlmaXIgdMOtbWE8L2Rpdj5cbiAgICA8ZGl2IGNsYXNzPVwiaDJoLWNoYXJ0LXN1YnRpdGxlXCI+JHtwbGF5ZXIxfSBvZyAke3BsYXllcjJ9PC9kaXY+XG4gICAgJHtjaGFydH1cbiAgICA8ZGl2IGNsYXNzPVwiaDJoLWNoYXJ0LWxlZ2VuZFwiPlxuICAgICAgPHNwYW4gY2xhc3M9XCJoMmgtbGVnZW5kLWl0ZW1cIj5cbiAgICAgICAgPHNwYW4gY2xhc3M9XCJoMmgtbGVnZW5kLXBpcFwiIHN0eWxlPVwiYmFja2dyb3VuZDogIzAwNzMzZVwiPjwvc3Bhbj4ke3BsYXllcjF9IGZyYW1hclxuICAgICAgPC9zcGFuPlxuICAgICAgPHNwYW4gY2xhc3M9XCJoMmgtbGVnZW5kLWl0ZW1cIj5cbiAgICAgICAgPHNwYW4gY2xhc3M9XCJoMmgtbGVnZW5kLXBpcFwiIHN0eWxlPVwiYmFja2dyb3VuZDogI2QzMjAyYVwiPjwvc3Bhbj4ke3BsYXllcjJ9IGZyYW1hclxuICAgICAgPC9zcGFuPlxuICAgIDwvZGl2PlxuICA8L2Rpdj5gO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdwbGF5ZXIxJykifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3BsYXllcjInKSJ9XX0=
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImlzRGFyayA9IHtcbiAgbGV0IGRhcmsgPSBkb2N1bWVudC5ib2R5LmNsYXNzTGlzdC5jb250YWlucyhcInF1YXJ0by1kYXJrXCIpO1xuICB5aWVsZCBkYXJrO1xuICB3aGlsZSAodHJ1ZSkge1xuICAgIGF3YWl0IG5ldyBQcm9taXNlKHIgPT4gc2V0VGltZW91dChyLCAxNTApKTtcbiAgICBjb25zdCBub3cgPSBkb2N1bWVudC5ib2R5LmNsYXNzTGlzdC5jb250YWlucyhcInF1YXJ0by1kYXJrXCIpO1xuICAgIGlmIChub3cgIT09IGRhcmspIHsgZGFyayA9IG5vdzsgeWllbGQgZGFyazsgfVxuICB9XG59XG5cbnRoZW1lQ29sb3JzID0gKHtcbiAgYmx1ZTogICAgaXNEYXJrID8gXCIjM2I5ZWRkXCIgOiBcIiMwZTY4YWJcIixcbiAgZ3JlZW46ICAgaXNEYXJrID8gXCIjMmVjYzcxXCIgOiBcIiMwMDczM2VcIixcbiAgcmVkOiAgICAgaXNEYXJrID8gXCIjZTc0YzNjXCIgOiBcIiNkMzIwMmFcIixcbiAgZ29sZDogICAgaXNEYXJrID8gXCIjZDRhODQzXCIgOiBcIiM4YjY5MTRcIixcbiAgdGV4dDogICAgaXNEYXJrID8gXCIjYzhjNGJjXCIgOiBcIiMyYTFmMTRcIixcbiAgbXV0ZWQ6ICAgaXNEYXJrID8gXCIjN2E3NjcwXCIgOiBcIiM1YzRmNDJcIixcbiAgZ3JpZDogICAgaXNEYXJrID8gXCJyZ2JhKDI1NSwyNTUsMjU1LDAuMSlcIiA6IFwiI2Q0Y2ZjOVwiLFxuICBsaW5lOiAgICBpc0RhcmsgPyBcIiNjOGM0YmNcIiA6IFwiIzJhMWYxNFwiXG59KVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC0yIiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiaDJoID0gdHJhbnNwb3NlKGgyaF9kYXRhKVxuaDJoQ3ViZSA9IHRyYW5zcG9zZShoMmhfY3ViZV9kYXRhKVxucGxheWVycyA9IHBsYXllcl9uYW1lc1xuXG5lbG9IaXN0b3J5ID0ge1xuICBjb25zdCByYXcgPSB0cmFuc3Bvc2UoZWxvX2hpc3RvcnkpO1xuICByZXR1cm4gcmF3Lm1hcChkID0+ICh7XG4gICAgcGxheWVyOiBkLnBsYXllcixcbiAgICBkYXRlOiBuZXcgRGF0ZShkLmRhdGUpLFxuICAgIHNjb3JlX21lZGlhbjogK2Quc2NvcmVfbWVkaWFuXG4gIH0pKTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMyIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InZpZXdvZiBwbGF5ZXIxID0gSW5wdXRzLnNlbGVjdChbXCJcIiwgLi4ucGxheWVyc10sIHtcbiAgbGFiZWw6IFwiTGVpa21hw7B1ciAxOlwiLFxuICB2YWx1ZTogXCJcIixcbiAgZm9ybWF0OiBkID0+IGQgPT09IFwiXCIgPyBcIlZlbGR1IGxlaWttYW5uLi4uXCIgOiBkXG59KVxuXG52aWV3b2YgcGxheWVyMiA9IElucHV0cy5zZWxlY3QoW1wiXCIsIC4uLnBsYXllcnNdLCB7XG4gIGxhYmVsOiBcIkxlaWttYcOwdXIgMjpcIixcbiAgdmFsdWU6IFwiXCIsXG4gIGZvcm1hdDogZCA9PiBkID09PSBcIlwiID8gXCJWZWxkdSBsZWlrbWFubi4uLlwiIDogZFxufSlcbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNCIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IntcbiAgaWYgKHBsYXllcjEgPT09IFwiXCIgfHwgcGxheWVyMiA9PT0gXCJcIiB8fCBwbGF5ZXIxID09PSBwbGF5ZXIyKSB7XG4gICAgY29uc3QgbXNnID0gcGxheWVyMSA9PT0gcGxheWVyMiAmJiBwbGF5ZXIxICE9PSBcIlwiXG4gICAgICA/IFwiVmVsZHUgdHZvIMOzbMOta2EgbGVpa21lbm5cIlxuICAgICAgOiBcIlZlbGR1IHR2byBsZWlrbWVubiB0aWwgYcOwIHNqw6EgZWludsOtZ2nDsFwiO1xuICAgIHJldHVybiBodG1sYDxkaXYgY2xhc3M9XCJlbXB0eS1zdGF0ZVwiPlxuICAgICAgPGRpdiBjbGFzcz1cImVtcHR5LWljb25cIj4mIzk4NzY7PC9kaXY+XG4gICAgICA8ZGl2PiR7bXNnfTwvZGl2PlxuICAgIDwvZGl2PmA7XG4gIH1cblxuICAvLyBGaW5kIHJlY29yZHMgaW4gYm90aCBkaXJlY3Rpb25zOiBwMeKGknAyIGFuZCBwMuKGknAxXG4gIGNvbnN0IGZvcndhcmQgPSBoMmguZmlsdGVyKGQgPT4gZC5wbGF5ZXIxID09PSBwbGF5ZXIxICYmIGQucGxheWVyMiA9PT0gcGxheWVyMik7XG4gIGNvbnN0IHJldmVyc2UgPSBoMmguZmlsdGVyKGQgPT4gZC5wbGF5ZXIxID09PSBwbGF5ZXIyICYmIGQucGxheWVyMiA9PT0gcGxheWVyMSk7XG5cbiAgY29uc3QgcDFXaW5zID0gKGZvcndhcmRbMF0gPyArZm9yd2FyZFswXS5wMV93aW5zIDogMCkgK1xuICAgICAgICAgICAgICAgICAocmV2ZXJzZVswXSA/ICgrcmV2ZXJzZVswXS5nYW1lcyAtICtyZXZlcnNlWzBdLnAxX3dpbnMpIDogMCk7XG4gIGNvbnN0IHRvdGFsR2FtZXMgPSAoZm9yd2FyZFswXSA/ICtmb3J3YXJkWzBdLmdhbWVzIDogMCkgK1xuICAgICAgICAgICAgICAgICAgICAgKHJldmVyc2VbMF0gPyArcmV2ZXJzZVswXS5nYW1lcyA6IDApO1xuICBjb25zdCBwMldpbnMgPSB0b3RhbEdhbWVzIC0gcDFXaW5zO1xuXG4gIGlmICh0b3RhbEdhbWVzID09PSAwKSB7XG4gICAgcmV0dXJuIGh0bWxgPGRpdiBjbGFzcz1cImVtcHR5LXN0YXRlXCI+XG4gICAgICA8ZGl2IGNsYXNzPVwiZW1wdHktaWNvblwiPiYjMTAwNjg7PC9kaXY+XG4gICAgICA8ZGl2PkVuZ2lyIGxlaWtpciBmdW5kdXN0IMOhIG1pbGxpICR7cGxheWVyMX0gb2cgJHtwbGF5ZXIyfTwvZGl2PlxuICAgIDwvZGl2PmA7XG4gIH1cblxuICBjb25zdCBwMVBjdCA9IE1hdGgucm91bmQoKHAxV2lucyAvIHRvdGFsR2FtZXMpICogMTAwKTtcbiAgY29uc3QgcDJQY3QgPSAxMDAgLSBwMVBjdDtcbiAgY29uc3QgcDFDb2xvciA9IHAxV2lucyA+PSBwMldpbnMgPyB0aGVtZUNvbG9ycy5ncmVlbiA6IHRoZW1lQ29sb3JzLnJlZDtcbiAgY29uc3QgcDJDb2xvciA9IHAyV2lucyA+PSBwMVdpbnMgPyB0aGVtZUNvbG9ycy5ncmVlbiA6IHRoZW1lQ29sb3JzLnJlZDtcblxuICAvLyBDdWJlIGJyZWFrZG93blxuICBjb25zdCBjdWJlRm9yd2FyZCA9IGgyaEN1YmUuZmlsdGVyKGQgPT4gZC5wbGF5ZXIxID09PSBwbGF5ZXIxICYmIGQucGxheWVyMiA9PT0gcGxheWVyMik7XG4gIGNvbnN0IGN1YmVSZXZlcnNlID0gaDJoQ3ViZS5maWx0ZXIoZCA9PiBkLnBsYXllcjEgPT09IHBsYXllcjIgJiYgZC5wbGF5ZXIyID09PSBwbGF5ZXIxKTtcblxuICBjb25zdCBjdWJlVHlwZXMgPSBbLi4ubmV3IFNldChbLi4uY3ViZUZvcndhcmQubWFwKGQgPT4gZC5jdWJlKSwgLi4uY3ViZVJldmVyc2UubWFwKGQgPT4gZC5jdWJlKV0pXS5zb3J0KCk7XG4gIGNvbnN0IGN1YmVSb3dzID0gY3ViZVR5cGVzLm1hcChjdWJlID0+IHtcbiAgICBjb25zdCBmd2QgPSBjdWJlRm9yd2FyZC5maW5kKGQgPT4gZC5jdWJlID09PSBjdWJlKTtcbiAgICBjb25zdCByZXYgPSBjdWJlUmV2ZXJzZS5maW5kKGQgPT4gZC5jdWJlID09PSBjdWJlKTtcbiAgICBjb25zdCB3MSA9IChmd2QgPyArZndkLnAxX3dpbnMgOiAwKSArIChyZXYgPyAoK3Jldi5nYW1lcyAtICtyZXYucDFfd2lucykgOiAwKTtcbiAgICBjb25zdCB0b3RhbCA9IChmd2QgPyArZndkLmdhbWVzIDogMCkgKyAocmV2ID8gK3Jldi5nYW1lcyA6IDApO1xuICAgIHJldHVybiB7IGN1YmUsIHAxV2luczogdzEsIHAyV2luczogdG90YWwgLSB3MSwgdG90YWwgfTtcbiAgfSk7XG5cbiAgcmV0dXJuIGh0bWxgXG4gICAgPGRpdiBjbGFzcz1cImgyaC1jYXJkXCI+XG4gICAgICA8ZGl2IGNsYXNzPVwiaDJoLWhlYWRlclwiPlxuICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXBsYXllclwiPlxuICAgICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtbmFtZVwiPiR7cGxheWVyMX08L2Rpdj5cbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXdpbnNcIiBzdHlsZT1cImNvbG9yOiAke3AxQ29sb3J9XCI+JHtwMVdpbnN9IDxzcGFuIGNsYXNzPVwiaDJoLXdpbnMtbGFiZWxcIj5zaWdyYXI8L3NwYW4+PC9kaXY+XG4gICAgICAgIDwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLXZzXCI+dnM8L2Rpdj5cbiAgICAgICAgPGRpdiBjbGFzcz1cImgyaC1wbGF5ZXJcIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLW5hbWVcIj4ke3BsYXllcjJ9PC9kaXY+XG4gICAgICAgICAgPGRpdiBjbGFzcz1cImgyaC13aW5zXCIgc3R5bGU9XCJjb2xvcjogJHtwMkNvbG9yfVwiPiR7cDJXaW5zfSA8c3BhbiBjbGFzcz1cImgyaC13aW5zLWxhYmVsXCI+c2lncmFyPC9zcGFuPjwvZGl2PlxuICAgICAgICA8L2Rpdj5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cImgyaC1iYXItY29udGFpbmVyXCI+XG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtYmFyLWZpbGwgaDJoLWJhci1wMVwiIHN0eWxlPVwid2lkdGg6ICR7cDFQY3R9JTsgYmFja2dyb3VuZDogJHtwMUNvbG9yfVwiPiR7cDFQY3R9JTwvZGl2PlxuICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLWJhci1maWxsIGgyaC1iYXItcDJcIiBzdHlsZT1cIndpZHRoOiAke3AyUGN0fSU7IGJhY2tncm91bmQ6ICR7cDJDb2xvcn1cIj4ke3AyUGN0fSU8L2Rpdj5cbiAgICAgIDwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cImgyaC10b3RhbFwiPiR7dG90YWxHYW1lc30gbGVpa2lyIHNhbXRhbHM8L2Rpdj5cbiAgICAgICR7Y3ViZVJvd3MubGVuZ3RoID4gMCA/IGh0bWxgXG4gICAgICAgIDxkaXYgY2xhc3M9XCJoMmgtY3ViZS1icmVha2Rvd25cIj5cbiAgICAgICAgICA8ZGl2IGNsYXNzPVwiaDJoLWN1YmUtdGl0bGVcIj5FZnRpciBrdWJiaTwvZGl2PlxuICAgICAgICAgIDx0YWJsZSBjbGFzcz1cImgyaC1jdWJlLXRhYmxlXCI+XG4gICAgICAgICAgICA8dGhlYWQ+XG4gICAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgICA8dGg+PC90aD5cbiAgICAgICAgICAgICAgICA8dGg+JHtwbGF5ZXIxfTwvdGg+XG4gICAgICAgICAgICAgICAgPHRoPiR7cGxheWVyMn08L3RoPlxuICAgICAgICAgICAgICAgIDx0aD5TYW10YWxzPC90aD5cbiAgICAgICAgICAgICAgPC90cj5cbiAgICAgICAgICAgIDwvdGhlYWQ+XG4gICAgICAgICAgICA8dGJvZHk+XG4gICAgICAgICAgICAgICR7Y3ViZVJvd3MubWFwKHIgPT4gaHRtbGBcbiAgICAgICAgICAgICAgICA8dHI+XG4gICAgICAgICAgICAgICAgICA8dGQ+JHtyLmN1YmV9PC90ZD5cbiAgICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT1cImNvbG9yOiAke3IucDFXaW5zID49IHIucDJXaW5zID8gdGhlbWVDb2xvcnMuZ3JlZW4gOiB0aGVtZUNvbG9ycy5yZWR9OyBmb250LXdlaWdodDogNjAwXCI+JHtyLnAxV2luc308L3RkPlxuICAgICAgICAgICAgICAgICAgPHRkIHN0eWxlPVwiY29sb3I6ICR7ci5wMldpbnMgPj0gci5wMVdpbnMgPyB0aGVtZUNvbG9ycy5ncmVlbiA6IHRoZW1lQ29sb3JzLnJlZH07IGZvbnQtd2VpZ2h0OiA2MDBcIj4ke3IucDJXaW5zfTwvdGQ+XG4gICAgICAgICAgICAgICAgICA8dGQ+JHtyLnRvdGFsfTwvdGQ+XG4gICAgICAgICAgICAgICAgPC90cj5cbiAgICAgICAgICAgICAgYCl9XG4gICAgICAgICAgICA8L3Rib2R5PlxuICAgICAgICAgIDwvdGFibGU+XG4gICAgICAgIDwvZGl2PlxuICAgICAgYCA6IGh0bWxgYH1cbiAgICA8L2Rpdj5cbiAgYDtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtNSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6IntcbiAgaWYgKHBsYXllcjEgPT09IFwiXCIgfHwgcGxheWVyMiA9PT0gXCJcIiB8fCBwbGF5ZXIxID09PSBwbGF5ZXIyKSByZXR1cm4gaHRtbGBgO1xuXG4gIGNvbnN0IHAxTWFwID0gbmV3IE1hcChcbiAgICBlbG9IaXN0b3J5LmZpbHRlcihkID0+IGQucGxheWVyID09PSBwbGF5ZXIxKS5tYXAoZCA9PiBbK2QuZGF0ZSwgZC5zY29yZV9tZWRpYW5dKVxuICApO1xuICBjb25zdCBlbG9EaWZmID0gZWxvSGlzdG9yeVxuICAgIC5maWx0ZXIoZCA9PiBkLnBsYXllciA9PT0gcGxheWVyMiAmJiBwMU1hcC5oYXMoK2QuZGF0ZSkpXG4gICAgLm1hcChkID0+ICh7IGRhdGU6IGQuZGF0ZSwgZGlmZjogcDFNYXAuZ2V0KCtkLmRhdGUpIC0gZC5zY29yZV9tZWRpYW4gfSkpXG4gICAgLnNvcnQoKGEsIGIpID0+IGEuZGF0ZSAtIGIuZGF0ZSk7XG5cbiAgaWYgKGVsb0RpZmYubGVuZ3RoIDwgMikgcmV0dXJuIGh0bWxgYDtcblxuICBjb25zdCBsYXRlc3RQdCA9IGVsb0RpZmZbZWxvRGlmZi5sZW5ndGggLSAxXTtcbiAgY29uc3QgbGF0ZXN0Q29sb3IgPSBsYXRlc3RQdC5kaWZmID49IDAgPyB0aGVtZUNvbG9ycy5ncmVlbiA6IHRoZW1lQ29sb3JzLnJlZDtcblxuICBjb25zdCBjaGFydCA9IFBsb3QucGxvdCh7XG4gICAgd2lkdGg6IHdpZHRoLCBoZWlnaHQ6IDI4MCxcbiAgICBtYXJnaW5MZWZ0OiA1NSwgbWFyZ2luQm90dG9tOiAzNSwgbWFyZ2luVG9wOiAyMCxcbiAgICBzdHlsZTogeyBmb250U2l6ZTogXCIxMnB4XCIsIGZvbnRGYW1pbHk6IFwiJ0ludGVyJywgc3lzdGVtLXVpLCBzYW5zLXNlcmlmXCIsIGJhY2tncm91bmQ6IFwidHJhbnNwYXJlbnRcIiwgY29sb3I6IHRoZW1lQ29sb3JzLnRleHQgfSxcbiAgICB4OiB7XG4gICAgICB0eXBlOiBcInRpbWVcIiwgbGFiZWw6IG51bGwsXG4gICAgICB0aWNrRm9ybWF0OiBkID0+IGQudG9Mb2NhbGVEYXRlU3RyaW5nKFwiaXMtSVNcIiwgeyBkYXk6IFwibnVtZXJpY1wiLCBtb250aDogXCJzaG9ydFwiIH0pXG4gICAgfSxcbiAgICB5OiB7IGxhYmVsOiBcIkVMTyBtdW51clwiLCBncmlkOiB0cnVlIH0sXG4gICAgbWFya3M6IFtcbiAgICAgIFBsb3QucnVsZVkoWzBdLCB7IHN0cm9rZTogdGhlbWVDb2xvcnMuZ3JpZCwgc3Ryb2tlRGFzaGFycmF5OiBcIjQsNFwiIH0pLFxuICAgICAgUGxvdC5hcmVhWShlbG9EaWZmLCB7XG4gICAgICAgIHg6IFwiZGF0ZVwiLCB5MTogMCwgeTI6IGQgPT4gTWF0aC5tYXgoMCwgZC5kaWZmKSwgZmlsbDogdGhlbWVDb2xvcnMuZ3JlZW4sIGZpbGxPcGFjaXR5OiBpc0RhcmsgPyAwLjI1IDogMC4zLCBjdXJ2ZTogXCJtb25vdG9uZS14XCJcbiAgICAgIH0pLFxuICAgICAgUGxvdC5hcmVhWShlbG9EaWZmLCB7XG4gICAgICAgIHg6IFwiZGF0ZVwiLCB5MTogMCwgeTI6IGQgPT4gTWF0aC5taW4oMCwgZC5kaWZmKSwgZmlsbDogdGhlbWVDb2xvcnMucmVkLCBmaWxsT3BhY2l0eTogaXNEYXJrID8gMC4yNSA6IDAuMywgY3VydmU6IFwibW9ub3RvbmUteFwiXG4gICAgICB9KSxcbiAgICAgIFBsb3QubGluZVkoZWxvRGlmZiwgeyB4OiBcImRhdGVcIiwgeTogXCJkaWZmXCIsIHN0cm9rZTogdGhlbWVDb2xvcnMubGluZSwgc3Ryb2tlV2lkdGg6IDEuNSwgY3VydmU6IFwibW9ub3RvbmUteFwiIH0pLFxuICAgICAgUGxvdC5kb3QoW2xhdGVzdFB0XSwgeyB4OiBcImRhdGVcIiwgeTogXCJkaWZmXCIsIGZpbGw6IGxhdGVzdENvbG9yLCByOiA0IH0pLFxuICAgICAgUGxvdC50ZXh0KFtsYXRlc3RQdF0sIHtcbiAgICAgICAgeDogXCJkYXRlXCIsIHk6IFwiZGlmZlwiLFxuICAgICAgICB0ZXh0OiBkID0+IChkLmRpZmYgPiAwID8gXCIrXCIgOiBcIlwiKSArIGQuZGlmZixcbiAgICAgICAgZHk6IC0xMiwgZm9udFNpemU6IDEzLCBmb250V2VpZ2h0OiBcImJvbGRcIiwgZmlsbDogbGF0ZXN0Q29sb3JcbiAgICAgIH0pXG4gICAgXVxuICB9KTtcblxuICByZXR1cm4gaHRtbGA8ZGl2IGNsYXNzPVwiaDJoLWVsby1jaGFydFwiPlxuICAgIDxkaXYgY2xhc3M9XCJoMmgtY2hhcnQtdGl0bGVcIj5FTE8tbXVudXIgeWZpciB0w61tYTwvZGl2PlxuICAgIDxkaXYgY2xhc3M9XCJoMmgtY2hhcnQtc3VidGl0bGVcIj4ke3BsYXllcjF9IG9nICR7cGxheWVyMn08L2Rpdj5cbiAgICAke2NoYXJ0fVxuICAgIDxkaXYgY2xhc3M9XCJoMmgtY2hhcnQtbGVnZW5kXCI+XG4gICAgICA8c3BhbiBjbGFzcz1cImgyaC1sZWdlbmQtaXRlbVwiPlxuICAgICAgICA8c3BhbiBjbGFzcz1cImgyaC1sZWdlbmQtcGlwXCIgc3R5bGU9XCJiYWNrZ3JvdW5kOiAke3RoZW1lQ29sb3JzLmdyZWVufVwiPjwvc3Bhbj4ke3BsYXllcjF9IGZyYW1hclxuICAgICAgPC9zcGFuPlxuICAgICAgPHNwYW4gY2xhc3M9XCJoMmgtbGVnZW5kLWl0ZW1cIj5cbiAgICAgICAgPHNwYW4gY2xhc3M9XCJoMmgtbGVnZW5kLXBpcFwiIHN0eWxlPVwiYmFja2dyb3VuZDogJHt0aGVtZUNvbG9ycy5yZWR9XCI+PC9zcGFuPiR7cGxheWVyMn0gZnJhbWFyXG4gICAgICA8L3NwYW4+XG4gICAgPC9kaXY+XG4gIDwvZGl2PmA7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXRRdWlldCIsInNvdXJjZSI6InNoaW55SW5wdXQoJ3BsYXllcjEnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgncGxheWVyMicpIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
@@ -441,6 +645,19 @@ window._ojs.runtime.interpretFromScriptTags();
 </script>
 <script id="quarto-html-after-body" type="application/javascript">
   window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
     const icon = "";
     const anchorJS = new window.AnchorJS();
     anchorJS.options = {

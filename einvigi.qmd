@@ -72,6 +72,30 @@ ojs_define(elo_history = history)
 ```
 
 ```{ojs}
+//| label: theme-detect
+isDark = {
+  let dark = document.body.classList.contains("quarto-dark");
+  yield dark;
+  while (true) {
+    await new Promise(r => setTimeout(r, 150));
+    const now = document.body.classList.contains("quarto-dark");
+    if (now !== dark) { dark = now; yield dark; }
+  }
+}
+
+themeColors = ({
+  blue:    isDark ? "#3b9edd" : "#0e68ab",
+  green:   isDark ? "#2ecc71" : "#00733e",
+  red:     isDark ? "#e74c3c" : "#d3202a",
+  gold:    isDark ? "#d4a843" : "#8b6914",
+  text:    isDark ? "#c8c4bc" : "#2a1f14",
+  muted:   isDark ? "#7a7670" : "#5c4f42",
+  grid:    isDark ? "rgba(255,255,255,0.1)" : "#d4cfc9",
+  line:    isDark ? "#c8c4bc" : "#2a1f14"
+})
+```
+
+```{ojs}
 //| label: data-prep
 h2h = transpose(h2h_data)
 h2hCube = transpose(h2h_cube_data)
@@ -155,8 +179,8 @@ viewof player2 = Inputs.select(["", ...players], {
 
   const p1Pct = Math.round((p1Wins / totalGames) * 100);
   const p2Pct = 100 - p1Pct;
-  const p1Color = p1Wins >= p2Wins ? "#00733e" : "#d3202a";
-  const p2Color = p2Wins >= p1Wins ? "#00733e" : "#d3202a";
+  const p1Color = p1Wins >= p2Wins ? themeColors.green : themeColors.red;
+  const p2Color = p2Wins >= p1Wins ? themeColors.green : themeColors.red;
 
   // Cube breakdown
   const cubeForward = h2hCube.filter(d => d.player1 === player1 && d.player2 === player2);
@@ -205,8 +229,8 @@ viewof player2 = Inputs.select(["", ...players], {
               ${cubeRows.map(r => html`
                 <tr>
                   <td>${r.cube}</td>
-                  <td style="color: ${r.p1Wins >= r.p2Wins ? '#00733e' : '#d3202a'}; font-weight: 600">${r.p1Wins}</td>
-                  <td style="color: ${r.p2Wins >= r.p1Wins ? '#00733e' : '#d3202a'}; font-weight: 600">${r.p2Wins}</td>
+                  <td style="color: ${r.p1Wins >= r.p2Wins ? themeColors.green : themeColors.red}; font-weight: 600">${r.p1Wins}</td>
+                  <td style="color: ${r.p2Wins >= r.p1Wins ? themeColors.green : themeColors.red}; font-weight: 600">${r.p2Wins}</td>
                   <td>${r.total}</td>
                 </tr>
               `)}
@@ -235,26 +259,26 @@ viewof player2 = Inputs.select(["", ...players], {
   if (eloDiff.length < 2) return html``;
 
   const latestPt = eloDiff[eloDiff.length - 1];
-  const latestColor = latestPt.diff >= 0 ? "#00733e" : "#d3202a";
+  const latestColor = latestPt.diff >= 0 ? themeColors.green : themeColors.red;
 
   const chart = Plot.plot({
     width: width, height: 280,
     marginLeft: 55, marginBottom: 35, marginTop: 20,
-    style: { fontSize: "12px", fontFamily: "'Inter', system-ui, sans-serif", background: "transparent" },
+    style: { fontSize: "12px", fontFamily: "'Inter', system-ui, sans-serif", background: "transparent", color: themeColors.text },
     x: {
       type: "time", label: null,
       tickFormat: d => d.toLocaleDateString("is-IS", { day: "numeric", month: "short" })
     },
     y: { label: "ELO munur", grid: true },
     marks: [
-      Plot.ruleY([0], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
+      Plot.ruleY([0], { stroke: themeColors.grid, strokeDasharray: "4,4" }),
       Plot.areaY(eloDiff, {
-        x: "date", y1: 0, y2: d => Math.max(0, d.diff), fill: "#00733e", fillOpacity: 0.3, curve: "monotone-x"
+        x: "date", y1: 0, y2: d => Math.max(0, d.diff), fill: themeColors.green, fillOpacity: isDark ? 0.25 : 0.3, curve: "monotone-x"
       }),
       Plot.areaY(eloDiff, {
-        x: "date", y1: 0, y2: d => Math.min(0, d.diff), fill: "#d3202a", fillOpacity: 0.3, curve: "monotone-x"
+        x: "date", y1: 0, y2: d => Math.min(0, d.diff), fill: themeColors.red, fillOpacity: isDark ? 0.25 : 0.3, curve: "monotone-x"
       }),
-      Plot.lineY(eloDiff, { x: "date", y: "diff", stroke: "#2a1f14", strokeWidth: 1.5, curve: "monotone-x" }),
+      Plot.lineY(eloDiff, { x: "date", y: "diff", stroke: themeColors.line, strokeWidth: 1.5, curve: "monotone-x" }),
       Plot.dot([latestPt], { x: "date", y: "diff", fill: latestColor, r: 4 }),
       Plot.text([latestPt], {
         x: "date", y: "diff",
@@ -270,10 +294,10 @@ viewof player2 = Inputs.select(["", ...players], {
     ${chart}
     <div class="h2h-chart-legend">
       <span class="h2h-legend-item">
-        <span class="h2h-legend-pip" style="background: #00733e"></span>${player1} framar
+        <span class="h2h-legend-pip" style="background: ${themeColors.green}"></span>${player1} framar
       </span>
       <span class="h2h-legend-item">
-        <span class="h2h-legend-pip" style="background: #d3202a"></span>${player2} framar
+        <span class="h2h-legend-pip" style="background: ${themeColors.red}"></span>${player2} framar
       </span>
     </div>
   </div>`;

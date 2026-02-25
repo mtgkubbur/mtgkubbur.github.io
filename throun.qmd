@@ -52,6 +52,33 @@ ojs_define(cube_records_data = cube_records)
 ```
 
 ```{ojs}
+//| label: theme-detect
+isDark = {
+  let dark = document.body.classList.contains("quarto-dark");
+  yield dark;
+  // Poll for class changes since MutationObserver callback can't yield
+  while (true) {
+    await new Promise(r => setTimeout(r, 150));
+    const now = document.body.classList.contains("quarto-dark");
+    if (now !== dark) { dark = now; yield dark; }
+  }
+}
+
+// Theme-aware color palettes
+themeColors = ({
+  blue:    isDark ? "#3b9edd" : "#0e68ab",
+  green:   isDark ? "#2ecc71" : "#00733e",
+  red:     isDark ? "#e74c3c" : "#d3202a",
+  gold:    isDark ? "#d4a843" : "#8b6914",
+  text:    isDark ? "#c8c4bc" : "#2a1f14",
+  muted:   isDark ? "#7a7670" : "#5c4f42",
+  grid:    isDark ? "rgba(255,255,255,0.1)" : "#d4cfc9",
+  blueArea1: isDark ? "rgba(59,158,221,0.10)" : "rgba(14,104,171,0.12)",
+  blueArea2: isDark ? "rgba(59,158,221,0.20)" : "rgba(14,104,171,0.25)"
+})
+```
+
+```{ojs}
 //| label: data-prep
 cubeRecords = transpose(cube_records_data).map(d => ({
   ...d,
@@ -166,10 +193,10 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   }
 
   const cubeTypes = [
-    { key: "gamma_High", label: "High", color: "#d3202a" },
-    { key: "gamma_Medium", label: "Medium", color: "#0e68ab" },
-    { key: "gamma_Low", label: "Low", color: "#00733e" },
-    { key: "gamma_Other", label: "Annað", color: "#8b6914" }
+    { key: "gamma_High", label: "High", color: themeColors.red },
+    { key: "gamma_Medium", label: "Medium", color: themeColors.blue },
+    { key: "gamma_Low", label: "Low", color: themeColors.green },
+    { key: "gamma_Other", label: "Annað", color: themeColors.gold }
   ];
 
   // Find strongest cube type
@@ -182,19 +209,19 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
 
   return html`<div class="player-summary">
     <div class="stat">
-      <div class="stat-value" style="color: #0e68ab;">${latest.score_median}</div>
+      <div class="stat-value" style="color: ${themeColors.blue};">${latest.score_median}</div>
       <div class="stat-label">ELO</div>
     </div>
     <div class="stat">
-      <div class="stat-value" style="color: #d3202a;">#${latest.rank}</div>
+      <div class="stat-value" style="color: ${themeColors.red};">#${latest.rank}</div>
       <div class="stat-label">Sæti</div>
     </div>
     <div class="stat">
-      <div class="stat-value" style="color: #00733e;">${latest.winRate.toFixed(0)}%</div>
+      <div class="stat-value" style="color: ${themeColors.green};">${latest.winRate.toFixed(0)}%</div>
       <div class="stat-label">Sigurhlutfall</div>
     </div>
     <div class="stat">
-      <div class="stat-value" style="color: #8b6914;">${latest.total}</div>
+      <div class="stat-value" style="color: ${themeColors.gold};">${latest.total}</div>
       <div class="stat-label">Leikir</div>
     </div>
     ${best ? html`<div class="stat">
@@ -211,10 +238,10 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   if (!latest) return html``;
 
   const cubeTypes = [
-    { key: "gamma_High", cube: "High", label: "High", color: "#d3202a" },
-    { key: "gamma_Medium", cube: "Medium", label: "Medium", color: "#0e68ab" },
-    { key: "gamma_Low", cube: "Low", label: "Low", color: "#00733e" },
-    { key: "gamma_Other", cube: "Other", label: "Annað", color: "#8b6914" }
+    { key: "gamma_High", cube: "High", label: "High", color: themeColors.red },
+    { key: "gamma_Medium", cube: "Medium", label: "Medium", color: themeColors.blue },
+    { key: "gamma_Low", cube: "Low", label: "Low", color: themeColors.green },
+    { key: "gamma_Other", cube: "Other", label: "Annað", color: themeColors.gold }
   ];
 
   const records = cubeRecords
@@ -263,16 +290,16 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
             </td>
             <td>${r.total > 0 ? r.wins : '–'}</td>
             <td>${r.total > 0 ? r.losses : '–'}</td>
-            <td style="color: ${r.winrate != null ? (r.winrate >= 50 ? '#00733e' : '#d3202a') : '#5c4f42'}; font-weight: 600">${r.winrate != null ? r.winrate + '%' : '–'}</td>
+            <td style="color: ${r.winrate != null ? (r.winrate >= 50 ? themeColors.green : themeColors.red) : themeColors.muted}; font-weight: 600">${r.winrate != null ? r.winrate + '%' : '–'}</td>
             <td class="gamma-cell">
               ${r.gamma != null ? html`
                 <div class="gamma-bar-inline">
-                  <div class="gamma-bar-neg-side">${!isPositive ? html`<div class="gamma-bar-fill" style="width: ${barPct}%; background: #d3202a;"></div>` : html``}</div>
+                  <div class="gamma-bar-neg-side">${!isPositive ? html`<div class="gamma-bar-fill" style="width: ${barPct}%; background: ${themeColors.red};"></div>` : html``}</div>
                   <div class="gamma-bar-mid"></div>
-                  <div class="gamma-bar-pos-side">${isPositive ? html`<div class="gamma-bar-fill" style="width: ${barPct}%; background: #00733e;"></div>` : html``}</div>
+                  <div class="gamma-bar-pos-side">${isPositive ? html`<div class="gamma-bar-fill" style="width: ${barPct}%; background: ${themeColors.green};"></div>` : html``}</div>
                 </div>
-                <span class="gamma-val" style="color: ${r.gamma >= 0 ? '#00733e' : '#d3202a'}">${r.gamma >= 0 ? '+' : ''}${r.gamma.toFixed(2)}</span>
-              ` : html`<span style="color: #5c4f42">–</span>`}
+                <span class="gamma-val" style="color: ${r.gamma >= 0 ? themeColors.green : themeColors.red}">${r.gamma >= 0 ? '+' : ''}${r.gamma.toFixed(2)}</span>
+              ` : html`<span style="color: ${themeColors.muted}">–</span>`}
             </td>
           </tr>`;
         })}
@@ -297,7 +324,8 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   const chartStyle = {
     fontSize: "13px",
     fontFamily: "'Inter', system-ui, sans-serif",
-    background: "transparent"
+    background: "transparent",
+    color: themeColors.text
   };
 
   const xConfig = {
@@ -314,15 +342,15 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     y: { label: "ELO", domain: yDomain, grid: true },
     color: {
       domain: ["90% bil", "50% bil", "Miðgildi"],
-      range: ["rgba(14,104,171,0.12)", "rgba(14,104,171,0.25)", "#0e68ab"],
+      range: [themeColors.blueArea1, themeColors.blueArea2, themeColors.blue],
       legend: true
     },
     marks: [
-      Plot.areaY(playerData, { x: "date", y1: "score_lower", y2: "score_upper", fill: "rgba(14,104,171,0.12)", curve: "monotone-x" }),
-      Plot.areaY(playerData, { x: "date", y1: "score_q25", y2: "score_q75", fill: "rgba(14,104,171,0.25)", curve: "monotone-x" }),
-      Plot.lineY(playerData, { x: "date", y: "score_median", stroke: "#0e68ab", strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "score_median", fill: "#0e68ab", r: 4 }),
-      Plot.text([latest], { x: "date", y: "score_median", text: d => `${d.score_median}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#0e68ab" })
+      Plot.areaY(playerData, { x: "date", y1: "score_lower", y2: "score_upper", fill: themeColors.blueArea1, curve: "monotone-x" }),
+      Plot.areaY(playerData, { x: "date", y1: "score_q25", y2: "score_q75", fill: themeColors.blueArea2, curve: "monotone-x" }),
+      Plot.lineY(playerData, { x: "date", y: "score_median", stroke: themeColors.blue, strokeWidth: 2.5, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "score_median", fill: themeColors.blue, r: 4 }),
+      Plot.text([latest], { x: "date", y: "score_median", text: d => `${d.score_median}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.blue })
     ]
   });
 
@@ -332,10 +360,10 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     x: xConfig,
     y: { label: "Sigurhlutfall (%)", domain: [0, 100], grid: true },
     marks: [
-      Plot.ruleY([50], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
-      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: "#00733e", strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "winRate", fill: "#00733e", r: 4 }),
-      Plot.text([latest], { x: "date", y: "winRate", text: d => `${d.winRate.toFixed(0)}%`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#00733e" })
+      Plot.ruleY([50], { stroke: themeColors.grid, strokeDasharray: "4,4" }),
+      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: themeColors.green, strokeWidth: 2.5, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "winRate", fill: themeColors.green, r: 4 }),
+      Plot.text([latest], { x: "date", y: "winRate", text: d => `${d.winRate.toFixed(0)}%`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.green })
     ]
   });
 
@@ -345,18 +373,18 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     x: xConfig,
     y: { label: "Sæti", domain: [maxPlayers, 1], grid: true },
     marks: [
-      Plot.lineY(playerData, { x: "date", y: "rank", stroke: "#d3202a", strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "rank", fill: "#d3202a", r: 4 }),
-      Plot.text([latest], { x: "date", y: "rank", text: d => `#${d.rank}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#d3202a" })
+      Plot.lineY(playerData, { x: "date", y: "rank", stroke: themeColors.red, strokeWidth: 2.5, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "rank", fill: themeColors.red, r: 4 }),
+      Plot.text([latest], { x: "date", y: "rank", text: d => `#${d.rank}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.red })
     ]
   });
 
   // Cube affinity evolution chart
   const cubeTypes = [
-    { key: "gamma_High", label: "High", color: "#d3202a" },
-    { key: "gamma_Medium", label: "Medium", color: "#0e68ab" },
-    { key: "gamma_Low", label: "Low", color: "#00733e" },
-    { key: "gamma_Other", label: "Annað", color: "#8b6914" }
+    { key: "gamma_High", label: "High", color: themeColors.red },
+    { key: "gamma_Medium", label: "Medium", color: themeColors.blue },
+    { key: "gamma_Low", label: "Low", color: themeColors.green },
+    { key: "gamma_Other", label: "Annað", color: themeColors.gold }
   ];
 
   // Reshape gamma data to long format for Plot
@@ -382,7 +410,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
       legend: true
     },
     marks: [
-      Plot.ruleY([0], { stroke: "#d4cfc9", strokeDasharray: "4,4" }),
+      Plot.ruleY([0], { stroke: themeColors.grid, strokeDasharray: "4,4" }),
       Plot.lineY(gammaData, { x: "date", y: "gamma", stroke: "cube", strokeWidth: 2.5, curve: "monotone-x" }),
       // Latest dots for each cube type
       ...cubeTypes
@@ -399,9 +427,9 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     x: xConfig,
     y: { label: "Fjöldi leikja", domain: [0, d3.max(playerData, d => d.total) * 1.1 || 10], grid: true },
     marks: [
-      Plot.lineY(playerData, { x: "date", y: "total", stroke: "#8b6914", strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "total", fill: "#8b6914", r: 4 }),
-      Plot.text([latest], { x: "date", y: "total", text: d => `${d.total}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: "#8b6914" })
+      Plot.lineY(playerData, { x: "date", y: "total", stroke: themeColors.gold, strokeWidth: 2.5, curve: "monotone-x" }),
+      Plot.dot([latest], { x: "date", y: "total", fill: themeColors.gold, r: 4 }),
+      Plot.text([latest], { x: "date", y: "total", text: d => `${d.total}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.gold })
     ]
   });
 

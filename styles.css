@@ -794,3 +794,307 @@ form.oi-3a86ea select:focus {
     transition: none !important;
   }
 }
+
+/* ═══════════════════════════════════════════════════════════════
+   DARK THEME OVERRIDES
+   Quarto adds .quarto-dark on <body> when dark mode is active.
+   All overrides below target that class.
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ─── Dark: Glass card surfaces ─── */
+.quarto-dark .score-table,
+.quarto-dark .h2h-card,
+.quarto-dark .h2h-elo-chart,
+.quarto-dark .cube-combined-card,
+.quarto-dark .player-summary,
+.quarto-dark .dashboard-grid .cell,
+.quarto-dark .chart-row-full .cell {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-color: rgba(255, 255, 255, 0.08);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+}
+
+.quarto-dark .score-table:hover,
+.quarto-dark .h2h-card:hover,
+.quarto-dark .h2h-elo-chart:hover,
+.quarto-dark .cube-combined-card:hover,
+.quarto-dark .dashboard-grid .cell:hover,
+.quarto-dark .chart-row-full .cell:hover {
+  background: rgba(255, 255, 255, 0.07);
+  border-color: rgba(255, 255, 255, 0.14);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ─── Dark: Page hero header ─── */
+.quarto-dark .page-header {
+  background:
+    radial-gradient(ellipse 50% 90% at 50% 40%, rgba(212, 168, 67, 0.12) 0%, transparent 60%),
+    radial-gradient(ellipse 80% 60% at 15% 70%, rgba(59, 158, 221, 0.05) 0%, transparent 50%),
+    radial-gradient(ellipse 80% 60% at 85% 70%, rgba(46, 204, 113, 0.05) 0%, transparent 50%),
+    linear-gradient(180deg, #12121a 0%, #0e0e14 100%);
+  box-shadow: inset 0 -1px 0 0 rgba(212, 168, 67, 0.1);
+}
+
+.quarto-dark .page-header::before {
+  border-color: rgba(212, 168, 67, 0.12);
+  background: radial-gradient(ellipse, rgba(212, 168, 67, 0.06) 0%, transparent 70%);
+}
+
+.quarto-dark .page-header::after {
+  border-color: rgba(212, 168, 67, 0.06);
+}
+
+.quarto-dark .page-header .mana-pips .ms:hover {
+  filter: brightness(1.3);
+}
+
+.quarto-dark .page-header .mana-pip-w { color: #d4a843; opacity: 1; }
+.quarto-dark .page-header .mana-pip-u { color: #3b9edd; opacity: 1; }
+.quarto-dark .page-header .mana-pip-b { color: #6a6060; opacity: 1; }
+.quarto-dark .page-header .mana-pip-r { color: #e74c3c; opacity: 1; }
+.quarto-dark .page-header .mana-pip-g { color: #2ecc71; opacity: 1; }
+
+.quarto-dark .page-header h1 {
+  color: #e8e4dc;
+}
+
+.quarto-dark .page-header .subtitle,
+.quarto-dark .page-header .page-desc {
+  color: #7a7670;
+}
+
+.quarto-dark .date-badge {
+  background: rgba(212, 168, 67, 0.15);
+  color: #d4a843;
+  border-color: rgba(212, 168, 67, 0.2);
+  box-shadow: none;
+}
+
+/* ─── Dark: Reactable table ─── */
+.quarto-dark .score-table {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.quarto-dark .score-table .rt-table {
+  color: #c8c4bc;
+}
+
+.quarto-dark .score-table .rt-thead {
+  border-bottom-color: rgba(212, 168, 67, 0.3);
+}
+
+.quarto-dark .score-table .rt-th {
+  color: #7a7670 !important;
+  border-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.quarto-dark .score-table .rt-th-group {
+  color: #7a7670 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+.quarto-dark .score-table .rt-td {
+  border-color: rgba(255, 255, 255, 0.06) !important;
+  color: #c8c4bc;
+}
+
+.quarto-dark .score-table .rt-tr-striped {
+  background: rgba(255, 255, 255, 0.015) !important;
+}
+
+.quarto-dark .score-table .rt-tr:hover .rt-td {
+  background-color: rgba(59, 158, 221, 0.08) !important;
+}
+
+/* Podium medals — dark */
+.quarto-dark .score-table .rt-tr-group:nth-child(1) .rt-td:first-child {
+  border-left-color: #d4a843;
+}
+.quarto-dark .score-table .rt-tr-group:nth-child(1) .rt-td:first-child .rt-td-inner::before {
+  background: linear-gradient(135deg, #f0d060, #c49630);
+  box-shadow: 0 0 6px rgba(212, 168, 67, 0.5);
+}
+
+.quarto-dark .score-table .rt-tr-group:nth-child(2) .rt-td:first-child {
+  border-left-color: #8a8a8a;
+}
+.quarto-dark .score-table .rt-tr-group:nth-child(2) .rt-td:first-child .rt-td-inner::before {
+  background: linear-gradient(135deg, #c0c0c0, #808080);
+  box-shadow: 0 0 4px rgba(160, 160, 160, 0.4);
+}
+
+/* Podium row backgrounds — override R-generated gradients */
+.quarto-dark .score-table .rt-tr-group:nth-child(1) .rt-tr {
+  background: linear-gradient(90deg, rgba(212, 168, 67, 0.12) 0%, rgba(212, 168, 67, 0.02) 100%) !important;
+}
+.quarto-dark .score-table .rt-tr-group:nth-child(2) .rt-tr {
+  background: linear-gradient(90deg, rgba(160, 160, 160, 0.08) 0%, rgba(160, 160, 160, 0.01) 100%) !important;
+}
+.quarto-dark .score-table .rt-tr-group:nth-child(3) .rt-tr {
+  background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, rgba(184, 115, 51, 0.01) 100%) !important;
+}
+
+/* Search input */
+.quarto-dark .score-table .rt-search input {
+  border-color: rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.04);
+  color: #c8c4bc;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%237a7670' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='11' cy='11' r='8'/%3E%3Cline x1='21' y1='21' x2='16.65' y2='16.65'/%3E%3C/svg%3E");
+}
+
+.quarto-dark .score-table .rt-search input:focus {
+  border-color: #3b9edd;
+  box-shadow: 0 0 0 3px rgba(59, 158, 221, 0.15);
+}
+
+.quarto-dark .score-table .rt-search input::placeholder {
+  color: #4a4640;
+}
+
+/* Mobile sticky column dark bg */
+@media (max-width: 768px) {
+  .quarto-dark .score-table .rt-th:first-child,
+  .quarto-dark .score-table .rt-td:first-child {
+    background-color: #16161e;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+  }
+}
+
+/* ─── Dark: OJS dropdown styling ─── */
+.quarto-dark form.oi-3a86ea label {
+  color: #e8e4dc;
+}
+
+.quarto-dark form.oi-3a86ea select {
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #c8c4bc;
+  background-color: rgba(255, 255, 255, 0.04);
+}
+
+.quarto-dark form.oi-3a86ea select:focus {
+  box-shadow: 0 0 0 2px rgba(59, 158, 221, 0.2);
+  border-color: #3b9edd;
+}
+
+/* ─── Dark: Cube combined table ─── */
+.quarto-dark .cube-affinity-title {
+  color: #7a7670;
+}
+
+.quarto-dark .cube-combined-table th {
+  color: #7a7670;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark .cube-combined-table td {
+  color: #c8c4bc;
+}
+
+.quarto-dark .cube-combined-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.quarto-dark .gamma-bar-mid {
+  background: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark .cube-footnote {
+  color: #4a4640;
+}
+
+/* ─── Dark: Chart titles ─── */
+.quarto-dark .chart-title {
+  color: #e8e4dc;
+}
+
+/* ─── Dark: Player summary ─── */
+.quarto-dark .player-summary {
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.quarto-dark .player-summary .stat-value {
+  color: #e8e4dc;
+}
+
+.quarto-dark .player-summary .stat-label {
+  color: #7a7670;
+}
+
+/* ─── Dark: Empty state ─── */
+.quarto-dark .empty-state {
+  color: #7a7670;
+}
+
+.quarto-dark .empty-state .empty-icon {
+  opacity: 0.2;
+}
+
+/* ─── Dark: H2H card ─── */
+.quarto-dark .h2h-name {
+  color: #e8e4dc;
+}
+
+.quarto-dark .h2h-vs {
+  color: #4a4640;
+}
+
+.quarto-dark .h2h-total {
+  color: #7a7670;
+}
+
+.quarto-dark .h2h-cube-breakdown {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark .h2h-cube-title {
+  color: #7a7670;
+}
+
+.quarto-dark .h2h-cube-table th {
+  color: #7a7670;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark .h2h-cube-table td {
+  color: #c8c4bc;
+}
+
+.quarto-dark .h2h-cube-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+/* ─── Dark: ELO chart ─── */
+.quarto-dark .h2h-chart-title {
+  color: #e8e4dc;
+}
+
+.quarto-dark .h2h-chart-subtitle {
+  color: #7a7670;
+}
+
+.quarto-dark .h2h-chart-legend {
+  color: #7a7670;
+}
+
+/* ─── Dark: Reactable cell color overrides ─── */
+/* Override R-generated inline colors for score, delta, wins/losses */
+.quarto-dark .score-table .rt-td-inner {
+  color: #c8c4bc !important;
+}
+
+/* Pagination */
+.quarto-dark .score-table .rt-pagination {
+  color: #7a7670;
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark .score-table .rt-page-button {
+  color: #7a7670;
+}
+
+.quarto-dark .score-table .rt-page-button:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: #e8e4dc;
+}

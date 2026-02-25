@@ -42,6 +42,7 @@ format:
   html:
     theme:
       light: [cosmo, theme.scss]
+      dark: [cosmo, theme-dark.scss]
     css: styles.css
     toc: false
     include-in-header:
