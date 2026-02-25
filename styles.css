@@ -487,11 +487,34 @@ form.oi-3a86ea select:focus {
 
 /* Chart card titles */
 .chart-title {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 600;
-  color: #2a1f14;
-  margin: 0 0 0.5rem;
+  color: #5c4f42;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin: 0 0 0.25rem;
   text-align: center;
+}
+
+/* ─── Observable Plot legend styling ─── */
+.profile-charts figure,
+.h2h-elo-chart figure {
+  margin: 0;
+}
+
+/* Legend (swatches) refinements */
+.profile-charts [class*="plot-"] + div,
+.profile-charts figure > div:first-child,
+.profile-charts span[class*="legend"],
+.profile-charts div[style*="display: flex"][style*="flex-wrap"] {
+  font-size: 11px !important;
+  justify-content: center;
+}
+
+/* Axis label typography */
+.profile-charts svg text,
+.h2h-elo-chart svg text {
+  font-family: 'Inter', system-ui, sans-serif;
 }
 
 /* ─── Player summary card ─── */
@@ -1006,7 +1029,7 @@ form.oi-3a86ea select:focus {
 
 /* ─── Dark: Chart titles ─── */
 .quarto-dark .chart-title {
-  color: #e8e4dc;
+  color: #9a9590;
 }
 
 /* ─── Dark: Player summary ─── */

@@ -322,64 +322,119 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   if (!latest) return html``;
 
   const chartStyle = {
-    fontSize: "13px",
+    fontSize: "12px",
     fontFamily: "'Inter', system-ui, sans-serif",
     background: "transparent",
     color: themeColors.text
   };
 
-  const xConfig = {
-    type: "time",
-    domain: xDomain,
-    label: null,
-    tickFormat: d => d.toLocaleDateString("is-IS", { day: "numeric", month: "short" })
-  };
+  // Background color for text halo (matches card bg)
+  const haloBg = isDark ? "#1e1e26" : "#ffffff";
 
+  // Shared axis/grid mark builders for consistent styling
+  const makeGridY = (opts) => Plot.gridY({
+    stroke: themeColors.grid,
+    strokeOpacity: 0.6,
+    strokeDasharray: "3,4",
+    ...opts
+  });
+
+  const makeAxisX = (opts) => Plot.axisX({
+    tickSize: 4,
+    tickPadding: 6,
+    stroke: themeColors.grid,
+    fill: themeColors.muted,
+    fontVariant: "normal",
+    ticks: d3.utcMonth,
+    tickFormat: d => d.toLocaleDateString("is-IS", { month: "short" }),
+    ...opts
+  });
+
+  const makeAxisY = (label, opts) => Plot.axisY({
+    label: label,
+    labelArrow: "none",
+    labelAnchor: "top",
+    tickSize: 0,
+    tickPadding: 8,
+    fill: themeColors.muted,
+    textStroke: haloBg,
+    textStrokeWidth: 3,
+    ...opts
+  });
+
+  // Endpoint label helper — adds white halo for legibility
+  const endLabel = (d, text, color) => Plot.text([d], {
+    x: "date", y: text.field || Object.keys(d).find(k => typeof d[k] === "number" && k !== "rank"),
+    text: () => text.value,
+    dy: -14, fontSize: 12, fontWeight: 600,
+    fill: color, stroke: haloBg, strokeWidth: 4
+  });
+
+  // Shared x scale (no axis — we use explicit axisX marks instead)
+  const xScale = { type: "time", domain: xDomain, label: null, axis: null };
+
+  // ── ELO chart ──
   const eloChart = Plot.plot({
-    width: width, height: 380, marginLeft: 55, marginBottom: 40,
+    width: width, height: 380,
+    marginLeft: 60, marginRight: 20, marginBottom: 40, marginTop: 12,
     style: chartStyle,
-    x: xConfig,
-    y: { label: "ELO", domain: yDomain, grid: true },
+    x: xScale,
+    y: { label: null, domain: yDomain, axis: null },
     color: {
       domain: ["90% bil", "50% bil", "Miðgildi"],
       range: [themeColors.blueArea1, themeColors.blueArea2, themeColors.blue],
       legend: true
     },
     marks: [
-      Plot.areaY(playerData, { x: "date", y1: "score_lower", y2: "score_upper", fill: themeColors.blueArea1, curve: "monotone-x" }),
-      Plot.areaY(playerData, { x: "date", y1: "score_q25", y2: "score_q75", fill: themeColors.blueArea2, curve: "monotone-x" }),
-      Plot.lineY(playerData, { x: "date", y: "score_median", stroke: themeColors.blue, strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "score_median", fill: themeColors.blue, r: 4 }),
-      Plot.text([latest], { x: "date", y: "score_median", text: d => `${d.score_median}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.blue })
+      makeGridY(),
+      makeAxisX(),
+      makeAxisY("ELO"),
+      Plot.areaY(playerData, { x: "date", y1: "score_lower", y2: "score_upper", fill: themeColors.blueArea1, curve: "catmull-rom" }),
+      Plot.areaY(playerData, { x: "date", y1: "score_q25", y2: "score_q75", fill: themeColors.blueArea2, curve: "catmull-rom" }),
+      Plot.lineY(playerData, { x: "date", y: "score_median", stroke: themeColors.blue, strokeWidth: 2.5, curve: "catmull-rom" }),
+      Plot.dot([latest], { x: "date", y: "score_median", fill: themeColors.blue, r: 5, stroke: haloBg, strokeWidth: 2 }),
+      Plot.text([latest], { x: "date", y: "score_median", text: d => `${d.score_median}`, dy: -14, fontSize: 12, fontWeight: 600, fill: themeColors.blue, stroke: haloBg, strokeWidth: 4 })
     ]
   });
 
+  // ── Win rate chart ──
   const winrateChart = Plot.plot({
-    width: width, height: 360, marginLeft: 55, marginBottom: 40,
+    width: width, height: 340,
+    marginLeft: 50, marginRight: 20, marginBottom: 40, marginTop: 12,
     style: chartStyle,
-    x: xConfig,
-    y: { label: "Sigurhlutfall (%)", domain: [0, 100], grid: true },
+    x: xScale,
+    y: { label: null, domain: [0, 100], axis: null },
     marks: [
-      Plot.ruleY([50], { stroke: themeColors.grid, strokeDasharray: "4,4" }),
-      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: themeColors.green, strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "winRate", fill: themeColors.green, r: 4 }),
-      Plot.text([latest], { x: "date", y: "winRate", text: d => `${d.winRate.toFixed(0)}%`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.green })
+      makeGridY(),
+      makeAxisX(),
+      makeAxisY("Sigurhlutfall (%)"),
+      Plot.ruleY([50], { stroke: themeColors.muted, strokeDasharray: "6,4", strokeOpacity: 0.5 }),
+      Plot.areaY(playerData, { x: "date", y1: 50, y2: "winRate", fill: themeColors.green, fillOpacity: isDark ? 0.10 : 0.12, curve: "catmull-rom" }),
+      Plot.lineY(playerData, { x: "date", y: "winRate", stroke: themeColors.green, strokeWidth: 2.5, curve: "catmull-rom" }),
+      Plot.dot([latest], { x: "date", y: "winRate", fill: themeColors.green, r: 5, stroke: haloBg, strokeWidth: 2 }),
+      Plot.text([latest], { x: "date", y: "winRate", text: d => `${d.winRate.toFixed(0)}%`, dy: -14, fontSize: 12, fontWeight: 600, fill: themeColors.green, stroke: haloBg, strokeWidth: 4 })
     ]
   });
 
+  // ── Placement chart ──
   const placementChart = Plot.plot({
-    width: width, height: 360, marginLeft: 55, marginBottom: 40,
+    width: width, height: 340,
+    marginLeft: 50, marginRight: 20, marginBottom: 40, marginTop: 12,
     style: chartStyle,
-    x: xConfig,
-    y: { label: "Sæti", domain: [maxPlayers, 1], grid: true },
+    x: xScale,
+    y: { label: null, domain: [maxPlayers, 1], axis: null },
     marks: [
-      Plot.lineY(playerData, { x: "date", y: "rank", stroke: themeColors.red, strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "rank", fill: themeColors.red, r: 4 }),
-      Plot.text([latest], { x: "date", y: "rank", text: d => `#${d.rank}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.red })
+      makeGridY(),
+      makeAxisX(),
+      makeAxisY("Sæti"),
+      Plot.areaY(playerData, { x: "date", y1: maxPlayers, y2: "rank", fill: themeColors.red, fillOpacity: isDark ? 0.08 : 0.10, curve: "catmull-rom" }),
+      Plot.lineY(playerData, { x: "date", y: "rank", stroke: themeColors.red, strokeWidth: 2.5, curve: "catmull-rom" }),
+      Plot.dot([latest], { x: "date", y: "rank", fill: themeColors.red, r: 5, stroke: haloBg, strokeWidth: 2 }),
+      Plot.text([latest], { x: "date", y: "rank", text: d => `#${d.rank}`, dy: -14, fontSize: 12, fontWeight: 600, fill: themeColors.red, stroke: haloBg, strokeWidth: 4 })
     ]
   });
 
-  // Cube affinity evolution chart
+  // ── Cube affinity evolution chart ──
   const cubeTypes = [
     { key: "gamma_High", label: "High", color: themeColors.red },
     { key: "gamma_Medium", label: "Medium", color: themeColors.blue },
@@ -387,7 +442,6 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     { key: "gamma_Other", label: "Annað", color: themeColors.gold }
   ];
 
-  // Reshape gamma data to long format for Plot
   const gammaData = playerData.flatMap(d =>
     cubeTypes
       .filter(c => d[c.key] != null)
@@ -400,36 +454,45 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
   );
 
   const gammaChart = gammaData.length > 0 ? Plot.plot({
-    width: width, height: 360, marginLeft: 55, marginBottom: 40,
+    width: width, height: 340,
+    marginLeft: 50, marginRight: 20, marginBottom: 40, marginTop: 12,
     style: chartStyle,
-    x: xConfig,
-    y: { label: "Kubbaáhrif (γ)", grid: true },
+    x: xScale,
+    y: { label: null, axis: null },
     color: {
       domain: cubeTypes.map(c => c.label),
       range: cubeTypes.map(c => c.color),
       legend: true
     },
     marks: [
-      Plot.ruleY([0], { stroke: themeColors.grid, strokeDasharray: "4,4" }),
-      Plot.lineY(gammaData, { x: "date", y: "gamma", stroke: "cube", strokeWidth: 2.5, curve: "monotone-x" }),
-      // Latest dots for each cube type
+      makeGridY(),
+      makeAxisX(),
+      makeAxisY("Kubbaáhrif (γ)"),
+      Plot.ruleY([0], { stroke: themeColors.muted, strokeDasharray: "6,4", strokeOpacity: 0.5 }),
+      Plot.lineY(gammaData, { x: "date", y: "gamma", stroke: "cube", strokeWidth: 2, curve: "catmull-rom" }),
       ...cubeTypes
         .filter(c => latest[c.key] != null)
         .map(c => Plot.dot([{ date: latest.date, gamma: latest[c.key] }], {
-          x: "date", y: "gamma", fill: c.color, r: 3.5
+          x: "date", y: "gamma", fill: c.color, r: 4, stroke: haloBg, strokeWidth: 2
         }))
     ]
   }) : null;
 
+  // ── Games count chart ──
   const gamesChart = Plot.plot({
-    width: width, height: 360, marginLeft: 55, marginBottom: 40,
+    width: width, height: 340,
+    marginLeft: 50, marginRight: 20, marginBottom: 40, marginTop: 12,
     style: chartStyle,
-    x: xConfig,
-    y: { label: "Fjöldi leikja", domain: [0, d3.max(playerData, d => d.total) * 1.1 || 10], grid: true },
+    x: xScale,
+    y: { label: null, domain: [0, d3.max(playerData, d => d.total) * 1.1 || 10], axis: null },
     marks: [
-      Plot.lineY(playerData, { x: "date", y: "total", stroke: themeColors.gold, strokeWidth: 2.5, curve: "monotone-x" }),
-      Plot.dot([latest], { x: "date", y: "total", fill: themeColors.gold, r: 4 }),
-      Plot.text([latest], { x: "date", y: "total", text: d => `${d.total}`, dy: -12, fontSize: 13, fontWeight: "bold", fill: themeColors.gold })
+      makeGridY(),
+      makeAxisX(),
+      makeAxisY("Fjöldi leikja"),
+      Plot.areaY(playerData, { x: "date", y1: 0, y2: "total", fill: themeColors.gold, fillOpacity: isDark ? 0.10 : 0.12, curve: "step-after" }),
+      Plot.lineY(playerData, { x: "date", y: "total", stroke: themeColors.gold, strokeWidth: 2.5, curve: "step-after" }),
+      Plot.dot([latest], { x: "date", y: "total", fill: themeColors.gold, r: 5, stroke: haloBg, strokeWidth: 2 }),
+      Plot.text([latest], { x: "date", y: "total", text: d => `${d.total}`, dy: -14, fontSize: 12, fontWeight: 600, fill: themeColors.gold, stroke: haloBg, strokeWidth: 4 })
     ]
   });
 

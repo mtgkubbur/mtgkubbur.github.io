@@ -261,29 +261,53 @@ viewof player2 = Inputs.select(["", ...players], {
   const latestPt = eloDiff[eloDiff.length - 1];
   const latestColor = latestPt.diff >= 0 ? themeColors.green : themeColors.red;
 
+  const haloBg = isDark ? "#1e1e26" : "#ffffff";
+
   const chart = Plot.plot({
     width: width, height: 280,
-    marginLeft: 55, marginBottom: 35, marginTop: 20,
+    marginLeft: 55, marginRight: 20, marginBottom: 40, marginTop: 12,
     style: { fontSize: "12px", fontFamily: "'Inter', system-ui, sans-serif", background: "transparent", color: themeColors.text },
-    x: {
-      type: "time", label: null,
-      tickFormat: d => d.toLocaleDateString("is-IS", { day: "numeric", month: "short" })
-    },
-    y: { label: "ELO munur", grid: true },
+    x: { type: "time", label: null, axis: null },
+    y: { label: null, axis: null },
     marks: [
-      Plot.ruleY([0], { stroke: themeColors.grid, strokeDasharray: "4,4" }),
+      Plot.gridY({
+        stroke: themeColors.grid,
+        strokeOpacity: 0.6,
+        strokeDasharray: "3,4"
+      }),
+      Plot.axisX({
+        tickSize: 4,
+        tickPadding: 6,
+        stroke: themeColors.grid,
+        fill: themeColors.muted,
+        fontVariant: "normal",
+        ticks: d3.utcMonth,
+        tickFormat: d => d.toLocaleDateString("is-IS", { month: "short" })
+      }),
+      Plot.axisY({
+        label: "ELO munur",
+        labelArrow: "none",
+        labelAnchor: "top",
+        tickSize: 0,
+        tickPadding: 8,
+        fill: themeColors.muted,
+        textStroke: haloBg,
+        textStrokeWidth: 3
+      }),
+      Plot.ruleY([0], { stroke: themeColors.muted, strokeDasharray: "6,4", strokeOpacity: 0.5 }),
       Plot.areaY(eloDiff, {
-        x: "date", y1: 0, y2: d => Math.max(0, d.diff), fill: themeColors.green, fillOpacity: isDark ? 0.25 : 0.3, curve: "monotone-x"
+        x: "date", y1: 0, y2: d => Math.max(0, d.diff), fill: themeColors.green, fillOpacity: isDark ? 0.20 : 0.25, curve: "catmull-rom"
       }),
       Plot.areaY(eloDiff, {
-        x: "date", y1: 0, y2: d => Math.min(0, d.diff), fill: themeColors.red, fillOpacity: isDark ? 0.25 : 0.3, curve: "monotone-x"
+        x: "date", y1: 0, y2: d => Math.min(0, d.diff), fill: themeColors.red, fillOpacity: isDark ? 0.20 : 0.25, curve: "catmull-rom"
       }),
-      Plot.lineY(eloDiff, { x: "date", y: "diff", stroke: themeColors.line, strokeWidth: 1.5, curve: "monotone-x" }),
-      Plot.dot([latestPt], { x: "date", y: "diff", fill: latestColor, r: 4 }),
+      Plot.lineY(eloDiff, { x: "date", y: "diff", stroke: themeColors.line, strokeWidth: 1.5, curve: "catmull-rom" }),
+      Plot.dot([latestPt], { x: "date", y: "diff", fill: latestColor, r: 5, stroke: haloBg, strokeWidth: 2 }),
       Plot.text([latestPt], {
         x: "date", y: "diff",
         text: d => (d.diff > 0 ? "+" : "") + d.diff,
-        dy: -12, fontSize: 13, fontWeight: "bold", fill: latestColor
+        dy: -14, fontSize: 12, fontWeight: 600, fill: latestColor,
+        stroke: haloBg, strokeWidth: 4
       })
     ]
   });
