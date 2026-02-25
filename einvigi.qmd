@@ -101,7 +101,7 @@ eloHistory = {
 
 # Einvígi {.title}
 
-[Beint samanburður milli tveggja leikmanna]{.page-desc}
+[Beinn samanburður milli tveggja leikmanna]{.page-desc}
 
 ::::
 
@@ -191,7 +191,7 @@ viewof player2 = Inputs.select(["", ...players], {
       <div class="h2h-total">${totalGames} leikir samtals</div>
       ${cubeRows.length > 0 ? html`
         <div class="h2h-cube-breakdown">
-          <div class="h2h-cube-title">Eftir kubb</div>
+          <div class="h2h-cube-title">Eftir kubbi</div>
           <table class="h2h-cube-table">
             <thead>
               <tr>
