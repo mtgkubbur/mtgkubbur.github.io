@@ -42,7 +42,7 @@ newest_date <- fetch_newest_date()
 [ELO-stigaröðun]{.subtitle}
 
 [Uppfært `r newest_date`]{.date-badge}
-
+ 
 ::::
 
 ```{ojs}

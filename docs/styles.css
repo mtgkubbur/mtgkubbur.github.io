@@ -243,13 +243,37 @@ body:has(.h2h-layout) #quarto-content {
   border-bottom: 2px solid #0e68ab;
 }
 
+.score-table .rt-th {
+  color: #5c4f42 !important;
+  border-bottom: 2px solid #0e68ab;
+}
+
+.score-table .rt-td {
+  color: #3d3028;
+  border-color: rgba(0, 0, 0, 0.06);
+}
+
+.score-table .rt-tr-striped {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+
+/* ELO score — prominent column */
+.score-table .score-elo-cell {
+  color: #2c1e10 !important;
+}
+
+/* Secondary "Fyrra" columns — muted but legible */
+.score-table .score-prev-cell {
+  color: #7a6e60 !important;
+}
+
 /* Column group headers */
 .score-table .rt-th-group {
   font-size: 11px !important;
   font-weight: 600;
   text-transform: uppercase;
   letter-spacing: 0.06em;
-  color: #5c4f42;
+  color: #5c4f42 !important;
   border-bottom: 1px solid #d4cfc9 !important;
   padding-bottom: 4px;
 }
@@ -935,6 +959,7 @@ form.oi-3a86ea select:focus {
 .quarto-dark .score-table .rt-th {
   color: #7a7670 !important;
   border-color: rgba(255, 255, 255, 0.08) !important;
+  border-bottom: 2px solid rgba(212, 168, 67, 0.3) !important;
 }
 
 .quarto-dark .score-table .rt-th-group {
@@ -953,6 +978,14 @@ form.oi-3a86ea select:focus {
 
 .quarto-dark .score-table .rt-tr:hover .rt-td {
   background-color: rgba(59, 158, 221, 0.08) !important;
+}
+
+.quarto-dark .score-table .score-elo-cell {
+  color: #e8e4dc !important;
+}
+
+.quarto-dark .score-table .score-prev-cell {
+  color: #7a7670 !important;
 }
 
 /* Podium medals — dark */
