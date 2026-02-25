@@ -199,7 +199,7 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     </div>
     ${best ? html`<div class="stat">
       <div class="stat-value" style="color: ${best.color};">${best.label}</div>
-      <div class="stat-label">Sterkasti kubbur</div>
+      <div class="stat-label">Sterkustu kubbar</div>
     </div>` : html``}
   </div>`;
 }

@@ -39,7 +39,7 @@ newest_date <- fetch_newest_date()
 </div>
 ```
 
-[ELO-stigaröðun MtG Kubbur leikja]{.subtitle}
+[ELO-stigaröðun]{.subtitle}
 
 [Uppfært `r newest_date`]{.date-badge}
 

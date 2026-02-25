@@ -6,7 +6,7 @@ $mtg-green:  #00733e;
 $mtg-red:    #d3202a;
 $mtg-black:  #150b00;
 $mtg-white:  #f9faf4;
-$mtg-gold:   #8b6914;
+$mtg-gold:   #c9a84c;
 
 // Derived
 $blue-light: #e8f1f8;
@@ -43,29 +43,94 @@ body {
   line-height: 1.6;
 }
 
+/* ─── Navbar — rich dark with gold accents ─── */
 .navbar {
-  border-bottom: 3px solid $mtg-blue;
+  border-bottom: none;
+  background: linear-gradient(180deg, #1a1008 0%, #0d0700 100%) !important;
+  box-shadow:
+    0 1px 0 0 rgba($mtg-gold, 0.25),
+    0 2px 8px rgba(0, 0, 0, 0.4);
+  padding-top: 0.6rem;
+  padding-bottom: 0.6rem;
+  position: relative;
+
+  /* Subtle gold line at the very bottom */
+  &::after {
+    content: "";
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($mtg-gold, 0.5) 20%,
+      $mtg-gold 50%,
+      rgba($mtg-gold, 0.5) 80%,
+      transparent 100%
+    );
+  }
 
   .navbar-brand {
-    font-weight: 600;
+    font-weight: 700;
     color: $mtg-white;
+    font-size: 1.15rem;
+    letter-spacing: 0.01em;
+    position: relative;
+    padding-right: 0.5rem;
+
+    /* Gold shimmer on brand text */
+    background: linear-gradient(135deg, #f0e6d0 0%, $mtg-gold 40%, #e8d8a8 60%, $mtg-gold 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
   }
 
   .nav-link {
-    color: rgba($mtg-white, 0.85);
-    padding-bottom: 0.4rem;
-    border-bottom: 2px solid transparent;
-    transition: color 0.15s ease, border-color 0.15s ease;
+    color: rgba($mtg-white, 0.7);
+    padding: 0.35rem 0.85rem;
+    border-radius: 4px;
+    font-weight: 500;
+    font-size: 0.9rem;
+    transition: color 0.2s ease, background 0.2s ease;
+    border-bottom: none;
 
     &:hover {
       color: $mtg-white;
-      border-bottom-color: rgba($mtg-white, 0.4);
+      background: rgba($mtg-white, 0.08);
+      border-bottom: none;
     }
 
     &.active {
       color: $mtg-white;
-      border-bottom-color: $mtg-blue;
+      background: rgba($mtg-gold, 0.12);
+      border-bottom: none;
+      font-weight: 600;
+
+      /* Gold dot indicator */
+      position: relative;
+      &::after {
+        content: "";
+        position: absolute;
+        bottom: 2px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 4px;
+        height: 4px;
+        border-radius: 50%;
+        background: $mtg-gold;
+      }
     }
+  }
+
+  /* GitHub icon styling */
+  .nav-link .bi-github {
+    opacity: 0.6;
+    transition: opacity 0.2s ease;
+  }
+  .nav-link:hover .bi-github {
+    opacity: 1;
   }
 }
 
@@ -86,11 +151,30 @@ body {
 
 // Quarto renders footer as <footer class="footer">
 .footer {
-  border-top: 3px solid $mtg-blue;
+  border-top: none;
   color: $text-muted;
   font-size: 0.8rem;
-  padding: 1.25rem 0 1rem;
-  background: #faf9f7;
+  padding: 1.5rem 0 1.25rem;
+  background: linear-gradient(180deg, #f5f2ed 0%, #eae6e0 100%);
+  position: relative;
+
+  /* Gold top accent line matching navbar */
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: linear-gradient(
+      90deg,
+      transparent 0%,
+      rgba($mtg-gold, 0.3) 20%,
+      rgba($mtg-gold, 0.5) 50%,
+      rgba($mtg-gold, 0.3) 80%,
+      transparent 100%
+    );
+  }
 }
 
 .footer-brand {
