@@ -11,7 +11,7 @@
     "href": "index.html",
     "title": "MtG Kubbur",
     "section": "",
-    "text": "ELO-stigaröðun\nUppfært 2026-02-19"
+    "text": "ELO-stigaröðun\nUppfært 2026-02-19\n\n\nviewof cubeFilter = Inputs.select(\n  [\"Allt\", \"High\", \"Medium\", \"Low\", \"Annað\"],\n  {\n    label: \"Kubbaflokkur:\",\n    value: \"Allt\"\n  }\n)\n\n\n\n\n\n\n\n{\n  const panels = document.querySelectorAll(\".cube-table-panel\");\n  const key = cubeFilter === \"Annað\" ? \"Other\" : cubeFilter === \"Allt\" ? \"Allt\" : cubeFilter;\n  panels.forEach(el =&gt; {\n    el.classList.toggle(\"active\", el.dataset.cube === key);\n  });\n}"
   },
   {
     "objectID": "einvigi.html",

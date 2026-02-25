@@ -285,6 +285,30 @@ body:has(.h2h-layout) #quarto-content {
   }
 }
 
+/* ─── Cube filter panel toggle ─── */
+/* Quarto adds page-columns (display: grid) to fenced divs, so we need
+   !important to override it, and display: grid when active to preserve
+   the page-width column layout. */
+.cube-table-panel {
+  display: none !important;
+}
+
+.cube-table-panel.active {
+  display: grid !important;
+}
+
+/* Center the cube selector under the header */
+#cube-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Hide the toggle cell output (side-effect only, no visible content) */
+#cube-toggle {
+  display: none;
+}
+
 /* ─── OJS dropdown styling ─── */
 form.oi-3a86ea label {
   font-weight: 600;

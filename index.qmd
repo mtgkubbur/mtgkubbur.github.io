@@ -45,8 +45,32 @@ newest_date <- fetch_newest_date()
 
 ::::
 
+```{ojs}
+//| label: cube-selector
+viewof cubeFilter = Inputs.select(
+  ["Allt", "High", "Medium", "Low", "Annað"],
+  {
+    label: "Kubbaflokkur:",
+    value: "Allt"
+  }
+)
+```
+
+```{ojs}
+//| label: cube-toggle
+{
+  const panels = document.querySelectorAll(".cube-table-panel");
+  const key = cubeFilter === "Annað" ? "Other" : cubeFilter === "Allt" ? "Allt" : cubeFilter;
+  panels.forEach(el => {
+    el.classList.toggle("active", el.dataset.cube === key);
+  });
+}
+```
+
+::: {.cube-table-panel data-cube="Allt" .active}
+
 ```{r}
-#| label: render-table-widget
+#| label: table-all
 #| column: page
 
 render_score_table_interactive(
@@ -57,3 +81,64 @@ render_score_table_interactive(
 )
 ```
 
+:::
+
+::: {.cube-table-panel data-cube="High"}
+
+```{r}
+#| label: table-high
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "High",
+  min_total_games = 3,
+  table_players = table_players
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="Medium"}
+
+```{r}
+#| label: table-medium
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "Medium",
+  min_total_games = 3,
+  table_players = table_players
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="Low"}
+
+```{r}
+#| label: table-low
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "Low",
+  min_total_games = 3,
+  table_players = table_players
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="Other"}
+
+```{r}
+#| label: table-other
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "Other",
+  min_total_games = 3,
+  table_players = table_players
+)
+```
+
+:::
