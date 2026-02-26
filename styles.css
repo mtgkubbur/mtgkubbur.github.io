@@ -1,5 +1,50 @@
 /* MtG Kubbur - Custom Styles (MTG Mana Color Identity) */
 
+:root {
+  --mtg-blue: #0e68ab;
+  --mtg-green: #00733e;
+  --mtg-red: #d3202a;
+  --mtg-gold: #8b6914;
+
+  --text-primary: #2a1f14;
+  --text-muted: #5c4f42;
+  --border-default: #d4cfc9;
+  --surface-card: #ffffff;
+  --surface-soft: #f9faf4;
+
+  --chart-grid: #d4cfc9;
+  --chart-blue-area-1: rgba(14, 104, 171, 0.12);
+  --chart-blue-area-2: rgba(14, 104, 171, 0.25);
+
+  --radius-sm: 8px;
+  --radius-md: 10px;
+  --radius-lg: 12px;
+  --shadow-soft: 0 1px 3px rgba(42, 31, 20, 0.04);
+  --shadow-card: 0 2px 6px rgba(42, 31, 20, 0.06);
+  --shadow-hover: 0 4px 12px rgba(42, 31, 20, 0.10);
+}
+
+.quarto-dark {
+  --mtg-blue: #3b9edd;
+  --mtg-green: #2ecc71;
+  --mtg-red: #e74c3c;
+  --mtg-gold: #d4a843;
+
+  --text-primary: #e8e4dc;
+  --text-muted: #9a9590;
+  --border-default: rgba(255, 255, 255, 0.10);
+  --surface-card: rgba(255, 255, 255, 0.04);
+  --surface-soft: rgba(255, 255, 255, 0.04);
+
+  --chart-grid: rgba(255, 255, 255, 0.12);
+  --chart-blue-area-1: rgba(59, 158, 221, 0.10);
+  --chart-blue-area-2: rgba(59, 158, 221, 0.20);
+
+  --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.18);
+  --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.2);
+  --shadow-hover: 0 4px 20px rgba(0, 0, 0, 0.28);
+}
+
 /* Let the table be wider */
 .cell-output-display {
   display: flex;
@@ -146,7 +191,7 @@ body:has(.h2h-layout) #quarto-content {
 .h2h-card:hover,
 .h2h-elo-chart:hover,
 .cube-combined-card:hover {
-  box-shadow: 0 4px 12px rgba(42, 31, 20, 0.10);
+  box-shadow: var(--shadow-hover);
   border-color: #c4bfb9;
 }
 
@@ -155,11 +200,11 @@ body:has(.h2h-layout) #quarto-content {
   font-size: 16px;
   max-width: 1100px;
   margin: 0 auto;
-  background: #ffffff;
-  border: 1px solid #d4cfc9;
-  border-radius: 12px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-lg);
   padding: 16px 20px 8px;
-  box-shadow: 0 2px 8px rgba(42, 31, 20, 0.06), 0 0 0 1px rgba(201, 168, 76, 0.06);
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(201, 168, 76, 0.06);
 }
 
 /* Podium highlight for top 3 rows — left accent + medal pip */
@@ -334,21 +379,28 @@ body:has(.h2h-layout) #quarto-content {
 }
 
 /* ─── OJS dropdown styling ─── */
-form.oi-3a86ea label {
+#cube-selector label,
+#player-selector label,
+#player-selectors label {
   font-weight: 600;
-  color: #2a1f14;
+  color: var(--text-primary);
 }
 
-form.oi-3a86ea select {
-  border: 1px solid #d4cfc9;
-  border-radius: 6px;
+#cube-selector select,
+#player-selector select,
+#player-selectors select {
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   padding: 6px 10px;
   font-size: 14px;
-  color: #2a1f14;
+  color: var(--text-primary);
+  background: var(--surface-card);
   transition: box-shadow 0.15s ease;
 }
 
-form.oi-3a86ea select:focus {
+#cube-selector select:focus,
+#player-selector select:focus,
+#player-selectors select:focus {
   box-shadow: 0 0 0 2px rgba(14, 104, 171, 0.15);
   outline: none;
 }
@@ -363,11 +415,11 @@ form.oi-3a86ea select:focus {
 .dashboard-grid .cell,
 .chart-row-full .cell {
   min-width: 0;
-  background: #fff;
-  border: 1px solid #d4cfc9;
-  border-radius: 8px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   padding: 1rem;
-  box-shadow: 0 1px 3px rgba(42, 31, 20, 0.04);
+  box-shadow: var(--shadow-soft);
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
 }
 
@@ -410,11 +462,11 @@ form.oi-3a86ea select:focus {
 .cube-combined-card {
   max-width: 580px;
   margin: 0 auto 1.5rem;
-  background: #fff;
-  border: 1px solid #d4cfc9;
-  border-radius: 8px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
   padding: 1rem 1.25rem;
-  box-shadow: 0 1px 3px rgba(42, 31, 20, 0.04);
+  box-shadow: var(--shadow-soft);
 }
 
 .cube-affinity-title {
@@ -527,8 +579,8 @@ form.oi-3a86ea select:focus {
 .cube-footnote {
   max-width: 700px;
   margin: 1.5rem auto 0;
-  font-size: 12px;
-  color: #5c4f42;
+  font-size: 13px;
+  color: var(--text-muted);
   line-height: 1.6;
   text-align: center;
 }
@@ -537,7 +589,7 @@ form.oi-3a86ea select:focus {
 .chart-title {
   font-size: 13px;
   font-weight: 600;
-  color: #5c4f42;
+  color: var(--text-muted);
   text-transform: uppercase;
   letter-spacing: 0.06em;
   margin: 0 0 0.25rem;
@@ -572,9 +624,9 @@ form.oi-3a86ea select:focus {
   gap: 2rem;
   padding: 0.75rem 1rem;
   margin-bottom: 1rem;
-  background: #f9faf4;
-  border: 1px solid #d4cfc9;
-  border-radius: 8px;
+  background: var(--surface-soft);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
 }
 
 .player-summary .stat {
@@ -649,7 +701,7 @@ form.oi-3a86ea select:focus {
   margin-bottom: 1.5rem;
 }
 
-#player-selectors form.oi-3a86ea {
+#player-selectors form {
   flex: 0 1 260px;
 }
 
@@ -664,11 +716,11 @@ form.oi-3a86ea select:focus {
 .h2h-card {
   max-width: none;
   margin: 0;
-  background: #fff;
-  border: 1px solid #d4cfc9;
-  border-radius: 10px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   padding: 1.5rem;
-  box-shadow: 0 2px 6px rgba(42, 31, 20, 0.06);
+  box-shadow: var(--shadow-card);
 }
 
 .h2h-header {
@@ -803,11 +855,11 @@ form.oi-3a86ea select:focus {
 .h2h-elo-chart {
   max-width: none;
   margin: 0;
-  background: #fff;
-  border: 1px solid #d4cfc9;
-  border-radius: 10px;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-md);
   padding: 1.25rem;
-  box-shadow: 0 2px 6px rgba(42, 31, 20, 0.06);
+  box-shadow: var(--shadow-card);
   text-align: center;
 }
 
@@ -880,11 +932,22 @@ form.oi-3a86ea select:focus {
 .quarto-dark .player-summary,
 .quarto-dark .dashboard-grid .cell,
 .quarto-dark .chart-row-full .cell {
-  background: rgba(255, 255, 255, 0.04);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border-color: rgba(255, 255, 255, 0.08);
-  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.2);
+  background: var(--surface-card);
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-card);
+}
+
+@media (min-width: 900px) {
+  .quarto-dark .score-table,
+  .quarto-dark .h2h-card,
+  .quarto-dark .h2h-elo-chart,
+  .quarto-dark .cube-combined-card,
+  .quarto-dark .player-summary,
+  .quarto-dark .dashboard-grid .cell,
+  .quarto-dark .chart-row-full .cell {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
 
 .quarto-dark .score-table:hover,
@@ -893,9 +956,9 @@ form.oi-3a86ea select:focus {
 .quarto-dark .cube-combined-card:hover,
 .quarto-dark .dashboard-grid .cell:hover,
 .quarto-dark .chart-row-full .cell:hover {
-  background: rgba(255, 255, 255, 0.07);
-  border-color: rgba(255, 255, 255, 0.14);
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.3);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-hover);
 }
 
 /* ─── Dark: Page hero header ─── */
@@ -1043,17 +1106,23 @@ form.oi-3a86ea select:focus {
 }
 
 /* ─── Dark: OJS dropdown styling ─── */
-.quarto-dark form.oi-3a86ea label {
+.quarto-dark #cube-selector label,
+.quarto-dark #player-selector label,
+.quarto-dark #player-selectors label {
   color: #e8e4dc;
 }
 
-.quarto-dark form.oi-3a86ea select {
+.quarto-dark #cube-selector select,
+.quarto-dark #player-selector select,
+.quarto-dark #player-selectors select {
   border-color: rgba(255, 255, 255, 0.08);
   color: #c8c4bc;
   background-color: rgba(255, 255, 255, 0.04);
 }
 
-.quarto-dark form.oi-3a86ea select:focus {
+.quarto-dark #cube-selector select:focus,
+.quarto-dark #player-selector select:focus,
+.quarto-dark #player-selectors select:focus {
   box-shadow: 0 0 0 2px rgba(59, 158, 221, 0.2);
   border-color: #3b9edd;
 }
@@ -1081,12 +1150,12 @@ form.oi-3a86ea select:focus {
 }
 
 .quarto-dark .cube-footnote {
-  color: #4a4640;
+  color: #9a9590;
 }
 
 /* ─── Dark: Chart titles ─── */
 .quarto-dark .chart-title {
-  color: #9a9590;
+  color: #aaa59f;
 }
 
 /* ─── Dark: Player summary ─── */
@@ -1117,7 +1186,7 @@ form.oi-3a86ea select:focus {
 }
 
 .quarto-dark .h2h-vs {
-  color: #4a4640;
+  color: #9a9590;
 }
 
 .quarto-dark .h2h-total {

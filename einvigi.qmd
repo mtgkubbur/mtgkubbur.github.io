@@ -73,26 +73,38 @@ ojs_define(elo_history = history)
 
 ```{ojs}
 //| label: theme-detect
-isDark = {
-  let dark = document.body.classList.contains("quarto-dark");
-  yield dark;
-  while (true) {
-    await new Promise(r => setTimeout(r, 150));
-    const now = document.body.classList.contains("quarto-dark");
-    if (now !== dark) { dark = now; yield dark; }
-  }
-}
+isDark = Generators.observe(notify => {
+  const current = () => document.body.classList.contains("quarto-dark");
+  notify(current());
 
-themeColors = ({
-  blue:    isDark ? "#3b9edd" : "#0e68ab",
-  green:   isDark ? "#2ecc71" : "#00733e",
-  red:     isDark ? "#e74c3c" : "#d3202a",
-  gold:    isDark ? "#d4a843" : "#8b6914",
-  text:    isDark ? "#c8c4bc" : "#2a1f14",
-  muted:   isDark ? "#7a7670" : "#5c4f42",
-  grid:    isDark ? "rgba(255,255,255,0.1)" : "#d4cfc9",
-  line:    isDark ? "#c8c4bc" : "#2a1f14"
+  const observer = new MutationObserver(() => {
+    notify(current());
+  });
+
+  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  return () => observer.disconnect();
 })
+
+themeColors = {
+  const _ = isDark;
+  const bodyStyles = getComputedStyle(document.body);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const cssVar = (name, fallback = "") =>
+    bodyStyles.getPropertyValue(name).trim() ||
+    rootStyles.getPropertyValue(name).trim() ||
+    fallback;
+
+  return {
+    blue: cssVar("--mtg-blue", "#0e68ab"),
+    green: cssVar("--mtg-green", "#00733e"),
+    red: cssVar("--mtg-red", "#d3202a"),
+    gold: cssVar("--mtg-gold", "#8b6914"),
+    text: cssVar("--text-primary", "#2a1f14"),
+    muted: cssVar("--text-muted", "#5c4f42"),
+    grid: cssVar("--chart-grid", "#d4cfc9"),
+    line: cssVar("--text-primary", "#2a1f14")
+  };
+}
 ```
 
 ```{ojs}
