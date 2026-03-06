@@ -21,6 +21,8 @@ table_players <- fetch_table_players()
 
 # Read raw match data from Google Sheets to keep original cube names
 # (processed_data.rds buckets cubes into High/Medium/Low/Other)
+# Use ALL matches for calculations (so h2h records count games vs
+# non-opted-in players), but only display opted-in players in selectors.
 sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
 games <- read_sheet(sheet_url) |>
   mutate(date = as_date(date)) |>
@@ -31,10 +33,6 @@ games <- read_sheet(sheet_url) |>
     player2 = str_to_title(player2),
     winner = str_to_title(winner),
     cube = str_to_title(cube)
-  ) |>
-  filter(
-    str_to_lower(player1) %in% table_players,
-    str_to_lower(player2) %in% table_players
   )
 
 # Head-to-head totals
@@ -55,8 +53,9 @@ h2h_cube <- games |>
     .groups = "drop"
   )
 
-# Player list for selectors (Icelandic sort)
-player_list <- sort(unique(c(h2h$player1, h2h$player2)),
+# Player list for selectors: only opted-in players (Icelandic sort)
+all_players <- unique(c(h2h$player1, h2h$player2))
+player_list <- sort(all_players[str_to_lower(all_players) %in% table_players],
                     method = "radix")
 
 ojs_define(h2h_data = h2h)
