@@ -28,14 +28,8 @@ Quarto config: `_quarto.yml` · Styling: `theme.scss` + `theme-dark.scss` + `sty
 
 - All text labels and UI are in **Icelandic**
 - Icelandic locale sorting for player names
-- MTG mana color system: blue (#0e68ab), green (#00733e), red (#d3202a), black (#150b00), white (#f9faf4), gold (#8b6914)
 - Navbar and footer framed with blue (Islands) borders
-
-## Styling Rules
-
-- **Dark/light mode**: `theme.scss` (light) + `theme-dark.scss` (dark) + `styles.css` (component overrides). Use `.quarto-dark` prefix for dark-mode CSS selectors.
-- **Never set colors as inline styles in R** `reactable`/`colDef`. Use CSS classes and handle light/dark mode in `styles.css`.
-- See `elo_table.R` for the reactable rendering pattern — styling belongs in CSS, not in R code.
+- Styling rules (dark/light mode, MTG colours, reactable patterns) are in `.claude/rules/styling.md`
 
 ## Data Reference
 
