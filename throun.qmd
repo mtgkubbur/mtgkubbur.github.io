@@ -46,9 +46,40 @@ cube_records <- bind_rows(
   ) |>
   mutate(winrate = round(wins / total * 100))
 
+# Per-cube records with original cube names (from Google Sheets)
+sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
+games <- read_sheet(sheet_url) |>
+  mutate(date = as_date(date)) |>
+  pivot_longer(game1:game3, names_to = "game", values_to = "winner") |>
+  drop_na(winner) |>
+  mutate(
+    player1 = str_to_title(player1),
+    player2 = str_to_title(player2),
+    winner = str_to_title(winner),
+    cube = str_to_title(cube)
+  ) |>
+  filter(
+    str_to_lower(player1) %in% table_players,
+    str_to_lower(player2) %in% table_players
+  )
+
+per_cube_records <- bind_rows(
+  games |> transmute(player = player1, cube, win = as.integer(winner == player1)),
+  games |> transmute(player = player2, cube, win = as.integer(winner == player2))
+) |>
+  group_by(player, cube) |>
+  summarise(
+    wins = sum(win),
+    losses = n() - sum(win),
+    total = n(),
+    .groups = "drop"
+  ) |>
+  mutate(winrate = round(wins / total * 100))
+
 # Pass to OJS
 ojs_define(player_history = history)
 ojs_define(cube_records_data = cube_records)
+ojs_define(per_cube_data = per_cube_records)
 ```
 
 ```{ojs}
@@ -92,6 +123,14 @@ themeColors = {
 ```{ojs}
 //| label: data-prep
 cubeRecords = transpose(cube_records_data).map(d => ({
+  ...d,
+  wins: +d.wins,
+  losses: +d.losses,
+  total: +d.total,
+  winrate: +d.winrate
+}))
+
+perCubeRecords = transpose(per_cube_data).map(d => ({
   ...d,
   wins: +d.wins,
   losses: +d.losses,
@@ -319,6 +358,38 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
     <div class="cube-footnote">
       <strong>High:</strong> Vintage Cube, Bolti Vintage Cube, Nerva's Cube | <strong>Medium:</strong> Meta Memories, Modern Stories, Synergy Cube, Bar Cube | <strong>Low:</strong> Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube, Ab Wheel, Horror Cube | <strong>Annað:</strong> Boltalandið, Genesis, Stone Soup Cube, Super Turbo Time
     </div>
+    ${(() => {
+      const cubeRows = perCubeRecords
+        .filter(d => d.player === selectedPlayer)
+        .sort((a, b) => b.total - a.total);
+      if (cubeRows.length === 0) return html``;
+      return html`
+        <details class="cube-detail-toggle">
+          <summary>Sundurliðun eftir kubbi</summary>
+          <table class="cube-detail-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>S</th>
+                <th>T</th>
+                <th>Samtals</th>
+                <th>%</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cubeRows.map(r => html`
+                <tr>
+                  <td class="cube-detail-name">${r.cube}</td>
+                  <td>${r.wins}</td>
+                  <td>${r.losses}</td>
+                  <td>${r.total}</td>
+                  <td style="color: ${r.winrate >= 50 ? themeColors.green : themeColors.red}; font-weight: 600">${r.winrate}%</td>
+                </tr>
+              `)}
+            </tbody>
+          </table>
+        </details>`;
+    })()}
   </div>`;
 }
 ```
