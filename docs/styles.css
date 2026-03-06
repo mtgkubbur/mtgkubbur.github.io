@@ -380,6 +380,8 @@ body:has(.h2h-layout) #quarto-content {
 
 /* ─── OJS dropdown styling ─── */
 #cube-selector label,
+#cube-page-selector label,
+#event-date-selector label,
 #player-selector label,
 #player-selectors label {
   font-weight: 600;
@@ -387,6 +389,8 @@ body:has(.h2h-layout) #quarto-content {
 }
 
 #cube-selector select,
+#cube-page-selector select,
+#event-date-selector select,
 #player-selector select,
 #player-selectors select {
   border: 1px solid var(--border-default);
@@ -399,6 +403,8 @@ body:has(.h2h-layout) #quarto-content {
 }
 
 #cube-selector select:focus,
+#cube-page-selector select:focus,
+#event-date-selector select:focus,
 #player-selector select:focus,
 #player-selectors select:focus {
   box-shadow: 0 0 0 2px rgba(14, 104, 171, 0.15);
@@ -967,6 +973,128 @@ body:has(.h2h-layout) #quarto-content {
   display: block;
 }
 
+/* ─── Cube page selector centering ─── */
+#cube-page-selector,
+#event-date-selector {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 1.5rem;
+}
+
+/* ─── Event date selector — more prominent ─── */
+#event-date-selector select {
+  font-weight: 600;
+  color: var(--text-primary) !important;
+  background: var(--surface-card) !important;
+  border: 2px solid var(--mtg-gold) !important;
+  padding: 8px 14px;
+  font-size: 15px;
+}
+
+#event-date-selector select:focus {
+  box-shadow: 0 0 0 3px rgba(139, 105, 20, 0.15) !important;
+  border-color: var(--mtg-gold) !important;
+}
+
+/* ─── Column group headers for tables ─── */
+.col-group-header {
+  font-size: 11px !important;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--text-muted) !important;
+  border-bottom: 1px solid var(--border-default) !important;
+  padding-bottom: 4px;
+  text-align: center;
+}
+
+/* ─── Trophy card (Kubbar page) ─── */
+.trophy-card {
+  max-width: 440px;
+  margin: 0 auto 1.5rem;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.trophy-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: #c4bfb9;
+}
+
+.trophy-table {
+  width: 100%;
+  font-size: 14px;
+  border-collapse: collapse;
+}
+
+.trophy-table th {
+  text-align: left;
+  font-weight: 600;
+  font-size: 12px;
+  color: #5c4f42;
+  padding: 4px 8px;
+  border-bottom: 1px solid #d4cfc9;
+}
+
+.trophy-table th:nth-child(2) {
+  text-align: center;
+}
+
+.trophy-table td {
+  padding: 6px 8px;
+}
+
+.trophy-table tr:hover td {
+  background: #f9faf4;
+}
+
+/* ─── Recent events (Kubbar page) ─── */
+.recent-events-card {
+  max-width: 580px;
+  margin: 0 auto 1.5rem;
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.recent-events-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: #c4bfb9;
+}
+
+.recent-event-block {
+  margin-bottom: 1rem;
+}
+
+.recent-event-block:last-child {
+  margin-bottom: 0;
+}
+
+.recent-event-date {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  margin-bottom: 0.25rem;
+}
+
+.recent-event-block + .recent-event-block {
+  border-top: 1px solid var(--border-default);
+  padding-top: 1rem;
+}
+
+/* ─── Kubbar page content width ─── */
+.kubbar-content {
+  max-width: 580px;
+  margin: 0 auto;
+}
+
 /* ─── Reduced motion support ─── */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -987,6 +1115,8 @@ body:has(.h2h-layout) #quarto-content {
 .quarto-dark .h2h-elo-chart,
 .quarto-dark .cube-combined-card,
 .quarto-dark .player-summary,
+.quarto-dark .trophy-card,
+.quarto-dark .recent-events-card,
 .quarto-dark .dashboard-grid .cell,
 .quarto-dark .chart-row-full .cell {
   background: var(--surface-card);
@@ -1000,6 +1130,8 @@ body:has(.h2h-layout) #quarto-content {
   .quarto-dark .h2h-elo-chart,
   .quarto-dark .cube-combined-card,
   .quarto-dark .player-summary,
+  .quarto-dark .trophy-card,
+  .quarto-dark .recent-events-card,
   .quarto-dark .dashboard-grid .cell,
   .quarto-dark .chart-row-full .cell {
     backdrop-filter: blur(8px);
@@ -1011,6 +1143,8 @@ body:has(.h2h-layout) #quarto-content {
 .quarto-dark .h2h-card:hover,
 .quarto-dark .h2h-elo-chart:hover,
 .quarto-dark .cube-combined-card:hover,
+.quarto-dark .trophy-card:hover,
+.quarto-dark .recent-events-card:hover,
 .quarto-dark .dashboard-grid .cell:hover,
 .quarto-dark .chart-row-full .cell:hover {
   background: rgba(255, 255, 255, 0.06);
@@ -1164,12 +1298,16 @@ body:has(.h2h-layout) #quarto-content {
 
 /* ─── Dark: OJS dropdown styling ─── */
 .quarto-dark #cube-selector label,
+.quarto-dark #cube-page-selector label,
+#event-date-selector label,
 .quarto-dark #player-selector label,
 .quarto-dark #player-selectors label {
   color: #e8e4dc;
 }
 
 .quarto-dark #cube-selector select,
+.quarto-dark #cube-page-selector select,
+#event-date-selector select,
 .quarto-dark #player-selector select,
 .quarto-dark #player-selectors select {
   border-color: rgba(255, 255, 255, 0.08);
@@ -1178,6 +1316,8 @@ body:has(.h2h-layout) #quarto-content {
 }
 
 .quarto-dark #cube-selector select:focus,
+.quarto-dark #cube-page-selector select:focus,
+#event-date-selector select:focus,
 .quarto-dark #player-selector select:focus,
 .quarto-dark #player-selectors select:focus {
   box-shadow: 0 0 0 2px rgba(59, 158, 221, 0.2);
@@ -1320,4 +1460,41 @@ body:has(.h2h-layout) #quarto-content {
 .quarto-dark .score-table .rt-page-button:hover {
   background: rgba(255, 255, 255, 0.05);
   color: #e8e4dc;
+}
+
+/* ─── Dark: Trophy & Recent Events (Kubbar page) ─── */
+.quarto-dark .trophy-table th {
+  color: #7a7670;
+  border-bottom-color: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark .trophy-table td {
+  color: #c8c4bc;
+}
+
+.quarto-dark .trophy-table tr:hover td {
+  background: rgba(255, 255, 255, 0.03);
+}
+
+.quarto-dark .recent-event-date {
+  color: #7a7670;
+}
+
+.quarto-dark .recent-event-block + .recent-event-block {
+  border-top-color: rgba(255, 255, 255, 0.08);
+}
+
+.quarto-dark #event-date-selector select {
+  border-color: var(--mtg-gold) !important;
+  color: #e8e4dc !important;
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+.quarto-dark #event-date-selector select:focus {
+  box-shadow: 0 0 0 3px rgba(212, 168, 67, 0.2) !important;
+}
+
+.quarto-dark .col-group-header {
+  color: #7a7670 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.08) !important;
 }

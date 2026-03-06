@@ -47,21 +47,22 @@ cube_records <- bind_rows(
   mutate(winrate = round(wins / total * 100))
 
 # Per-cube records with original cube names (from Google Sheets)
+# Use ALL matches for stats (so trophies count games vs non-opted-in players),
+# then filter to only display opted-in players.
 sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
-games <- read_sheet(sheet_url) |>
-  mutate(date = as_date(date)) |>
-  pivot_longer(game1:game3, names_to = "game", values_to = "winner") |>
-  drop_na(winner) |>
+raw_matches <- read_sheet(sheet_url) |>
   mutate(
+    match_id = row_number(),
+    date = as_date(date),
     player1 = str_to_title(player1),
     player2 = str_to_title(player2),
-    winner = str_to_title(winner),
     cube = str_to_title(cube)
-  ) |>
-  filter(
-    str_to_lower(player1) %in% table_players,
-    str_to_lower(player2) %in% table_players
   )
+
+games <- raw_matches |>
+  pivot_longer(game1:game3, names_to = "game", values_to = "winner") |>
+  drop_na(winner) |>
+  mutate(winner = str_to_title(winner))
 
 per_cube_records <- bind_rows(
   games |> transmute(player = player1, cube, win = as.integer(winner == player1)),
@@ -74,12 +75,36 @@ per_cube_records <- bind_rows(
     total = n(),
     .groups = "drop"
   ) |>
-  mutate(winrate = round(wins / total * 100))
+  mutate(winrate = round(wins / total * 100)) |>
+  filter(str_to_lower(player) %in% table_players)
+
+# Trophies: 3+ match wins at a single event (date + cube)
+match_results <- games |>
+  group_by(match_id, date, player1, player2, cube) |>
+  summarise(
+    p1_game_wins = sum(winner == player1),
+    p2_game_wins = sum(winner == player2),
+    .groups = "drop"
+  ) |>
+  mutate(match_winner = if_else(p1_game_wins > p2_game_wins, player1, player2))
+
+player_trophies <- bind_rows(
+  match_results |> transmute(date, cube, player = player1,
+                             match_win = as.integer(match_winner == player1)),
+  match_results |> transmute(date, cube, player = player2,
+                             match_win = as.integer(match_winner == player2))
+) |>
+  group_by(date, cube, player) |>
+  summarise(match_wins = sum(match_win), .groups = "drop") |>
+  filter(match_wins >= 3, str_to_lower(player) %in% table_players) |>
+  group_by(player, cube) |>
+  summarise(trophies = n(), .groups = "drop")
 
 # Pass to OJS
 ojs_define(player_history = history)
 ojs_define(cube_records_data = cube_records)
 ojs_define(per_cube_data = per_cube_records)
+ojs_define(player_trophy_data = player_trophies)
 ```
 
 ```{ojs}
@@ -136,6 +161,11 @@ perCubeRecords = transpose(per_cube_data).map(d => ({
   losses: +d.losses,
   total: +d.total,
   winrate: +d.winrate
+}))
+
+playerTrophies = transpose(player_trophy_data).map(d => ({
+  ...d,
+  trophies: +d.trophies
 }))
 
 data = {
@@ -363,6 +393,11 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
         .filter(d => d.player === selectedPlayer)
         .sort((a, b) => b.total - a.total);
       if (cubeRows.length === 0) return html``;
+      const trophyMap = new Map(
+        playerTrophies
+          .filter(d => d.player === selectedPlayer)
+          .map(d => [d.cube, d.trophies])
+      );
       return html`
         <details class="cube-detail-toggle">
           <summary>Sundurliðun eftir kubbi</summary>
@@ -372,20 +407,24 @@ latest = playerData.length > 0 ? playerData[playerData.length - 1] : null
                 <th></th>
                 <th>S</th>
                 <th>T</th>
-                <th>Samtals</th>
+                <th>Games</th>
                 <th>%</th>
+                <th></th>
               </tr>
             </thead>
             <tbody>
-              ${cubeRows.map(r => html`
+              ${cubeRows.map(r => {
+                const t = trophyMap.get(r.cube) || 0;
+                return html`
                 <tr>
                   <td class="cube-detail-name">${r.cube}</td>
                   <td>${r.wins}</td>
                   <td>${r.losses}</td>
                   <td>${r.total}</td>
                   <td style="color: ${r.winrate >= 50 ? themeColors.green : themeColors.red}; font-weight: 600">${r.winrate}%</td>
-                </tr>
-              `)}
+                  <td style="text-align: center">${t > 0 ? "🏆".repeat(t) : ""}</td>
+                </tr>`;
+              })}
             </tbody>
           </table>
         </details>`;

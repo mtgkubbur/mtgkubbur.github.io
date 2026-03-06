@@ -19,6 +19,8 @@ website:
         href: throun.qmd
       - text: "Einvígi"
         href: einvigi.qmd
+      - text: "Kubbar"
+        href: kubbar.qmd
     right:
       - icon: github
         href: https://github.com/mtgkubbur/mtgkubbur.github.io
@@ -35,6 +37,8 @@ website:
         <a href="throun.html">Leikmaður</a>
         <i class="ms ms-r footer-mana-sep" aria-hidden="true"></i>
         <a href="einvigi.html">Einvígi</a>
+        <i class="ms ms-b footer-mana-sep" aria-hidden="true"></i>
+        <a href="kubbar.html">Kubbar</a>
       </nav>
     right: "© 2026 MtG Kubbur"
 

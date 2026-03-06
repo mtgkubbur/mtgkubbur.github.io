@@ -1,0 +1,431 @@
+---
+pagetitle: "Kubbar"
+title-block-style: none
+page-layout: article
+toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(lubridate)
+library(googlesheets4)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+source("R/elo_table.R")
+
+table_players <- fetch_table_players()
+
+# Read raw match data from Google Sheets to keep original cube names
+sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
+# Use ALL matches for calculations (so trophies/records count games vs
+# non-opted-in players), but only display opted-in players in output.
+raw_matches <- read_sheet(sheet_url) |>
+  mutate(
+    match_id = row_number(),
+    date = as_date(date),
+    player1 = str_to_title(player1),
+    player2 = str_to_title(player2),
+    cube = str_to_title(cube)
+  )
+
+# Games: one row per game (for game-level W/L stats)
+games <- raw_matches |>
+  pivot_longer(game1:game3, names_to = "game", values_to = "winner") |>
+  drop_na(winner) |>
+  mutate(winner = str_to_title(winner))
+
+# Per-cube per-player game-level stats (all matches, then filter display)
+per_cube_player <- bind_rows(
+  games |> transmute(player = player1, cube, win = as.integer(winner == player1)),
+  games |> transmute(player = player2, cube, win = as.integer(winner == player2))
+) |>
+  group_by(player, cube) |>
+  summarise(
+    wins = sum(win),
+    losses = n() - sum(win),
+    total = n(),
+    .groups = "drop"
+  ) |>
+  mutate(winrate = round(wins / total * 100)) |>
+  filter(str_to_lower(player) %in% table_players)
+
+# Match results: determine match winner per row
+match_results <- games |>
+  group_by(match_id, date, player1, player2, cube) |>
+  summarise(
+    p1_game_wins = sum(winner == player1),
+    p2_game_wins = sum(winner == player2),
+    .groups = "drop"
+  ) |>
+  mutate(match_winner = if_else(p1_game_wins > p2_game_wins, player1, player2))
+
+# Per-event per-player match stats
+event_match_stats <- bind_rows(
+  match_results |> transmute(date, cube, player = player1,
+                             match_win = as.integer(match_winner == player1)),
+  match_results |> transmute(date, cube, player = player2,
+                             match_win = as.integer(match_winner == player2))
+) |>
+  group_by(date, cube, player) |>
+  summarise(
+    match_wins = sum(match_win),
+    matches = n(),
+    .groups = "drop"
+  )
+
+# Per-event per-player game stats
+event_game_stats <- bind_rows(
+  games |> transmute(date, cube, player = player1,
+                     game_win = as.integer(winner == player1)),
+  games |> transmute(date, cube, player = player2,
+                     game_win = as.integer(winner == player2))
+) |>
+  group_by(date, cube, player) |>
+  summarise(
+    game_wins = sum(game_win),
+    game_losses = n() - sum(game_win),
+    .groups = "drop"
+  )
+
+# Combined event results
+event_player_matches <- event_match_stats |>
+  left_join(event_game_stats, by = c("date", "cube", "player")) |>
+  filter(str_to_lower(player) %in% table_players)
+
+# Trophies: 3+ match wins at a single event (opted-in players only)
+trophy_data <- event_player_matches |>
+  filter(match_wins >= 3, str_to_lower(player) %in% table_players) |>
+  group_by(player, cube) |>
+  summarise(trophies = n(), .groups = "drop")
+
+# Cube summary stats
+cube_summary <- match_results |>
+  group_by(cube) |>
+  summarise(
+    total_matches = n(),
+    total_events = n_distinct(date),
+    unique_players = n_distinct(c(player1, player2)),
+    first_played = min(date),
+    last_played = max(date),
+    .groups = "drop"
+  )
+
+# Pass to OJS
+ojs_define(per_cube_player_data = per_cube_player)
+ojs_define(trophy_list = trophy_data)
+ojs_define(cube_summary_data = cube_summary)
+ojs_define(event_results_data = event_player_matches)
+```
+
+```{ojs}
+//| label: theme-detect
+isDark = Generators.observe(notify => {
+  const current = () => document.body.classList.contains("quarto-dark");
+  notify(current());
+
+  const observer = new MutationObserver(() => {
+    notify(current());
+  });
+
+  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  return () => observer.disconnect();
+})
+
+themeColors = {
+  const _ = isDark;
+  const bodyStyles = getComputedStyle(document.body);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const cssVar = (name, fallback = "") =>
+    bodyStyles.getPropertyValue(name).trim() ||
+    rootStyles.getPropertyValue(name).trim() ||
+    fallback;
+
+  return {
+    blue: cssVar("--mtg-blue", "#0e68ab"),
+    green: cssVar("--mtg-green", "#00733e"),
+    red: cssVar("--mtg-red", "#d3202a"),
+    gold: cssVar("--mtg-gold", "#8b6914"),
+    text: cssVar("--text-primary", "#2a1f14"),
+    muted: cssVar("--text-muted", "#5c4f42")
+  };
+}
+```
+
+```{ojs}
+//| label: data-prep
+perCubePlayer = transpose(per_cube_player_data).map(d => ({
+  ...d,
+  wins: +d.wins,
+  losses: +d.losses,
+  total: +d.total,
+  winrate: +d.winrate
+}))
+
+trophies = transpose(trophy_list).map(d => ({
+  ...d,
+  trophies: +d.trophies
+}))
+
+cubeSummary = transpose(cube_summary_data).map(d => ({
+  ...d,
+  total_matches: +d.total_matches,
+  total_events: +d.total_events,
+  unique_players: +d.unique_players,
+  first_played: new Date(d.first_played),
+  last_played: new Date(d.last_played)
+}))
+
+eventResults = transpose(event_results_data).map(d => ({
+  ...d,
+  date: new Date(d.date),
+  match_wins: +d.match_wins,
+  matches: +d.matches,
+  game_wins: +d.game_wins,
+  game_losses: +d.game_losses
+}))
+
+cubeNames = [...new Set(cubeSummary.map(d => d.cube))].sort((a, b) =>
+  a.localeCompare(b, "is")
+)
+```
+
+:::: {.page-header}
+
+```{=html}
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+```
+
+# Kubbar {.title}
+
+[Tölfræði og saga einstakra kubba]{.page-desc}
+
+::::
+
+```{ojs}
+//| label: cube-page-selector
+viewof selectedCube = Inputs.select(["", ...cubeNames], {
+  label: "Kubbur:",
+  value: "",
+  format: d => d === "" ? "Veldu kubb..." : d
+})
+```
+
+```{ojs}
+//| label: cube-content
+{
+  if (selectedCube === "") {
+    return html`<div class="empty-state">
+      <div class="empty-icon">&#9876;</div>
+      <div>Veldu kubb til að sjá upplýsingar</div>
+    </div>`;
+  }
+
+  const summary = cubeSummary.find(d => d.cube === selectedCube);
+  const players = perCubePlayer
+    .filter(d => d.cube === selectedCube)
+    .sort((a, b) => b.winrate - a.winrate || b.total - a.total);
+  const cubeTrophies = trophies
+    .filter(d => d.cube === selectedCube)
+    .sort((a, b) => b.trophies - a.trophies);
+  const events = eventResults.filter(d => d.cube === selectedCube);
+
+  const fmtDate = d => {
+    const yy = String(d.getFullYear()).slice(2);
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yy}.${mm}.${dd}`;
+  };
+
+  // ── 1. Summary Stats ──
+  const summaryCard = html`<div class="player-summary">
+    <div class="stat">
+      <div class="stat-value" style="color: ${themeColors.blue};">${summary.total_events}</div>
+      <div class="stat-label">Viðburðir</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: ${themeColors.red};">${summary.total_matches}</div>
+      <div class="stat-label">Matches</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: ${themeColors.green};">${summary.unique_players}</div>
+      <div class="stat-label">Leikmenn</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: ${themeColors.gold};">${fmtDate(summary.first_played)}</div>
+      <div class="stat-label">Fyrst spilað</div>
+    </div>
+    <div class="stat">
+      <div class="stat-value" style="color: ${themeColors.gold};">${fmtDate(summary.last_played)}</div>
+      <div class="stat-label">Síðast spilað</div>
+    </div>
+  </div>`;
+
+  // ── 2. Trophy Leaderboard ──
+  const trophyCard = cubeTrophies.length === 0 ? html`` : html`
+    <div class="trophy-card">
+      <div class="cube-affinity-title">Bikarhafar</div>
+      <table class="trophy-table">
+        <thead>
+          <tr>
+            <th>Leikmaður</th>
+            <th>Bikarar</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${cubeTrophies.map(t => html`
+            <tr>
+              <td class="cube-record-name">${t.player}</td>
+              <td style="text-align: center; font-weight: 600; color: ${themeColors.gold};">${"🏆".repeat(t.trophies)}</td>
+            </tr>
+          `)}
+        </tbody>
+      </table>
+    </div>`;
+
+  // ── 3. Player Rankings Table ──
+  // Compute match-level stats per player from event results
+  const matchByPlayer = new Map();
+  events.forEach(d => {
+    if (!matchByPlayer.has(d.player)) matchByPlayer.set(d.player, { mw: 0, ml: 0 });
+    const s = matchByPlayer.get(d.player);
+    s.mw += d.match_wins;
+    s.ml += d.matches - d.match_wins;
+  });
+
+  const enrichedPlayers = players.map(r => {
+    const ms = matchByPlayer.get(r.player) || { mw: 0, ml: 0 };
+    const mTotal = ms.mw + ms.ml;
+    return { ...r, mw: ms.mw, ml: ms.ml, mTotal, mPct: mTotal > 0 ? Math.round(ms.mw / mTotal * 100) : 0 };
+  });
+
+  const rankingsCard = enrichedPlayers.length === 0 ? html`` : html`
+    <div class="cube-combined-card">
+      <div class="cube-affinity-title">Árangur leikmanna</div>
+      <table class="cube-combined-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="3" class="col-group-header">Matches</th>
+            <th colspan="3" class="col-group-header">Games</th>
+          </tr>
+          <tr>
+            <th>Leikmaður</th>
+            <th>S</th>
+            <th>T</th>
+            <th>%</th>
+            <th>S</th>
+            <th>T</th>
+            <th>%</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${enrichedPlayers.map(r => html`
+            <tr>
+              <td class="cube-record-name">${r.player}</td>
+              <td>${r.mw}</td>
+              <td>${r.ml}</td>
+              <td style="color: ${r.mPct >= 50 ? themeColors.green : themeColors.red}; font-weight: 600">${r.mPct}%</td>
+              <td>${r.wins}</td>
+              <td>${r.losses}</td>
+              <td style="color: ${r.winrate >= 50 ? themeColors.green : themeColors.red}; font-weight: 600">${r.winrate}%</td>
+            </tr>
+          `)}
+        </tbody>
+      </table>
+    </div>`;
+
+  return html`<div class="kubbar-content">
+    ${summaryCard}
+    ${trophyCard}
+    ${rankingsCard}
+  </div>`;
+}
+```
+
+```{ojs}
+//| label: event-date-selector
+cubeEventDates = {
+  if (selectedCube === "") return [];
+  const events = eventResults.filter(d => d.cube === selectedCube);
+  return [...new Set(events.map(d => +d.date))]
+    .sort((a, b) => b - a);
+}
+
+viewof selectedEventDate = {
+  if (cubeEventDates.length === 0) return Object.assign(html`<span></span>`, { value: "" });
+
+  const fmtDate = ms => {
+    const d = new Date(ms);
+    const yy = String(d.getFullYear()).slice(2);
+    const mm = String(d.getMonth() + 1).padStart(2, '0');
+    const dd = String(d.getDate()).padStart(2, '0');
+    return `${yy}.${mm}.${dd}`;
+  };
+
+  const options = cubeEventDates.map(ms => ({ value: String(ms), label: fmtDate(ms) }));
+
+  return Inputs.select(options.map(o => o.value), {
+    label: "Viðburður:",
+    value: options[0].value,
+    format: v => options.find(o => o.value === v)?.label || v
+  });
+}
+```
+
+```{ojs}
+//| label: event-results
+{
+  if (selectedCube === "" || !selectedEventDate || cubeEventDates.length === 0) return html``;
+
+  const dateMs = +selectedEventDate;
+  const eventPlayers = eventResults
+    .filter(d => d.cube === selectedCube && +d.date === dateMs)
+    .sort((a, b) => b.match_wins - a.match_wins);
+
+  if (eventPlayers.length === 0) return html``;
+
+  return html`<div class="kubbar-content">
+    <div class="recent-events-card">
+      <div class="cube-affinity-title">Viðburður</div>
+      <table class="trophy-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th colspan="2" class="col-group-header">Matches</th>
+            <th colspan="2" class="col-group-header">Games</th>
+          </tr>
+          <tr>
+            <th>Leikmaður</th>
+            <th>S</th>
+            <th>T</th>
+            <th>S</th>
+            <th>T</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${eventPlayers.map(p => html`
+            <tr>
+              <td class="cube-record-name">${p.player}${p.match_wins >= 3 ? " 🏆" : ""}</td>
+              <td style="text-align: center">${p.match_wins}</td>
+              <td style="text-align: center">${p.matches - p.match_wins}</td>
+              <td style="text-align: center">${p.game_wins}</td>
+              <td style="text-align: center">${p.game_losses}</td>
+            </tr>
+          `)}
+        </tbody>
+      </table>
+    </div>
+  </div>`;
+}
+```
