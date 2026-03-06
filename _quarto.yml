@@ -21,6 +21,8 @@ website:
         href: einvigi.qmd
       - text: "Kubbar"
         href: kubbar.qmd
+      - text: "Dagatal"
+        href: dagatal.qmd
     right:
       - icon: github
         href: https://github.com/mtgkubbur/mtgkubbur.github.io
@@ -39,6 +41,8 @@ website:
         <a href="einvigi.html">Einvígi</a>
         <i class="ms ms-b footer-mana-sep" aria-hidden="true"></i>
         <a href="kubbar.html">Kubbar</a>
+        <i class="ms ms-g footer-mana-sep" aria-hidden="true"></i>
+        <a href="dagatal.html">Dagatal</a>
       </nav>
     right: "© 2026 MtG Kubbur"
 

@@ -1095,6 +1095,61 @@ body:has(.h2h-layout) #quarto-content {
   margin: 0 auto;
 }
 
+/* ─── Calendar page (Dagatal) ─── */
+.calendar-content {
+  max-width: 620px;
+  margin: 0 auto;
+}
+
+.calendar-table-card {
+  background: var(--surface-card);
+  border: 1px solid var(--border-default);
+  border-radius: var(--radius-sm);
+  padding: 1rem 1.25rem;
+  box-shadow: var(--shadow-soft);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.calendar-table-card:hover {
+  box-shadow: var(--shadow-hover);
+  border-color: #c4bfb9;
+}
+
+.calendar-next-event td {
+  font-weight: 700;
+}
+
+.calendar-next-event td:first-child {
+  border-left: 3px solid var(--mtg-gold);
+}
+
+.calendar-past-toggle {
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.calendar-past-toggle summary {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 4px 0;
+  user-select: none;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  text-align: center;
+  margin-bottom: 0.5rem;
+}
+
+.calendar-past-toggle summary:hover {
+  color: var(--text-primary);
+}
+
+.calendar-past-toggle .trophy-table {
+  margin-top: 0.75rem;
+}
+
 /* ─── Reduced motion support ─── */
 @media (prefers-reduced-motion: reduce) {
   * {
@@ -1497,4 +1552,36 @@ body:has(.h2h-layout) #quarto-content {
 .quarto-dark .col-group-header {
   color: #7a7670 !important;
   border-bottom-color: rgba(255, 255, 255, 0.08) !important;
+}
+
+/* ─── Dark: Calendar page (Dagatal) ─── */
+.quarto-dark .calendar-table-card {
+  background: var(--surface-card);
+  border-color: var(--border-default);
+  box-shadow: var(--shadow-card);
+}
+
+.quarto-dark .calendar-table-card:hover {
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.16);
+  box-shadow: var(--shadow-hover);
+}
+
+.quarto-dark .calendar-next-event td:first-child {
+  border-left-color: var(--mtg-gold);
+}
+
+.quarto-dark .calendar-past-toggle summary {
+  color: #7a7670;
+}
+
+.quarto-dark .calendar-past-toggle summary:hover {
+  color: #e8e4dc;
+}
+
+@media (min-width: 900px) {
+  .quarto-dark .calendar-table-card {
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+  }
 }
