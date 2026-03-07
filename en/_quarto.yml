@@ -1,0 +1,78 @@
+project:
+  type: website
+  output-dir: ../docs/en
+  render:
+    - "*.qmd"
+
+website:
+  title: "MtG Kubbur"
+  favicon: ../favicon.svg
+  description: "Magic: The Gathering Cube Drafts in Iceland"
+  site-url: "https://mtgkubbur.is/en"
+
+  navbar:
+    search: false
+    left:
+      - text: "Rankings"
+        href: index.qmd
+      - text: "Player"
+        href: player.qmd
+      - text: "Head-to-Head"
+        href: head-to-head.qmd
+      - text: "Cubes"
+        href: cubes.qmd
+      - text: "Calendar"
+        href: calendar.qmd
+    right:
+      - text: "IS"
+        href: "../index.html"
+        aria-label: "Switch to Icelandic"
+      - icon: github
+        href: https://github.com/mtgkubbur/mtgkubbur.github.io
+        aria-label: GitHub
+
+  page-footer:
+    left: |
+      <span class="footer-brand">MtG Kubbur</span>
+      <span class="footer-tagline">Magic: The Gathering Cube Drafts in Iceland</span>
+    center: |
+      <nav class="footer-nav">
+        <a href="index.html">Rankings</a>
+        <i class="ms ms-u footer-mana-sep" aria-hidden="true"></i>
+        <a href="player.html">Player</a>
+        <i class="ms ms-r footer-mana-sep" aria-hidden="true"></i>
+        <a href="head-to-head.html">Head-to-Head</a>
+        <i class="ms ms-b footer-mana-sep" aria-hidden="true"></i>
+        <a href="cubes.html">Cubes</a>
+        <i class="ms ms-g footer-mana-sep" aria-hidden="true"></i>
+        <a href="calendar.html">Calendar</a>
+      </nav>
+    right: "© 2026 MtG Kubbur"
+
+format:
+  html:
+    theme:
+      light: [cosmo, ../theme.scss]
+      dark: [cosmo, ../theme-dark.scss]
+    css: ../styles.css
+    toc: false
+    include-after-body:
+      text: |
+        <script>
+        (function() {
+          var map = {
+            'player.html': '../throun.html',
+            'head-to-head.html': '../einvigi.html',
+            'cubes.html': '../kubbar.html',
+            'calendar.html': '../dagatal.html'
+          };
+          var page = location.pathname.split('/').pop() || 'index.html';
+          var el = document.querySelector('a[aria-label="Switch to Icelandic"]');
+          if (el && map[page]) el.href = map[page];
+        })();
+        </script>
+    include-in-header:
+      text: |
+        <link href="https://cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
+
+engine: knitr

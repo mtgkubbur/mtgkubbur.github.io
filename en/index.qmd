@@ -1,0 +1,156 @@
+---
+page-layout: article
+toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(posterior)
+library(cmdstanr)
+library(gt)
+library(gtExtras)
+library(scales)
+library(glue)
+library(googlesheets4)
+library(reactable)
+library(htmltools)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+source("../R/elo_table.R")
+
+table_players <- fetch_table_players()
+newest_date <- fetch_newest_date()
+results_root <- "../results"
+labels <- ranking_table_labels("en")
+```
+
+:::: {.page-header}
+
+```{=html}
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+```
+
+[ELO Rankings]{.subtitle}
+
+[Updated `r newest_date`]{.date-badge}
+
+
+::::
+
+```{ojs}
+//| label: cube-selector
+viewof cubeFilter = Inputs.select(
+  ["All", "High", "Medium", "Low", "Other"],
+  {
+    label: "Cube category:",
+    value: "All"
+  }
+)
+```
+
+```{ojs}
+//| label: cube-toggle
+{
+  const panels = document.querySelectorAll(".cube-table-panel");
+  panels.forEach(el => {
+    el.classList.toggle("active", el.dataset.cube === cubeFilter);
+  });
+}
+```
+
+::: {.cube-table-panel data-cube="All" .active}
+
+```{r}
+#| label: table-all
+#| column: page
+
+render_score_table_interactive(
+  top_n = Inf,
+  results_root = results_root,
+  min_total_games = 18,
+  table_players = table_players,
+  newest_date = NULL,
+  labels = labels
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="High"}
+
+```{r}
+#| label: table-high
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "High",
+  results_root = results_root,
+  min_total_games = 3,
+  table_players = table_players,
+  labels = labels
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="Medium"}
+
+```{r}
+#| label: table-medium
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "Medium",
+  results_root = results_root,
+  min_total_games = 3,
+  table_players = table_players,
+  labels = labels
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="Low"}
+
+```{r}
+#| label: table-low
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "Low",
+  results_root = results_root,
+  min_total_games = 3,
+  table_players = table_players,
+  labels = labels
+)
+```
+
+:::
+
+::: {.cube-table-panel data-cube="Other"}
+
+```{r}
+#| label: table-other
+#| column: page
+
+render_cube_score_table_interactive(
+  cube_type = "Other",
+  results_root = results_root,
+  min_total_games = 3,
+  table_players = table_players,
+  labels = labels
+)
+```
+
+:::

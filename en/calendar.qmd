@@ -1,0 +1,192 @@
+---
+pagetitle: "Calendar"
+title-block-style: none
+page-layout: article
+toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(lubridate)
+library(googlesheets4)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+
+sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
+
+calendar <- read_sheet(sheet_url, sheet = "Cube calendar") |>
+  janitor::clean_names() |>
+  mutate(
+    date = as_date(date),
+    cube = str_to_title(cube),
+    host = str_to_title(host)
+  ) |>
+  filter(!is.na(cube), cube != "", cube != "NA") |>
+  arrange(date)
+
+today <- today()
+
+upcoming <- calendar |>
+  filter(date >= today) |>
+  arrange(date) |>
+  mutate(players = as.character(players))
+
+past <- calendar |>
+  filter(date < today) |>
+  arrange(desc(date)) |>
+  mutate(players = as.character(players))
+
+ojs_define(upcoming_data = upcoming)
+ojs_define(past_data = past)
+```
+
+:::: {.page-header}
+
+```{=html}
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+```
+
+# Calendar {.title}
+
+[Schedule for upcoming cube nights]{.page-desc}
+
+
+::::
+
+```{ojs}
+//| label: theme-detect
+isDark = Generators.observe(notify => {
+  const current = () => document.body.classList.contains("quarto-dark");
+  notify(current());
+
+  const observer = new MutationObserver(() => {
+    notify(current());
+  });
+
+  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  return () => observer.disconnect();
+})
+
+themeColors = {
+  const _ = isDark;
+  const bodyStyles = getComputedStyle(document.body);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const cssVar = (name, fallback = "") =>
+    bodyStyles.getPropertyValue(name).trim() ||
+    rootStyles.getPropertyValue(name).trim() ||
+    fallback;
+
+  return {
+    blue: cssVar("--mtg-blue", "#0e68ab"),
+    green: cssVar("--mtg-green", "#00733e"),
+    red: cssVar("--mtg-red", "#d3202a"),
+    gold: cssVar("--mtg-gold", "#8b6914"),
+    text: cssVar("--text-primary", "#2a1f14"),
+    muted: cssVar("--text-muted", "#5c4f42")
+  };
+}
+```
+
+```{ojs}
+//| label: data-prep
+upcoming = transpose(upcoming_data).map(d => ({
+  ...d,
+  date: new Date(d.date)
+}))
+
+past = transpose(past_data).map(d => ({
+  ...d,
+  date: new Date(d.date)
+}))
+```
+
+```{ojs}
+//| label: calendar-content
+{
+  const fmtDate = d => d.toLocaleDateString("en-GB", {
+    day: "2-digit",
+    month: "short",
+    year: "numeric"
+  });
+
+  const clean = v => (v === undefined || v === null || v === "undefined" || v === "NA") ? "" : v;
+
+  const nextDate = upcoming.length > 0 ? +upcoming[0].date : null;
+  const isNext = d => nextDate !== null && +d === nextDate;
+
+  let upcomingSection;
+  if (upcoming.length === 0) {
+    upcomingSection = html`<div class="empty-state">
+      <div class="empty-icon">&#128197;</div>
+      <div>No upcoming events scheduled</div>
+    </div>`;
+  } else {
+    upcomingSection = html`<div class="calendar-table-card">
+      <div class="cube-affinity-title">Upcoming events</div>
+      <table class="trophy-table">
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>Cube</th>
+            <th>Host</th>
+          </tr>
+        </thead>
+        <tbody>
+          ${upcoming.map(e => html`
+            <tr class="${isNext(e.date) ? "calendar-next-event" : ""}">
+              <td>${fmtDate(e.date)}</td>
+              <td>${clean(e.cube)}</td>
+              <td>${clean(e.host)}</td>
+            </tr>
+          `)}
+        </tbody>
+      </table>
+    </div>`;
+  }
+
+  let pastSection = html``;
+  if (past.length > 0) {
+    pastSection = html`<div class="calendar-table-card" style="margin-top: 1.5rem;">
+      <details class="calendar-past-toggle">
+        <summary>Past events (${past.length})</summary>
+        <table class="trophy-table">
+          <thead>
+            <tr>
+              <th>Date</th>
+              <th>Cube</th>
+              <th>Host</th>
+              <th>Players</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${past.map(e => html`
+              <tr>
+                <td>${fmtDate(e.date)}</td>
+                <td>${clean(e.cube)}</td>
+                <td>${clean(e.host)}</td>
+                <td style="text-align: center;">${clean(e.players) || "—"}</td>
+              </tr>
+            `)}
+          </tbody>
+        </table>
+      </details>
+    </div>`;
+  }
+
+  return html`<div class="calendar-content">
+    ${upcomingSection}
+    ${pastSection}
+  </div>`;
+}
+```

@@ -308,6 +308,10 @@ window.Quarto = {
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./en/index.html"> 
+<span class="menu-text">EN</span></a>
+  </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/mtgkubbur/mtgkubbur.github.io"> <i class="bi bi-github" role="img" aria-label="GitHub">
 </i> 
@@ -1018,6 +1022,19 @@ t_{1/2} = -\frac{\ln(2)}{\ln(\phi)}
 </div>
   </div>
 </footer>
+<script>
+(function() {
+  var map = {
+    'throun.html': 'en/player.html',
+    'einvigi.html': 'en/head-to-head.html',
+    'kubbar.html': 'en/cubes.html',
+    'dagatal.html': 'en/calendar.html'
+  };
+  var page = location.pathname.split('/').pop() || 'index.html';
+  var el = document.querySelector('a[aria-label="Switch to English"]');
+  if (el && map[page]) el.href = map[page];
+})();
+</script>
 
 
 

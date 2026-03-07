@@ -1,0 +1,333 @@
+---
+pagetitle: "Head-to-Head"
+title-block-style: none
+page-layout: article
+toc: false
+execute:
+  echo: false
+  warning: false
+  message: false
+---
+
+```{r}
+#| label: setup
+library(tidyverse)
+library(googlesheets4)
+
+gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
+source("../R/elo_table.R")
+
+table_players <- fetch_table_players()
+results_root <- "../results"
+
+sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
+games <- read_sheet(sheet_url) |>
+  mutate(date = as_date(date)) |>
+  pivot_longer(game1:game3, names_to = "game", values_to = "winner") |>
+  drop_na(winner) |>
+  mutate(
+    player1 = str_to_title(player1),
+    player2 = str_to_title(player2),
+    winner = str_to_title(winner),
+    cube = str_to_title(cube)
+  )
+
+h2h <- games |>
+  group_by(player1, player2) |>
+  summarise(
+    games = n(),
+    p1_wins = sum(winner == player1),
+    .groups = "drop"
+  )
+
+h2h_cube <- games |>
+  group_by(player1, player2, cube) |>
+  summarise(
+    games = n(),
+    p1_wins = sum(winner == player1),
+    .groups = "drop"
+  )
+
+all_players <- unique(c(h2h$player1, h2h$player2))
+player_list <- sort(all_players[str_to_lower(all_players) %in% table_players],
+                    method = "radix")
+
+ojs_define(h2h_data = h2h)
+ojs_define(h2h_cube_data = h2h_cube)
+ojs_define(player_names = player_list)
+
+history <- combine_player_summaries(results_root = results_root) |>
+  filter(str_to_lower(player) %in% table_players) |>
+  select(date, player, score_median)
+
+ojs_define(elo_history = history)
+```
+
+```{ojs}
+//| label: theme-detect
+isDark = Generators.observe(notify => {
+  const current = () => document.body.classList.contains("quarto-dark");
+  notify(current());
+
+  const observer = new MutationObserver(() => {
+    notify(current());
+  });
+
+  observer.observe(document.body, { attributes: true, attributeFilter: ["class"] });
+  return () => observer.disconnect();
+})
+
+themeColors = {
+  const _ = isDark;
+  const bodyStyles = getComputedStyle(document.body);
+  const rootStyles = getComputedStyle(document.documentElement);
+  const cssVar = (name, fallback = "") =>
+    bodyStyles.getPropertyValue(name).trim() ||
+    rootStyles.getPropertyValue(name).trim() ||
+    fallback;
+
+  return {
+    blue: cssVar("--mtg-blue", "#0e68ab"),
+    green: cssVar("--mtg-green", "#00733e"),
+    red: cssVar("--mtg-red", "#d3202a"),
+    gold: cssVar("--mtg-gold", "#8b6914"),
+    text: cssVar("--text-primary", "#2a1f14"),
+    muted: cssVar("--text-muted", "#5c4f42"),
+    grid: cssVar("--chart-grid", "#d4cfc9"),
+    line: cssVar("--text-primary", "#2a1f14")
+  };
+}
+```
+
+```{ojs}
+//| label: data-prep
+h2h = transpose(h2h_data)
+h2hCube = transpose(h2h_cube_data)
+players = player_names
+
+eloHistory = {
+  const raw = transpose(elo_history);
+  return raw.map(d => ({
+    player: d.player,
+    date: new Date(d.date),
+    score_median: +d.score_median
+  }));
+}
+```
+
+:::: {.page-header}
+
+```{=html}
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+```
+
+# Head-to-Head {.title}
+
+[Direct comparison between two players]{.page-desc}
+
+
+::::
+
+```{ojs}
+//| label: player-selectors
+viewof player1 = Inputs.select(["", ...players], {
+  label: "Player 1:",
+  value: "",
+  format: d => d === "" ? "Choose a player..." : d
+})
+
+viewof player2 = Inputs.select(["", ...players], {
+  label: "Player 2:",
+  value: "",
+  format: d => d === "" ? "Choose a player..." : d
+})
+```
+
+::: {.h2h-layout}
+
+```{ojs}
+//| label: h2h-results
+{
+  if (player1 === "" || player2 === "" || player1 === player2) {
+    const msg = player1 === player2 && player1 !== ""
+      ? "Choose two different players"
+      : "Choose two players to compare";
+    return html`<div class="empty-state">
+      <div class="empty-icon">&#9876;</div>
+      <div>${msg}</div>
+    </div>`;
+  }
+
+  const forward = h2h.filter(d => d.player1 === player1 && d.player2 === player2);
+  const reverse = h2h.filter(d => d.player1 === player2 && d.player2 === player1);
+
+  const p1Wins = (forward[0] ? +forward[0].p1_wins : 0) +
+                 (reverse[0] ? (+reverse[0].games - +reverse[0].p1_wins) : 0);
+  const totalGames = (forward[0] ? +forward[0].games : 0) +
+                     (reverse[0] ? +reverse[0].games : 0);
+  const p2Wins = totalGames - p1Wins;
+
+  if (totalGames === 0) {
+    return html`<div class="empty-state">
+      <div class="empty-icon">&#10068;</div>
+      <div>No games found between ${player1} and ${player2}</div>
+    </div>`;
+  }
+
+  const p1Pct = Math.round((p1Wins / totalGames) * 100);
+  const p2Pct = 100 - p1Pct;
+  const p1Color = p1Wins >= p2Wins ? themeColors.green : themeColors.red;
+  const p2Color = p2Wins >= p1Wins ? themeColors.green : themeColors.red;
+
+  const cubeForward = h2hCube.filter(d => d.player1 === player1 && d.player2 === player2);
+  const cubeReverse = h2hCube.filter(d => d.player1 === player2 && d.player2 === player1);
+
+  const cubeTypes = [...new Set([...cubeForward.map(d => d.cube), ...cubeReverse.map(d => d.cube)])].sort();
+  const cubeRows = cubeTypes.map(cube => {
+    const fwd = cubeForward.find(d => d.cube === cube);
+    const rev = cubeReverse.find(d => d.cube === cube);
+    const w1 = (fwd ? +fwd.p1_wins : 0) + (rev ? (+rev.games - +rev.p1_wins) : 0);
+    const total = (fwd ? +fwd.games : 0) + (rev ? +rev.games : 0);
+    return { cube, p1Wins: w1, p2Wins: total - w1, total };
+  });
+
+  return html`
+    <div class="h2h-card">
+      <div class="h2h-header">
+        <div class="h2h-player">
+          <div class="h2h-name">${player1}</div>
+          <div class="h2h-wins" style="color: ${p1Color}">${p1Wins} <span class="h2h-wins-label">wins</span></div>
+        </div>
+        <div class="h2h-vs">vs</div>
+        <div class="h2h-player">
+          <div class="h2h-name">${player2}</div>
+          <div class="h2h-wins" style="color: ${p2Color}">${p2Wins} <span class="h2h-wins-label">wins</span></div>
+        </div>
+      </div>
+      <div class="h2h-bar-container">
+        <div class="h2h-bar-fill h2h-bar-p1" style="width: ${p1Pct}%; background: ${p1Color}">${p1Pct}%</div>
+        <div class="h2h-bar-fill h2h-bar-p2" style="width: ${p2Pct}%; background: ${p2Color}">${p2Pct}%</div>
+      </div>
+      <div class="h2h-total">${totalGames} games total</div>
+      ${cubeRows.length > 0 ? html`
+        <div class="h2h-cube-breakdown">
+          <div class="h2h-cube-title">By cube</div>
+          <table class="h2h-cube-table">
+            <thead>
+              <tr>
+                <th></th>
+                <th>${player1}</th>
+                <th>${player2}</th>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${cubeRows.map(r => html`
+                <tr>
+                  <td>${r.cube}</td>
+                  <td style="color: ${r.p1Wins >= r.p2Wins ? themeColors.green : themeColors.red}; font-weight: 600">${r.p1Wins}</td>
+                  <td style="color: ${r.p2Wins >= r.p1Wins ? themeColors.green : themeColors.red}; font-weight: 600">${r.p2Wins}</td>
+                  <td>${r.total}</td>
+                </tr>
+              `)}
+            </tbody>
+          </table>
+        </div>
+      ` : html``}
+    </div>
+  `;
+}
+```
+
+```{ojs}
+//| label: elo-diff-chart
+{
+  if (player1 === "" || player2 === "" || player1 === player2) return html``;
+
+  const p1Map = new Map(
+    eloHistory.filter(d => d.player === player1).map(d => [+d.date, d.score_median])
+  );
+  const eloDiff = eloHistory
+    .filter(d => d.player === player2 && p1Map.has(+d.date))
+    .map(d => ({ date: d.date, diff: p1Map.get(+d.date) - d.score_median }))
+    .sort((a, b) => a.date - b.date);
+
+  if (eloDiff.length < 2) return html``;
+
+  const latestPt = eloDiff[eloDiff.length - 1];
+  const latestColor = latestPt.diff >= 0 ? themeColors.green : themeColors.red;
+
+  const haloBg = isDark ? "#1e1e26" : "#ffffff";
+
+  const chart = Plot.plot({
+    width: width, height: 280,
+    marginLeft: 55, marginRight: 20, marginBottom: 40, marginTop: 12,
+    style: { fontSize: "12px", fontFamily: "'Inter', system-ui, sans-serif", background: "transparent", color: themeColors.text },
+    x: { type: "time", label: null, axis: null },
+    y: { label: null, axis: null },
+    marks: [
+      Plot.gridY({
+        stroke: themeColors.grid,
+        strokeOpacity: 0.6,
+        strokeDasharray: "3,4"
+      }),
+      Plot.axisX({
+        tickSize: 4,
+        tickPadding: 6,
+        stroke: themeColors.grid,
+        fill: themeColors.muted,
+        fontVariant: "normal",
+        ticks: d3.utcMonth,
+        tickFormat: d => d.toLocaleDateString("en-US", { month: "short" })
+      }),
+      Plot.axisY({
+        label: "ELO difference",
+        labelArrow: "none",
+        labelAnchor: "top",
+        tickSize: 0,
+        tickPadding: 8,
+        fill: themeColors.muted,
+        textStroke: haloBg,
+        textStrokeWidth: 3
+      }),
+      Plot.ruleY([0], { stroke: themeColors.muted, strokeDasharray: "6,4", strokeOpacity: 0.5 }),
+      Plot.areaY(eloDiff, {
+        x: "date", y1: 0, y2: d => Math.max(0, d.diff), fill: themeColors.green, fillOpacity: isDark ? 0.20 : 0.25, curve: "catmull-rom"
+      }),
+      Plot.areaY(eloDiff, {
+        x: "date", y1: 0, y2: d => Math.min(0, d.diff), fill: themeColors.red, fillOpacity: isDark ? 0.20 : 0.25, curve: "catmull-rom"
+      }),
+      Plot.lineY(eloDiff, { x: "date", y: "diff", stroke: themeColors.line, strokeWidth: 1.5, curve: "catmull-rom" }),
+      Plot.dot([latestPt], { x: "date", y: "diff", fill: latestColor, r: 5, stroke: haloBg, strokeWidth: 2 }),
+      Plot.text([latestPt], {
+        x: "date", y: "diff",
+        text: d => (d.diff > 0 ? "+" : "") + d.diff,
+        dy: -14, fontSize: 12, fontWeight: 600, fill: latestColor,
+        stroke: haloBg, strokeWidth: 4
+      })
+    ]
+  });
+
+  return html`<div class="h2h-elo-chart">
+    <div class="h2h-chart-title">ELO difference over time</div>
+    <div class="h2h-chart-subtitle">${player1} and ${player2}</div>
+    ${chart}
+    <div class="h2h-chart-legend">
+      <span class="h2h-legend-item">
+        <span class="h2h-legend-pip" style="background: ${themeColors.green}"></span>${player1} ahead
+      </span>
+      <span class="h2h-legend-item">
+        <span class="h2h-legend-pip" style="background: ${themeColors.red}"></span>${player2} ahead
+      </span>
+    </div>
+  </div>`;
+}
+```
+
+:::

@@ -2,7 +2,12 @@ project:
   type: website
   output-dir: docs
   render:
-    - "*.qmd"
+    - "index.qmd"
+    - "throun.qmd"
+    - "einvigi.qmd"
+    - "kubbar.qmd"
+    - "dagatal.qmd"
+    - "methods.qmd"
 
 website:
   title: "MtG Kubbur"
@@ -24,6 +29,9 @@ website:
       - text: "Dagatal"
         href: dagatal.qmd
     right:
+      - text: "EN"
+        href: "en/index.html"
+        aria-label: "Switch to English"
       - icon: github
         href: https://github.com/mtgkubbur/mtgkubbur.github.io
         aria-label: GitHub
@@ -53,6 +61,21 @@ format:
       dark: [cosmo, theme-dark.scss]
     css: styles.css
     toc: false
+    include-after-body:
+      text: |
+        <script>
+        (function() {
+          var map = {
+            'throun.html': 'en/player.html',
+            'einvigi.html': 'en/head-to-head.html',
+            'kubbar.html': 'en/cubes.html',
+            'dagatal.html': 'en/calendar.html'
+          };
+          var page = location.pathname.split('/').pop() || 'index.html';
+          var el = document.querySelector('a[aria-label="Switch to English"]');
+          if (el && map[page]) el.href = map[page];
+        })();
+        </script>
     include-in-header:
       text: |
         <link href="https://cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />

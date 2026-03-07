@@ -178,6 +178,21 @@ body:has(.h2h-layout) #quarto-content {
   box-shadow: 0 1px 2px rgba(139, 105, 20, 0.08);
 }
 
+/* ─── Navbar language switch ─── */
+.navbar a[aria-label="Switch to English"],
+.navbar a[aria-label="Switch to Icelandic"] {
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  font-size: 0.8rem;
+  opacity: 0.7;
+  transition: opacity 0.15s ease;
+}
+
+.navbar a[aria-label="Switch to English"]:hover,
+.navbar a[aria-label="Switch to Icelandic"]:hover {
+  opacity: 1;
+}
+
 /* ─── Shared card elevation ─── */
 .score-table,
 .h2h-card,
@@ -1250,6 +1265,24 @@ body:has(.h2h-layout) #quarto-content {
   color: #d4a843;
   border-color: rgba(212, 168, 67, 0.2);
   box-shadow: none;
+}
+
+.quarto-dark .lang-chip {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(212, 168, 67, 0.18);
+  color: #bcb5ab;
+}
+
+.quarto-dark .lang-chip:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(212, 168, 67, 0.34);
+  color: #f0ece4;
+}
+
+.quarto-dark .lang-chip.current {
+  background: rgba(212, 168, 67, 0.12);
+  border-color: rgba(212, 168, 67, 0.28);
+  color: #f0dca0;
 }
 
 /* ─── Dark: Reactable table ─── */

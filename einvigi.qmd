@@ -138,6 +138,7 @@ eloHistory = {
 
 [Beinn samanburður milli tveggja leikmanna]{.page-desc}
 
+
 ::::
 
 ```{ojs}

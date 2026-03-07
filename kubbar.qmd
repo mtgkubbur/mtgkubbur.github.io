@@ -210,6 +210,7 @@ cubeNames = [...new Set(cubeSummary.map(d => d.cube))].sort((a, b) =>
 
 [Tölfræði og saga einstakra kubba]{.page-desc}
 
+
 ::::
 
 ```{ojs}

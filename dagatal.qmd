@@ -61,6 +61,7 @@ ojs_define(past_data = past)
 
 [Dagskrá kubbakvölda]{.page-desc}
 
+
 ::::
 
 ```{ojs}

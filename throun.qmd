@@ -240,6 +240,7 @@ maxPlayers = d3.max([...d3.group(data, d => +d.date).values()], rows => rows.len
 
 [Þróun og tölfræði einstakra leikmanna]{.page-desc}
 
+
 ::::
 
 ```{ojs}
