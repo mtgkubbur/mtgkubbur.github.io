@@ -1,0 +1,1183 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.8.27">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+
+<title>Cubes – MtG Kubbur</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+html { -webkit-text-size-adjust: 100%; }
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/quarto-nav/headroom.min.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<link href="./../favicon.svg" rel="icon" type="image/svg+xml">
+<script src="site_libs/quarto-html/quarto.js" type="module"></script>
+<script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
+<script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark-4d9afe2b8d18ee9fa5d0d57b5ed4214d.css" rel="stylesheet" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-ed96de9b727972fe78a7b5d16c58bf87.css" rel="stylesheet" class="quarto-color-scheme-extra" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap-2809080f8b6389ee96ae8948de1ba7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark-50dfa8c009a1a8093ab416c812260a34.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="dark">
+<link href="site_libs/bootstrap/bootstrap-2809080f8b6389ee96ae8948de1ba7fd.min.css" rel="stylesheet" append-hash="true" class="quarto-color-scheme-extra" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "navbar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "end",
+  "type": "overlay",
+  "limit": 50,
+  "keyboard-shortcut": [
+    "f",
+    "/",
+    "s"
+  ],
+  "show-item-context": false,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-text-placeholder": "",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+<script type="module" src="site_libs/quarto-ojs/quarto-ojs-runtime.js"></script>
+<link href="site_libs/quarto-ojs/quarto-ojs.css" rel="stylesheet">
+<script type="ojs-define">
+{"contents":[{"name":"per_cube_player_data","value":{"player":["Anna","Anna","Anna","Anna","Anna","Anna","Anna","Anna","Arnar","Arnar","Arnar","Arnar","Arnar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Gauti","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Aron Ívars","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Atli","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Binni","Daníel","Daníel","Daníel","Daníel","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Diddi","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar","Einar Logi","Einar Logi","Einar Logi","Einar Logi","Fjölnir","Fjölnir","Fjölnir","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Hjalti","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Ingvi","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Oddur","Siggi","Siggi","Siggi","Styrmir","Styrmir","Styrmir","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Tommi","Victor","Victor","Victor","Victor","Victor","Ólafur","Ólafur","Ólafur","Ólafur","Ólafur","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar"],"cube":["Ab Wheel","Horror Cube","Kaldheim Cube","Khans Cube","Nerva's Cube","Stone Soup Cube","Synergy Cube","Vintage Cube","Bar Cube","Horror Cube","Khans Cube","Stone Soup Cube","Vintage Cube","Bar Cube","Meta Memories","Modern Stories","Old Border Cube","Pauper Cube","Stone Soup Cube","Vintage Cube","Bar Cube","Boltalandið","Bolti Vintage Cube","Horror Cube","Meta Memories","Modern Stories","Nerva's Cube","Old Border Cube","Stone Soup Cube","Synergy Cube","That's Totally Uncommon","Vintage Cube","Ab Wheel","Bolti Vintage Cube","Khans Cube","Nerva's Cube","Old Border Cube","Pauper Cube","Stone Soup Cube","Synergy Cube","Vintage Cube","Bar Cube","Bolti Vintage Cube","Meta Memories","Old Border Cube","Synergy Cube","Vintage Cube","Ab Wheel","Bar Cube","Boltalandið","Horror Cube","Meta Memories","Pauper Cube","Stone Soup Cube","That's Totally Uncommon","Vintage Cube","Boltalandið","Bolti Vintage Cube","Khans Cube","Meta Memories","Modern Stories","Old Border Cube","Pauper Cube","Stone Soup Cube","Super Turbo Time","Synergy Cube","Vintage Cube","Bolti Vintage Cube","Meta Memories","Old Border Cube","Stone Soup Cube","Bar Cube","Boltalandið","Bolti Vintage Cube","Genesis","Kaldheim Cube","Khans Cube","Meta Memories","Modern Stories","Nerva's Cube","Old Border Cube","Stone Soup Cube","That's Totally Uncommon","Vintage Cube","Bolti Vintage Cube","Genesis","Khans Cube","Meta Memories","Modern Stories","Nerva's Cube","Old Border Cube","Stone Soup Cube","Synergy Cube","That's Totally Uncommon","Vintage Cube","Bar Cube","Meta Memories","Modern Stories","Vintage Cube","Meta Memories","Modern Stories","Vintage Cube","Ab Wheel","Boltalandið","Bolti Vintage Cube","Genesis","Meta Memories","Stone Soup Cube","Vintage Cube","Genesis","Meta Memories","Nerva's Cube","Stone Soup Cube","Super Turbo Time","Vintage Cube","Bar Cube","Genesis","Kaldheim Cube","Khans Cube","Meta Memories","Nerva's Cube","Old Border Cube","Stone Soup Cube","Super Turbo Time","Synergy Cube","That's Totally Uncommon","Bar Cube","Stone Soup Cube","Vintage Cube","Meta Memories","Stone Soup Cube","Vintage Cube","Ab Wheel","Bar Cube","Boltalandið","Bolti Vintage Cube","Genesis","Kaldheim Cube","Khans Cube","Meta Memories","Nerva's Cube","Pauper Cube","Stone Soup Cube","Synergy Cube","That's Totally Uncommon","Vintage Cube","Bolti Vintage Cube","Kaldheim Cube","Pauper Cube","Synergy Cube","Vintage Cube","Modern Stories","Nerva's Cube","Pauper Cube","Stone Soup Cube","Vintage Cube","Ab Wheel","Bar Cube","Bolti Vintage Cube","Genesis","Horror Cube","Kaldheim Cube","Meta Memories","Nerva's Cube","Old Border Cube","Pauper Cube","Stone Soup Cube","That's Totally Uncommon","Vintage Cube"],"wins":[4,4,4,2,3,7,6,4,11,6,4,5,3,4,10,4,3,6,8,16,4,4,6,5,19,6,12,4,7,4,3,28,2,2,3,0,8,6,1,3,7,0,10,10,4,1,12,5,4,4,3,8,4,3,3,13,6,6,2,13,2,4,4,10,6,6,15,7,6,6,8,4,5,7,2,3,5,28,5,11,2,15,3,18,0,5,4,8,4,2,4,8,11,3,7,1,5,5,3,0,2,7,0,1,2,6,7,1,23,3,3,4,6,5,16,8,2,3,2,18,3,0,2,2,3,4,5,4,4,3,6,2,2,7,4,4,2,3,6,30,4,2,12,3,4,19,0,5,9,6,5,2,6,3,3,6,5,5,5,4,0,6,9,4,6,7,8,5,26],"losses":[3,3,4,5,4,8,2,4,6,2,2,3,6,5,24,3,4,1,6,14,4,4,5,2,10,3,4,4,2,4,4,25,3,6,5,4,6,11,3,6,16,4,6,11,2,6,16,2,4,3,4,13,4,3,4,6,1,2,3,16,6,2,4,6,3,9,11,8,8,1,8,5,3,4,5,8,2,17,3,2,4,7,3,15,2,2,4,7,4,4,4,8,4,4,9,2,3,3,5,6,4,6,4,5,5,2,5,4,17,5,4,5,6,3,9,8,5,3,4,17,5,6,12,5,5,3,4,4,3,2,9,8,3,8,3,4,5,2,1,15,3,7,5,6,4,17,2,4,4,2,14,4,8,5,5,6,1,3,4,2,4,1,7,2,0,7,6,0,12],"total":[7,7,8,7,7,15,8,8,17,8,6,8,9,9,34,7,7,7,14,30,8,8,11,7,29,9,16,8,9,8,7,53,5,8,8,4,14,17,4,9,23,4,16,21,6,7,28,7,8,7,7,21,8,6,7,19,7,8,5,29,8,6,8,16,9,15,26,15,14,7,16,9,8,11,7,11,7,45,8,13,6,22,6,33,2,7,8,15,8,6,8,16,15,7,16,3,8,8,8,6,6,13,4,6,7,8,12,5,40,8,7,9,12,8,25,16,7,6,6,35,8,6,14,7,8,7,9,8,7,5,15,10,5,15,7,8,7,5,7,45,7,9,17,9,8,36,2,9,13,8,19,6,14,8,8,12,6,8,9,6,4,7,16,6,6,14,14,5,38],"winrate":[57,57,50,29,43,47,75,50,65,75,67,62,33,44,29,57,43,86,57,53,50,50,55,71,66,67,75,50,78,50,43,53,40,25,38,0,57,35,25,33,30,0,62,48,67,14,43,71,50,57,43,38,50,50,43,68,86,75,40,45,25,67,50,62,67,40,58,47,43,86,50,44,62,64,29,27,71,62,62,85,33,68,50,55,0,71,50,53,50,33,50,50,73,43,44,33,62,62,38,0,33,54,0,17,29,75,58,20,57,38,43,44,50,62,64,50,29,50,33,51,38,0,14,29,38,57,56,50,57,60,40,20,40,47,57,50,29,60,86,67,57,22,71,33,50,53,0,56,69,75,26,33,43,38,38,50,83,62,56,67,0,86,56,67,100,50,57,100,68]}}]}
+</script>
+<script type="ojs-define">
+{"contents":[{"name":"trophy_list","value":{"player":["Anna","Arnar","Arnar","Aron Elvar","Aron Elvar","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Aron Freyr","Atli","Binni","Binni","Binni","Binni","Daníel","Diddi","Diddi","Diddi","Diddi","Einar","Hjalti","Hjalti","Ingvi","Oddur","Tommi","Tommi","Tommi","Victor","Örvar","Örvar","Örvar","Örvar","Örvar","Örvar"],"cube":["Synergy Cube","Bar Cube","Horror Cube","Pauper Cube","Vintage Cube","Meta Memories","Modern Stories","Nerva's Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Boltalandið","Bolti Vintage Cube","Stone Soup Cube","Super Turbo Time","Old Border Cube","Bolti Vintage Cube","Meta Memories","Nerva's Cube","Stone Soup Cube","Synergy Cube","Genesis","Vintage Cube","Vintage Cube","Bar Cube","Khans Cube","Meta Memories","Stone Soup Cube","Synergy Cube","Kaldheim Cube","Nerva's Cube","Old Border Cube","Pauper Cube","That's Totally Uncommon","Vintage Cube"],"trophies":[1,1,1,1,1,1,1,2,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,2,1,1,3,2,1,1,1,1,1,1,2]}}]}
+</script>
+<script type="ojs-define">
+{"contents":[{"name":"cube_summary_data","value":{"cube":["Ab Wheel","Bar Cube","Boltalandið","Bolti Vintage Cube","Genesis","Horror Cube","Kaldheim Cube","Khans Cube","Meta Memories","Modern Stories","Nerva's Cube","Old Border Cube","Pauper Cube","Stone Soup Cube","Super Turbo Time","Synergy Cube","That's Totally Uncommon","Vintage Cube"],"total_matches":[9,20,12,19,12,11,10,14,75,12,22,24,21,49,9,18,12,100],"total_events":[1,2,1,2,1,1,1,1,6,1,2,2,2,3,1,2,1,7],"unique_players":[7,11,8,12,8,8,7,10,19,8,13,15,11,22,6,10,8,26],"first_played":["2026-01-29","2025-09-11","2025-12-18","2025-10-12","2025-11-20","2026-02-19","2025-09-18","2025-08-21","2025-08-14","2026-01-29","2025-10-10","2025-10-12","2025-10-12","2025-08-28","2025-10-12","2025-09-11","2026-02-26","2025-09-04"],"last_played":["2026-01-29","2025-12-11","2025-12-18","2025-11-06","2025-11-20","2026-02-19","2025-09-18","2025-08-21","2026-02-12","2026-01-29","2025-10-12","2025-11-13","2026-01-22","2025-12-04","2025-10-12","2025-10-12","2026-02-26","2026-03-05"]}}]}
+</script>
+<script type="ojs-define">
+{"contents":[{"name":"event_results_data","value":{"date":["2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-14","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-21","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-08-28","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-04","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-11","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-18","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-09-25","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-02","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-10","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-12","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-23","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-10-30","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-06","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-13","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-20","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-11-27","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-04","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-11","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-18","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2025-12-29","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-08","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-15","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-22","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-01-29","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-05","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-12","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-19","2026-02-26","2026-02-26","2026-02-26","2026-02-26","2026-02-26","2026-02-26","2026-02-26","2026-03-05","2026-03-05","2026-03-05","2026-03-05","2026-03-05","2026-03-05","2026-03-05","2026-03-05","2026-03-05","2026-03-05"],"cube":["Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Khans Cube","Khans Cube","Khans Cube","Khans Cube","Khans Cube","Khans Cube","Khans Cube","Khans Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Synergy Cube","Synergy Cube","Synergy Cube","Synergy Cube","Synergy Cube","Synergy Cube","Kaldheim Cube","Kaldheim Cube","Kaldheim Cube","Kaldheim Cube","Kaldheim Cube","Kaldheim Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Nerva's Cube","Old Border Cube","Old Border Cube","Old Border Cube","Pauper Cube","Pauper Cube","Pauper Cube","Pauper Cube","Super Turbo Time","Super Turbo Time","Super Turbo Time","Synergy Cube","Synergy Cube","Synergy Cube","Synergy Cube","Synergy Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Bolti Vintage Cube","Old Border Cube","Old Border Cube","Old Border Cube","Old Border Cube","Old Border Cube","Old Border Cube","Old Border Cube","Old Border Cube","Genesis","Genesis","Genesis","Genesis","Genesis","Genesis","Genesis","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Stone Soup Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Bar Cube","Boltalandið","Boltalandið","Boltalandið","Boltalandið","Boltalandið","Boltalandið","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Pauper Cube","Pauper Cube","Pauper Cube","Pauper Cube","Pauper Cube","Pauper Cube","Pauper Cube","Ab Wheel","Ab Wheel","Ab Wheel","Ab Wheel","Ab Wheel","Ab Wheel","Modern Stories","Modern Stories","Modern Stories","Modern Stories","Modern Stories","Modern Stories","Modern Stories","Modern Stories","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Meta Memories","Horror Cube","Horror Cube","Horror Cube","Horror Cube","Horror Cube","That's Totally Uncommon","That's Totally Uncommon","That's Totally Uncommon","That's Totally Uncommon","That's Totally Uncommon","That's Totally Uncommon","That's Totally Uncommon","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube","Vintage Cube"],"player":["Aron Elvar","Aron Freyr","Aron Ívars","Binni","Diddi","Einar","Hjalti","Ingvi","Oddur","Styrmir","Tommi","Anna","Arnar","Aron Gauti","Binni","Diddi","Einar","Oddur","Tommi","Anna","Arnar","Binni","Daníel","Diddi","Einar","Ingvi","Oddur","Siggi","Styrmir","Tommi","Aron Elvar","Aron Freyr","Aron Ívars","Diddi","Hjalti","Ingvi","Styrmir","Tommi","Örvar","Arnar","Diddi","Einar Logi","Oddur","Siggi","Tommi","Anna","Aron Freyr","Aron Gauti","Aron Ívars","Binni","Einar","Anna","Diddi","Oddur","Tommi","Victor","Örvar","Aron Freyr","Aron Gauti","Einar","Hjalti","Ingvi","Siggi","Tommi","Ólafur","Aron Elvar","Aron Freyr","Binni","Diddi","Hjalti","Oddur","Tommi","Anna","Aron Freyr","Aron Gauti","Diddi","Einar","Oddur","Tommi","Ólafur","Aron Freyr","Aron Ívars","Binni","Daníel","Diddi","Einar","Victor","Aron Freyr","Aron Ívars","Daníel","Diddi","Einar","Tommi","Aron Freyr","Diddi","Ingvi","Ólafur","Örvar","Aron Gauti","Aron Ívars","Daníel","Aron Gauti","Victor","Ólafur","Örvar","Binni","Ingvi","Oddur","Binni","Einar","Oddur","Tommi","Victor","Anna","Aron Elvar","Aron Freyr","Diddi","Einar","Ingvi","Oddur","Styrmir","Tommi","Ólafur","Örvar","Aron Freyr","Aron Gauti","Hjalti","Ingvi","Örvar","Aron Freyr","Aron Gauti","Aron Ívars","Daníel","Diddi","Hjalti","Tommi","Örvar","Aron Elvar","Aron Freyr","Aron Gauti","Binni","Diddi","Einar","Oddur","Örvar","Diddi","Einar","Hjalti","Ingvi","Oddur","Tommi","Örvar","Aron Elvar","Aron Ívars","Atli","Binni","Daníel","Diddi","Oddur","Tommi","Aron Elvar","Aron Gauti","Atli","Binni","Daníel","Diddi","Hjalti","Tommi","Örvar","Arnar","Aron Elvar","Aron Freyr","Aron Ívars","Atli","Oddur","Tommi","Örvar","Aron Freyr","Atli","Binni","Diddi","Hjalti","Tommi","Aron Elvar","Aron Freyr","Aron Ívars","Binni","Diddi","Tommi","Victor","Ólafur","Örvar","Aron Elvar","Aron Freyr","Aron Ívars","Atli","Binni","Diddi","Fjölnir","Hjalti","Tommi","Victor","Örvar","Aron Elvar","Atli","Binni","Diddi","Fjölnir","Oddur","Tommi","Örvar","Aron Elvar","Aron Gauti","Atli","Binni","Tommi","Victor","Örvar","Anna","Aron Gauti","Atli","Hjalti","Tommi","Örvar","Aron Elvar","Aron Freyr","Binni","Diddi","Einar","Einar Logi","Fjölnir","Ólafur","Arnar","Aron Freyr","Atli","Binni","Diddi","Einar","Einar Logi","Fjölnir","Ingvi","Styrmir","Victor","Örvar","Aron Elvar","Aron Freyr","Atli","Diddi","Einar Logi","Oddur","Tommi","Örvar","Anna","Arnar","Aron Freyr","Atli","Örvar","Aron Freyr","Atli","Diddi","Einar","Oddur","Tommi","Örvar","Anna","Aron Elvar","Aron Freyr","Aron Gauti","Aron Ívars","Atli","Binni","Diddi","Hjalti","Tommi"],"match_wins":[0,2,1,2,1,1,2,1,1,1,2,0,2,1,1,2,2,1,3,2,2,3,1,2,1,0,0,2,1,3,1,3,1,2,2,0,0,2,2,2,1,0,3,2,0,3,1,0,0,2,3,2,0,1,1,2,3,2,0,1,2,3,2,1,1,2,3,0,2,1,1,2,1,3,0,3,0,1,2,2,1,2,3,1,0,0,0,2,2,1,3,2,1,3,2,1,0,3,2,2,3,0,2,1,3,3,2,0,1,2,1,0,3,1,1,3,2,2,2,0,1,3,1,2,1,1,1,3,2,2,0,2,1,3,1,1,2,1,1,2,2,1,2,0,3,1,2,3,1,0,1,2,0,1,1,2,1,2,2,3,2,0,2,1,2,3,0,0,2,3,2,2,0,1,0,2,2,1,2,3,2,0,2,2,2,1,0,2,1,0,2,3,1,1,1,3,2,0,2,2,2,2,1,1,1,1,2,0,2,3,2,3,2,1,2,0,2,2,2,1,2,1,1,2,2,3,0,2,1,2,1,1,0,2,2,2,2,1,1,1,2,0,0,3,0,2,1,2,2,1,3,1,2,3,2,1,0,1,1,2,1,2,2,3,1,3,0,1,2,1,2,2,3,1],"matches":[2,3,2,3,3,3,3,3,2,2,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3,2,2,4,3,3,1,3,3,3,3,3,3,3,3,3,3,4,2,2,3,3,3,3,3,3,3,3,3,3,3,3,2,3,2,3,3,3,3,2,3,2,3,3,3,2,3,3,2,1,1,1,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,4,3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,2,2,3,3,4,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,2,3,3,2,3,3,3,3,3,3,3,1,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,3,2,2,3,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,2,2,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,2,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3],"game_wins":[1,4,2,4,4,4,4,3,3,3,4,2,4,3,2,5,4,2,6,5,5,6,4,5,4,2,2,4,3,6,4,6,2,4,4,0,2,4,6,5,4,1,6,5,2,6,4,3,1,4,6,4,3,3,3,5,6,5,0,3,4,6,4,4,2,4,6,1,4,3,2,5,3,6,0,6,2,3,4,4,2,5,6,3,1,0,0,4,4,3,6,4,3,6,5,4,2,4,4,4,6,3,5,3,4,6,5,2,2,5,3,3,6,2,3,7,4,4,4,0,3,6,3,4,3,4,4,6,5,4,2,5,4,6,2,4,5,3,4,4,4,2,4,0,6,2,5,6,3,2,2,4,1,4,4,5,3,4,4,6,5,1,3,4,4,6,1,0,4,6,4,4,0,4,2,5,5,4,4,6,5,1,4,4,4,3,1,4,3,1,4,6,2,3,3,6,4,1,4,5,5,4,3,3,2,3,5,0,5,6,5,6,3,4,4,2,4,3,4,2,5,0,2,5,4,6,2,5,4,5,2,2,3,5,4,5,4,4,3,3,4,0,0,6,1,5,2,5,5,4,6,4,4,6,5,3,0,3,3,3,3,4,4,5,4,6,2,3,4,3,5,5,6,3],"game_losses":[4,3,3,3,4,5,2,4,3,2,4,5,2,5,3,2,4,4,1,4,3,2,5,4,5,4,6,4,5,2,4,2,4,3,3,6,4,2,4,4,5,2,2,4,6,2,4,6,6,4,2,4,8,3,2,4,1,3,6,4,3,1,3,4,4,3,1,4,2,3,4,2,4,2,4,0,4,5,3,3,2,3,2,3,2,2,2,3,3,4,1,2,4,2,2,5,5,2,3,2,1,6,1,5,4,3,3,5,5,2,5,6,2,4,2,2,2,3,2,6,4,0,5,3,4,5,5,2,4,3,6,3,5,2,5,4,4,4,4,3,2,4,4,6,0,5,2,2,5,5,5,2,6,5,5,4,4,3,3,1,4,3,3,4,3,1,4,3,3,2,5,4,4,4,6,2,3,4,3,1,3,5,3,3,2,4,4,3,4,4,2,0,5,5,4,1,2,2,3,4,2,4,2,5,4,5,3,6,2,1,3,1,5,4,4,7,3,3,3,3,2,4,3,1,3,3,6,3,4,3,4,4,6,3,1,2,4,5,5,3,0,4,6,2,6,3,4,4,3,5,3,4,3,2,2,4,4,4,4,3,4,3,4,0,4,2,6,5,4,4,3,3,2,5]}}]}
+</script>
+<link href="https://cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css">
+
+
+<link rel="stylesheet" href="../styles.css">
+</head>
+
+<body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
+    const toggleBodyColorMode = (bsSheetEl) => {
+      const mode = bsSheetEl.getAttribute("data-mode");
+      const bodyEl = window.document.querySelector("body");
+      if (mode === "dark") {
+        bodyEl.classList.add("quarto-dark");
+        bodyEl.classList.remove("quarto-light");
+      } else {
+        bodyEl.classList.add("quarto-light");
+        bodyEl.classList.remove("quarto-dark");
+      }
+    }
+    const toggleBodyColorPrimary = () => {
+      const bsSheetEl = window.document.querySelector("link#quarto-bootstrap:not([rel=disabled-stylesheet])");
+      if (bsSheetEl) {
+        toggleBodyColorMode(bsSheetEl);
+      }
+    }
+    const setColorSchemeToggle = (alternate) => {
+      const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+      for (let i=0; i < toggles.length; i++) {
+        const toggle = toggles[i];
+        if (toggle) {
+          if (alternate) {
+            toggle.classList.add("alternate");
+          } else {
+            toggle.classList.remove("alternate");
+          }
+        }
+      }
+    };
+    const toggleColorMode = (alternate) => {
+      // Switch the stylesheets
+      const primaryStylesheets = window.document.querySelectorAll('link.quarto-color-scheme:not(.quarto-color-alternate)');
+      const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+      manageTransitions('#quarto-margin-sidebar .nav-link', false);
+      if (alternate) {
+        // note: dark is layered on light, we don't disable primary!
+        enableStylesheet(alternateStylesheets);
+        for (const sheetNode of alternateStylesheets) {
+          if (sheetNode.id === "quarto-bootstrap") {
+            toggleBodyColorMode(sheetNode);
+          }
+        }
+      } else {
+        disableStylesheet(alternateStylesheets);
+        enableStylesheet(primaryStylesheets)
+        toggleBodyColorPrimary();
+      }
+      manageTransitions('#quarto-margin-sidebar .nav-link', true);
+      // Switch the toggles
+      setColorSchemeToggle(alternate)
+      // Hack to workaround the fact that safari doesn't
+      // properly recolor the scrollbar when toggling (#1455)
+      if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+        manageTransitions("body", false);
+        window.scrollTo(0, 1);
+        setTimeout(() => {
+          window.scrollTo(0, 0);
+          manageTransitions("body", true);
+        }, 40);
+      }
+    }
+    const disableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        stylesheet.rel = 'disabled-stylesheet';
+      }
+    }
+    const enableStylesheet = (stylesheets) => {
+      for (let i=0; i < stylesheets.length; i++) {
+        const stylesheet = stylesheets[i];
+        if(stylesheet.rel !== 'stylesheet') { // for Chrome, which will still FOUC without this check
+          stylesheet.rel = 'stylesheet';
+        }
+      }
+    }
+    const manageTransitions = (selector, allowTransitions) => {
+      const els = window.document.querySelectorAll(selector);
+      for (let i=0; i < els.length; i++) {
+        const el = els[i];
+        if (allowTransitions) {
+          el.classList.remove('notransition');
+        } else {
+          el.classList.add('notransition');
+        }
+      }
+    }
+    const isFileUrl = () => {
+      return window.location.protocol === 'file:';
+    }
+    const hasAlternateSentinel = () => {
+      let styleSentinel = getColorSchemeSentinel();
+      if (styleSentinel !== null) {
+        return styleSentinel === "alternate";
+      } else {
+        return false;
+      }
+    }
+    const setStyleSentinel = (alternate) => {
+      const value = alternate ? "alternate" : "default";
+      if (!isFileUrl()) {
+        window.localStorage.setItem("quarto-color-scheme", value);
+      } else {
+        localAlternateSentinel = value;
+      }
+    }
+    const getColorSchemeSentinel = () => {
+      if (!isFileUrl()) {
+        const storageValue = window.localStorage.getItem("quarto-color-scheme");
+        return storageValue != null ? storageValue : localAlternateSentinel;
+      } else {
+        return localAlternateSentinel;
+      }
+    }
+    const toggleGiscusIfUsed = (isAlternate, darkModeDefault) => {
+      const baseTheme = document.querySelector('#giscus-base-theme')?.value ?? 'light';
+      const alternateTheme = document.querySelector('#giscus-alt-theme')?.value ?? 'dark';
+      let newTheme = '';
+      if(authorPrefersDark) {
+        newTheme = isAlternate ? baseTheme : alternateTheme;
+      } else {
+        newTheme = isAlternate ? alternateTheme : baseTheme;
+      }
+      const changeGiscusTheme = () => {
+        // From: https://github.com/giscus/giscus/issues/336
+        const sendMessage = (message) => {
+          const iframe = document.querySelector('iframe.giscus-frame');
+          if (!iframe) return;
+          iframe.contentWindow.postMessage({ giscus: message }, 'https://giscus.app');
+        }
+        sendMessage({
+          setConfig: {
+            theme: newTheme
+          }
+        });
+      }
+      const isGiscussLoaded = window.document.querySelector('iframe.giscus-frame') !== null;
+      if (isGiscussLoaded) {
+        changeGiscusTheme();
+      }
+    };
+    const authorPrefersDark = false;
+    const darkModeDefault = authorPrefersDark;
+      document.querySelector('link#quarto-text-highlighting-styles.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+      document.querySelector('link#quarto-bootstrap.quarto-color-scheme-extra').rel = 'disabled-stylesheet';
+    let localAlternateSentinel = darkModeDefault ? 'alternate' : 'default';
+    // Dark / light mode switch
+    window.quartoToggleColorScheme = () => {
+      // Read the current dark / light value
+      let toAlternate = !hasAlternateSentinel();
+      toggleColorMode(toAlternate);
+      setStyleSentinel(toAlternate);
+      toggleGiscusIfUsed(toAlternate, darkModeDefault);
+      window.dispatchEvent(new Event('resize'));
+    };
+    // Switch to dark mode if need be
+    if (hasAlternateSentinel()) {
+      toggleColorMode(true);
+    } else {
+      toggleColorMode(false);
+    }
+  </script>
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+    <nav class="navbar navbar-expand-lg " data-bs-theme="dark">
+      <div class="navbar-container container-fluid">
+      <div class="navbar-brand-container mx-auto">
+    <a class="navbar-brand" href="./index.html">
+    <span class="navbar-title">MtG Kubbur</span>
+    </a>
+  </div>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse" aria-controls="navbarCollapse" role="menu" aria-expanded="false" aria-label="Toggle navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+  <span class="navbar-toggler-icon"></span>
+</button>
+          <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav navbar-nav-scroll me-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./index.html"> 
+<span class="menu-text">Rankings</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./player.html"> 
+<span class="menu-text">Player</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./head-to-head.html"> 
+<span class="menu-text">Head-to-Head</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link active" href="./cubes.html" aria-current="page"> 
+<span class="menu-text">Cubes</span></a>
+  </li>  
+  <li class="nav-item">
+    <a class="nav-link" href="./calendar.html"> 
+<span class="menu-text">Calendar</span></a>
+  </li>  
+</ul>
+            <ul class="navbar-nav navbar-nav-scroll ms-auto">
+  <li class="nav-item">
+    <a class="nav-link" href="./../index.html"> 
+<span class="menu-text">IS</span></a>
+  </li>  
+  <li class="nav-item compact">
+    <a class="nav-link" href="https://github.com/mtgkubbur/mtgkubbur.github.io"> <i class="bi bi-github" role="img" aria-label="GitHub">
+</i> 
+<span class="menu-text"></span></a>
+  </li>  
+</ul>
+          </div> <!-- /navcollapse -->
+            <div class="quarto-navbar-tools">
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div> <!-- /container-fluid -->
+    </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article page-navbar">
+<!-- sidebar -->
+<!-- margin-sidebar -->
+    
+<!-- main -->
+<main class="content" id="quarto-document-content"><header id="title-block-header" class="quarto-title-block"></header>
+
+
+
+
+
+<div id="theme-detect" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb1" data-startfrom="115" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 114;"><span id="cb1-115"><a href="#cb1-115" aria-hidden="true" tabindex="-1"></a>isDark <span class="op">=</span> Generators<span class="op">.</span><span class="fu">observe</span>(notify <span class="kw">=&gt;</span> {</span>
+<span id="cb1-116"><a href="#cb1-116" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> current <span class="op">=</span> () <span class="kw">=&gt;</span> <span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">.</span><span class="at">classList</span><span class="op">.</span><span class="fu">contains</span>(<span class="st">"quarto-dark"</span>)<span class="op">;</span></span>
+<span id="cb1-117"><a href="#cb1-117" aria-hidden="true" tabindex="-1"></a>  <span class="fu">notify</span>(<span class="fu">current</span>())<span class="op">;</span></span>
+<span id="cb1-118"><a href="#cb1-118" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-119"><a href="#cb1-119" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> observer <span class="op">=</span> <span class="kw">new</span> <span class="bu">MutationObserver</span>(() <span class="kw">=&gt;</span> {</span>
+<span id="cb1-120"><a href="#cb1-120" aria-hidden="true" tabindex="-1"></a>    <span class="fu">notify</span>(<span class="fu">current</span>())<span class="op">;</span></span>
+<span id="cb1-121"><a href="#cb1-121" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb1-122"><a href="#cb1-122" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-123"><a href="#cb1-123" aria-hidden="true" tabindex="-1"></a>  observer<span class="op">.</span><span class="fu">observe</span>(<span class="bu">document</span><span class="op">.</span><span class="at">body</span><span class="op">,</span> { <span class="dt">attributes</span><span class="op">:</span> <span class="kw">true</span><span class="op">,</span> <span class="dt">attributeFilter</span><span class="op">:</span> [<span class="st">"class"</span>] })<span class="op">;</span></span>
+<span id="cb1-124"><a href="#cb1-124" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> () <span class="kw">=&gt;</span> observer<span class="op">.</span><span class="fu">disconnect</span>()<span class="op">;</span></span>
+<span id="cb1-125"><a href="#cb1-125" aria-hidden="true" tabindex="-1"></a>})</span>
+<span id="cb1-126"><a href="#cb1-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-127"><a href="#cb1-127" aria-hidden="true" tabindex="-1"></a>themeColors <span class="op">=</span> {</span>
+<span id="cb1-128"><a href="#cb1-128" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> _ <span class="op">=</span> isDark<span class="op">;</span></span>
+<span id="cb1-129"><a href="#cb1-129" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> bodyStyles <span class="op">=</span> <span class="fu">getComputedStyle</span>(<span class="bu">document</span><span class="op">.</span><span class="at">body</span>)<span class="op">;</span></span>
+<span id="cb1-130"><a href="#cb1-130" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rootStyles <span class="op">=</span> <span class="fu">getComputedStyle</span>(<span class="bu">document</span><span class="op">.</span><span class="at">documentElement</span>)<span class="op">;</span></span>
+<span id="cb1-131"><a href="#cb1-131" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cssVar <span class="op">=</span> (name<span class="op">,</span> fallback <span class="op">=</span> <span class="st">""</span>) <span class="kw">=&gt;</span></span>
+<span id="cb1-132"><a href="#cb1-132" aria-hidden="true" tabindex="-1"></a>    bodyStyles<span class="op">.</span><span class="fu">getPropertyValue</span>(name)<span class="op">.</span><span class="fu">trim</span>() <span class="op">||</span></span>
+<span id="cb1-133"><a href="#cb1-133" aria-hidden="true" tabindex="-1"></a>    rootStyles<span class="op">.</span><span class="fu">getPropertyValue</span>(name)<span class="op">.</span><span class="fu">trim</span>() <span class="op">||</span></span>
+<span id="cb1-134"><a href="#cb1-134" aria-hidden="true" tabindex="-1"></a>    fallback<span class="op">;</span></span>
+<span id="cb1-135"><a href="#cb1-135" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-136"><a href="#cb1-136" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> {</span>
+<span id="cb1-137"><a href="#cb1-137" aria-hidden="true" tabindex="-1"></a>    <span class="dt">blue</span><span class="op">:</span> <span class="fu">cssVar</span>(<span class="st">"--mtg-blue"</span><span class="op">,</span> <span class="st">"#0e68ab"</span>)<span class="op">,</span></span>
+<span id="cb1-138"><a href="#cb1-138" aria-hidden="true" tabindex="-1"></a>    <span class="dt">green</span><span class="op">:</span> <span class="fu">cssVar</span>(<span class="st">"--mtg-green"</span><span class="op">,</span> <span class="st">"#00733e"</span>)<span class="op">,</span></span>
+<span id="cb1-139"><a href="#cb1-139" aria-hidden="true" tabindex="-1"></a>    <span class="dt">red</span><span class="op">:</span> <span class="fu">cssVar</span>(<span class="st">"--mtg-red"</span><span class="op">,</span> <span class="st">"#d3202a"</span>)<span class="op">,</span></span>
+<span id="cb1-140"><a href="#cb1-140" aria-hidden="true" tabindex="-1"></a>    <span class="dt">gold</span><span class="op">:</span> <span class="fu">cssVar</span>(<span class="st">"--mtg-gold"</span><span class="op">,</span> <span class="st">"#8b6914"</span>)<span class="op">,</span></span>
+<span id="cb1-141"><a href="#cb1-141" aria-hidden="true" tabindex="-1"></a>    <span class="dt">text</span><span class="op">:</span> <span class="fu">cssVar</span>(<span class="st">"--text-primary"</span><span class="op">,</span> <span class="st">"#2a1f14"</span>)<span class="op">,</span></span>
+<span id="cb1-142"><a href="#cb1-142" aria-hidden="true" tabindex="-1"></a>    <span class="dt">muted</span><span class="op">:</span> <span class="fu">cssVar</span>(<span class="st">"--text-muted"</span><span class="op">,</span> <span class="st">"#5c4f42"</span>)</span>
+<span id="cb1-143"><a href="#cb1-143" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
+<span id="cb1-144"><a href="#cb1-144" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="theme-detect-1">
+<div id="ojs-cell-1-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="theme-detect-2">
+<div id="ojs-cell-1-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div id="data-prep" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb2" data-startfrom="149" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 148;"><span id="cb2-149"><a href="#cb2-149" aria-hidden="true" tabindex="-1"></a>perCubePlayer <span class="op">=</span> <span class="fu">transpose</span>(per_cube_player_data)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-150"><a href="#cb2-150" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb2-151"><a href="#cb2-151" aria-hidden="true" tabindex="-1"></a>  <span class="dt">wins</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">wins</span><span class="op">,</span></span>
+<span id="cb2-152"><a href="#cb2-152" aria-hidden="true" tabindex="-1"></a>  <span class="dt">losses</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">losses</span><span class="op">,</span></span>
+<span id="cb2-153"><a href="#cb2-153" aria-hidden="true" tabindex="-1"></a>  <span class="dt">total</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">total</span><span class="op">,</span></span>
+<span id="cb2-154"><a href="#cb2-154" aria-hidden="true" tabindex="-1"></a>  <span class="dt">winrate</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">winrate</span></span>
+<span id="cb2-155"><a href="#cb2-155" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb2-156"><a href="#cb2-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-157"><a href="#cb2-157" aria-hidden="true" tabindex="-1"></a>trophies <span class="op">=</span> <span class="fu">transpose</span>(trophy_list)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-158"><a href="#cb2-158" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb2-159"><a href="#cb2-159" aria-hidden="true" tabindex="-1"></a>  <span class="dt">trophies</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">trophies</span></span>
+<span id="cb2-160"><a href="#cb2-160" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb2-161"><a href="#cb2-161" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-162"><a href="#cb2-162" aria-hidden="true" tabindex="-1"></a>cubeSummary <span class="op">=</span> <span class="fu">transpose</span>(cube_summary_data)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-163"><a href="#cb2-163" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb2-164"><a href="#cb2-164" aria-hidden="true" tabindex="-1"></a>  <span class="dt">total_matches</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">total_matches</span><span class="op">,</span></span>
+<span id="cb2-165"><a href="#cb2-165" aria-hidden="true" tabindex="-1"></a>  <span class="dt">total_events</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">total_events</span><span class="op">,</span></span>
+<span id="cb2-166"><a href="#cb2-166" aria-hidden="true" tabindex="-1"></a>  <span class="dt">unique_players</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">unique_players</span><span class="op">,</span></span>
+<span id="cb2-167"><a href="#cb2-167" aria-hidden="true" tabindex="-1"></a>  <span class="dt">first_played</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(d<span class="op">.</span><span class="at">first_played</span>)<span class="op">,</span></span>
+<span id="cb2-168"><a href="#cb2-168" aria-hidden="true" tabindex="-1"></a>  <span class="dt">last_played</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(d<span class="op">.</span><span class="at">last_played</span>)</span>
+<span id="cb2-169"><a href="#cb2-169" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb2-170"><a href="#cb2-170" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-171"><a href="#cb2-171" aria-hidden="true" tabindex="-1"></a>eventResults <span class="op">=</span> <span class="fu">transpose</span>(event_results_data)<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> ({</span>
+<span id="cb2-172"><a href="#cb2-172" aria-hidden="true" tabindex="-1"></a>  <span class="op">...</span>d<span class="op">,</span></span>
+<span id="cb2-173"><a href="#cb2-173" aria-hidden="true" tabindex="-1"></a>  <span class="dt">date</span><span class="op">:</span> <span class="kw">new</span> <span class="bu">Date</span>(d<span class="op">.</span><span class="at">date</span>)<span class="op">,</span></span>
+<span id="cb2-174"><a href="#cb2-174" aria-hidden="true" tabindex="-1"></a>  <span class="dt">match_wins</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">match_wins</span><span class="op">,</span></span>
+<span id="cb2-175"><a href="#cb2-175" aria-hidden="true" tabindex="-1"></a>  <span class="dt">matches</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">matches</span><span class="op">,</span></span>
+<span id="cb2-176"><a href="#cb2-176" aria-hidden="true" tabindex="-1"></a>  <span class="dt">game_wins</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">game_wins</span><span class="op">,</span></span>
+<span id="cb2-177"><a href="#cb2-177" aria-hidden="true" tabindex="-1"></a>  <span class="dt">game_losses</span><span class="op">:</span> <span class="op">+</span>d<span class="op">.</span><span class="at">game_losses</span></span>
+<span id="cb2-178"><a href="#cb2-178" aria-hidden="true" tabindex="-1"></a>}))</span>
+<span id="cb2-179"><a href="#cb2-179" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-180"><a href="#cb2-180" aria-hidden="true" tabindex="-1"></a>cubeNames <span class="op">=</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>(cubeSummary<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span>))]<span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span></span>
+<span id="cb2-181"><a href="#cb2-181" aria-hidden="true" tabindex="-1"></a>  a<span class="op">.</span><span class="fu">localeCompare</span>(b<span class="op">,</span> <span class="st">"en"</span>)</span>
+<span id="cb2-182"><a href="#cb2-182" aria-hidden="true" tabindex="-1"></a>)</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-1">
+<div id="ojs-cell-2-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-2">
+<div id="ojs-cell-2-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-3">
+<div id="ojs-cell-2-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-4">
+<div id="ojs-cell-2-4" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="data-prep-5">
+<div id="ojs-cell-2-5" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="page-header">
+<div class="mana-pips">
+  <i class="ms ms-w mana-pip-w"></i>
+  <i class="ms ms-u mana-pip-u"></i>
+  <i class="ms ms-b mana-pip-b"></i>
+  <i class="ms ms-r mana-pip-r"></i>
+  <i class="ms ms-g mana-pip-g"></i>
+</div>
+<section id="cubes" class="level1 title">
+<h1 class="title">Cubes</h1>
+<p><span class="page-desc">History and stats for individual cubes</span></p>
+</section>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="205" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 204;"><span id="cb3-205"><a href="#cb3-205" aria-hidden="true" tabindex="-1"></a>viewof selectedCube <span class="op">=</span> Inputs<span class="op">.</span><span class="fu">select</span>([<span class="st">""</span><span class="op">,</span> <span class="op">...</span>cubeNames]<span class="op">,</span> {</span>
+<span id="cb3-206"><a href="#cb3-206" aria-hidden="true" tabindex="-1"></a>  <span class="dt">label</span><span class="op">:</span> <span class="st">"Cube:"</span><span class="op">,</span></span>
+<span id="cb3-207"><a href="#cb3-207" aria-hidden="true" tabindex="-1"></a>  <span class="dt">value</span><span class="op">:</span> <span class="st">""</span><span class="op">,</span></span>
+<span id="cb3-208"><a href="#cb3-208" aria-hidden="true" tabindex="-1"></a>  <span class="dt">format</span><span class="op">:</span> d <span class="kw">=&gt;</span> d <span class="op">===</span> <span class="st">""</span> <span class="op">?</span> <span class="st">"Choose a cube..."</span> <span class="op">:</span> d</span>
+<span id="cb3-209"><a href="#cb3-209" aria-hidden="true" tabindex="-1"></a>})</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cube-page-selector" class="cell-output cell-output-display">
+<div id="ojs-cell-3" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb4" data-startfrom="214" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 213;"><span id="cb4-214"><a href="#cb4-214" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb4-215"><a href="#cb4-215" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (selectedCube <span class="op">===</span> <span class="st">""</span>) {</span>
+<span id="cb4-216"><a href="#cb4-216" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
+<span id="cb4-217"><a href="#cb4-217" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#9876;&lt;/div&gt;</span></span>
+<span id="cb4-218"><a href="#cb4-218" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;Choose a cube to see details&lt;/div&gt;</span></span>
+<span id="cb4-219"><a href="#cb4-219" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-220"><a href="#cb4-220" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb4-221"><a href="#cb4-221" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-222"><a href="#cb4-222" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> summary <span class="op">=</span> cubeSummary<span class="op">.</span><span class="fu">find</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> selectedCube)<span class="op">;</span></span>
+<span id="cb4-223"><a href="#cb4-223" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> players <span class="op">=</span> perCubePlayer</span>
+<span id="cb4-224"><a href="#cb4-224" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> selectedCube)</span>
+<span id="cb4-225"><a href="#cb4-225" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">winrate</span> <span class="op">-</span> a<span class="op">.</span><span class="at">winrate</span> <span class="op">||</span> b<span class="op">.</span><span class="at">total</span> <span class="op">-</span> a<span class="op">.</span><span class="at">total</span>)<span class="op">;</span></span>
+<span id="cb4-226"><a href="#cb4-226" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> cubeTrophies <span class="op">=</span> trophies</span>
+<span id="cb4-227"><a href="#cb4-227" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> selectedCube)</span>
+<span id="cb4-228"><a href="#cb4-228" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">trophies</span> <span class="op">-</span> a<span class="op">.</span><span class="at">trophies</span>)<span class="op">;</span></span>
+<span id="cb4-229"><a href="#cb4-229" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> events <span class="op">=</span> eventResults<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> selectedCube)<span class="op">;</span></span>
+<span id="cb4-230"><a href="#cb4-230" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-231"><a href="#cb4-231" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fmtDate <span class="op">=</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">toLocaleDateString</span>(<span class="st">"en-GB"</span><span class="op">,</span> {</span>
+<span id="cb4-232"><a href="#cb4-232" aria-hidden="true" tabindex="-1"></a>    <span class="dt">day</span><span class="op">:</span> <span class="st">"2-digit"</span><span class="op">,</span></span>
+<span id="cb4-233"><a href="#cb4-233" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span><span class="op">:</span> <span class="st">"short"</span><span class="op">,</span></span>
+<span id="cb4-234"><a href="#cb4-234" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span><span class="op">:</span> <span class="st">"numeric"</span></span>
+<span id="cb4-235"><a href="#cb4-235" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb4-236"><a href="#cb4-236" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-237"><a href="#cb4-237" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> summaryCard <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="player-summary"&gt;</span></span>
+<span id="cb4-238"><a href="#cb4-238" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="stat"&gt;</span></span>
+<span id="cb4-239"><a href="#cb4-239" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-value" style="color: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">blue</span><span class="sc">}</span><span class="vs">;"&gt;</span><span class="sc">${</span>summary<span class="op">.</span><span class="at">total_events</span><span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-240"><a href="#cb4-240" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-label"&gt;Events&lt;/div&gt;</span></span>
+<span id="cb4-241"><a href="#cb4-241" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-242"><a href="#cb4-242" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="stat"&gt;</span></span>
+<span id="cb4-243"><a href="#cb4-243" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-value" style="color: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">red</span><span class="sc">}</span><span class="vs">;"&gt;</span><span class="sc">${</span>summary<span class="op">.</span><span class="at">total_matches</span><span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-244"><a href="#cb4-244" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-label"&gt;Matches&lt;/div&gt;</span></span>
+<span id="cb4-245"><a href="#cb4-245" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-246"><a href="#cb4-246" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="stat"&gt;</span></span>
+<span id="cb4-247"><a href="#cb4-247" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-value" style="color: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">green</span><span class="sc">}</span><span class="vs">;"&gt;</span><span class="sc">${</span>summary<span class="op">.</span><span class="at">unique_players</span><span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-248"><a href="#cb4-248" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-label"&gt;Players&lt;/div&gt;</span></span>
+<span id="cb4-249"><a href="#cb4-249" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-250"><a href="#cb4-250" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="stat"&gt;</span></span>
+<span id="cb4-251"><a href="#cb4-251" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-value" style="color: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">gold</span><span class="sc">}</span><span class="vs">;"&gt;</span><span class="sc">${</span><span class="fu">fmtDate</span>(summary<span class="op">.</span><span class="at">first_played</span>)<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-252"><a href="#cb4-252" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-label"&gt;First played&lt;/div&gt;</span></span>
+<span id="cb4-253"><a href="#cb4-253" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-254"><a href="#cb4-254" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="stat"&gt;</span></span>
+<span id="cb4-255"><a href="#cb4-255" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-value" style="color: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">gold</span><span class="sc">}</span><span class="vs">;"&gt;</span><span class="sc">${</span><span class="fu">fmtDate</span>(summary<span class="op">.</span><span class="at">last_played</span>)<span class="sc">}</span><span class="vs">&lt;/div&gt;</span></span>
+<span id="cb4-256"><a href="#cb4-256" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="stat-label"&gt;Last played&lt;/div&gt;</span></span>
+<span id="cb4-257"><a href="#cb4-257" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb4-258"><a href="#cb4-258" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-259"><a href="#cb4-259" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-260"><a href="#cb4-260" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> trophyCard <span class="op">=</span> cubeTrophies<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="fu">html</span><span class="vs">``</span> <span class="op">:</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-261"><a href="#cb4-261" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="trophy-card"&gt;</span></span>
+<span id="cb4-262"><a href="#cb4-262" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="cube-affinity-title"&gt;Trophy leaders&lt;/div&gt;</span></span>
+<span id="cb4-263"><a href="#cb4-263" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;table class="trophy-table"&gt;</span></span>
+<span id="cb4-264"><a href="#cb4-264" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;thead&gt;</span></span>
+<span id="cb4-265"><a href="#cb4-265" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
+<span id="cb4-266"><a href="#cb4-266" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Player&lt;/th&gt;</span></span>
+<span id="cb4-267"><a href="#cb4-267" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Trophies&lt;/th&gt;</span></span>
+<span id="cb4-268"><a href="#cb4-268" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
+<span id="cb4-269"><a href="#cb4-269" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/thead&gt;</span></span>
+<span id="cb4-270"><a href="#cb4-270" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;tbody&gt;</span></span>
+<span id="cb4-271"><a href="#cb4-271" aria-hidden="true" tabindex="-1"></a><span class="vs">          </span><span class="sc">${</span>cubeTrophies<span class="op">.</span><span class="fu">map</span>(t <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-272"><a href="#cb4-272" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr&gt;</span></span>
+<span id="cb4-273"><a href="#cb4-273" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td class="cube-record-name"&gt;</span><span class="sc">${</span>t<span class="op">.</span><span class="at">player</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-274"><a href="#cb4-274" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="text-align: center; font-weight: 600; color: </span><span class="sc">${</span>themeColors<span class="op">.</span><span class="at">gold</span><span class="sc">}</span><span class="vs">;"&gt;</span><span class="sc">${</span><span class="st">"🏆"</span><span class="op">.</span><span class="fu">repeat</span>(t<span class="op">.</span><span class="at">trophies</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-275"><a href="#cb4-275" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
+<span id="cb4-276"><a href="#cb4-276" aria-hidden="true" tabindex="-1"></a><span class="vs">          `</span>)<span class="sc">}</span></span>
+<span id="cb4-277"><a href="#cb4-277" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/tbody&gt;</span></span>
+<span id="cb4-278"><a href="#cb4-278" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/table&gt;</span></span>
+<span id="cb4-279"><a href="#cb4-279" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-280"><a href="#cb4-280" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-281"><a href="#cb4-281" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> matchByPlayer <span class="op">=</span> <span class="kw">new</span> <span class="bu">Map</span>()<span class="op">;</span></span>
+<span id="cb4-282"><a href="#cb4-282" aria-hidden="true" tabindex="-1"></a>  events<span class="op">.</span><span class="fu">forEach</span>(d <span class="kw">=&gt;</span> {</span>
+<span id="cb4-283"><a href="#cb4-283" aria-hidden="true" tabindex="-1"></a>    <span class="cf">if</span> (<span class="op">!</span>matchByPlayer<span class="op">.</span><span class="fu">has</span>(d<span class="op">.</span><span class="at">player</span>)) matchByPlayer<span class="op">.</span><span class="fu">set</span>(d<span class="op">.</span><span class="at">player</span><span class="op">,</span> { <span class="dt">mw</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">ml</span><span class="op">:</span> <span class="dv">0</span> })<span class="op">;</span></span>
+<span id="cb4-284"><a href="#cb4-284" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> s <span class="op">=</span> matchByPlayer<span class="op">.</span><span class="fu">get</span>(d<span class="op">.</span><span class="at">player</span>)<span class="op">;</span></span>
+<span id="cb4-285"><a href="#cb4-285" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="at">mw</span> <span class="op">+=</span> d<span class="op">.</span><span class="at">match_wins</span><span class="op">;</span></span>
+<span id="cb4-286"><a href="#cb4-286" aria-hidden="true" tabindex="-1"></a>    s<span class="op">.</span><span class="at">ml</span> <span class="op">+=</span> d<span class="op">.</span><span class="at">matches</span> <span class="op">-</span> d<span class="op">.</span><span class="at">match_wins</span><span class="op">;</span></span>
+<span id="cb4-287"><a href="#cb4-287" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb4-288"><a href="#cb4-288" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-289"><a href="#cb4-289" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> enrichedPlayers <span class="op">=</span> players<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> {</span>
+<span id="cb4-290"><a href="#cb4-290" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> ms <span class="op">=</span> matchByPlayer<span class="op">.</span><span class="fu">get</span>(r<span class="op">.</span><span class="at">player</span>) <span class="op">||</span> { <span class="dt">mw</span><span class="op">:</span> <span class="dv">0</span><span class="op">,</span> <span class="dt">ml</span><span class="op">:</span> <span class="dv">0</span> }<span class="op">;</span></span>
+<span id="cb4-291"><a href="#cb4-291" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> mTotal <span class="op">=</span> ms<span class="op">.</span><span class="at">mw</span> <span class="op">+</span> ms<span class="op">.</span><span class="at">ml</span><span class="op">;</span></span>
+<span id="cb4-292"><a href="#cb4-292" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> { <span class="op">...</span>r<span class="op">,</span> <span class="dt">mw</span><span class="op">:</span> ms<span class="op">.</span><span class="at">mw</span><span class="op">,</span> <span class="dt">ml</span><span class="op">:</span> ms<span class="op">.</span><span class="at">ml</span><span class="op">,</span> mTotal<span class="op">,</span> <span class="dt">mPct</span><span class="op">:</span> mTotal <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="bu">Math</span><span class="op">.</span><span class="fu">round</span>(ms<span class="op">.</span><span class="at">mw</span> <span class="op">/</span> mTotal <span class="op">*</span> <span class="dv">100</span>) <span class="op">:</span> <span class="dv">0</span> }<span class="op">;</span></span>
+<span id="cb4-293"><a href="#cb4-293" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb4-294"><a href="#cb4-294" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-295"><a href="#cb4-295" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> rankingsCard <span class="op">=</span> enrichedPlayers<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span> <span class="op">?</span> <span class="fu">html</span><span class="vs">``</span> <span class="op">:</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-296"><a href="#cb4-296" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="cube-combined-card"&gt;</span></span>
+<span id="cb4-297"><a href="#cb4-297" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="cube-affinity-title"&gt;Player results&lt;/div&gt;</span></span>
+<span id="cb4-298"><a href="#cb4-298" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;table class="cube-combined-table"&gt;</span></span>
+<span id="cb4-299"><a href="#cb4-299" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;thead&gt;</span></span>
+<span id="cb4-300"><a href="#cb4-300" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
+<span id="cb4-301"><a href="#cb4-301" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb4-302"><a href="#cb4-302" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th colspan="3" class="col-group-header"&gt;Matches&lt;/th&gt;</span></span>
+<span id="cb4-303"><a href="#cb4-303" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th colspan="3" class="col-group-header"&gt;Games&lt;/th&gt;</span></span>
+<span id="cb4-304"><a href="#cb4-304" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
+<span id="cb4-305"><a href="#cb4-305" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
+<span id="cb4-306"><a href="#cb4-306" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Player&lt;/th&gt;</span></span>
+<span id="cb4-307"><a href="#cb4-307" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;W&lt;/th&gt;</span></span>
+<span id="cb4-308"><a href="#cb4-308" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;L&lt;/th&gt;</span></span>
+<span id="cb4-309"><a href="#cb4-309" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;%&lt;/th&gt;</span></span>
+<span id="cb4-310"><a href="#cb4-310" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;W&lt;/th&gt;</span></span>
+<span id="cb4-311"><a href="#cb4-311" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;L&lt;/th&gt;</span></span>
+<span id="cb4-312"><a href="#cb4-312" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;%&lt;/th&gt;</span></span>
+<span id="cb4-313"><a href="#cb4-313" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
+<span id="cb4-314"><a href="#cb4-314" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/thead&gt;</span></span>
+<span id="cb4-315"><a href="#cb4-315" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;tbody&gt;</span></span>
+<span id="cb4-316"><a href="#cb4-316" aria-hidden="true" tabindex="-1"></a><span class="vs">          </span><span class="sc">${</span>enrichedPlayers<span class="op">.</span><span class="fu">map</span>(r <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb4-317"><a href="#cb4-317" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr&gt;</span></span>
+<span id="cb4-318"><a href="#cb4-318" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td class="cube-record-name"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">player</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-319"><a href="#cb4-319" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">mw</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-320"><a href="#cb4-320" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">ml</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-321"><a href="#cb4-321" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">mPct</span> <span class="op">&gt;=</span> <span class="dv">50</span> <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">mPct</span><span class="sc">}</span><span class="vs">%&lt;/td&gt;</span></span>
+<span id="cb4-322"><a href="#cb4-322" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-323"><a href="#cb4-323" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">losses</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb4-324"><a href="#cb4-324" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="color: </span><span class="sc">${</span>r<span class="op">.</span><span class="at">winrate</span> <span class="op">&gt;=</span> <span class="dv">50</span> <span class="op">?</span> themeColors<span class="op">.</span><span class="at">green</span> <span class="op">:</span> themeColors<span class="op">.</span><span class="at">red</span><span class="sc">}</span><span class="vs">; font-weight: 600"&gt;</span><span class="sc">${</span>r<span class="op">.</span><span class="at">winrate</span><span class="sc">}</span><span class="vs">%&lt;/td&gt;</span></span>
+<span id="cb4-325"><a href="#cb4-325" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
+<span id="cb4-326"><a href="#cb4-326" aria-hidden="true" tabindex="-1"></a><span class="vs">          `</span>)<span class="sc">}</span></span>
+<span id="cb4-327"><a href="#cb4-327" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/tbody&gt;</span></span>
+<span id="cb4-328"><a href="#cb4-328" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/table&gt;</span></span>
+<span id="cb4-329"><a href="#cb4-329" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-330"><a href="#cb4-330" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb4-331"><a href="#cb4-331" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="kubbar-content"&gt;</span></span>
+<span id="cb4-332"><a href="#cb4-332" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>summaryCard<span class="sc">}</span></span>
+<span id="cb4-333"><a href="#cb4-333" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>trophyCard<span class="sc">}</span></span>
+<span id="cb4-334"><a href="#cb4-334" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>rankingsCard<span class="sc">}</span></span>
+<span id="cb4-335"><a href="#cb4-335" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb4-336"><a href="#cb4-336" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="cube-content" class="cell-output cell-output-display">
+<div id="ojs-cell-4" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+<div id="event-date-selector" class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb5" data-startfrom="342" data-source-offset="-0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 341;"><span id="cb5-342"><a href="#cb5-342" aria-hidden="true" tabindex="-1"></a>cubeEventDates <span class="op">=</span> {</span>
+<span id="cb5-343"><a href="#cb5-343" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (selectedCube <span class="op">===</span> <span class="st">""</span>) <span class="cf">return</span> []<span class="op">;</span></span>
+<span id="cb5-344"><a href="#cb5-344" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> events <span class="op">=</span> eventResults<span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> selectedCube)<span class="op">;</span></span>
+<span id="cb5-345"><a href="#cb5-345" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> [<span class="op">...</span><span class="kw">new</span> <span class="bu">Set</span>(events<span class="op">.</span><span class="fu">map</span>(d <span class="kw">=&gt;</span> <span class="op">+</span>d<span class="op">.</span><span class="at">date</span>))]</span>
+<span id="cb5-346"><a href="#cb5-346" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b <span class="op">-</span> a)<span class="op">;</span></span>
+<span id="cb5-347"><a href="#cb5-347" aria-hidden="true" tabindex="-1"></a>}</span>
+<span id="cb5-348"><a href="#cb5-348" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-349"><a href="#cb5-349" aria-hidden="true" tabindex="-1"></a>viewof selectedEventDate <span class="op">=</span> {</span>
+<span id="cb5-350"><a href="#cb5-350" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (cubeEventDates<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span> <span class="bu">Object</span><span class="op">.</span><span class="fu">assign</span>(<span class="fu">html</span><span class="vs">`&lt;span&gt;&lt;/span&gt;`</span><span class="op">,</span> { <span class="dt">value</span><span class="op">:</span> <span class="st">""</span> })<span class="op">;</span></span>
+<span id="cb5-351"><a href="#cb5-351" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-352"><a href="#cb5-352" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fmtDate <span class="op">=</span> ms <span class="kw">=&gt;</span> <span class="kw">new</span> <span class="bu">Date</span>(ms)<span class="op">.</span><span class="fu">toLocaleDateString</span>(<span class="st">"en-GB"</span><span class="op">,</span> {</span>
+<span id="cb5-353"><a href="#cb5-353" aria-hidden="true" tabindex="-1"></a>    <span class="dt">day</span><span class="op">:</span> <span class="st">"2-digit"</span><span class="op">,</span></span>
+<span id="cb5-354"><a href="#cb5-354" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span><span class="op">:</span> <span class="st">"short"</span><span class="op">,</span></span>
+<span id="cb5-355"><a href="#cb5-355" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span><span class="op">:</span> <span class="st">"numeric"</span></span>
+<span id="cb5-356"><a href="#cb5-356" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-357"><a href="#cb5-357" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-358"><a href="#cb5-358" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> options <span class="op">=</span> cubeEventDates<span class="op">.</span><span class="fu">map</span>(ms <span class="kw">=&gt;</span> ({ <span class="dt">value</span><span class="op">:</span> <span class="bu">String</span>(ms)<span class="op">,</span> <span class="dt">label</span><span class="op">:</span> <span class="fu">fmtDate</span>(ms) }))<span class="op">;</span></span>
+<span id="cb5-359"><a href="#cb5-359" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb5-360"><a href="#cb5-360" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> Inputs<span class="op">.</span><span class="fu">select</span>(options<span class="op">.</span><span class="fu">map</span>(o <span class="kw">=&gt;</span> o<span class="op">.</span><span class="at">value</span>)<span class="op">,</span> {</span>
+<span id="cb5-361"><a href="#cb5-361" aria-hidden="true" tabindex="-1"></a>    <span class="dt">label</span><span class="op">:</span> <span class="st">"Event:"</span><span class="op">,</span></span>
+<span id="cb5-362"><a href="#cb5-362" aria-hidden="true" tabindex="-1"></a>    <span class="dt">value</span><span class="op">:</span> options[<span class="dv">0</span>]<span class="op">.</span><span class="at">value</span><span class="op">,</span></span>
+<span id="cb5-363"><a href="#cb5-363" aria-hidden="true" tabindex="-1"></a>    <span class="dt">format</span><span class="op">:</span> v <span class="kw">=&gt;</span> options<span class="op">.</span><span class="fu">find</span>(o <span class="kw">=&gt;</span> o<span class="op">.</span><span class="at">value</span> <span class="op">===</span> v)<span class="op">?.</span><span class="at">label</span> <span class="op">||</span> v</span>
+<span id="cb5-364"><a href="#cb5-364" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb5-365"><a href="#cb5-365" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div class="cell-output cell-output-display">
+<div id="event-date-selector-1">
+<div id="ojs-cell-5-1" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+<div class="cell-output cell-output-display">
+<div id="event-date-selector-2">
+<div id="ojs-cell-5-2" data-nodetype="declaration">
+
+</div>
+</div>
+</div>
+</div>
+<div class="cell">
+<div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb6" data-startfrom="369" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 368;"><span id="cb6-369"><a href="#cb6-369" aria-hidden="true" tabindex="-1"></a>{</span>
+<span id="cb6-370"><a href="#cb6-370" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (selectedCube <span class="op">===</span> <span class="st">""</span> <span class="op">||</span> <span class="op">!</span>selectedEventDate <span class="op">||</span> cubeEventDates<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
+<span id="cb6-371"><a href="#cb6-371" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-372"><a href="#cb6-372" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> dateMs <span class="op">=</span> <span class="op">+</span>selectedEventDate<span class="op">;</span></span>
+<span id="cb6-373"><a href="#cb6-373" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> eventPlayers <span class="op">=</span> eventResults</span>
+<span id="cb6-374"><a href="#cb6-374" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">filter</span>(d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="at">cube</span> <span class="op">===</span> selectedCube <span class="op">&amp;&amp;</span> <span class="op">+</span>d<span class="op">.</span><span class="at">date</span> <span class="op">===</span> dateMs)</span>
+<span id="cb6-375"><a href="#cb6-375" aria-hidden="true" tabindex="-1"></a>    <span class="op">.</span><span class="fu">sort</span>((a<span class="op">,</span> b) <span class="kw">=&gt;</span> b<span class="op">.</span><span class="at">match_wins</span> <span class="op">-</span> a<span class="op">.</span><span class="at">match_wins</span>)<span class="op">;</span></span>
+<span id="cb6-376"><a href="#cb6-376" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-377"><a href="#cb6-377" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (eventPlayers<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) <span class="cf">return</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
+<span id="cb6-378"><a href="#cb6-378" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-379"><a href="#cb6-379" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="kubbar-content"&gt;</span></span>
+<span id="cb6-380"><a href="#cb6-380" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;div class="recent-events-card"&gt;</span></span>
+<span id="cb6-381"><a href="#cb6-381" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="cube-affinity-title"&gt;Event results&lt;/div&gt;</span></span>
+<span id="cb6-382"><a href="#cb6-382" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;table class="trophy-table"&gt;</span></span>
+<span id="cb6-383"><a href="#cb6-383" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;thead&gt;</span></span>
+<span id="cb6-384"><a href="#cb6-384" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
+<span id="cb6-385"><a href="#cb6-385" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;&lt;/th&gt;</span></span>
+<span id="cb6-386"><a href="#cb6-386" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th colspan="2" class="col-group-header"&gt;Matches&lt;/th&gt;</span></span>
+<span id="cb6-387"><a href="#cb6-387" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th colspan="2" class="col-group-header"&gt;Games&lt;/th&gt;</span></span>
+<span id="cb6-388"><a href="#cb6-388" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
+<span id="cb6-389"><a href="#cb6-389" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
+<span id="cb6-390"><a href="#cb6-390" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Player&lt;/th&gt;</span></span>
+<span id="cb6-391"><a href="#cb6-391" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;W&lt;/th&gt;</span></span>
+<span id="cb6-392"><a href="#cb6-392" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;L&lt;/th&gt;</span></span>
+<span id="cb6-393"><a href="#cb6-393" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;W&lt;/th&gt;</span></span>
+<span id="cb6-394"><a href="#cb6-394" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;L&lt;/th&gt;</span></span>
+<span id="cb6-395"><a href="#cb6-395" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
+<span id="cb6-396"><a href="#cb6-396" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/thead&gt;</span></span>
+<span id="cb6-397"><a href="#cb6-397" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;tbody&gt;</span></span>
+<span id="cb6-398"><a href="#cb6-398" aria-hidden="true" tabindex="-1"></a><span class="vs">          </span><span class="sc">${</span>eventPlayers<span class="op">.</span><span class="fu">map</span>(p <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb6-399"><a href="#cb6-399" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr&gt;</span></span>
+<span id="cb6-400"><a href="#cb6-400" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td class="cube-record-name"&gt;</span><span class="sc">${</span>p<span class="op">.</span><span class="at">player</span><span class="sc">}${</span>p<span class="op">.</span><span class="at">match_wins</span> <span class="op">&gt;=</span> <span class="dv">3</span> <span class="op">?</span> <span class="st">" 🏆"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-401"><a href="#cb6-401" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="text-align: center"&gt;</span><span class="sc">${</span>p<span class="op">.</span><span class="at">match_wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-402"><a href="#cb6-402" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="text-align: center"&gt;</span><span class="sc">${</span>p<span class="op">.</span><span class="at">matches</span> <span class="op">-</span> p<span class="op">.</span><span class="at">match_wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-403"><a href="#cb6-403" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="text-align: center"&gt;</span><span class="sc">${</span>p<span class="op">.</span><span class="at">game_wins</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-404"><a href="#cb6-404" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td style="text-align: center"&gt;</span><span class="sc">${</span>p<span class="op">.</span><span class="at">game_losses</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb6-405"><a href="#cb6-405" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
+<span id="cb6-406"><a href="#cb6-406" aria-hidden="true" tabindex="-1"></a><span class="vs">          `</span>)<span class="sc">}</span></span>
+<span id="cb6-407"><a href="#cb6-407" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/tbody&gt;</span></span>
+<span id="cb6-408"><a href="#cb6-408" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/table&gt;</span></span>
+<span id="cb6-409"><a href="#cb6-409" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;</span></span>
+<span id="cb6-410"><a href="#cb6-410" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb6-411"><a href="#cb6-411" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<div id="event-results" class="cell-output cell-output-display">
+<div id="ojs-cell-6" data-nodetype="expression">
+
+</div>
+</div>
+</div>
+
+
+
+</main> <!-- /main -->
+<script type="ojs-module-contents">
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImlzRGFyayA9IEdlbmVyYXRvcnMub2JzZXJ2ZShub3RpZnkgPT4ge1xuICBjb25zdCBjdXJyZW50ID0gKCkgPT4gZG9jdW1lbnQuYm9keS5jbGFzc0xpc3QuY29udGFpbnMoXCJxdWFydG8tZGFya1wiKTtcbiAgbm90aWZ5KGN1cnJlbnQoKSk7XG5cbiAgY29uc3Qgb2JzZXJ2ZXIgPSBuZXcgTXV0YXRpb25PYnNlcnZlcigoKSA9PiB7XG4gICAgbm90aWZ5KGN1cnJlbnQoKSk7XG4gIH0pO1xuXG4gIG9ic2VydmVyLm9ic2VydmUoZG9jdW1lbnQuYm9keSwgeyBhdHRyaWJ1dGVzOiB0cnVlLCBhdHRyaWJ1dGVGaWx0ZXI6IFtcImNsYXNzXCJdIH0pO1xuICByZXR1cm4gKCkgPT4gb2JzZXJ2ZXIuZGlzY29ubmVjdCgpO1xufSlcblxudGhlbWVDb2xvcnMgPSB7XG4gIGNvbnN0IF8gPSBpc0Rhcms7XG4gIGNvbnN0IGJvZHlTdHlsZXMgPSBnZXRDb21wdXRlZFN0eWxlKGRvY3VtZW50LmJvZHkpO1xuICBjb25zdCByb290U3R5bGVzID0gZ2V0Q29tcHV0ZWRTdHlsZShkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQpO1xuICBjb25zdCBjc3NWYXIgPSAobmFtZSwgZmFsbGJhY2sgPSBcIlwiKSA9PlxuICAgIGJvZHlTdHlsZXMuZ2V0UHJvcGVydHlWYWx1ZShuYW1lKS50cmltKCkgfHxcbiAgICByb290U3R5bGVzLmdldFByb3BlcnR5VmFsdWUobmFtZSkudHJpbSgpIHx8XG4gICAgZmFsbGJhY2s7XG5cbiAgcmV0dXJuIHtcbiAgICBibHVlOiBjc3NWYXIoXCItLW10Zy1ibHVlXCIsIFwiIzBlNjhhYlwiKSxcbiAgICBncmVlbjogY3NzVmFyKFwiLS1tdGctZ3JlZW5cIiwgXCIjMDA3MzNlXCIpLFxuICAgIHJlZDogY3NzVmFyKFwiLS1tdGctcmVkXCIsIFwiI2QzMjAyYVwiKSxcbiAgICBnb2xkOiBjc3NWYXIoXCItLW10Zy1nb2xkXCIsIFwiIzhiNjkxNFwiKSxcbiAgICB0ZXh0OiBjc3NWYXIoXCItLXRleHQtcHJpbWFyeVwiLCBcIiMyYTFmMTRcIiksXG4gICAgbXV0ZWQ6IGNzc1ZhcihcIi0tdGV4dC1tdXRlZFwiLCBcIiM1YzRmNDJcIilcbiAgfTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InBlckN1YmVQbGF5ZXIgPSB0cmFuc3Bvc2UocGVyX2N1YmVfcGxheWVyX2RhdGEpLm1hcChkID0+ICh7XG4gIC4uLmQsXG4gIHdpbnM6ICtkLndpbnMsXG4gIGxvc3NlczogK2QubG9zc2VzLFxuICB0b3RhbDogK2QudG90YWwsXG4gIHdpbnJhdGU6ICtkLndpbnJhdGVcbn0pKVxuXG50cm9waGllcyA9IHRyYW5zcG9zZSh0cm9waHlfbGlzdCkubWFwKGQgPT4gKHtcbiAgLi4uZCxcbiAgdHJvcGhpZXM6ICtkLnRyb3BoaWVzXG59KSlcblxuY3ViZVN1bW1hcnkgPSB0cmFuc3Bvc2UoY3ViZV9zdW1tYXJ5X2RhdGEpLm1hcChkID0+ICh7XG4gIC4uLmQsXG4gIHRvdGFsX21hdGNoZXM6ICtkLnRvdGFsX21hdGNoZXMsXG4gIHRvdGFsX2V2ZW50czogK2QudG90YWxfZXZlbnRzLFxuICB1bmlxdWVfcGxheWVyczogK2QudW5pcXVlX3BsYXllcnMsXG4gIGZpcnN0X3BsYXllZDogbmV3IERhdGUoZC5maXJzdF9wbGF5ZWQpLFxuICBsYXN0X3BsYXllZDogbmV3IERhdGUoZC5sYXN0X3BsYXllZClcbn0pKVxuXG5ldmVudFJlc3VsdHMgPSB0cmFuc3Bvc2UoZXZlbnRfcmVzdWx0c19kYXRhKS5tYXAoZCA9PiAoe1xuICAuLi5kLFxuICBkYXRlOiBuZXcgRGF0ZShkLmRhdGUpLFxuICBtYXRjaF93aW5zOiArZC5tYXRjaF93aW5zLFxuICBtYXRjaGVzOiArZC5tYXRjaGVzLFxuICBnYW1lX3dpbnM6ICtkLmdhbWVfd2lucyxcbiAgZ2FtZV9sb3NzZXM6ICtkLmdhbWVfbG9zc2VzXG59KSlcblxuY3ViZU5hbWVzID0gWy4uLm5ldyBTZXQoY3ViZVN1bW1hcnkubWFwKGQgPT4gZC5jdWJlKSldLnNvcnQoKGEsIGIpID0+XG4gIGEubG9jYWxlQ29tcGFyZShiLCBcImVuXCIpXG4pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ2aWV3b2Ygc2VsZWN0ZWRDdWJlID0gSW5wdXRzLnNlbGVjdChbXCJcIiwgLi4uY3ViZU5hbWVzXSwge1xuICBsYWJlbDogXCJDdWJlOlwiLFxuICB2YWx1ZTogXCJcIixcbiAgZm9ybWF0OiBkID0+IGQgPT09IFwiXCIgPyBcIkNob29zZSBhIGN1YmUuLi5cIiA6IGRcbn0pXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTQiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGlmIChzZWxlY3RlZEN1YmUgPT09IFwiXCIpIHtcbiAgICByZXR1cm4gaHRtbGA8ZGl2IGNsYXNzPVwiZW1wdHktc3RhdGVcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJlbXB0eS1pY29uXCI+JiM5ODc2OzwvZGl2PlxuICAgICAgPGRpdj5DaG9vc2UgYSBjdWJlIHRvIHNlZSBkZXRhaWxzPC9kaXY+XG4gICAgPC9kaXY+YDtcbiAgfVxuXG4gIGNvbnN0IHN1bW1hcnkgPSBjdWJlU3VtbWFyeS5maW5kKGQgPT4gZC5jdWJlID09PSBzZWxlY3RlZEN1YmUpO1xuICBjb25zdCBwbGF5ZXJzID0gcGVyQ3ViZVBsYXllclxuICAgIC5maWx0ZXIoZCA9PiBkLmN1YmUgPT09IHNlbGVjdGVkQ3ViZSlcbiAgICAuc29ydCgoYSwgYikgPT4gYi53aW5yYXRlIC0gYS53aW5yYXRlIHx8IGIudG90YWwgLSBhLnRvdGFsKTtcbiAgY29uc3QgY3ViZVRyb3BoaWVzID0gdHJvcGhpZXNcbiAgICAuZmlsdGVyKGQgPT4gZC5jdWJlID09PSBzZWxlY3RlZEN1YmUpXG4gICAgLnNvcnQoKGEsIGIpID0+IGIudHJvcGhpZXMgLSBhLnRyb3BoaWVzKTtcbiAgY29uc3QgZXZlbnRzID0gZXZlbnRSZXN1bHRzLmZpbHRlcihkID0+IGQuY3ViZSA9PT0gc2VsZWN0ZWRDdWJlKTtcblxuICBjb25zdCBmbXREYXRlID0gZCA9PiBkLnRvTG9jYWxlRGF0ZVN0cmluZyhcImVuLUdCXCIsIHtcbiAgICBkYXk6IFwiMi1kaWdpdFwiLFxuICAgIG1vbnRoOiBcInNob3J0XCIsXG4gICAgeWVhcjogXCJudW1lcmljXCJcbiAgfSk7XG5cbiAgY29uc3Qgc3VtbWFyeUNhcmQgPSBodG1sYDxkaXYgY2xhc3M9XCJwbGF5ZXItc3VtbWFyeVwiPlxuICAgIDxkaXYgY2xhc3M9XCJzdGF0XCI+XG4gICAgICA8ZGl2IGNsYXNzPVwic3RhdC12YWx1ZVwiIHN0eWxlPVwiY29sb3I6ICR7dGhlbWVDb2xvcnMuYmx1ZX07XCI+JHtzdW1tYXJ5LnRvdGFsX2V2ZW50c308L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3M9XCJzdGF0LWxhYmVsXCI+RXZlbnRzPC9kaXY+XG4gICAgPC9kaXY+XG4gICAgPGRpdiBjbGFzcz1cInN0YXRcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJzdGF0LXZhbHVlXCIgc3R5bGU9XCJjb2xvcjogJHt0aGVtZUNvbG9ycy5yZWR9O1wiPiR7c3VtbWFyeS50b3RhbF9tYXRjaGVzfTwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cInN0YXQtbGFiZWxcIj5NYXRjaGVzPC9kaXY+XG4gICAgPC9kaXY+XG4gICAgPGRpdiBjbGFzcz1cInN0YXRcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJzdGF0LXZhbHVlXCIgc3R5bGU9XCJjb2xvcjogJHt0aGVtZUNvbG9ycy5ncmVlbn07XCI+JHtzdW1tYXJ5LnVuaXF1ZV9wbGF5ZXJzfTwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cInN0YXQtbGFiZWxcIj5QbGF5ZXJzPC9kaXY+XG4gICAgPC9kaXY+XG4gICAgPGRpdiBjbGFzcz1cInN0YXRcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJzdGF0LXZhbHVlXCIgc3R5bGU9XCJjb2xvcjogJHt0aGVtZUNvbG9ycy5nb2xkfTtcIj4ke2ZtdERhdGUoc3VtbWFyeS5maXJzdF9wbGF5ZWQpfTwvZGl2PlxuICAgICAgPGRpdiBjbGFzcz1cInN0YXQtbGFiZWxcIj5GaXJzdCBwbGF5ZWQ8L2Rpdj5cbiAgICA8L2Rpdj5cbiAgICA8ZGl2IGNsYXNzPVwic3RhdFwiPlxuICAgICAgPGRpdiBjbGFzcz1cInN0YXQtdmFsdWVcIiBzdHlsZT1cImNvbG9yOiAke3RoZW1lQ29sb3JzLmdvbGR9O1wiPiR7Zm10RGF0ZShzdW1tYXJ5Lmxhc3RfcGxheWVkKX08L2Rpdj5cbiAgICAgIDxkaXYgY2xhc3M9XCJzdGF0LWxhYmVsXCI+TGFzdCBwbGF5ZWQ8L2Rpdj5cbiAgICA8L2Rpdj5cbiAgPC9kaXY+YDtcblxuICBjb25zdCB0cm9waHlDYXJkID0gY3ViZVRyb3BoaWVzLmxlbmd0aCA9PT0gMCA/IGh0bWxgYCA6IGh0bWxgXG4gICAgPGRpdiBjbGFzcz1cInRyb3BoeS1jYXJkXCI+XG4gICAgICA8ZGl2IGNsYXNzPVwiY3ViZS1hZmZpbml0eS10aXRsZVwiPlRyb3BoeSBsZWFkZXJzPC9kaXY+XG4gICAgICA8dGFibGUgY2xhc3M9XCJ0cm9waHktdGFibGVcIj5cbiAgICAgICAgPHRoZWFkPlxuICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgIDx0aD5QbGF5ZXI8L3RoPlxuICAgICAgICAgICAgPHRoPlRyb3BoaWVzPC90aD5cbiAgICAgICAgICA8L3RyPlxuICAgICAgICA8L3RoZWFkPlxuICAgICAgICA8dGJvZHk+XG4gICAgICAgICAgJHtjdWJlVHJvcGhpZXMubWFwKHQgPT4gaHRtbGBcbiAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgPHRkIGNsYXNzPVwiY3ViZS1yZWNvcmQtbmFtZVwiPiR7dC5wbGF5ZXJ9PC90ZD5cbiAgICAgICAgICAgICAgPHRkIHN0eWxlPVwidGV4dC1hbGlnbjogY2VudGVyOyBmb250LXdlaWdodDogNjAwOyBjb2xvcjogJHt0aGVtZUNvbG9ycy5nb2xkfTtcIj4ke1wi8J+PhlwiLnJlcGVhdCh0LnRyb3BoaWVzKX08L3RkPlxuICAgICAgICAgICAgPC90cj5cbiAgICAgICAgICBgKX1cbiAgICAgICAgPC90Ym9keT5cbiAgICAgIDwvdGFibGU+XG4gICAgPC9kaXY+YDtcblxuICBjb25zdCBtYXRjaEJ5UGxheWVyID0gbmV3IE1hcCgpO1xuICBldmVudHMuZm9yRWFjaChkID0+IHtcbiAgICBpZiAoIW1hdGNoQnlQbGF5ZXIuaGFzKGQucGxheWVyKSkgbWF0Y2hCeVBsYXllci5zZXQoZC5wbGF5ZXIsIHsgbXc6IDAsIG1sOiAwIH0pO1xuICAgIGNvbnN0IHMgPSBtYXRjaEJ5UGxheWVyLmdldChkLnBsYXllcik7XG4gICAgcy5tdyArPSBkLm1hdGNoX3dpbnM7XG4gICAgcy5tbCArPSBkLm1hdGNoZXMgLSBkLm1hdGNoX3dpbnM7XG4gIH0pO1xuXG4gIGNvbnN0IGVucmljaGVkUGxheWVycyA9IHBsYXllcnMubWFwKHIgPT4ge1xuICAgIGNvbnN0IG1zID0gbWF0Y2hCeVBsYXllci5nZXQoci5wbGF5ZXIpIHx8IHsgbXc6IDAsIG1sOiAwIH07XG4gICAgY29uc3QgbVRvdGFsID0gbXMubXcgKyBtcy5tbDtcbiAgICByZXR1cm4geyAuLi5yLCBtdzogbXMubXcsIG1sOiBtcy5tbCwgbVRvdGFsLCBtUGN0OiBtVG90YWwgPiAwID8gTWF0aC5yb3VuZChtcy5tdyAvIG1Ub3RhbCAqIDEwMCkgOiAwIH07XG4gIH0pO1xuXG4gIGNvbnN0IHJhbmtpbmdzQ2FyZCA9IGVucmljaGVkUGxheWVycy5sZW5ndGggPT09IDAgPyBodG1sYGAgOiBodG1sYFxuICAgIDxkaXYgY2xhc3M9XCJjdWJlLWNvbWJpbmVkLWNhcmRcIj5cbiAgICAgIDxkaXYgY2xhc3M9XCJjdWJlLWFmZmluaXR5LXRpdGxlXCI+UGxheWVyIHJlc3VsdHM8L2Rpdj5cbiAgICAgIDx0YWJsZSBjbGFzcz1cImN1YmUtY29tYmluZWQtdGFibGVcIj5cbiAgICAgICAgPHRoZWFkPlxuICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgIDx0aD48L3RoPlxuICAgICAgICAgICAgPHRoIGNvbHNwYW49XCIzXCIgY2xhc3M9XCJjb2wtZ3JvdXAtaGVhZGVyXCI+TWF0Y2hlczwvdGg+XG4gICAgICAgICAgICA8dGggY29sc3Bhbj1cIjNcIiBjbGFzcz1cImNvbC1ncm91cC1oZWFkZXJcIj5HYW1lczwvdGg+XG4gICAgICAgICAgPC90cj5cbiAgICAgICAgICA8dHI+XG4gICAgICAgICAgICA8dGg+UGxheWVyPC90aD5cbiAgICAgICAgICAgIDx0aD5XPC90aD5cbiAgICAgICAgICAgIDx0aD5MPC90aD5cbiAgICAgICAgICAgIDx0aD4lPC90aD5cbiAgICAgICAgICAgIDx0aD5XPC90aD5cbiAgICAgICAgICAgIDx0aD5MPC90aD5cbiAgICAgICAgICAgIDx0aD4lPC90aD5cbiAgICAgICAgICA8L3RyPlxuICAgICAgICA8L3RoZWFkPlxuICAgICAgICA8dGJvZHk+XG4gICAgICAgICAgJHtlbnJpY2hlZFBsYXllcnMubWFwKHIgPT4gaHRtbGBcbiAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgPHRkIGNsYXNzPVwiY3ViZS1yZWNvcmQtbmFtZVwiPiR7ci5wbGF5ZXJ9PC90ZD5cbiAgICAgICAgICAgICAgPHRkPiR7ci5td308L3RkPlxuICAgICAgICAgICAgICA8dGQ+JHtyLm1sfTwvdGQ+XG4gICAgICAgICAgICAgIDx0ZCBzdHlsZT1cImNvbG9yOiAke3IubVBjdCA+PSA1MCA/IHRoZW1lQ29sb3JzLmdyZWVuIDogdGhlbWVDb2xvcnMucmVkfTsgZm9udC13ZWlnaHQ6IDYwMFwiPiR7ci5tUGN0fSU8L3RkPlxuICAgICAgICAgICAgICA8dGQ+JHtyLndpbnN9PC90ZD5cbiAgICAgICAgICAgICAgPHRkPiR7ci5sb3NzZXN9PC90ZD5cbiAgICAgICAgICAgICAgPHRkIHN0eWxlPVwiY29sb3I6ICR7ci53aW5yYXRlID49IDUwID8gdGhlbWVDb2xvcnMuZ3JlZW4gOiB0aGVtZUNvbG9ycy5yZWR9OyBmb250LXdlaWdodDogNjAwXCI+JHtyLndpbnJhdGV9JTwvdGQ+XG4gICAgICAgICAgICA8L3RyPlxuICAgICAgICAgIGApfVxuICAgICAgICA8L3Rib2R5PlxuICAgICAgPC90YWJsZT5cbiAgICA8L2Rpdj5gO1xuXG4gIHJldHVybiBodG1sYDxkaXYgY2xhc3M9XCJrdWJiYXItY29udGVudFwiPlxuICAgICR7c3VtbWFyeUNhcmR9XG4gICAgJHt0cm9waHlDYXJkfVxuICAgICR7cmFua2luZ3NDYXJkfVxuICA8L2Rpdj5gO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0IiwiY2VsbE5hbWUiOiJvanMtY2VsbC01IiwiaW5saW5lIjpmYWxzZSwic291cmNlIjoiY3ViZUV2ZW50RGF0ZXMgPSB7XG4gIGlmIChzZWxlY3RlZEN1YmUgPT09IFwiXCIpIHJldHVybiBbXTtcbiAgY29uc3QgZXZlbnRzID0gZXZlbnRSZXN1bHRzLmZpbHRlcihkID0+IGQuY3ViZSA9PT0gc2VsZWN0ZWRDdWJlKTtcbiAgcmV0dXJuIFsuLi5uZXcgU2V0KGV2ZW50cy5tYXAoZCA9PiArZC5kYXRlKSldXG4gICAgLnNvcnQoKGEsIGIpID0+IGIgLSBhKTtcbn1cblxudmlld29mIHNlbGVjdGVkRXZlbnREYXRlID0ge1xuICBpZiAoY3ViZUV2ZW50RGF0ZXMubGVuZ3RoID09PSAwKSByZXR1cm4gT2JqZWN0LmFzc2lnbihodG1sYDxzcGFuPjwvc3Bhbj5gLCB7IHZhbHVlOiBcIlwiIH0pO1xuXG4gIGNvbnN0IGZtdERhdGUgPSBtcyA9PiBuZXcgRGF0ZShtcykudG9Mb2NhbGVEYXRlU3RyaW5nKFwiZW4tR0JcIiwge1xuICAgIGRheTogXCIyLWRpZ2l0XCIsXG4gICAgbW9udGg6IFwic2hvcnRcIixcbiAgICB5ZWFyOiBcIm51bWVyaWNcIlxuICB9KTtcblxuICBjb25zdCBvcHRpb25zID0gY3ViZUV2ZW50RGF0ZXMubWFwKG1zID0+ICh7IHZhbHVlOiBTdHJpbmcobXMpLCBsYWJlbDogZm10RGF0ZShtcykgfSkpO1xuXG4gIHJldHVybiBJbnB1dHMuc2VsZWN0KG9wdGlvbnMubWFwKG8gPT4gby52YWx1ZSksIHtcbiAgICBsYWJlbDogXCJFdmVudDpcIixcbiAgICB2YWx1ZTogb3B0aW9uc1swXS52YWx1ZSxcbiAgICBmb3JtYXQ6IHYgPT4gb3B0aW9ucy5maW5kKG8gPT4gby52YWx1ZSA9PT0gdik/LmxhYmVsIHx8IHZcbiAgfSk7XG59XG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTYiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGlmIChzZWxlY3RlZEN1YmUgPT09IFwiXCIgfHwgIXNlbGVjdGVkRXZlbnREYXRlIHx8IGN1YmVFdmVudERhdGVzLmxlbmd0aCA9PT0gMCkgcmV0dXJuIGh0bWxgYDtcblxuICBjb25zdCBkYXRlTXMgPSArc2VsZWN0ZWRFdmVudERhdGU7XG4gIGNvbnN0IGV2ZW50UGxheWVycyA9IGV2ZW50UmVzdWx0c1xuICAgIC5maWx0ZXIoZCA9PiBkLmN1YmUgPT09IHNlbGVjdGVkQ3ViZSAmJiArZC5kYXRlID09PSBkYXRlTXMpXG4gICAgLnNvcnQoKGEsIGIpID0+IGIubWF0Y2hfd2lucyAtIGEubWF0Y2hfd2lucyk7XG5cbiAgaWYgKGV2ZW50UGxheWVycy5sZW5ndGggPT09IDApIHJldHVybiBodG1sYGA7XG5cbiAgcmV0dXJuIGh0bWxgPGRpdiBjbGFzcz1cImt1YmJhci1jb250ZW50XCI+XG4gICAgPGRpdiBjbGFzcz1cInJlY2VudC1ldmVudHMtY2FyZFwiPlxuICAgICAgPGRpdiBjbGFzcz1cImN1YmUtYWZmaW5pdHktdGl0bGVcIj5FdmVudCByZXN1bHRzPC9kaXY+XG4gICAgICA8dGFibGUgY2xhc3M9XCJ0cm9waHktdGFibGVcIj5cbiAgICAgICAgPHRoZWFkPlxuICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgIDx0aD48L3RoPlxuICAgICAgICAgICAgPHRoIGNvbHNwYW49XCIyXCIgY2xhc3M9XCJjb2wtZ3JvdXAtaGVhZGVyXCI+TWF0Y2hlczwvdGg+XG4gICAgICAgICAgICA8dGggY29sc3Bhbj1cIjJcIiBjbGFzcz1cImNvbC1ncm91cC1oZWFkZXJcIj5HYW1lczwvdGg+XG4gICAgICAgICAgPC90cj5cbiAgICAgICAgICA8dHI+XG4gICAgICAgICAgICA8dGg+UGxheWVyPC90aD5cbiAgICAgICAgICAgIDx0aD5XPC90aD5cbiAgICAgICAgICAgIDx0aD5MPC90aD5cbiAgICAgICAgICAgIDx0aD5XPC90aD5cbiAgICAgICAgICAgIDx0aD5MPC90aD5cbiAgICAgICAgICA8L3RyPlxuICAgICAgICA8L3RoZWFkPlxuICAgICAgICA8dGJvZHk+XG4gICAgICAgICAgJHtldmVudFBsYXllcnMubWFwKHAgPT4gaHRtbGBcbiAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgPHRkIGNsYXNzPVwiY3ViZS1yZWNvcmQtbmFtZVwiPiR7cC5wbGF5ZXJ9JHtwLm1hdGNoX3dpbnMgPj0gMyA/IFwiIPCfj4ZcIiA6IFwiXCJ9PC90ZD5cbiAgICAgICAgICAgICAgPHRkIHN0eWxlPVwidGV4dC1hbGlnbjogY2VudGVyXCI+JHtwLm1hdGNoX3dpbnN9PC90ZD5cbiAgICAgICAgICAgICAgPHRkIHN0eWxlPVwidGV4dC1hbGlnbjogY2VudGVyXCI+JHtwLm1hdGNoZXMgLSBwLm1hdGNoX3dpbnN9PC90ZD5cbiAgICAgICAgICAgICAgPHRkIHN0eWxlPVwidGV4dC1hbGlnbjogY2VudGVyXCI+JHtwLmdhbWVfd2luc308L3RkPlxuICAgICAgICAgICAgICA8dGQgc3R5bGU9XCJ0ZXh0LWFsaWduOiBjZW50ZXJcIj4ke3AuZ2FtZV9sb3NzZXN9PC90ZD5cbiAgICAgICAgICAgIDwvdHI+XG4gICAgICAgICAgYCl9XG4gICAgICAgIDwvdGJvZHk+XG4gICAgICA8L3RhYmxlPlxuICAgIDwvZGl2PlxuICA8L2Rpdj5gO1xufVxuIn0seyJtZXRob2ROYW1lIjoiaW50ZXJwcmV0UXVpZXQiLCJzb3VyY2UiOiJzaGlueUlucHV0KCdzZWxlY3RlZEN1YmUnKSJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldFF1aWV0Iiwic291cmNlIjoic2hpbnlJbnB1dCgnc2VsZWN0ZWRFdmVudERhdGUnKSJ9XX0=
+</script>
+<script type="module">
+if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
+window._ojs.paths.runtimeToDoc = "../..";
+window._ojs.paths.runtimeToRoot = "../..";
+window._ojs.paths.docToRoot = "";
+window._ojs.selfContained = false;
+window._ojs.runtime.interpretFromScriptTags();
+</script>
+<script id="quarto-html-after-body" type="application/javascript">
+  window.document.addEventListener("DOMContentLoaded", function (event) {
+    // Ensure there is a toggle, if there isn't float one in the top right
+    if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+      const a = window.document.createElement('a');
+      a.classList.add('top-right');
+      a.classList.add('quarto-color-scheme-toggle');
+      a.href = "";
+      a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+      const i = window.document.createElement("i");
+      i.classList.add('bi');
+      a.appendChild(i);
+      window.document.body.appendChild(a);
+    }
+    setColorSchemeToggle(hasAlternateSentinel())
+    const icon = "";
+    const anchorJS = new window.AnchorJS();
+    anchorJS.options = {
+      placement: 'right',
+      icon: icon
+    };
+    anchorJS.add('.anchored');
+    const isCodeAnnotation = (el) => {
+      for (const clz of el.classList) {
+        if (clz.startsWith('code-annotation-')) {                     
+          return true;
+        }
+      }
+      return false;
+    }
+    const onCopySuccess = function(e) {
+      // button target
+      const button = e.trigger;
+      // don't keep focus
+      button.blur();
+      // flash "checked"
+      button.classList.add('code-copy-button-checked');
+      var currentTitle = button.getAttribute("title");
+      button.setAttribute("title", "Copied!");
+      let tooltip;
+      if (window.bootstrap) {
+        button.setAttribute("data-bs-toggle", "tooltip");
+        button.setAttribute("data-bs-placement", "left");
+        button.setAttribute("data-bs-title", "Copied!");
+        tooltip = new bootstrap.Tooltip(button, 
+          { trigger: "manual", 
+            customClass: "code-copy-button-tooltip",
+            offset: [0, -8]});
+        tooltip.show();    
+      }
+      setTimeout(function() {
+        if (tooltip) {
+          tooltip.hide();
+          button.removeAttribute("data-bs-title");
+          button.removeAttribute("data-bs-toggle");
+          button.removeAttribute("data-bs-placement");
+        }
+        button.setAttribute("title", currentTitle);
+        button.classList.remove('code-copy-button-checked');
+      }, 1000);
+      // clear code selection
+      e.clearSelection();
+    }
+    const getTextToCopy = function(trigger) {
+      const outerScaffold = trigger.parentElement.cloneNode(true);
+      const codeEl = outerScaffold.querySelector('code');
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+    const clipboard = new window.ClipboardJS('.code-copy-button:not([data-in-quarto-modal])', {
+      text: getTextToCopy
+    });
+    clipboard.on('success', onCopySuccess);
+    if (window.document.getElementById('quarto-embedded-source-code-modal')) {
+      const clipboardModal = new window.ClipboardJS('.code-copy-button[data-in-quarto-modal]', {
+        text: getTextToCopy,
+        container: window.document.getElementById('quarto-embedded-source-code-modal')
+      });
+      clipboardModal.on('success', onCopySuccess);
+    }
+      var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
+      var mailtoRegex = new RegExp(/^mailto:/);
+        var filterRegex = new RegExp("https:\/\/mtgkubbur\.is\/en");
+      var isInternal = (href) => {
+          return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
+      }
+      // Inspect non-navigation links and adorn them if external
+     var links = window.document.querySelectorAll('a[href]:not(.nav-link):not(.navbar-brand):not(.toc-action):not(.sidebar-link):not(.sidebar-item-toggle):not(.pagination-link):not(.no-external):not([aria-hidden]):not(.dropdown-item):not(.quarto-navigation-tool):not(.about-link)');
+      for (var i=0; i<links.length; i++) {
+        const link = links[i];
+        if (!isInternal(link.href)) {
+          // undo the damage that might have been done by quarto-nav.js in the case of
+          // links that we want to consider external
+          if (link.dataset.originalHref !== undefined) {
+            link.href = link.dataset.originalHref;
+          }
+        }
+      }
+    function tippyHover(el, contentFn, onTriggerFn, onUntriggerFn) {
+      const config = {
+        allowHTML: true,
+        maxWidth: 500,
+        delay: 100,
+        arrow: false,
+        appendTo: function(el) {
+            return el.parentElement;
+        },
+        interactive: true,
+        interactiveBorder: 10,
+        theme: 'quarto',
+        placement: 'bottom-start',
+      };
+      if (contentFn) {
+        config.content = contentFn;
+      }
+      if (onTriggerFn) {
+        config.onTrigger = onTriggerFn;
+      }
+      if (onUntriggerFn) {
+        config.onUntrigger = onUntriggerFn;
+      }
+      window.tippy(el, config); 
+    }
+    const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+    for (var i=0; i<noterefs.length; i++) {
+      const ref = noterefs[i];
+      tippyHover(ref, function() {
+        // use id or data attribute instead here
+        let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+        try { href = new URL(href).hash; } catch {}
+        const id = href.replace(/^#\/?/, "");
+        const note = window.document.getElementById(id);
+        if (note) {
+          return note.innerHTML;
+        } else {
+          return "";
+        }
+      });
+    }
+    const xrefs = window.document.querySelectorAll('a.quarto-xref');
+    const processXRef = (id, note) => {
+      // Strip column container classes
+      const stripColumnClz = (el) => {
+        el.classList.remove("page-full", "page-columns");
+        if (el.children) {
+          for (const child of el.children) {
+            stripColumnClz(child);
+          }
+        }
+      }
+      stripColumnClz(note)
+      if (id === null || id.startsWith('sec-')) {
+        // Special case sections, only their first couple elements
+        const container = document.createElement("div");
+        if (note.children && note.children.length > 2) {
+          container.appendChild(note.children[0].cloneNode(true));
+          for (let i = 1; i < note.children.length; i++) {
+            const child = note.children[i];
+            if (child.tagName === "P" && child.innerText === "") {
+              continue;
+            } else {
+              container.appendChild(child.cloneNode(true));
+              break;
+            }
+          }
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(container);
+          }
+          return container.innerHTML
+        } else {
+          if (window.Quarto?.typesetMath) {
+            window.Quarto.typesetMath(note);
+          }
+          return note.innerHTML;
+        }
+      } else {
+        // Remove any anchor links if they are present
+        const anchorLink = note.querySelector('a.anchorjs-link');
+        if (anchorLink) {
+          anchorLink.remove();
+        }
+        if (window.Quarto?.typesetMath) {
+          window.Quarto.typesetMath(note);
+        }
+        if (note.classList.contains("callout")) {
+          return note.outerHTML;
+        } else {
+          return note.innerHTML;
+        }
+      }
+    }
+    for (var i=0; i<xrefs.length; i++) {
+      const xref = xrefs[i];
+      tippyHover(xref, undefined, function(instance) {
+        instance.disable();
+        let url = xref.getAttribute('href');
+        let hash = undefined; 
+        if (url.startsWith('#')) {
+          hash = url;
+        } else {
+          try { hash = new URL(url).hash; } catch {}
+        }
+        if (hash) {
+          const id = hash.replace(/^#\/?/, "");
+          const note = window.document.getElementById(id);
+          if (note !== null) {
+            try {
+              const html = processXRef(id, note.cloneNode(true));
+              instance.setContent(html);
+            } finally {
+              instance.enable();
+              instance.show();
+            }
+          } else {
+            // See if we can fetch this
+            fetch(url.split('#')[0])
+            .then(res => res.text())
+            .then(html => {
+              const parser = new DOMParser();
+              const htmlDoc = parser.parseFromString(html, "text/html");
+              const note = htmlDoc.getElementById(id);
+              if (note !== null) {
+                const html = processXRef(id, note);
+                instance.setContent(html);
+              } 
+            }).finally(() => {
+              instance.enable();
+              instance.show();
+            });
+          }
+        } else {
+          // See if we can fetch a full url (with no hash to target)
+          // This is a special case and we should probably do some content thinning / targeting
+          fetch(url)
+          .then(res => res.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const htmlDoc = parser.parseFromString(html, "text/html");
+            const note = htmlDoc.querySelector('main.content');
+            if (note !== null) {
+              // This should only happen for chapter cross references
+              // (since there is no id in the URL)
+              // remove the first header
+              if (note.children.length > 0 && note.children[0].tagName === "HEADER") {
+                note.children[0].remove();
+              }
+              const html = processXRef(null, note);
+              instance.setContent(html);
+            } 
+          }).finally(() => {
+            instance.enable();
+            instance.show();
+          });
+        }
+      }, function(instance) {
+      });
+    }
+        let selectedAnnoteEl;
+        const selectorForAnnotation = ( cell, annotation) => {
+          let cellAttr = 'data-code-cell="' + cell + '"';
+          let lineAttr = 'data-code-annotation="' +  annotation + '"';
+          const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+          return selector;
+        }
+        const selectCodeLines = (annoteEl) => {
+          const doc = window.document;
+          const targetCell = annoteEl.getAttribute("data-target-cell");
+          const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+          const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+          const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+          const lineIds = lines.map((line) => {
+            return targetCell + "-" + line;
+          })
+          let top = null;
+          let height = null;
+          let parent = null;
+          if (lineIds.length > 0) {
+              //compute the position of the single el (top and bottom and make a div)
+              const el = window.document.getElementById(lineIds[0]);
+              top = el.offsetTop;
+              height = el.offsetHeight;
+              parent = el.parentElement.parentElement;
+            if (lineIds.length > 1) {
+              const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+              const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+              height = bottom - top;
+            }
+            if (top !== null && height !== null && parent !== null) {
+              // cook up a div (if necessary) and position it 
+              let div = window.document.getElementById("code-annotation-line-highlight");
+              if (div === null) {
+                div = window.document.createElement("div");
+                div.setAttribute("id", "code-annotation-line-highlight");
+                div.style.position = 'absolute';
+                parent.appendChild(div);
+              }
+              div.style.top = top - 2 + "px";
+              div.style.height = height + 4 + "px";
+              div.style.left = 0;
+              let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+              if (gutterDiv === null) {
+                gutterDiv = window.document.createElement("div");
+                gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+                gutterDiv.style.position = 'absolute';
+                const codeCell = window.document.getElementById(targetCell);
+                const gutter = codeCell.querySelector('.code-annotation-gutter');
+                gutter.appendChild(gutterDiv);
+              }
+              gutterDiv.style.top = top - 2 + "px";
+              gutterDiv.style.height = height + 4 + "px";
+            }
+            selectedAnnoteEl = annoteEl;
+          }
+        };
+        const unselectCodeLines = () => {
+          const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+          elementsIds.forEach((elId) => {
+            const div = window.document.getElementById(elId);
+            if (div) {
+              div.remove();
+            }
+          });
+          selectedAnnoteEl = undefined;
+        };
+          // Handle positioning of the toggle
+      window.addEventListener(
+        "resize",
+        throttle(() => {
+          elRect = undefined;
+          if (selectedAnnoteEl) {
+            selectCodeLines(selectedAnnoteEl);
+          }
+        }, 10)
+      );
+      function throttle(fn, ms) {
+      let throttle = false;
+      let timer;
+        return (...args) => {
+          if(!throttle) { // first call gets through
+              fn.apply(this, args);
+              throttle = true;
+          } else { // all the others get throttled
+              if(timer) clearTimeout(timer); // cancel #2
+              timer = setTimeout(() => {
+                fn.apply(this, args);
+                timer = throttle = false;
+              }, ms);
+          }
+        };
+      }
+        // Attach click handler to the DT
+        const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+        for (const annoteDlNode of annoteDls) {
+          annoteDlNode.addEventListener('click', (event) => {
+            const clickedEl = event.target;
+            if (clickedEl !== selectedAnnoteEl) {
+              unselectCodeLines();
+              const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+              if (activeEl) {
+                activeEl.classList.remove('code-annotation-active');
+              }
+              selectCodeLines(clickedEl);
+              clickedEl.classList.add('code-annotation-active');
+            } else {
+              // Unselect the line
+              unselectCodeLines();
+              clickedEl.classList.remove('code-annotation-active');
+            }
+          });
+        }
+    const findCites = (el) => {
+      const parentEl = el.parentElement;
+      if (parentEl) {
+        const cites = parentEl.dataset.cites;
+        if (cites) {
+          return {
+            el,
+            cites: cites.split(' ')
+          };
+        } else {
+          return findCites(el.parentElement)
+        }
+      } else {
+        return undefined;
+      }
+    };
+    var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+    for (var i=0; i<bibliorefs.length; i++) {
+      const ref = bibliorefs[i];
+      const citeInfo = findCites(ref);
+      if (citeInfo) {
+        tippyHover(citeInfo.el, function() {
+          var popup = window.document.createElement('div');
+          citeInfo.cites.forEach(function(cite) {
+            var citeDiv = window.document.createElement('div');
+            citeDiv.classList.add('hanging-indent');
+            citeDiv.classList.add('csl-entry');
+            var biblioDiv = window.document.getElementById('ref-' + cite);
+            if (biblioDiv) {
+              citeDiv.innerHTML = biblioDiv.innerHTML;
+            }
+            popup.appendChild(citeDiv);
+          });
+          return popup.innerHTML;
+        });
+      }
+    }
+  });
+  </script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">
+<p><span class="footer-brand">MtG Kubbur</span> <span class="footer-tagline">Magic: The Gathering Cube Drafts in Iceland</span></p>
+</div>   
+    <div class="nav-footer-center">
+<nav class="footer-nav">
+<a href="index.html">Rankings</a> <i class="ms ms-u footer-mana-sep" aria-hidden="true"></i> <a href="player.html">Player</a> <i class="ms ms-r footer-mana-sep" aria-hidden="true"></i> <a href="head-to-head.html">Head-to-Head</a> <i class="ms ms-b footer-mana-sep" aria-hidden="true"></i> <a href="cubes.html">Cubes</a> <i class="ms ms-g footer-mana-sep" aria-hidden="true"></i> <a href="calendar.html">Calendar</a>
+</nav>
+</div>
+    <div class="nav-footer-right">
+<p>© 2026 MtG Kubbur</p>
+</div>
+  </div>
+</footer>
+<script>
+(function() {
+  var map = {
+    'player.html': '../throun.html',
+    'head-to-head.html': '../einvigi.html',
+    'cubes.html': '../kubbar.html',
+    'calendar.html': '../dagatal.html'
+  };
+  var page = location.pathname.split('/').pop() || 'index.html';
+  var el = document.querySelector('a[aria-label="Switch to Icelandic"]');
+  if (el && map[page]) el.href = map[page];
+})();
+</script>
+
+
+
+
+</body></html>

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Dagatal – MtG Kubbur</title>
+<title>Calendar – MtG Kubbur</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -65,7 +65,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <script src="site_libs/quarto-search/fuse.min.js"></script>
 <script src="site_libs/quarto-search/quarto-search.js"></script>
 <meta name="quarto:offset" content="./">
-<link href="./favicon.svg" rel="icon" type="image/svg+xml">
+<link href="./../favicon.svg" rel="icon" type="image/svg+xml">
 <script src="site_libs/quarto-html/quarto.js" type="module"></script>
 <script src="site_libs/quarto-html/tabsets/tabsets.js" type="module"></script>
 <script src="site_libs/quarto-html/axe/axe-check.js" type="module"></script>
@@ -119,7 +119,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <link href="https://cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css">
 
 
-<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="../styles.css">
 </head>
 
 <body class="nav-fixed fullcontent quarto-light"><script id="quarto-html-before-body" type="application/javascript">
@@ -302,29 +302,29 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
             <ul class="navbar-nav navbar-nav-scroll me-auto">
   <li class="nav-item">
     <a class="nav-link" href="./index.html"> 
-<span class="menu-text">Stigatafla</span></a>
+<span class="menu-text">Rankings</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./throun.html"> 
-<span class="menu-text">Leikmaður</span></a>
+    <a class="nav-link" href="./player.html"> 
+<span class="menu-text">Player</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./einvigi.html"> 
-<span class="menu-text">Einvígi</span></a>
+    <a class="nav-link" href="./head-to-head.html"> 
+<span class="menu-text">Head-to-Head</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link" href="./kubbar.html"> 
-<span class="menu-text">Kubbar</span></a>
+    <a class="nav-link" href="./cubes.html"> 
+<span class="menu-text">Cubes</span></a>
   </li>  
   <li class="nav-item">
-    <a class="nav-link active" href="./dagatal.html" aria-current="page"> 
-<span class="menu-text">Dagatal</span></a>
+    <a class="nav-link active" href="./calendar.html" aria-current="page"> 
+<span class="menu-text">Calendar</span></a>
   </li>  
 </ul>
             <ul class="navbar-nav navbar-nav-scroll ms-auto">
   <li class="nav-item">
-    <a class="nav-link" href="./en/index.html"> 
-<span class="menu-text">EN</span></a>
+    <a class="nav-link" href="./../index.html"> 
+<span class="menu-text">IS</span></a>
   </li>  
   <li class="nav-item compact">
     <a class="nav-link" href="https://github.com/mtgkubbur/mtgkubbur.github.io"> <i class="bi bi-github" role="img" aria-label="GitHub">
@@ -359,9 +359,9 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
   <i class="ms ms-r mana-pip-r"></i>
   <i class="ms ms-g mana-pip-g"></i>
 </div>
-<section id="dagatal" class="level1 title">
-<h1 class="title">Dagatal</h1>
-<p><span class="page-desc">Dagskrá kubbakvölda</span></p>
+<section id="calendar" class="level1 title">
+<h1 class="title">Calendar</h1>
+<p><span class="page-desc">Schedule for upcoming cube nights</span></p>
 </section>
 </div>
 <div id="theme-detect" class="cell">
@@ -437,84 +437,81 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 </div>
 <div class="cell">
 <div class="code-copy-outer-scaffold"><div class="sourceCode cell-code hidden" id="cb3" data-startfrom="115" data-source-offset="0"><pre class="sourceCode js code-with-copy"><code class="sourceCode javascript" style="counter-reset: source-line 114;"><span id="cb3-115"><a href="#cb3-115" aria-hidden="true" tabindex="-1"></a>{</span>
-<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fmtDate <span class="op">=</span> d <span class="kw">=&gt;</span> {</span>
-<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> dd <span class="op">=</span> <span class="bu">String</span>(d<span class="op">.</span><span class="fu">getDate</span>())<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">'0'</span>)<span class="op">;</span></span>
-<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> mm <span class="op">=</span> <span class="bu">String</span>(d<span class="op">.</span><span class="fu">getMonth</span>() <span class="op">+</span> <span class="dv">1</span>)<span class="op">.</span><span class="fu">padStart</span>(<span class="dv">2</span><span class="op">,</span> <span class="st">'0'</span>)<span class="op">;</span></span>
-<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>    <span class="kw">const</span> yyyy <span class="op">=</span> d<span class="op">.</span><span class="fu">getFullYear</span>()<span class="op">;</span></span>
-<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>    <span class="cf">return</span> <span class="vs">`</span><span class="sc">${</span>dd<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span>mm<span class="sc">}</span><span class="vs">.</span><span class="sc">${</span>yyyy<span class="sc">}</span><span class="vs">`</span><span class="op">;</span></span>
-<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a>  }<span class="op">;</span></span>
-<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> clean <span class="op">=</span> v <span class="kw">=&gt;</span> (v <span class="op">===</span> <span class="kw">undefined</span> <span class="op">||</span> v <span class="op">===</span> <span class="kw">null</span> <span class="op">||</span> v <span class="op">===</span> <span class="st">"undefined"</span> <span class="op">||</span> v <span class="op">===</span> <span class="st">"NA"</span>) <span class="op">?</span> <span class="st">""</span> <span class="op">:</span> v<span class="op">;</span></span>
-<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> nextDate <span class="op">=</span> upcoming<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">+</span>upcoming[<span class="dv">0</span>]<span class="op">.</span><span class="at">date</span> <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
-<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> isNext <span class="op">=</span> d <span class="kw">=&gt;</span> nextDate <span class="op">!==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> <span class="op">+</span>d <span class="op">===</span> nextDate<span class="op">;</span></span>
-<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ── Upcoming events table ──</span></span>
-<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> upcomingSection<span class="op">;</span></span>
-<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (upcoming<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
-<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a>    upcomingSection <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
-<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#128197;&lt;/div&gt;</span></span>
-<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;Engin viðburðir á dagskrá&lt;/div&gt;</span></span>
-<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
-<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a>    upcomingSection <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="calendar-table-card"&gt;</span></span>
-<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="cube-affinity-title"&gt;Væntanlegir viðburðir&lt;/div&gt;</span></span>
-<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;table class="trophy-table"&gt;</span></span>
-<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;thead&gt;</span></span>
-<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
-<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Dagsetning&lt;/th&gt;</span></span>
-<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Kubbur&lt;/th&gt;</span></span>
-<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Eigandi&lt;/th&gt;</span></span>
-<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
-<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/thead&gt;</span></span>
-<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;tbody&gt;</span></span>
-<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a><span class="vs">          </span><span class="sc">${</span>upcoming<span class="op">.</span><span class="fu">map</span>(e <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr class="</span><span class="sc">${</span><span class="fu">isNext</span>(e<span class="op">.</span><span class="at">date</span>) <span class="op">?</span> <span class="st">"calendar-next-event"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">"&gt;</span></span>
-<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtDate</span>(e<span class="op">.</span><span class="at">date</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">cube</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">host</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
-<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="vs">          `</span>)<span class="sc">}</span></span>
-<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/tbody&gt;</span></span>
-<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/table&gt;</span></span>
-<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>  <span class="co">// ── Past events (collapsible) ──</span></span>
-<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> pastSection <span class="op">=</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
-<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (past<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
-<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a>    pastSection <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="calendar-table-card" style="margin-top: 1.5rem;"&gt;</span></span>
-<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;details class="calendar-past-toggle"&gt;</span></span>
-<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;summary&gt;Liðnir viðburðir (</span><span class="sc">${</span>past<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs">)&lt;/summary&gt;</span></span>
-<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;table class="trophy-table"&gt;</span></span>
-<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;thead&gt;</span></span>
-<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr&gt;</span></span>
-<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Dagsetning&lt;/th&gt;</span></span>
-<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Kubbur&lt;/th&gt;</span></span>
-<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Eigandi&lt;/th&gt;</span></span>
-<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Leikmenn&lt;/th&gt;</span></span>
-<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
-<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/thead&gt;</span></span>
-<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tbody&gt;</span></span>
-<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="vs">            </span><span class="sc">${</span>past<span class="op">.</span><span class="fu">map</span>(e <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
-<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;tr&gt;</span></span>
-<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtDate</span>(e<span class="op">.</span><span class="at">date</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">cube</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">host</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td style="text-align: center;"&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">players</span>) <span class="op">||</span> <span class="st">"—"</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
-<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;/tr&gt;</span></span>
-<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="vs">            `</span>)<span class="sc">}</span></span>
-<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tbody&gt;</span></span>
-<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/table&gt;</span></span>
-<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/details&gt;</span></span>
-<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a>  }</span>
-<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="calendar-content"&gt;</span></span>
-<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>upcomingSection<span class="sc">}</span></span>
-<span id="cb3-191"><a href="#cb3-191" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>pastSection<span class="sc">}</span></span>
-<span id="cb3-192"><a href="#cb3-192" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
-<span id="cb3-193"><a href="#cb3-193" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
+<span id="cb3-116"><a href="#cb3-116" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> fmtDate <span class="op">=</span> d <span class="kw">=&gt;</span> d<span class="op">.</span><span class="fu">toLocaleDateString</span>(<span class="st">"en-GB"</span><span class="op">,</span> {</span>
+<span id="cb3-117"><a href="#cb3-117" aria-hidden="true" tabindex="-1"></a>    <span class="dt">day</span><span class="op">:</span> <span class="st">"2-digit"</span><span class="op">,</span></span>
+<span id="cb3-118"><a href="#cb3-118" aria-hidden="true" tabindex="-1"></a>    <span class="dt">month</span><span class="op">:</span> <span class="st">"short"</span><span class="op">,</span></span>
+<span id="cb3-119"><a href="#cb3-119" aria-hidden="true" tabindex="-1"></a>    <span class="dt">year</span><span class="op">:</span> <span class="st">"numeric"</span></span>
+<span id="cb3-120"><a href="#cb3-120" aria-hidden="true" tabindex="-1"></a>  })<span class="op">;</span></span>
+<span id="cb3-121"><a href="#cb3-121" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-122"><a href="#cb3-122" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> clean <span class="op">=</span> v <span class="kw">=&gt;</span> (v <span class="op">===</span> <span class="kw">undefined</span> <span class="op">||</span> v <span class="op">===</span> <span class="kw">null</span> <span class="op">||</span> v <span class="op">===</span> <span class="st">"undefined"</span> <span class="op">||</span> v <span class="op">===</span> <span class="st">"NA"</span>) <span class="op">?</span> <span class="st">""</span> <span class="op">:</span> v<span class="op">;</span></span>
+<span id="cb3-123"><a href="#cb3-123" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-124"><a href="#cb3-124" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> nextDate <span class="op">=</span> upcoming<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span> <span class="op">?</span> <span class="op">+</span>upcoming[<span class="dv">0</span>]<span class="op">.</span><span class="at">date</span> <span class="op">:</span> <span class="kw">null</span><span class="op">;</span></span>
+<span id="cb3-125"><a href="#cb3-125" aria-hidden="true" tabindex="-1"></a>  <span class="kw">const</span> isNext <span class="op">=</span> d <span class="kw">=&gt;</span> nextDate <span class="op">!==</span> <span class="kw">null</span> <span class="op">&amp;&amp;</span> <span class="op">+</span>d <span class="op">===</span> nextDate<span class="op">;</span></span>
+<span id="cb3-126"><a href="#cb3-126" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-127"><a href="#cb3-127" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> upcomingSection<span class="op">;</span></span>
+<span id="cb3-128"><a href="#cb3-128" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (upcoming<span class="op">.</span><span class="at">length</span> <span class="op">===</span> <span class="dv">0</span>) {</span>
+<span id="cb3-129"><a href="#cb3-129" aria-hidden="true" tabindex="-1"></a>    upcomingSection <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="empty-state"&gt;</span></span>
+<span id="cb3-130"><a href="#cb3-130" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="empty-icon"&gt;&amp;#128197;&lt;/div&gt;</span></span>
+<span id="cb3-131"><a href="#cb3-131" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div&gt;No upcoming events scheduled&lt;/div&gt;</span></span>
+<span id="cb3-132"><a href="#cb3-132" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb3-133"><a href="#cb3-133" aria-hidden="true" tabindex="-1"></a>  } <span class="cf">else</span> {</span>
+<span id="cb3-134"><a href="#cb3-134" aria-hidden="true" tabindex="-1"></a>    upcomingSection <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="calendar-table-card"&gt;</span></span>
+<span id="cb3-135"><a href="#cb3-135" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;div class="cube-affinity-title"&gt;Upcoming events&lt;/div&gt;</span></span>
+<span id="cb3-136"><a href="#cb3-136" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;table class="trophy-table"&gt;</span></span>
+<span id="cb3-137"><a href="#cb3-137" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;thead&gt;</span></span>
+<span id="cb3-138"><a href="#cb3-138" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tr&gt;</span></span>
+<span id="cb3-139"><a href="#cb3-139" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Date&lt;/th&gt;</span></span>
+<span id="cb3-140"><a href="#cb3-140" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Cube&lt;/th&gt;</span></span>
+<span id="cb3-141"><a href="#cb3-141" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;th&gt;Host&lt;/th&gt;</span></span>
+<span id="cb3-142"><a href="#cb3-142" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tr&gt;</span></span>
+<span id="cb3-143"><a href="#cb3-143" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/thead&gt;</span></span>
+<span id="cb3-144"><a href="#cb3-144" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;tbody&gt;</span></span>
+<span id="cb3-145"><a href="#cb3-145" aria-hidden="true" tabindex="-1"></a><span class="vs">          </span><span class="sc">${</span>upcoming<span class="op">.</span><span class="fu">map</span>(e <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb3-146"><a href="#cb3-146" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr class="</span><span class="sc">${</span><span class="fu">isNext</span>(e<span class="op">.</span><span class="at">date</span>) <span class="op">?</span> <span class="st">"calendar-next-event"</span> <span class="op">:</span> <span class="st">""</span><span class="sc">}</span><span class="vs">"&gt;</span></span>
+<span id="cb3-147"><a href="#cb3-147" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtDate</span>(e<span class="op">.</span><span class="at">date</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-148"><a href="#cb3-148" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">cube</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-149"><a href="#cb3-149" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">host</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-150"><a href="#cb3-150" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
+<span id="cb3-151"><a href="#cb3-151" aria-hidden="true" tabindex="-1"></a><span class="vs">          `</span>)<span class="sc">}</span></span>
+<span id="cb3-152"><a href="#cb3-152" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/tbody&gt;</span></span>
+<span id="cb3-153"><a href="#cb3-153" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/table&gt;</span></span>
+<span id="cb3-154"><a href="#cb3-154" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb3-155"><a href="#cb3-155" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-156"><a href="#cb3-156" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-157"><a href="#cb3-157" aria-hidden="true" tabindex="-1"></a>  <span class="kw">let</span> pastSection <span class="op">=</span> <span class="fu">html</span><span class="vs">``</span><span class="op">;</span></span>
+<span id="cb3-158"><a href="#cb3-158" aria-hidden="true" tabindex="-1"></a>  <span class="cf">if</span> (past<span class="op">.</span><span class="at">length</span> <span class="op">&gt;</span> <span class="dv">0</span>) {</span>
+<span id="cb3-159"><a href="#cb3-159" aria-hidden="true" tabindex="-1"></a>    pastSection <span class="op">=</span> <span class="fu">html</span><span class="vs">`&lt;div class="calendar-table-card" style="margin-top: 1.5rem;"&gt;</span></span>
+<span id="cb3-160"><a href="#cb3-160" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;details class="calendar-past-toggle"&gt;</span></span>
+<span id="cb3-161"><a href="#cb3-161" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;summary&gt;Past events (</span><span class="sc">${</span>past<span class="op">.</span><span class="at">length</span><span class="sc">}</span><span class="vs">)&lt;/summary&gt;</span></span>
+<span id="cb3-162"><a href="#cb3-162" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;table class="trophy-table"&gt;</span></span>
+<span id="cb3-163"><a href="#cb3-163" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;thead&gt;</span></span>
+<span id="cb3-164"><a href="#cb3-164" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;tr&gt;</span></span>
+<span id="cb3-165"><a href="#cb3-165" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Date&lt;/th&gt;</span></span>
+<span id="cb3-166"><a href="#cb3-166" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Cube&lt;/th&gt;</span></span>
+<span id="cb3-167"><a href="#cb3-167" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Host&lt;/th&gt;</span></span>
+<span id="cb3-168"><a href="#cb3-168" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;th&gt;Players&lt;/th&gt;</span></span>
+<span id="cb3-169"><a href="#cb3-169" aria-hidden="true" tabindex="-1"></a><span class="vs">            &lt;/tr&gt;</span></span>
+<span id="cb3-170"><a href="#cb3-170" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/thead&gt;</span></span>
+<span id="cb3-171"><a href="#cb3-171" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;tbody&gt;</span></span>
+<span id="cb3-172"><a href="#cb3-172" aria-hidden="true" tabindex="-1"></a><span class="vs">            </span><span class="sc">${</span>past<span class="op">.</span><span class="fu">map</span>(e <span class="kw">=&gt;</span> <span class="fu">html</span><span class="vs">`</span></span>
+<span id="cb3-173"><a href="#cb3-173" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;tr&gt;</span></span>
+<span id="cb3-174"><a href="#cb3-174" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td&gt;</span><span class="sc">${</span><span class="fu">fmtDate</span>(e<span class="op">.</span><span class="at">date</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-175"><a href="#cb3-175" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">cube</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-176"><a href="#cb3-176" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">host</span>)<span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-177"><a href="#cb3-177" aria-hidden="true" tabindex="-1"></a><span class="vs">                &lt;td style="text-align: center;"&gt;</span><span class="sc">${</span><span class="fu">clean</span>(e<span class="op">.</span><span class="at">players</span>) <span class="op">||</span> <span class="st">"—"</span><span class="sc">}</span><span class="vs">&lt;/td&gt;</span></span>
+<span id="cb3-178"><a href="#cb3-178" aria-hidden="true" tabindex="-1"></a><span class="vs">              &lt;/tr&gt;</span></span>
+<span id="cb3-179"><a href="#cb3-179" aria-hidden="true" tabindex="-1"></a><span class="vs">            `</span>)<span class="sc">}</span></span>
+<span id="cb3-180"><a href="#cb3-180" aria-hidden="true" tabindex="-1"></a><span class="vs">          &lt;/tbody&gt;</span></span>
+<span id="cb3-181"><a href="#cb3-181" aria-hidden="true" tabindex="-1"></a><span class="vs">        &lt;/table&gt;</span></span>
+<span id="cb3-182"><a href="#cb3-182" aria-hidden="true" tabindex="-1"></a><span class="vs">      &lt;/details&gt;</span></span>
+<span id="cb3-183"><a href="#cb3-183" aria-hidden="true" tabindex="-1"></a><span class="vs">    &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb3-184"><a href="#cb3-184" aria-hidden="true" tabindex="-1"></a>  }</span>
+<span id="cb3-185"><a href="#cb3-185" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb3-186"><a href="#cb3-186" aria-hidden="true" tabindex="-1"></a>  <span class="cf">return</span> <span class="fu">html</span><span class="vs">`&lt;div class="calendar-content"&gt;</span></span>
+<span id="cb3-187"><a href="#cb3-187" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>upcomingSection<span class="sc">}</span></span>
+<span id="cb3-188"><a href="#cb3-188" aria-hidden="true" tabindex="-1"></a><span class="vs">    </span><span class="sc">${</span>pastSection<span class="sc">}</span></span>
+<span id="cb3-189"><a href="#cb3-189" aria-hidden="true" tabindex="-1"></a><span class="vs">  &lt;/div&gt;`</span><span class="op">;</span></span>
+<span id="cb3-190"><a href="#cb3-190" aria-hidden="true" tabindex="-1"></a>}</span></code></pre></div><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></div>
 <div id="calendar-content" class="cell-output cell-output-display">
 <div id="ojs-cell-3" data-nodetype="expression">
 
@@ -526,7 +523,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 
 </main> <!-- /main -->
 <script type="ojs-module-contents">
-eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImlzRGFyayA9IEdlbmVyYXRvcnMub2JzZXJ2ZShub3RpZnkgPT4ge1xuICBjb25zdCBjdXJyZW50ID0gKCkgPT4gZG9jdW1lbnQuYm9keS5jbGFzc0xpc3QuY29udGFpbnMoXCJxdWFydG8tZGFya1wiKTtcbiAgbm90aWZ5KGN1cnJlbnQoKSk7XG5cbiAgY29uc3Qgb2JzZXJ2ZXIgPSBuZXcgTXV0YXRpb25PYnNlcnZlcigoKSA9PiB7XG4gICAgbm90aWZ5KGN1cnJlbnQoKSk7XG4gIH0pO1xuXG4gIG9ic2VydmVyLm9ic2VydmUoZG9jdW1lbnQuYm9keSwgeyBhdHRyaWJ1dGVzOiB0cnVlLCBhdHRyaWJ1dGVGaWx0ZXI6IFtcImNsYXNzXCJdIH0pO1xuICByZXR1cm4gKCkgPT4gb2JzZXJ2ZXIuZGlzY29ubmVjdCgpO1xufSlcblxudGhlbWVDb2xvcnMgPSB7XG4gIGNvbnN0IF8gPSBpc0Rhcms7XG4gIGNvbnN0IGJvZHlTdHlsZXMgPSBnZXRDb21wdXRlZFN0eWxlKGRvY3VtZW50LmJvZHkpO1xuICBjb25zdCByb290U3R5bGVzID0gZ2V0Q29tcHV0ZWRTdHlsZShkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQpO1xuICBjb25zdCBjc3NWYXIgPSAobmFtZSwgZmFsbGJhY2sgPSBcIlwiKSA9PlxuICAgIGJvZHlTdHlsZXMuZ2V0UHJvcGVydHlWYWx1ZShuYW1lKS50cmltKCkgfHxcbiAgICByb290U3R5bGVzLmdldFByb3BlcnR5VmFsdWUobmFtZSkudHJpbSgpIHx8XG4gICAgZmFsbGJhY2s7XG5cbiAgcmV0dXJuIHtcbiAgICBibHVlOiBjc3NWYXIoXCItLW10Zy1ibHVlXCIsIFwiIzBlNjhhYlwiKSxcbiAgICBncmVlbjogY3NzVmFyKFwiLS1tdGctZ3JlZW5cIiwgXCIjMDA3MzNlXCIpLFxuICAgIHJlZDogY3NzVmFyKFwiLS1tdGctcmVkXCIsIFwiI2QzMjAyYVwiKSxcbiAgICBnb2xkOiBjc3NWYXIoXCItLW10Zy1nb2xkXCIsIFwiIzhiNjkxNFwiKSxcbiAgICB0ZXh0OiBjc3NWYXIoXCItLXRleHQtcHJpbWFyeVwiLCBcIiMyYTFmMTRcIiksXG4gICAgbXV0ZWQ6IGNzc1ZhcihcIi0tdGV4dC1tdXRlZFwiLCBcIiM1YzRmNDJcIilcbiAgfTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InVwY29taW5nID0gdHJhbnNwb3NlKHVwY29taW5nX2RhdGEpLm1hcChkID0+ICh7XG4gIC4uLmQsXG4gIGRhdGU6IG5ldyBEYXRlKGQuZGF0ZSlcbn0pKVxuXG5wYXN0ID0gdHJhbnNwb3NlKHBhc3RfZGF0YSkubWFwKGQgPT4gKHtcbiAgLi4uZCxcbiAgZGF0ZTogbmV3IERhdGUoZC5kYXRlKVxufSkpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGNvbnN0IGZtdERhdGUgPSBkID0+IHtcbiAgICBjb25zdCBkZCA9IFN0cmluZyhkLmdldERhdGUoKSkucGFkU3RhcnQoMiwgJzAnKTtcbiAgICBjb25zdCBtbSA9IFN0cmluZyhkLmdldE1vbnRoKCkgKyAxKS5wYWRTdGFydCgyLCAnMCcpO1xuICAgIGNvbnN0IHl5eXkgPSBkLmdldEZ1bGxZZWFyKCk7XG4gICAgcmV0dXJuIGAke2RkfS4ke21tfS4ke3l5eXl9YDtcbiAgfTtcblxuICBjb25zdCBjbGVhbiA9IHYgPT4gKHYgPT09IHVuZGVmaW5lZCB8fCB2ID09PSBudWxsIHx8IHYgPT09IFwidW5kZWZpbmVkXCIgfHwgdiA9PT0gXCJOQVwiKSA/IFwiXCIgOiB2O1xuXG4gIGNvbnN0IG5leHREYXRlID0gdXBjb21pbmcubGVuZ3RoID4gMCA/ICt1cGNvbWluZ1swXS5kYXRlIDogbnVsbDtcbiAgY29uc3QgaXNOZXh0ID0gZCA9PiBuZXh0RGF0ZSAhPT0gbnVsbCAmJiArZCA9PT0gbmV4dERhdGU7XG5cbiAgLy8g4pSA4pSAIFVwY29taW5nIGV2ZW50cyB0YWJsZSDilIDilIBcbiAgbGV0IHVwY29taW5nU2VjdGlvbjtcbiAgaWYgKHVwY29taW5nLmxlbmd0aCA9PT0gMCkge1xuICAgIHVwY29taW5nU2VjdGlvbiA9IGh0bWxgPGRpdiBjbGFzcz1cImVtcHR5LXN0YXRlXCI+XG4gICAgICA8ZGl2IGNsYXNzPVwiZW1wdHktaWNvblwiPiYjMTI4MTk3OzwvZGl2PlxuICAgICAgPGRpdj5FbmdpbiB2acOwYnVyw7BpciDDoSBkYWdza3LDoTwvZGl2PlxuICAgIDwvZGl2PmA7XG4gIH0gZWxzZSB7XG4gICAgdXBjb21pbmdTZWN0aW9uID0gaHRtbGA8ZGl2IGNsYXNzPVwiY2FsZW5kYXItdGFibGUtY2FyZFwiPlxuICAgICAgPGRpdiBjbGFzcz1cImN1YmUtYWZmaW5pdHktdGl0bGVcIj5Ww6ZudGFubGVnaXIgdmnDsGJ1csOwaXI8L2Rpdj5cbiAgICAgIDx0YWJsZSBjbGFzcz1cInRyb3BoeS10YWJsZVwiPlxuICAgICAgICA8dGhlYWQ+XG4gICAgICAgICAgPHRyPlxuICAgICAgICAgICAgPHRoPkRhZ3NldG5pbmc8L3RoPlxuICAgICAgICAgICAgPHRoPkt1YmJ1cjwvdGg+XG4gICAgICAgICAgICA8dGg+RWlnYW5kaTwvdGg+XG4gICAgICAgICAgPC90cj5cbiAgICAgICAgPC90aGVhZD5cbiAgICAgICAgPHRib2R5PlxuICAgICAgICAgICR7dXBjb21pbmcubWFwKGUgPT4gaHRtbGBcbiAgICAgICAgICAgIDx0ciBjbGFzcz1cIiR7aXNOZXh0KGUuZGF0ZSkgPyBcImNhbGVuZGFyLW5leHQtZXZlbnRcIiA6IFwiXCJ9XCI+XG4gICAgICAgICAgICAgIDx0ZD4ke2ZtdERhdGUoZS5kYXRlKX08L3RkPlxuICAgICAgICAgICAgICA8dGQ+JHtjbGVhbihlLmN1YmUpfTwvdGQ+XG4gICAgICAgICAgICAgIDx0ZD4ke2NsZWFuKGUuaG9zdCl9PC90ZD5cbiAgICAgICAgICAgIDwvdHI+XG4gICAgICAgICAgYCl9XG4gICAgICAgIDwvdGJvZHk+XG4gICAgICA8L3RhYmxlPlxuICAgIDwvZGl2PmA7XG4gIH1cblxuICAvLyDilIDilIAgUGFzdCBldmVudHMgKGNvbGxhcHNpYmxlKSDilIDilIBcbiAgbGV0IHBhc3RTZWN0aW9uID0gaHRtbGBgO1xuICBpZiAocGFzdC5sZW5ndGggPiAwKSB7XG4gICAgcGFzdFNlY3Rpb24gPSBodG1sYDxkaXYgY2xhc3M9XCJjYWxlbmRhci10YWJsZS1jYXJkXCIgc3R5bGU9XCJtYXJnaW4tdG9wOiAxLjVyZW07XCI+XG4gICAgICA8ZGV0YWlscyBjbGFzcz1cImNhbGVuZGFyLXBhc3QtdG9nZ2xlXCI+XG4gICAgICAgIDxzdW1tYXJ5Pkxpw7BuaXIgdmnDsGJ1csOwaXIgKCR7cGFzdC5sZW5ndGh9KTwvc3VtbWFyeT5cbiAgICAgICAgPHRhYmxlIGNsYXNzPVwidHJvcGh5LXRhYmxlXCI+XG4gICAgICAgICAgPHRoZWFkPlxuICAgICAgICAgICAgPHRyPlxuICAgICAgICAgICAgICA8dGg+RGFnc2V0bmluZzwvdGg+XG4gICAgICAgICAgICAgIDx0aD5LdWJidXI8L3RoPlxuICAgICAgICAgICAgICA8dGg+RWlnYW5kaTwvdGg+XG4gICAgICAgICAgICAgIDx0aD5MZWlrbWVubjwvdGg+XG4gICAgICAgICAgICA8L3RyPlxuICAgICAgICAgIDwvdGhlYWQ+XG4gICAgICAgICAgPHRib2R5PlxuICAgICAgICAgICAgJHtwYXN0Lm1hcChlID0+IGh0bWxgXG4gICAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgICA8dGQ+JHtmbXREYXRlKGUuZGF0ZSl9PC90ZD5cbiAgICAgICAgICAgICAgICA8dGQ+JHtjbGVhbihlLmN1YmUpfTwvdGQ+XG4gICAgICAgICAgICAgICAgPHRkPiR7Y2xlYW4oZS5ob3N0KX08L3RkPlxuICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT1cInRleHQtYWxpZ246IGNlbnRlcjtcIj4ke2NsZWFuKGUucGxheWVycykgfHwgXCLigJRcIn08L3RkPlxuICAgICAgICAgICAgICA8L3RyPlxuICAgICAgICAgICAgYCl9XG4gICAgICAgICAgPC90Ym9keT5cbiAgICAgICAgPC90YWJsZT5cbiAgICAgIDwvZGV0YWlscz5cbiAgICA8L2Rpdj5gO1xuICB9XG5cbiAgcmV0dXJuIGh0bWxgPGRpdiBjbGFzcz1cImNhbGVuZGFyLWNvbnRlbnRcIj5cbiAgICAke3VwY29taW5nU2VjdGlvbn1cbiAgICAke3Bhc3RTZWN0aW9ufVxuICA8L2Rpdj5gO1xufVxuIn1dfQ==
+eyJjb250ZW50cyI6W3sibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMSIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6ImlzRGFyayA9IEdlbmVyYXRvcnMub2JzZXJ2ZShub3RpZnkgPT4ge1xuICBjb25zdCBjdXJyZW50ID0gKCkgPT4gZG9jdW1lbnQuYm9keS5jbGFzc0xpc3QuY29udGFpbnMoXCJxdWFydG8tZGFya1wiKTtcbiAgbm90aWZ5KGN1cnJlbnQoKSk7XG5cbiAgY29uc3Qgb2JzZXJ2ZXIgPSBuZXcgTXV0YXRpb25PYnNlcnZlcigoKSA9PiB7XG4gICAgbm90aWZ5KGN1cnJlbnQoKSk7XG4gIH0pO1xuXG4gIG9ic2VydmVyLm9ic2VydmUoZG9jdW1lbnQuYm9keSwgeyBhdHRyaWJ1dGVzOiB0cnVlLCBhdHRyaWJ1dGVGaWx0ZXI6IFtcImNsYXNzXCJdIH0pO1xuICByZXR1cm4gKCkgPT4gb2JzZXJ2ZXIuZGlzY29ubmVjdCgpO1xufSlcblxudGhlbWVDb2xvcnMgPSB7XG4gIGNvbnN0IF8gPSBpc0Rhcms7XG4gIGNvbnN0IGJvZHlTdHlsZXMgPSBnZXRDb21wdXRlZFN0eWxlKGRvY3VtZW50LmJvZHkpO1xuICBjb25zdCByb290U3R5bGVzID0gZ2V0Q29tcHV0ZWRTdHlsZShkb2N1bWVudC5kb2N1bWVudEVsZW1lbnQpO1xuICBjb25zdCBjc3NWYXIgPSAobmFtZSwgZmFsbGJhY2sgPSBcIlwiKSA9PlxuICAgIGJvZHlTdHlsZXMuZ2V0UHJvcGVydHlWYWx1ZShuYW1lKS50cmltKCkgfHxcbiAgICByb290U3R5bGVzLmdldFByb3BlcnR5VmFsdWUobmFtZSkudHJpbSgpIHx8XG4gICAgZmFsbGJhY2s7XG5cbiAgcmV0dXJuIHtcbiAgICBibHVlOiBjc3NWYXIoXCItLW10Zy1ibHVlXCIsIFwiIzBlNjhhYlwiKSxcbiAgICBncmVlbjogY3NzVmFyKFwiLS1tdGctZ3JlZW5cIiwgXCIjMDA3MzNlXCIpLFxuICAgIHJlZDogY3NzVmFyKFwiLS1tdGctcmVkXCIsIFwiI2QzMjAyYVwiKSxcbiAgICBnb2xkOiBjc3NWYXIoXCItLW10Zy1nb2xkXCIsIFwiIzhiNjkxNFwiKSxcbiAgICB0ZXh0OiBjc3NWYXIoXCItLXRleHQtcHJpbWFyeVwiLCBcIiMyYTFmMTRcIiksXG4gICAgbXV0ZWQ6IGNzc1ZhcihcIi0tdGV4dC1tdXRlZFwiLCBcIiM1YzRmNDJcIilcbiAgfTtcbn1cbiJ9LHsibWV0aG9kTmFtZSI6ImludGVycHJldCIsImNlbGxOYW1lIjoib2pzLWNlbGwtMiIsImlubGluZSI6ZmFsc2UsInNvdXJjZSI6InVwY29taW5nID0gdHJhbnNwb3NlKHVwY29taW5nX2RhdGEpLm1hcChkID0+ICh7XG4gIC4uLmQsXG4gIGRhdGU6IG5ldyBEYXRlKGQuZGF0ZSlcbn0pKVxuXG5wYXN0ID0gdHJhbnNwb3NlKHBhc3RfZGF0YSkubWFwKGQgPT4gKHtcbiAgLi4uZCxcbiAgZGF0ZTogbmV3IERhdGUoZC5kYXRlKVxufSkpXG4ifSx7Im1ldGhvZE5hbWUiOiJpbnRlcnByZXQiLCJjZWxsTmFtZSI6Im9qcy1jZWxsLTMiLCJpbmxpbmUiOmZhbHNlLCJzb3VyY2UiOiJ7XG4gIGNvbnN0IGZtdERhdGUgPSBkID0+IGQudG9Mb2NhbGVEYXRlU3RyaW5nKFwiZW4tR0JcIiwge1xuICAgIGRheTogXCIyLWRpZ2l0XCIsXG4gICAgbW9udGg6IFwic2hvcnRcIixcbiAgICB5ZWFyOiBcIm51bWVyaWNcIlxuICB9KTtcblxuICBjb25zdCBjbGVhbiA9IHYgPT4gKHYgPT09IHVuZGVmaW5lZCB8fCB2ID09PSBudWxsIHx8IHYgPT09IFwidW5kZWZpbmVkXCIgfHwgdiA9PT0gXCJOQVwiKSA/IFwiXCIgOiB2O1xuXG4gIGNvbnN0IG5leHREYXRlID0gdXBjb21pbmcubGVuZ3RoID4gMCA/ICt1cGNvbWluZ1swXS5kYXRlIDogbnVsbDtcbiAgY29uc3QgaXNOZXh0ID0gZCA9PiBuZXh0RGF0ZSAhPT0gbnVsbCAmJiArZCA9PT0gbmV4dERhdGU7XG5cbiAgbGV0IHVwY29taW5nU2VjdGlvbjtcbiAgaWYgKHVwY29taW5nLmxlbmd0aCA9PT0gMCkge1xuICAgIHVwY29taW5nU2VjdGlvbiA9IGh0bWxgPGRpdiBjbGFzcz1cImVtcHR5LXN0YXRlXCI+XG4gICAgICA8ZGl2IGNsYXNzPVwiZW1wdHktaWNvblwiPiYjMTI4MTk3OzwvZGl2PlxuICAgICAgPGRpdj5ObyB1cGNvbWluZyBldmVudHMgc2NoZWR1bGVkPC9kaXY+XG4gICAgPC9kaXY+YDtcbiAgfSBlbHNlIHtcbiAgICB1cGNvbWluZ1NlY3Rpb24gPSBodG1sYDxkaXYgY2xhc3M9XCJjYWxlbmRhci10YWJsZS1jYXJkXCI+XG4gICAgICA8ZGl2IGNsYXNzPVwiY3ViZS1hZmZpbml0eS10aXRsZVwiPlVwY29taW5nIGV2ZW50czwvZGl2PlxuICAgICAgPHRhYmxlIGNsYXNzPVwidHJvcGh5LXRhYmxlXCI+XG4gICAgICAgIDx0aGVhZD5cbiAgICAgICAgICA8dHI+XG4gICAgICAgICAgICA8dGg+RGF0ZTwvdGg+XG4gICAgICAgICAgICA8dGg+Q3ViZTwvdGg+XG4gICAgICAgICAgICA8dGg+SG9zdDwvdGg+XG4gICAgICAgICAgPC90cj5cbiAgICAgICAgPC90aGVhZD5cbiAgICAgICAgPHRib2R5PlxuICAgICAgICAgICR7dXBjb21pbmcubWFwKGUgPT4gaHRtbGBcbiAgICAgICAgICAgIDx0ciBjbGFzcz1cIiR7aXNOZXh0KGUuZGF0ZSkgPyBcImNhbGVuZGFyLW5leHQtZXZlbnRcIiA6IFwiXCJ9XCI+XG4gICAgICAgICAgICAgIDx0ZD4ke2ZtdERhdGUoZS5kYXRlKX08L3RkPlxuICAgICAgICAgICAgICA8dGQ+JHtjbGVhbihlLmN1YmUpfTwvdGQ+XG4gICAgICAgICAgICAgIDx0ZD4ke2NsZWFuKGUuaG9zdCl9PC90ZD5cbiAgICAgICAgICAgIDwvdHI+XG4gICAgICAgICAgYCl9XG4gICAgICAgIDwvdGJvZHk+XG4gICAgICA8L3RhYmxlPlxuICAgIDwvZGl2PmA7XG4gIH1cblxuICBsZXQgcGFzdFNlY3Rpb24gPSBodG1sYGA7XG4gIGlmIChwYXN0Lmxlbmd0aCA+IDApIHtcbiAgICBwYXN0U2VjdGlvbiA9IGh0bWxgPGRpdiBjbGFzcz1cImNhbGVuZGFyLXRhYmxlLWNhcmRcIiBzdHlsZT1cIm1hcmdpbi10b3A6IDEuNXJlbTtcIj5cbiAgICAgIDxkZXRhaWxzIGNsYXNzPVwiY2FsZW5kYXItcGFzdC10b2dnbGVcIj5cbiAgICAgICAgPHN1bW1hcnk+UGFzdCBldmVudHMgKCR7cGFzdC5sZW5ndGh9KTwvc3VtbWFyeT5cbiAgICAgICAgPHRhYmxlIGNsYXNzPVwidHJvcGh5LXRhYmxlXCI+XG4gICAgICAgICAgPHRoZWFkPlxuICAgICAgICAgICAgPHRyPlxuICAgICAgICAgICAgICA8dGg+RGF0ZTwvdGg+XG4gICAgICAgICAgICAgIDx0aD5DdWJlPC90aD5cbiAgICAgICAgICAgICAgPHRoPkhvc3Q8L3RoPlxuICAgICAgICAgICAgICA8dGg+UGxheWVyczwvdGg+XG4gICAgICAgICAgICA8L3RyPlxuICAgICAgICAgIDwvdGhlYWQ+XG4gICAgICAgICAgPHRib2R5PlxuICAgICAgICAgICAgJHtwYXN0Lm1hcChlID0+IGh0bWxgXG4gICAgICAgICAgICAgIDx0cj5cbiAgICAgICAgICAgICAgICA8dGQ+JHtmbXREYXRlKGUuZGF0ZSl9PC90ZD5cbiAgICAgICAgICAgICAgICA8dGQ+JHtjbGVhbihlLmN1YmUpfTwvdGQ+XG4gICAgICAgICAgICAgICAgPHRkPiR7Y2xlYW4oZS5ob3N0KX08L3RkPlxuICAgICAgICAgICAgICAgIDx0ZCBzdHlsZT1cInRleHQtYWxpZ246IGNlbnRlcjtcIj4ke2NsZWFuKGUucGxheWVycykgfHwgXCLigJRcIn08L3RkPlxuICAgICAgICAgICAgICA8L3RyPlxuICAgICAgICAgICAgYCl9XG4gICAgICAgICAgPC90Ym9keT5cbiAgICAgICAgPC90YWJsZT5cbiAgICAgIDwvZGV0YWlscz5cbiAgICA8L2Rpdj5gO1xuICB9XG5cbiAgcmV0dXJuIGh0bWxgPGRpdiBjbGFzcz1cImNhbGVuZGFyLWNvbnRlbnRcIj5cbiAgICAke3VwY29taW5nU2VjdGlvbn1cbiAgICAke3Bhc3RTZWN0aW9ufVxuICA8L2Rpdj5gO1xufVxuIn1dfQ==
 </script>
 <script type="module">
 if (window.location.protocol === "file:") { alert("The OJS runtime does not work with file:// URLs. Please use a web server to view this document."); }
@@ -622,7 +619,7 @@ window._ojs.runtime.interpretFromScriptTags();
     }
       var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
       var mailtoRegex = new RegExp(/^mailto:/);
-        var filterRegex = new RegExp("https:\/\/mtgkubbur\.is");
+        var filterRegex = new RegExp("https:\/\/mtgkubbur\.is\/en");
       var isInternal = (href) => {
           return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
       }
@@ -953,11 +950,11 @@ window._ojs.runtime.interpretFromScriptTags();
 <footer class="footer">
   <div class="nav-footer">
     <div class="nav-footer-left">
-<p><span class="footer-brand">MtG Kubbur</span> <span class="footer-tagline">Magic: The Gathering Cube Drafts á Íslandi</span></p>
+<p><span class="footer-brand">MtG Kubbur</span> <span class="footer-tagline">Magic: The Gathering Cube Drafts in Iceland</span></p>
 </div>   
     <div class="nav-footer-center">
 <nav class="footer-nav">
-<a href="index.html">Stigatafla</a> <i class="ms ms-u footer-mana-sep" aria-hidden="true"></i> <a href="throun.html">Leikmaður</a> <i class="ms ms-r footer-mana-sep" aria-hidden="true"></i> <a href="einvigi.html">Einvígi</a> <i class="ms ms-b footer-mana-sep" aria-hidden="true"></i> <a href="kubbar.html">Kubbar</a> <i class="ms ms-g footer-mana-sep" aria-hidden="true"></i> <a href="dagatal.html">Dagatal</a>
+<a href="index.html">Rankings</a> <i class="ms ms-u footer-mana-sep" aria-hidden="true"></i> <a href="player.html">Player</a> <i class="ms ms-r footer-mana-sep" aria-hidden="true"></i> <a href="head-to-head.html">Head-to-Head</a> <i class="ms ms-b footer-mana-sep" aria-hidden="true"></i> <a href="cubes.html">Cubes</a> <i class="ms ms-g footer-mana-sep" aria-hidden="true"></i> <a href="calendar.html">Calendar</a>
 </nav>
 </div>
     <div class="nav-footer-right">
@@ -968,13 +965,13 @@ window._ojs.runtime.interpretFromScriptTags();
 <script>
 (function() {
   var map = {
-    'throun.html': 'en/player.html',
-    'einvigi.html': 'en/head-to-head.html',
-    'kubbar.html': 'en/cubes.html',
-    'dagatal.html': 'en/calendar.html'
+    'player.html': '../throun.html',
+    'head-to-head.html': '../einvigi.html',
+    'cubes.html': '../kubbar.html',
+    'calendar.html': '../dagatal.html'
   };
   var page = location.pathname.split('/').pop() || 'index.html';
-  var el = document.querySelector('a[aria-label="Switch to English"]');
+  var el = document.querySelector('a[aria-label="Switch to Icelandic"]');
   if (el && map[page]) el.href = map[page];
 })();
 </script>
