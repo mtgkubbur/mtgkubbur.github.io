@@ -1,6 +1,5 @@
 ---
-title: "Statistical Methods"
-subtitle: "Time-Varying Bradley-Terry Model with Attendance-Based Mean Reversion and Cube Effects"
+title: "Hvernig stigin eru reiknuð"
 page-layout: article
 toc: true
 execute:
@@ -9,172 +8,170 @@ execute:
   message: false
 ---
 
-## Overview
+## Í stuttu máli
 
-The ranking system uses a Bayesian Bradley-Terry model to estimate relative player strength from head-to-head match results. The model has three key components:
+Stigataflan á þessari síðu kemur úr Bradley-Terry líkani sem er keyrt í Stan. Núverandi vefsíða notar tímabreytilega útgáfu með kubbaáhrifum, ekki gamla 0-100 skalaútgáfu.
 
-1. **Time-varying baseline strength** — Player skill evolves over time via an Ornstein-Uhlenbeck process
-2. **Attendance-based mean reversion** — Players who show up maintain their ratings; absent players regress toward the mean
-3. **Cube effects** — Players can be relatively stronger or weaker in specific cube formats
+Meginhugmyndin er einföld: úr hverjum skráðum leik reynir líkanið að meta hversu sterkir leikmenn eru miðað við hvern annan, hvernig það mat breytist milli kvölda, og hvort einhverjir séu tiltölulega sterkari í ákveðnum kubbaflokkum.
 
-## The Bradley-Terry Model
+## Hvaða gögn fara inn
 
-For a match between player $i$ and player $j$, the probability that $i$ wins is:
+Uppruninn er Google Sheet með dagsetningu, tveimur leikmönnum, kubbanafni og allt að þremur leikjum í hverri viðureignarskráningu (`game1` til `game3`).
 
-$$
-P(i \text{ wins}) = \text{logit}^{-1}(\alpha_i - \alpha_j) = \frac{\exp(\alpha_i - \alpha_j)}{1 + \exp(\alpha_i - \alpha_j)}
-$$
+Við undirbúning gagna er hver skráður leikur gerður að einni athugun:
 
-where $\alpha_k$ is player $k$'s strength on the log-odds scale. When $\alpha_i = \alpha_j$, win probability is 50%. Each unit difference in $\alpha$ corresponds to odds ratio of $e^1 \approx 2.7$ in favor of the stronger player.
+- tómar leikjasúlur detta út
+- `winner` er breytt í 1 eða 0 eftir því hvort `player1` vann leikinn
+- leikmenn fá númer sem Stan notar
+- gögnin eru afmörkuð við tiltekna dagsetningu þegar sögulegar stöðumyndir eru reiknaðar
 
-## Temporal Dynamics: Ornstein-Uhlenbeck Process
+Mikilvægt: líkanið vinnur með einstaka leiki, ekki bara sigurvegara viðureignar.
 
-Player strength evolves over time according to an Ornstein-Uhlenbeck (OU) process that combines two forces:
+Líkanið notar alla skráða leiki og alla leikmenn sem eru í gagnablaðinu. Opt-in sía fyrir opinberar töflur kemur seinna, þegar síðan er birt.
 
-1. **Random drift** — Strength can fluctuate due to practice, form changes, metagame shifts, etc.
-2. **Mean reversion** — Strength gradually pulls back toward the population average
+## Frá leikjum yfir í líkan
 
-The evolution equation is:
+Fyrir hvern leik fær líkanið meðal annars þetta:
 
-$$
-\alpha_{k,t} = \phi_k(t)^{\Delta t} \cdot \alpha_{k,t-1} + \sqrt{\Delta t} \cdot \sigma \cdot z_{k,t}
-$$
+- `player1` og `player2`: númer leikmannanna tveggja
+- `y`: 1 ef `player1` vann, annars 0
+- `game_time`: hvaða leikdegi leikurinn tilheyrir
+- `cube`: hvaða kubbaflokki leikurinn tilheyrir
+- `delta_t`: bil frá síðasta leikdegi, mælt í vikum
+- `played`: fylki sem segir hvort leikmaður mætti á viðkomandi leikdag
 
-where:
+Kubbanöfnin fara ekki öll beint inn sem sér breyta. Þau eru fyrst sett í fjóra flokka:
 
-- $\Delta t$ is the time gap (in weeks) since the previous game night
-- $\sigma$ is a shared volatility parameter
-- $z_{k,t} \sim \text{Normal}(0, 1)$ are standardized innovations
-- $\phi_k(t) \in [0, 1]$ is the mean-reversion rate, which depends on attendance
+- `High`: Vintage Cube, Bolti Vintage Cube, Nerva's Cube
+- `Medium`: Meta Memories, Modern Stories, Synergy Cube, Bar Cube, Horror Cube
+- `Low`: Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube, Ab Wheel, That's Totally Uncommon
+- `Other`: allt annað
 
-### Attendance-Based Mean Reversion
+Þetta skiptir máli vegna þess að líkanið metur aðeins þessa fjóra flokka. Það veit ekki muninn á tveimur einstökum kubbum sem lenda í sama flokki, jafnvel þótt aðrar síður á vefnum sýni upprunaleg kubbanöfn í töflum og tölfræði.
 
-The key innovation is that the mean-reversion rate depends on whether a player attended:
+## Hvaða líkan síðan notar í dag
 
-$$
-\phi_k(t) = \begin{cases}
-\phi_{\text{present}} & \text{if player } k \text{ played at time } t \\
-\phi_{\text{absent}} & \text{if player } k \text{ was absent}
-\end{cases}
-$$
+Lifandi stigataflan á síðunni kemur úr `run_historical_analysis.R`, sem keyrir `stan/bradley_terry_temporal.stan` fyrir hvern leikdag í `results/YYYY-MM-DD/`.
 
-where typically $\phi_{\text{present}} > \phi_{\text{absent}}$. This creates asymmetric dynamics:
+Í venjulegri uppfærslu er bara reiknað fyrir nýjar dagsetningar sem vantar. Eldri möppur eru látnar í friði nema keyrt sé með `--force`.
 
-- **Players who attend** maintain their ratings (weak mean reversion, $\phi \approx 1$)
-- **Players who are absent** regress toward the mean faster (stronger mean reversion, smaller $\phi$)
-
-This reflects the intuition that if you don't show up to prove yourself, the system should become more uncertain about your true current strength—and in the Bradley-Terry framework, increased uncertainty manifests as regression toward the mean.
-
-### Half-Life Interpretation
-
-The half-life tells us how long it takes for a player's "excess strength" (distance from the mean) to decay by 50%:
+Líkanið sem er í notkun á síðunni er þetta:
 
 $$
-t_{1/2} = -\frac{\ln(2)}{\ln(\phi)}
+P(\text{player1 vinnur}) =
+\operatorname{logit}^{-1}\left(
+\alpha_{player1,t} + \gamma_{player1,c}
+- \alpha_{player2,t} - \gamma_{player2,c}
+\right)
 $$
 
-For example, if $\phi_{\text{absent}} = 0.85$, the half-life is approximately 4 weeks. This means that if a strong player misses a month of cube nights, they lose about half of their rating advantage over the average player.
+Hér er:
 
-## Cube Effects
+- `alpha` grunnstyrkur leikmanns á tilteknum tíma
+- `gamma` fast kubbaávik fyrir tiltekinn kubbaflokk
+- `t` leikdagur
+- `c` kubbaflokkur
 
-Some players are relatively stronger in certain cube formats (e.g., Vintage Cube vs. Pauper Cube). The model captures this with cube-specific effects $\gamma_{k,c}$:
+Það eru enn eldri líkön í repóinu, þar á meðal `bradley_terry.stan`, `bradley_terry_cubeeffects.stan` og `run_analysis.R`. Þau eru ekki það sem núverandi vefsíða notar fyrir opinberu stigin.
 
-$$
-\eta_{ijc,t} = \alpha_{i,t} + \gamma_{i,c} - \alpha_{j,t} - \gamma_{j,c}
-$$
+## Hvernig tímauppfærslan virkar
 
-where $\gamma_{k,c}$ represents player $k$'s relative strength in cube format $c$. The cube effects are constrained so that $\sum_c \gamma_{k,c} = 0$ for each player, ensuring that $\alpha_{k,t}$ represents average strength across all cube types.
-
-Cube formats are categorized as:
-
-| Category | Cubes |
-|----------|-------|
-| High | Vintage Cube, Bolti Vintage Cube, Nerva's Cube |
-| Medium | Modern Cube, Synergy Cube, Bar Cube |
-| Low | Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube |
-| Other | Miscellaneous cubes |
-
-The cube effects are treated as static (not time-varying), which is reasonable since a player's relative affinity for different formats is unlikely to change dramatically week-to-week.
-
-## Prior Distributions
-
-The model uses the following priors:
-
-| Parameter | Prior | Rationale |
-|-----------|-------|-----------|
-| $\alpha_0$ | $\text{Normal}(0, 1)$ | Initial strengths on log-odds scale |
-| $\sigma$ | $\text{Exponential}(1)$ | Volatility; kept moderate |
-| $\phi_{\text{present}}$ | $\text{Beta}(15, 1)$ | Concentrated near 1 (weak reversion) |
-| $\phi_{\text{absent}}$ | $\text{Beta}(2, 2)$ | Symmetric, allows stronger reversion |
-| $\gamma_{k,c}$ | $\text{Normal}(0, 0.3)$ | Small cube effects centered at zero |
-
-The prior on $\phi_{\text{present}}$ being concentrated near 1 reflects the belief that players who consistently show up should maintain their ratings well. The prior on $\phi_{\text{absent}}$ is more diffuse, allowing the data to inform how quickly absent players should regress.
-
-## Score Scale (0-100)
-
-For interpretability, results are displayed on a normalized 0-100 scale rather than raw log-odds or traditional ELO. The normalization is performed **within each posterior draw**:
+Grunnstyrkur hvers leikmanns færist frá einum leikdegi til næsta samkvæmt:
 
 $$
-\text{Score}_k = \frac{\alpha_k - \min_j(\alpha_j)}{\max_j(\alpha_j) - \min_j(\alpha_j)} \times 100
+\alpha_{k,t} =
+\phi_{k,t}^{\Delta t_t} \alpha_{k,t-1}
++ \sqrt{\Delta t_t}\sigma z_{k,t}
 $$
 
-This means:
+Í framkvæmd þýðir þetta:
 
-- A score of **100** corresponds to the strongest player (in that posterior sample)
-- A score of **0** corresponds to the weakest player (in that posterior sample)
-- A score of **50** represents middle-of-the-pack performance
+- ef leikmaður mætti á viðkomandi leikdag fær hann `phi_present`
+- ef hann mætti ekki fær hann `phi_absent`
+- leikmenn sem mæta ekki dragast hraðar aftur í átt að meðaltalinu
+- lengra hlé gefur líka meira svigrúm fyrir hreyfingu
 
-The advantage of this approach is that scores are always interpretable as "where does this player fall in the distribution of player skill?" regardless of the overall spread of abilities. With an Ornstein-Uhlenbeck mean-reversion process, traditional ELO scores would become compressed toward the mean, making differences harder to interpret.
+Þetta er líka þar sem "mæting" kemur inn í líkanið. Það er ekki sér refsing á óvirka leikmenn; það er hluti af því hvernig tímabreytingin er skilgreind.
 
-### Uncertainty Propagation
+Það er líka ein hagnýt nálgun hér: `delta_t` er reiknað úr dagafjölda milli leikdaga deilt með 7, en það er aldrei látið fara undir 1. Tvö kvöld með stuttu millibili eru því samt meðhöndluð eins og að minnsta kosti ein vika hafi liðið.
 
-Because normalization happens within each posterior draw, uncertainty is properly propagated:
+## Kubbaáhrif
 
-- If there's high certainty about who's best, the top player's score distribution will be tightly concentrated near 100
-- If two players are close in skill, both might have score distributions spanning 85-100, reflecting uncertainty about who's actually stronger
+Kubbaáhrifin (`gamma`) eru föst yfir tíma. Hver leikmaður fær eitt gildi fyrir hvern kubbaflokk, og þessi gildi leggjast saman við núverandi grunnstyrk þegar kubbasértæk stig eru sýnd.
 
-The reported score intervals (5th and 95th percentiles) capture this uncertainty. Overlapping intervals indicate that the ranking between those players is uncertain.
+Þau eru ekki tímabreytileg. Ef leikmaður lagast mikið í ákveðnum kubbaflokki sér líkanið það bara í gegnum almenna tímabreytilega styrkinn og fasta kubbaávikið, ekki sem sérstaka þróun á kubbaáhrifunum sjálfum.
 
-## Identifiability
+## Hvað ELO-talan á síðunni merkir
 
-The Bradley-Terry model has a location non-identifiability: we can add any constant to all $\alpha_k$ without changing the likelihood. We handle this by:
+Síðan sýnir ekki hrá `alpha` gildi. Hún varpar þeim yfir á ELO-líkan kvarða:
 
-1. Constraining $\alpha_0$ (initial strengths) to sum to zero
-2. Re-centering $\alpha_t$ after each time step to maintain the constraint
+$$
+\text{ELO} = 1500 + \frac{400}{\log(10)}x
+$$
 
-This ensures the mean player strength is always zero on the log-odds scale. The normalized 0-100 score transformation then maps this to an interpretable scale where relative position is clear.
+þar sem:
 
-## Inference
+- `x = alpha_current` á heildartöflunni
+- `x = alpha_current + gamma` á kubbatöflunum
 
-The model is fit using Hamiltonian Monte Carlo (HMC) via Stan, called from R using `cmdstanr`. Default settings:
+`alpha_current` er einfaldlega síðasti tímapunkturinn í nýjustu keyrslu tímalíkansins.
 
-- 4 chains
-- 1,500 warmup iterations
-- 3,000 sampling iterations
-- `adapt_delta = 0.9` to reduce divergent transitions
+Talan sem birtist á síðunni er miðgildi posterior-dreifingarinnar á þessum ELO-kvarða, yfirleitt námunduð að heiltölu. Þótt dálkarnir í sumum CSV skrám heiti enn `score_*`, þá eru gildin þar líka ELO gildi, ekki sér 0-100 skor.
 
-The high dimensionality (player strengths at each time point plus cube effects) requires careful tuning, but the non-centered parameterization of the OU process helps with sampling efficiency.
+## Hvaða niðurstaða er notuð hvar
 
-## Model Comparison
+- Heildarstigataflan á forsíðunni er reiknuð beint úr nýjustu keyrslunni í `results/`.
+- `Fyrra` og breytingarnar bera saman nýjustu niðurstöðu við næstnýjustu niðurstöðumöppu, ekki við næsta eldri tímapunkt innan sömu keyrslu.
+- Leikmannasíðan og sögugrafið nota safn af `player_summary.csv` stöðumyndum úr öllum dagsetningamöppum.
 
-The model includes generated quantities for leave-one-out cross-validation (LOO-CV) via the `loo` package. This allows comparison against simpler alternatives:
+Þetta er vísvitandi. Þegar ný gögn bætast við getur ný keyrsla hnikað gömlu mati líka, svo samanburður á tveimur vistuðum stöðumyndum er skýrari fyrir síðuna en að bera saman `T` og `T-1` innan sömu nýju keyrslu.
 
-1. **Static Bradley-Terry** — No temporal dynamics
-2. **OU without attendance effects** — Single $\phi$ for everyone
-3. **No cube effects** — Only time-varying $\alpha$
+## Hvað "fyrra" og breytingarnar þýða
 
-## Limitations and Future Directions
+Á opinberu töflunum er:
 
-**Current limitations:**
+- `Fyrra`: ELO eða sæti í næstnýjustu vistuðu niðurstöðunni
+- `±`: mismunur milli námundaðra gildanna
 
-- Cube effects are static (don't evolve over time)
-- No player-vs-player specific effects (some players might consistently beat others)
-- Limited data per player can lead to high uncertainty
-- The model doesn't distinguish between "hasn't played recently" and "new player"
+Sætisbreytingin er því ekki hreinn "fór upp eða niður í heildarlista allra leikmanna". Hún er reiknuð eftir að sömu birtingarsíur hafa verið keyrðar á nýjustu og fyrri niðurstöðu.
 
-**Potential extensions:**
+Ef leikmaður var ekki inni í fyrri töflu, þá eru fyrri gildi tóm.
 
-- Glicko-style uncertainty inflation for inactive players (increase variance rather than shift mean)
-- Separate ranking tables for different cube categories
-- Time-varying cube effects
-- Hierarchical priors on player-specific volatility
+## Óvissa
+
+Líkanið skilar ekki einni fastri tölu fyrir hvern leikmann heldur posterior-dreifingu.
+
+Á leikmannasíðunni eru sýnd:
+
+- miðgildi
+- 50% bil (`score_q25` til `score_q75`)
+- 90% bil (`score_lower` til `score_upper`)
+
+Breiðara bil þýðir yfirleitt að gögnin eru þynnri eða merkið óskýrara. Þetta er óvissa í matinu út frá skráðum leikjum, ekki spá um nákvæma útkomu næsta kvölds.
+
+Heildarstigataflan á forsíðunni sýnir þessa óvissu ekki beint; þar er bara miðgildið sýnt.
+
+## Hverjir birtast á opinberu töflunum
+
+Birtingarsíurnar eru ekki hluti af Stan-líkaninu. Þær eru keyrðar ofan á niðurstöðurnar þegar vefurinn er byggður.
+
+Það sem gildir í dag:
+
+- aðeins leikmenn sem eru merktir `elo_table == TRUE` í `Players` blaðinu birtast opinberlega
+- heildartaflan krefst að minnsta kosti 18 leikja alls
+- heildartaflan krefst að minnsta kosti 15% vinningshlutfalls
+- kubbatöflurnar krefjast að minnsta kosti 3 leikja í viðkomandi kubbaflokki
+- kubbatöflurnar nota ekki sérstakt lágmark fyrir vinningshlutfall
+- leikmenn detta út úr töflunum ef síðasti skráði leikur þeirra er eldri en 8 vikur
+
+Síðasta atriðið notar síðasta leik yfir höfuð, ekki síðasta leik í viðkomandi kubbaflokki. Leikmaður getur því birst á High töflunni þótt hann hafi ekki spilað High nýlega, svo lengi sem hann hefur verið virkur einhvers staðar síðustu 8 vikurnar.
+
+Opt-in sían ræður því hverjir sjást á síðunni. Hún breytir ekki því hvaða leikir telja inn í líkanið, þannig að leikir gegn leikmönnum sem birtast ekki opinberlega telja samt áfram.
+
+## Takmarkanir
+
+- Líkanið notar aðeins skráða sigra og töp í einstökum leikjum. Það sér hvorki pods, sætaval, decklist, andstæðingadreifingu né annað slíkt.
+- Kubbaáhrifin eru aðeins fyrir fjóra breiða flokka og þau eru föst yfir tíma.
+- Sumar aðrar síður á vefnum sýna tölfræði eftir upprunalegu kubbanöfnum. Það er lýsandi tölfræði, ekki nákvæmlega sami hlutinn og fer inn í stigalíkanið.
+- Venjuleg uppfærsla endurreiknar ekki eldri dagsetningar. Ef gömlum gögnum er breytt eða líkanið sjálft breytist þarf `--force` til að endurreikna alla söguna.
+- Tímahliðin notar vikur með lágmarkinu 1, sem er einföldun frekar en fínt stillt tímamódel.

@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 
-<title>Statistical Methods – MtG Kubbur</title>
+<title>Hvernig stigin eru reiknuð – MtG Kubbur</title>
 <style>
 code{white-space: pre-wrap;}
 span.smallcaps{font-variant: small-caps;}
@@ -334,23 +334,18 @@ window.Quarto = {
     <h2 id="toc-title">On this page</h2>
    
   <ul>
-  <li><a href="#overview" id="toc-overview" class="nav-link active" data-scroll-target="#overview">Overview</a></li>
-  <li><a href="#the-bradley-terry-model" id="toc-the-bradley-terry-model" class="nav-link" data-scroll-target="#the-bradley-terry-model">The Bradley-Terry Model</a></li>
-  <li><a href="#temporal-dynamics-ornstein-uhlenbeck-process" id="toc-temporal-dynamics-ornstein-uhlenbeck-process" class="nav-link" data-scroll-target="#temporal-dynamics-ornstein-uhlenbeck-process">Temporal Dynamics: Ornstein-Uhlenbeck Process</a>
-  <ul class="collapse">
-  <li><a href="#attendance-based-mean-reversion" id="toc-attendance-based-mean-reversion" class="nav-link" data-scroll-target="#attendance-based-mean-reversion">Attendance-Based Mean Reversion</a></li>
-  <li><a href="#half-life-interpretation" id="toc-half-life-interpretation" class="nav-link" data-scroll-target="#half-life-interpretation">Half-Life Interpretation</a></li>
-  </ul></li>
-  <li><a href="#cube-effects" id="toc-cube-effects" class="nav-link" data-scroll-target="#cube-effects">Cube Effects</a></li>
-  <li><a href="#prior-distributions" id="toc-prior-distributions" class="nav-link" data-scroll-target="#prior-distributions">Prior Distributions</a></li>
-  <li><a href="#score-scale-0-100" id="toc-score-scale-0-100" class="nav-link" data-scroll-target="#score-scale-0-100">Score Scale (0-100)</a>
-  <ul class="collapse">
-  <li><a href="#uncertainty-propagation" id="toc-uncertainty-propagation" class="nav-link" data-scroll-target="#uncertainty-propagation">Uncertainty Propagation</a></li>
-  </ul></li>
-  <li><a href="#identifiability" id="toc-identifiability" class="nav-link" data-scroll-target="#identifiability">Identifiability</a></li>
-  <li><a href="#inference" id="toc-inference" class="nav-link" data-scroll-target="#inference">Inference</a></li>
-  <li><a href="#model-comparison" id="toc-model-comparison" class="nav-link" data-scroll-target="#model-comparison">Model Comparison</a></li>
-  <li><a href="#limitations-and-future-directions" id="toc-limitations-and-future-directions" class="nav-link" data-scroll-target="#limitations-and-future-directions">Limitations and Future Directions</a></li>
+  <li><a href="#í-stuttu-máli" id="toc-í-stuttu-máli" class="nav-link active" data-scroll-target="#í-stuttu-máli">Í stuttu máli</a></li>
+  <li><a href="#hvaða-gögn-fara-inn" id="toc-hvaða-gögn-fara-inn" class="nav-link" data-scroll-target="#hvaða-gögn-fara-inn">Hvaða gögn fara inn</a></li>
+  <li><a href="#frá-leikjum-yfir-í-líkan" id="toc-frá-leikjum-yfir-í-líkan" class="nav-link" data-scroll-target="#frá-leikjum-yfir-í-líkan">Frá leikjum yfir í líkan</a></li>
+  <li><a href="#hvaða-líkan-síðan-notar-í-dag" id="toc-hvaða-líkan-síðan-notar-í-dag" class="nav-link" data-scroll-target="#hvaða-líkan-síðan-notar-í-dag">Hvaða líkan síðan notar í dag</a></li>
+  <li><a href="#hvernig-tímauppfærslan-virkar" id="toc-hvernig-tímauppfærslan-virkar" class="nav-link" data-scroll-target="#hvernig-tímauppfærslan-virkar">Hvernig tímauppfærslan virkar</a></li>
+  <li><a href="#kubbaáhrif" id="toc-kubbaáhrif" class="nav-link" data-scroll-target="#kubbaáhrif">Kubbaáhrif</a></li>
+  <li><a href="#hvað-elo-talan-á-síðunni-merkir" id="toc-hvað-elo-talan-á-síðunni-merkir" class="nav-link" data-scroll-target="#hvað-elo-talan-á-síðunni-merkir">Hvað ELO-talan á síðunni merkir</a></li>
+  <li><a href="#hvaða-niðurstaða-er-notuð-hvar" id="toc-hvaða-niðurstaða-er-notuð-hvar" class="nav-link" data-scroll-target="#hvaða-niðurstaða-er-notuð-hvar">Hvaða niðurstaða er notuð hvar</a></li>
+  <li><a href="#hvað-fyrra-og-breytingarnar-þýða" id="toc-hvað-fyrra-og-breytingarnar-þýða" class="nav-link" data-scroll-target="#hvað-fyrra-og-breytingarnar-þýða">Hvað “fyrra” og breytingarnar þýða</a></li>
+  <li><a href="#óvissa" id="toc-óvissa" class="nav-link" data-scroll-target="#óvissa">Óvissa</a></li>
+  <li><a href="#hverjir-birtast-á-opinberu-töflunum" id="toc-hverjir-birtast-á-opinberu-töflunum" class="nav-link" data-scroll-target="#hverjir-birtast-á-opinberu-töflunum">Hverjir birtast á opinberu töflunum</a></li>
+  <li><a href="#takmarkanir" id="toc-takmarkanir" class="nav-link" data-scroll-target="#takmarkanir">Takmarkanir</a></li>
   </ul>
 </nav>
     </div>
@@ -360,8 +355,7 @@ window.Quarto = {
 
 <header id="title-block-header" class="quarto-title-block default">
 <div class="quarto-title">
-<h1 class="title">Statistical Methods</h1>
-<p class="subtitle lead">Time-Varying Bradley-Terry Model with Attendance-Based Mean Reversion and Cube Effects</p>
+<h1 class="title">Hvernig stigin eru reiknuð</h1>
 </div>
 
 
@@ -378,215 +372,156 @@ window.Quarto = {
 </header>
 
 
-<section id="overview" class="level2">
-<h2 class="anchored" data-anchor-id="overview">Overview</h2>
-<p>The ranking system uses a Bayesian Bradley-Terry model to estimate relative player strength from head-to-head match results. The model has three key components:</p>
-<ol type="1">
-<li><strong>Time-varying baseline strength</strong> — Player skill evolves over time via an Ornstein-Uhlenbeck process</li>
-<li><strong>Attendance-based mean reversion</strong> — Players who show up maintain their ratings; absent players regress toward the mean</li>
-<li><strong>Cube effects</strong> — Players can be relatively stronger or weaker in specific cube formats</li>
-</ol>
+<section id="í-stuttu-máli" class="level2">
+<h2 class="anchored" data-anchor-id="í-stuttu-máli">Í stuttu máli</h2>
+<p>Stigataflan á þessari síðu kemur úr Bradley-Terry líkani sem er keyrt í Stan. Núverandi vefsíða notar tímabreytilega útgáfu með kubbaáhrifum, ekki gamla 0-100 skalaútgáfu.</p>
+<p>Meginhugmyndin er einföld: úr hverjum skráðum leik reynir líkanið að meta hversu sterkir leikmenn eru miðað við hvern annan, hvernig það mat breytist milli kvölda, og hvort einhverjir séu tiltölulega sterkari í ákveðnum kubbaflokkum.</p>
 </section>
-<section id="the-bradley-terry-model" class="level2">
-<h2 class="anchored" data-anchor-id="the-bradley-terry-model">The Bradley-Terry Model</h2>
-<p>For a match between player <span class="math inline">\(i\)</span> and player <span class="math inline">\(j\)</span>, the probability that <span class="math inline">\(i\)</span> wins is:</p>
-<p><span class="math display">\[
-P(i \text{ wins}) = \text{logit}^{-1}(\alpha_i - \alpha_j) = \frac{\exp(\alpha_i - \alpha_j)}{1 + \exp(\alpha_i - \alpha_j)}
-\]</span></p>
-<p>where <span class="math inline">\(\alpha_k\)</span> is player <span class="math inline">\(k\)</span>’s strength on the log-odds scale. When <span class="math inline">\(\alpha_i = \alpha_j\)</span>, win probability is 50%. Each unit difference in <span class="math inline">\(\alpha\)</span> corresponds to odds ratio of <span class="math inline">\(e^1 \approx 2.7\)</span> in favor of the stronger player.</p>
-</section>
-<section id="temporal-dynamics-ornstein-uhlenbeck-process" class="level2">
-<h2 class="anchored" data-anchor-id="temporal-dynamics-ornstein-uhlenbeck-process">Temporal Dynamics: Ornstein-Uhlenbeck Process</h2>
-<p>Player strength evolves over time according to an Ornstein-Uhlenbeck (OU) process that combines two forces:</p>
-<ol type="1">
-<li><strong>Random drift</strong> — Strength can fluctuate due to practice, form changes, metagame shifts, etc.</li>
-<li><strong>Mean reversion</strong> — Strength gradually pulls back toward the population average</li>
-</ol>
-<p>The evolution equation is:</p>
-<p><span class="math display">\[
-\alpha_{k,t} = \phi_k(t)^{\Delta t} \cdot \alpha_{k,t-1} + \sqrt{\Delta t} \cdot \sigma \cdot z_{k,t}
-\]</span></p>
-<p>where:</p>
+<section id="hvaða-gögn-fara-inn" class="level2">
+<h2 class="anchored" data-anchor-id="hvaða-gögn-fara-inn">Hvaða gögn fara inn</h2>
+<p>Uppruninn er Google Sheet með dagsetningu, tveimur leikmönnum, kubbanafni og allt að þremur leikjum í hverri viðureignarskráningu (<code>game1</code> til <code>game3</code>).</p>
+<p>Við undirbúning gagna er hver skráður leikur gerður að einni athugun:</p>
 <ul>
-<li><span class="math inline">\(\Delta t\)</span> is the time gap (in weeks) since the previous game night</li>
-<li><span class="math inline">\(\sigma\)</span> is a shared volatility parameter</li>
-<li><span class="math inline">\(z_{k,t} \sim \text{Normal}(0, 1)\)</span> are standardized innovations</li>
-<li><span class="math inline">\(\phi_k(t) \in [0, 1]\)</span> is the mean-reversion rate, which depends on attendance</li>
+<li>tómar leikjasúlur detta út</li>
+<li><code>winner</code> er breytt í 1 eða 0 eftir því hvort <code>player1</code> vann leikinn</li>
+<li>leikmenn fá númer sem Stan notar</li>
+<li>gögnin eru afmörkuð við tiltekna dagsetningu þegar sögulegar stöðumyndir eru reiknaðar</li>
 </ul>
-<section id="attendance-based-mean-reversion" class="level3">
-<h3 class="anchored" data-anchor-id="attendance-based-mean-reversion">Attendance-Based Mean Reversion</h3>
-<p>The key innovation is that the mean-reversion rate depends on whether a player attended:</p>
+<p>Mikilvægt: líkanið vinnur með einstaka leiki, ekki bara sigurvegara viðureignar.</p>
+<p>Líkanið notar alla skráða leiki og alla leikmenn sem eru í gagnablaðinu. Opt-in sía fyrir opinberar töflur kemur seinna, þegar síðan er birt.</p>
+</section>
+<section id="frá-leikjum-yfir-í-líkan" class="level2">
+<h2 class="anchored" data-anchor-id="frá-leikjum-yfir-í-líkan">Frá leikjum yfir í líkan</h2>
+<p>Fyrir hvern leik fær líkanið meðal annars þetta:</p>
+<ul>
+<li><code>player1</code> og <code>player2</code>: númer leikmannanna tveggja</li>
+<li><code>y</code>: 1 ef <code>player1</code> vann, annars 0</li>
+<li><code>game_time</code>: hvaða leikdegi leikurinn tilheyrir</li>
+<li><code>cube</code>: hvaða kubbaflokki leikurinn tilheyrir</li>
+<li><code>delta_t</code>: bil frá síðasta leikdegi, mælt í vikum</li>
+<li><code>played</code>: fylki sem segir hvort leikmaður mætti á viðkomandi leikdag</li>
+</ul>
+<p>Kubbanöfnin fara ekki öll beint inn sem sér breyta. Þau eru fyrst sett í fjóra flokka:</p>
+<ul>
+<li><code>High</code>: Vintage Cube, Bolti Vintage Cube, Nerva’s Cube</li>
+<li><code>Medium</code>: Meta Memories, Modern Stories, Synergy Cube, Bar Cube, Horror Cube</li>
+<li><code>Low</code>: Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube, Ab Wheel, That’s Totally Uncommon</li>
+<li><code>Other</code>: allt annað</li>
+</ul>
+<p>Þetta skiptir máli vegna þess að líkanið metur aðeins þessa fjóra flokka. Það veit ekki muninn á tveimur einstökum kubbum sem lenda í sama flokki, jafnvel þótt aðrar síður á vefnum sýni upprunaleg kubbanöfn í töflum og tölfræði.</p>
+</section>
+<section id="hvaða-líkan-síðan-notar-í-dag" class="level2">
+<h2 class="anchored" data-anchor-id="hvaða-líkan-síðan-notar-í-dag">Hvaða líkan síðan notar í dag</h2>
+<p>Lifandi stigataflan á síðunni kemur úr <code>run_historical_analysis.R</code>, sem keyrir <code>stan/bradley_terry_temporal.stan</code> fyrir hvern leikdag í <code>results/YYYY-MM-DD/</code>.</p>
+<p>Í venjulegri uppfærslu er bara reiknað fyrir nýjar dagsetningar sem vantar. Eldri möppur eru látnar í friði nema keyrt sé með <code>--force</code>.</p>
+<p>Líkanið sem er í notkun á síðunni er þetta:</p>
 <p><span class="math display">\[
-\phi_k(t) = \begin{cases}
-\phi_{\text{present}} &amp; \text{if player } k \text{ played at time } t \\
-\phi_{\text{absent}} &amp; \text{if player } k \text{ was absent}
-\end{cases}
+P(\text{player1 vinnur}) =
+\operatorname{logit}^{-1}\left(
+\alpha_{player1,t} + \gamma_{player1,c}
+- \alpha_{player2,t} - \gamma_{player2,c}
+\right)
 \]</span></p>
-<p>where typically <span class="math inline">\(\phi_{\text{present}} &gt; \phi_{\text{absent}}\)</span>. This creates asymmetric dynamics:</p>
+<p>Hér er:</p>
 <ul>
-<li><strong>Players who attend</strong> maintain their ratings (weak mean reversion, <span class="math inline">\(\phi \approx 1\)</span>)</li>
-<li><strong>Players who are absent</strong> regress toward the mean faster (stronger mean reversion, smaller <span class="math inline">\(\phi\)</span>)</li>
+<li><code>alpha</code> grunnstyrkur leikmanns á tilteknum tíma</li>
+<li><code>gamma</code> fast kubbaávik fyrir tiltekinn kubbaflokk</li>
+<li><code>t</code> leikdagur</li>
+<li><code>c</code> kubbaflokkur</li>
 </ul>
-<p>This reflects the intuition that if you don’t show up to prove yourself, the system should become more uncertain about your true current strength—and in the Bradley-Terry framework, increased uncertainty manifests as regression toward the mean.</p>
+<p>Það eru enn eldri líkön í repóinu, þar á meðal <code>bradley_terry.stan</code>, <code>bradley_terry_cubeeffects.stan</code> og <code>run_analysis.R</code>. Þau eru ekki það sem núverandi vefsíða notar fyrir opinberu stigin.</p>
 </section>
-<section id="half-life-interpretation" class="level3">
-<h3 class="anchored" data-anchor-id="half-life-interpretation">Half-Life Interpretation</h3>
-<p>The half-life tells us how long it takes for a player’s “excess strength” (distance from the mean) to decay by 50%:</p>
+<section id="hvernig-tímauppfærslan-virkar" class="level2">
+<h2 class="anchored" data-anchor-id="hvernig-tímauppfærslan-virkar">Hvernig tímauppfærslan virkar</h2>
+<p>Grunnstyrkur hvers leikmanns færist frá einum leikdegi til næsta samkvæmt:</p>
 <p><span class="math display">\[
-t_{1/2} = -\frac{\ln(2)}{\ln(\phi)}
+\alpha_{k,t} =
+\phi_{k,t}^{\Delta t_t} \alpha_{k,t-1}
++ \sqrt{\Delta t_t}\sigma z_{k,t}
 \]</span></p>
-<p>For example, if <span class="math inline">\(\phi_{\text{absent}} = 0.85\)</span>, the half-life is approximately 4 weeks. This means that if a strong player misses a month of cube nights, they lose about half of their rating advantage over the average player.</p>
+<p>Í framkvæmd þýðir þetta:</p>
+<ul>
+<li>ef leikmaður mætti á viðkomandi leikdag fær hann <code>phi_present</code></li>
+<li>ef hann mætti ekki fær hann <code>phi_absent</code></li>
+<li>leikmenn sem mæta ekki dragast hraðar aftur í átt að meðaltalinu</li>
+<li>lengra hlé gefur líka meira svigrúm fyrir hreyfingu</li>
+</ul>
+<p>Þetta er líka þar sem “mæting” kemur inn í líkanið. Það er ekki sér refsing á óvirka leikmenn; það er hluti af því hvernig tímabreytingin er skilgreind.</p>
+<p>Það er líka ein hagnýt nálgun hér: <code>delta_t</code> er reiknað úr dagafjölda milli leikdaga deilt með 7, en það er aldrei látið fara undir 1. Tvö kvöld með stuttu millibili eru því samt meðhöndluð eins og að minnsta kosti ein vika hafi liðið.</p>
 </section>
+<section id="kubbaáhrif" class="level2">
+<h2 class="anchored" data-anchor-id="kubbaáhrif">Kubbaáhrif</h2>
+<p>Kubbaáhrifin (<code>gamma</code>) eru föst yfir tíma. Hver leikmaður fær eitt gildi fyrir hvern kubbaflokk, og þessi gildi leggjast saman við núverandi grunnstyrk þegar kubbasértæk stig eru sýnd.</p>
+<p>Þau eru ekki tímabreytileg. Ef leikmaður lagast mikið í ákveðnum kubbaflokki sér líkanið það bara í gegnum almenna tímabreytilega styrkinn og fasta kubbaávikið, ekki sem sérstaka þróun á kubbaáhrifunum sjálfum.</p>
 </section>
-<section id="cube-effects" class="level2">
-<h2 class="anchored" data-anchor-id="cube-effects">Cube Effects</h2>
-<p>Some players are relatively stronger in certain cube formats (e.g., Vintage Cube vs.&nbsp;Pauper Cube). The model captures this with cube-specific effects <span class="math inline">\(\gamma_{k,c}\)</span>:</p>
+<section id="hvað-elo-talan-á-síðunni-merkir" class="level2">
+<h2 class="anchored" data-anchor-id="hvað-elo-talan-á-síðunni-merkir">Hvað ELO-talan á síðunni merkir</h2>
+<p>Síðan sýnir ekki hrá <code>alpha</code> gildi. Hún varpar þeim yfir á ELO-líkan kvarða:</p>
 <p><span class="math display">\[
-\eta_{ijc,t} = \alpha_{i,t} + \gamma_{i,c} - \alpha_{j,t} - \gamma_{j,c}
+\text{ELO} = 1500 + \frac{400}{\log(10)}x
 \]</span></p>
-<p>where <span class="math inline">\(\gamma_{k,c}\)</span> represents player <span class="math inline">\(k\)</span>’s relative strength in cube format <span class="math inline">\(c\)</span>. The cube effects are constrained so that <span class="math inline">\(\sum_c \gamma_{k,c} = 0\)</span> for each player, ensuring that <span class="math inline">\(\alpha_{k,t}\)</span> represents average strength across all cube types.</p>
-<p>Cube formats are categorized as:</p>
-<table class="caption-top table">
-<thead>
-<tr class="header">
-<th>Category</th>
-<th>Cubes</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>High</td>
-<td>Vintage Cube, Bolti Vintage Cube, Nerva’s Cube</td>
-</tr>
-<tr class="even">
-<td>Medium</td>
-<td>Modern Cube, Synergy Cube, Bar Cube</td>
-</tr>
-<tr class="odd">
-<td>Low</td>
-<td>Khans Cube, Kaldheim Cube, Old Border Cube, Pauper Cube</td>
-</tr>
-<tr class="even">
-<td>Other</td>
-<td>Miscellaneous cubes</td>
-</tr>
-</tbody>
-</table>
-<p>The cube effects are treated as static (not time-varying), which is reasonable since a player’s relative affinity for different formats is unlikely to change dramatically week-to-week.</p>
-</section>
-<section id="prior-distributions" class="level2">
-<h2 class="anchored" data-anchor-id="prior-distributions">Prior Distributions</h2>
-<p>The model uses the following priors:</p>
-<table class="caption-top table">
-<colgroup>
-<col style="width: 37%">
-<col style="width: 24%">
-<col style="width: 37%">
-</colgroup>
-<thead>
-<tr class="header">
-<th>Parameter</th>
-<th>Prior</th>
-<th>Rationale</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td><span class="math inline">\(\alpha_0\)</span></td>
-<td><span class="math inline">\(\text{Normal}(0, 1)\)</span></td>
-<td>Initial strengths on log-odds scale</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(\sigma\)</span></td>
-<td><span class="math inline">\(\text{Exponential}(1)\)</span></td>
-<td>Volatility; kept moderate</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(\phi_{\text{present}}\)</span></td>
-<td><span class="math inline">\(\text{Beta}(15, 1)\)</span></td>
-<td>Concentrated near 1 (weak reversion)</td>
-</tr>
-<tr class="even">
-<td><span class="math inline">\(\phi_{\text{absent}}\)</span></td>
-<td><span class="math inline">\(\text{Beta}(2, 2)\)</span></td>
-<td>Symmetric, allows stronger reversion</td>
-</tr>
-<tr class="odd">
-<td><span class="math inline">\(\gamma_{k,c}\)</span></td>
-<td><span class="math inline">\(\text{Normal}(0, 0.3)\)</span></td>
-<td>Small cube effects centered at zero</td>
-</tr>
-</tbody>
-</table>
-<p>The prior on <span class="math inline">\(\phi_{\text{present}}\)</span> being concentrated near 1 reflects the belief that players who consistently show up should maintain their ratings well. The prior on <span class="math inline">\(\phi_{\text{absent}}\)</span> is more diffuse, allowing the data to inform how quickly absent players should regress.</p>
-</section>
-<section id="score-scale-0-100" class="level2">
-<h2 class="anchored" data-anchor-id="score-scale-0-100">Score Scale (0-100)</h2>
-<p>For interpretability, results are displayed on a normalized 0-100 scale rather than raw log-odds or traditional ELO. The normalization is performed <strong>within each posterior draw</strong>:</p>
-<p><span class="math display">\[
-\text{Score}_k = \frac{\alpha_k - \min_j(\alpha_j)}{\max_j(\alpha_j) - \min_j(\alpha_j)} \times 100
-\]</span></p>
-<p>This means:</p>
+<p>þar sem:</p>
 <ul>
-<li>A score of <strong>100</strong> corresponds to the strongest player (in that posterior sample)</li>
-<li>A score of <strong>0</strong> corresponds to the weakest player (in that posterior sample)</li>
-<li>A score of <strong>50</strong> represents middle-of-the-pack performance</li>
+<li><code>x = alpha_current</code> á heildartöflunni</li>
+<li><code>x = alpha_current + gamma</code> á kubbatöflunum</li>
 </ul>
-<p>The advantage of this approach is that scores are always interpretable as “where does this player fall in the distribution of player skill?” regardless of the overall spread of abilities. With an Ornstein-Uhlenbeck mean-reversion process, traditional ELO scores would become compressed toward the mean, making differences harder to interpret.</p>
-<section id="uncertainty-propagation" class="level3">
-<h3 class="anchored" data-anchor-id="uncertainty-propagation">Uncertainty Propagation</h3>
-<p>Because normalization happens within each posterior draw, uncertainty is properly propagated:</p>
+<p><code>alpha_current</code> er einfaldlega síðasti tímapunkturinn í nýjustu keyrslu tímalíkansins.</p>
+<p>Talan sem birtist á síðunni er miðgildi posterior-dreifingarinnar á þessum ELO-kvarða, yfirleitt námunduð að heiltölu. Þótt dálkarnir í sumum CSV skrám heiti enn <code>score_*</code>, þá eru gildin þar líka ELO gildi, ekki sér 0-100 skor.</p>
+</section>
+<section id="hvaða-niðurstaða-er-notuð-hvar" class="level2">
+<h2 class="anchored" data-anchor-id="hvaða-niðurstaða-er-notuð-hvar">Hvaða niðurstaða er notuð hvar</h2>
 <ul>
-<li>If there’s high certainty about who’s best, the top player’s score distribution will be tightly concentrated near 100</li>
-<li>If two players are close in skill, both might have score distributions spanning 85-100, reflecting uncertainty about who’s actually stronger</li>
+<li>Heildarstigataflan á forsíðunni er reiknuð beint úr nýjustu keyrslunni í <code>results/</code>.</li>
+<li><code>Fyrra</code> og breytingarnar bera saman nýjustu niðurstöðu við næstnýjustu niðurstöðumöppu, ekki við næsta eldri tímapunkt innan sömu keyrslu.</li>
+<li>Leikmannasíðan og sögugrafið nota safn af <code>player_summary.csv</code> stöðumyndum úr öllum dagsetningamöppum.</li>
 </ul>
-<p>The reported score intervals (5th and 95th percentiles) capture this uncertainty. Overlapping intervals indicate that the ranking between those players is uncertain.</p>
+<p>Þetta er vísvitandi. Þegar ný gögn bætast við getur ný keyrsla hnikað gömlu mati líka, svo samanburður á tveimur vistuðum stöðumyndum er skýrari fyrir síðuna en að bera saman <code>T</code> og <code>T-1</code> innan sömu nýju keyrslu.</p>
 </section>
-</section>
-<section id="identifiability" class="level2">
-<h2 class="anchored" data-anchor-id="identifiability">Identifiability</h2>
-<p>The Bradley-Terry model has a location non-identifiability: we can add any constant to all <span class="math inline">\(\alpha_k\)</span> without changing the likelihood. We handle this by:</p>
-<ol type="1">
-<li>Constraining <span class="math inline">\(\alpha_0\)</span> (initial strengths) to sum to zero</li>
-<li>Re-centering <span class="math inline">\(\alpha_t\)</span> after each time step to maintain the constraint</li>
-</ol>
-<p>This ensures the mean player strength is always zero on the log-odds scale. The normalized 0-100 score transformation then maps this to an interpretable scale where relative position is clear.</p>
-</section>
-<section id="inference" class="level2">
-<h2 class="anchored" data-anchor-id="inference">Inference</h2>
-<p>The model is fit using Hamiltonian Monte Carlo (HMC) via Stan, called from R using <code>cmdstanr</code>. Default settings:</p>
+<section id="hvað-fyrra-og-breytingarnar-þýða" class="level2">
+<h2 class="anchored" data-anchor-id="hvað-fyrra-og-breytingarnar-þýða">Hvað “fyrra” og breytingarnar þýða</h2>
+<p>Á opinberu töflunum er:</p>
 <ul>
-<li>4 chains</li>
-<li>1,500 warmup iterations</li>
-<li>3,000 sampling iterations</li>
-<li><code>adapt_delta = 0.9</code> to reduce divergent transitions</li>
+<li><code>Fyrra</code>: ELO eða sæti í næstnýjustu vistuðu niðurstöðunni</li>
+<li><code>±</code>: mismunur milli námundaðra gildanna</li>
 </ul>
-<p>The high dimensionality (player strengths at each time point plus cube effects) requires careful tuning, but the non-centered parameterization of the OU process helps with sampling efficiency.</p>
+<p>Sætisbreytingin er því ekki hreinn “fór upp eða niður í heildarlista allra leikmanna”. Hún er reiknuð eftir að sömu birtingarsíur hafa verið keyrðar á nýjustu og fyrri niðurstöðu.</p>
+<p>Ef leikmaður var ekki inni í fyrri töflu, þá eru fyrri gildi tóm.</p>
 </section>
-<section id="model-comparison" class="level2">
-<h2 class="anchored" data-anchor-id="model-comparison">Model Comparison</h2>
-<p>The model includes generated quantities for leave-one-out cross-validation (LOO-CV) via the <code>loo</code> package. This allows comparison against simpler alternatives:</p>
-<ol type="1">
-<li><strong>Static Bradley-Terry</strong> — No temporal dynamics</li>
-<li><strong>OU without attendance effects</strong> — Single <span class="math inline">\(\phi\)</span> for everyone</li>
-<li><strong>No cube effects</strong> — Only time-varying <span class="math inline">\(\alpha\)</span></li>
-</ol>
-</section>
-<section id="limitations-and-future-directions" class="level2">
-<h2 class="anchored" data-anchor-id="limitations-and-future-directions">Limitations and Future Directions</h2>
-<p><strong>Current limitations:</strong></p>
+<section id="óvissa" class="level2">
+<h2 class="anchored" data-anchor-id="óvissa">Óvissa</h2>
+<p>Líkanið skilar ekki einni fastri tölu fyrir hvern leikmann heldur posterior-dreifingu.</p>
+<p>Á leikmannasíðunni eru sýnd:</p>
 <ul>
-<li>Cube effects are static (don’t evolve over time)</li>
-<li>No player-vs-player specific effects (some players might consistently beat others)</li>
-<li>Limited data per player can lead to high uncertainty</li>
-<li>The model doesn’t distinguish between “hasn’t played recently” and “new player”</li>
+<li>miðgildi</li>
+<li>50% bil (<code>score_q25</code> til <code>score_q75</code>)</li>
+<li>90% bil (<code>score_lower</code> til <code>score_upper</code>)</li>
 </ul>
-<p><strong>Potential extensions:</strong></p>
+<p>Breiðara bil þýðir yfirleitt að gögnin eru þynnri eða merkið óskýrara. Þetta er óvissa í matinu út frá skráðum leikjum, ekki spá um nákvæma útkomu næsta kvölds.</p>
+<p>Heildarstigataflan á forsíðunni sýnir þessa óvissu ekki beint; þar er bara miðgildið sýnt.</p>
+</section>
+<section id="hverjir-birtast-á-opinberu-töflunum" class="level2">
+<h2 class="anchored" data-anchor-id="hverjir-birtast-á-opinberu-töflunum">Hverjir birtast á opinberu töflunum</h2>
+<p>Birtingarsíurnar eru ekki hluti af Stan-líkaninu. Þær eru keyrðar ofan á niðurstöðurnar þegar vefurinn er byggður.</p>
+<p>Það sem gildir í dag:</p>
 <ul>
-<li>Glicko-style uncertainty inflation for inactive players (increase variance rather than shift mean)</li>
-<li>Separate ranking tables for different cube categories</li>
-<li>Time-varying cube effects</li>
-<li>Hierarchical priors on player-specific volatility</li>
+<li>aðeins leikmenn sem eru merktir <code>elo_table == TRUE</code> í <code>Players</code> blaðinu birtast opinberlega</li>
+<li>heildartaflan krefst að minnsta kosti 18 leikja alls</li>
+<li>heildartaflan krefst að minnsta kosti 15% vinningshlutfalls</li>
+<li>kubbatöflurnar krefjast að minnsta kosti 3 leikja í viðkomandi kubbaflokki</li>
+<li>kubbatöflurnar nota ekki sérstakt lágmark fyrir vinningshlutfall</li>
+<li>leikmenn detta út úr töflunum ef síðasti skráði leikur þeirra er eldri en 8 vikur</li>
+</ul>
+<p>Síðasta atriðið notar síðasta leik yfir höfuð, ekki síðasta leik í viðkomandi kubbaflokki. Leikmaður getur því birst á High töflunni þótt hann hafi ekki spilað High nýlega, svo lengi sem hann hefur verið virkur einhvers staðar síðustu 8 vikurnar.</p>
+<p>Opt-in sían ræður því hverjir sjást á síðunni. Hún breytir ekki því hvaða leikir telja inn í líkanið, þannig að leikir gegn leikmönnum sem birtast ekki opinberlega telja samt áfram.</p>
+</section>
+<section id="takmarkanir" class="level2">
+<h2 class="anchored" data-anchor-id="takmarkanir">Takmarkanir</h2>
+<ul>
+<li>Líkanið notar aðeins skráða sigra og töp í einstökum leikjum. Það sér hvorki pods, sætaval, decklist, andstæðingadreifingu né annað slíkt.</li>
+<li>Kubbaáhrifin eru aðeins fyrir fjóra breiða flokka og þau eru föst yfir tíma.</li>
+<li>Sumar aðrar síður á vefnum sýna tölfræði eftir upprunalegu kubbanöfnum. Það er lýsandi tölfræði, ekki nákvæmlega sami hlutinn og fer inn í stigalíkanið.</li>
+<li>Venjuleg uppfærsla endurreiknar ekki eldri dagsetningar. Ef gömlum gögnum er breytt eða líkanið sjálft breytist þarf <code>--force</code> til að endurreikna alla söguna.</li>
+<li>Tímahliðin notar vikur með lágmarkinu 1, sem er einföldun frekar en fínt stillt tímamódel.</li>
 </ul>
 
 
