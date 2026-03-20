@@ -32,6 +32,6 @@
     "href": "index.html",
     "title": "MtG Kubbur",
     "section": "",
-    "text": "ELO Rankings\nUpdated 2026-03-05\n\n\nviewof cubeFilter = Inputs.select(\n  [\"All\", \"High\", \"Medium\", \"Low\", \"Other\"],\n  {\n    label: \"Cube category:\",\n    value: \"All\"\n  }\n)\n\n\n\n\n\n\n\n{\n  const panels = document.querySelectorAll(\".cube-table-panel\");\n  panels.forEach(el =&gt; {\n    el.classList.toggle(\"active\", el.dataset.cube === cubeFilter);\n  });\n}"
+    "text": "ELO Rankings\nUpdated 2026-03-19\n\n\nviewof cubeFilter = Inputs.select(\n  [\"All\", \"High\", \"Medium\", \"Low\", \"Other\"],\n  {\n    label: \"Cube category:\",\n    value: \"All\"\n  }\n)\n\n\n\n\n\n\n\n{\n  const panels = document.querySelectorAll(\".cube-table-panel\");\n  panels.forEach(el =&gt; {\n    el.classList.toggle(\"active\", el.dataset.cube === cubeFilter);\n  });\n}"
   }
 ]
