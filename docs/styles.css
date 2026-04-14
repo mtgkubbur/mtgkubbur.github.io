@@ -4,7 +4,7 @@
   --mtg-blue: #0e68ab;
   --mtg-green: #00733e;
   --mtg-red: #d3202a;
-  --mtg-gold: #8b6914;
+  --mtg-gold: #c9a84c;
 
   --text-primary: #2a1f14;
   --text-muted: #5c4f42;
@@ -21,7 +21,7 @@
   --radius-lg: 12px;
   --shadow-soft: 0 1px 3px rgba(42, 31, 20, 0.04);
   --shadow-card: 0 2px 6px rgba(42, 31, 20, 0.06);
-  --shadow-hover: 0 4px 12px rgba(42, 31, 20, 0.10);
+  --shadow-hover: 0 4px 12px rgba(42, 31, 20, 0.1);
 }
 
 .quarto-dark {
@@ -32,13 +32,13 @@
 
   --text-primary: #e8e4dc;
   --text-muted: #9a9590;
-  --border-default: rgba(255, 255, 255, 0.10);
+  --border-default: rgba(255, 255, 255, 0.1);
   --surface-card: rgba(255, 255, 255, 0.04);
   --surface-soft: rgba(255, 255, 255, 0.04);
 
   --chart-grid: rgba(255, 255, 255, 0.12);
-  --chart-blue-area-1: rgba(59, 158, 221, 0.10);
-  --chart-blue-area-2: rgba(59, 158, 221, 0.20);
+  --chart-blue-area-1: rgba(59, 158, 221, 0.1);
+  --chart-blue-area-2: rgba(59, 158, 221, 0.2);
 
   --shadow-soft: 0 2px 10px rgba(0, 0, 0, 0.18);
   --shadow-card: 0 2px 12px rgba(0, 0, 0, 0.2);
@@ -65,8 +65,8 @@ body:has(.h2h-layout) #quarto-content {
 /* ─── Page hero header — rich parchment with depth ─── */
 .page-header {
   text-align: center;
-  margin-bottom: 2.5rem;
-  padding: 3.5rem 1.5rem 2.5rem;
+  margin-bottom: 1.75rem;
+  padding: 3rem 1.5rem 2rem;
   position: relative;
   overflow: hidden;
   z-index: 0;
@@ -76,9 +76,21 @@ body:has(.h2h-layout) #quarto-content {
      2. Subtle noise-like texture via repeating gradient
      3. Deep parchment base */
   background:
-    radial-gradient(ellipse 60% 100% at 50% 40%, rgba(201, 168, 76, 0.15) 0%, transparent 60%),
-    radial-gradient(ellipse 100% 80% at 20% 80%, rgba(14, 104, 171, 0.04) 0%, transparent 50%),
-    radial-gradient(ellipse 100% 80% at 80% 80%, rgba(0, 115, 62, 0.04) 0%, transparent 50%),
+    radial-gradient(
+      ellipse 60% 100% at 50% 40%,
+      rgba(201, 168, 76, 0.15) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 20% 80%,
+      rgba(14, 104, 171, 0.04) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 100% 80% at 80% 80%,
+      rgba(0, 115, 62, 0.04) 0%,
+      transparent 50%
+    ),
     linear-gradient(180deg, #e0d3c0 0%, #ece5da 40%, #f6f2ec 80%, #fefefe 100%);
   border-bottom: none;
   box-shadow:
@@ -97,7 +109,11 @@ body:has(.h2h-layout) #quarto-content {
   height: 140px;
   border-radius: 50%;
   border: 1.5px solid rgba(201, 168, 76, 0.18);
-  background: radial-gradient(ellipse, rgba(201, 168, 76, 0.08) 0%, transparent 70%);
+  background: radial-gradient(
+    ellipse,
+    rgba(201, 168, 76, 0.08) 0%,
+    transparent 70%
+  );
   pointer-events: none;
   z-index: -1;
 }
@@ -112,7 +128,7 @@ body:has(.h2h-layout) #quarto-content {
   width: 650px;
   height: 180px;
   border-radius: 50%;
-  border: 1px solid rgba(201, 168, 76, 0.10);
+  border: 1px solid rgba(201, 168, 76, 0.1);
   pointer-events: none;
   z-index: -1;
 }
@@ -134,11 +150,26 @@ body:has(.h2h-layout) #quarto-content {
   transform: scale(1.3);
 }
 
-.page-header .mana-pip-w { color: #c9a84c; opacity: 0.7; }
-.page-header .mana-pip-u { color: #0e68ab; opacity: 0.7; }
-.page-header .mana-pip-b { color: #3d3028; opacity: 0.5; }
-.page-header .mana-pip-r { color: #d3202a; opacity: 0.7; }
-.page-header .mana-pip-g { color: #00733e; opacity: 0.7; }
+.page-header .mana-pip-w {
+  color: #c9a84c;
+  opacity: 0.7;
+}
+.page-header .mana-pip-u {
+  color: #0e68ab;
+  opacity: 0.7;
+}
+.page-header .mana-pip-b {
+  color: #3d3028;
+  opacity: 0.5;
+}
+.page-header .mana-pip-r {
+  color: #d3202a;
+  opacity: 0.7;
+}
+.page-header .mana-pip-g {
+  color: #00733e;
+  opacity: 0.7;
+}
 
 .page-header h1 {
   font-size: 2.5rem;
@@ -174,7 +205,7 @@ body:has(.h2h-layout) #quarto-content {
   border-radius: 14px;
   margin-top: 1rem;
   letter-spacing: 0.02em;
-  border: 1px solid rgba(201, 168, 76, 0.20);
+  border: 1px solid rgba(201, 168, 76, 0.2);
   box-shadow: 0 1px 2px rgba(139, 105, 20, 0.08);
 }
 
@@ -199,7 +230,9 @@ body:has(.h2h-layout) #quarto-content {
 .h2h-elo-chart,
 .cube-combined-card,
 .player-summary {
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .score-table:hover,
@@ -219,16 +252,21 @@ body:has(.h2h-layout) #quarto-content {
   border: 1px solid var(--border-default);
   border-radius: var(--radius-lg);
   padding: 16px 20px 8px;
-  box-shadow: var(--shadow-card), 0 0 0 1px rgba(201, 168, 76, 0.06);
+  box-shadow:
+    var(--shadow-card),
+    0 0 0 1px rgba(201, 168, 76, 0.06);
 }
 
 /* Podium highlight for top 3 rows — left accent + medal pip */
-.score-table .rt-tr-group:nth-child(-n+3) .rt-td:first-child {
+.score-table .rt-tr-group:nth-child(-n + 3) .rt-td:first-child {
   position: relative;
   padding-left: 28px;
 }
 
-.score-table .rt-tr-group:nth-child(-n+3) .rt-td:first-child .rt-td-inner::before {
+.score-table
+  .rt-tr-group:nth-child(-n + 3)
+  .rt-td:first-child
+  .rt-td-inner::before {
   content: "";
   position: absolute;
   left: 10px;
@@ -266,7 +304,7 @@ body:has(.h2h-layout) #quarto-content {
   box-shadow: 0 0 4px rgba(184, 115, 51, 0.4);
 }
 
-.score-table .rt-tr-group:nth-child(n+4) .rt-td:first-child {
+.score-table .rt-tr-group:nth-child(n + 4) .rt-td:first-child {
   border-left: 4px solid transparent;
 }
 
@@ -282,7 +320,9 @@ body:has(.h2h-layout) #quarto-content {
   background-position: 10px center;
   background-size: 14px;
   padding-left: 32px;
-  transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  transition:
+    border-color 0.15s ease,
+    box-shadow 0.15s ease;
 }
 
 .score-table .rt-search input:focus {
@@ -325,6 +365,29 @@ body:has(.h2h-layout) #quarto-content {
 /* Secondary "Fyrra" columns — muted but legible */
 .score-table .score-prev-cell {
   color: #7a6e60 !important;
+}
+
+/* Wins column — themed green */
+.score-table .wins-col {
+  color: #00733e !important;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Losses column — themed red */
+.score-table .losses-col {
+  color: #d3202a !important;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+
+/* Win-rate percentage label */
+.score-table .winrate-label {
+  font-size: 12px;
+  color: var(--text-muted);
+  min-width: 30px;
+  text-align: right;
+  font-variant-numeric: tabular-nums;
 }
 
 /* Column group headers */
@@ -441,12 +504,14 @@ body:has(.h2h-layout) #quarto-content {
   border-radius: var(--radius-sm);
   padding: 1rem;
   box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .dashboard-grid .cell:hover,
 .chart-row-full .cell:hover {
-  box-shadow: 0 4px 12px rgba(42, 31, 20, 0.10);
+  box-shadow: 0 4px 12px rgba(42, 31, 20, 0.1);
   border-color: #c4bfb9;
 }
 
@@ -692,7 +757,7 @@ body:has(.h2h-layout) #quarto-content {
 /* Axis label typography */
 .profile-charts svg text,
 .h2h-elo-chart svg text {
-  font-family: 'Inter', system-ui, sans-serif;
+  font-family: "Inter", system-ui, sans-serif;
 }
 
 /* ─── Player summary card ─── */
@@ -1032,7 +1097,9 @@ body:has(.h2h-layout) #quarto-content {
   border-radius: var(--radius-sm);
   padding: 1rem 1.25rem;
   box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .trophy-card:hover {
@@ -1076,7 +1143,9 @@ body:has(.h2h-layout) #quarto-content {
   border-radius: var(--radius-sm);
   padding: 1rem 1.25rem;
   box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .recent-events-card:hover {
@@ -1122,7 +1191,9 @@ body:has(.h2h-layout) #quarto-content {
   border-radius: var(--radius-sm);
   padding: 1rem 1.25rem;
   box-shadow: var(--shadow-soft);
-  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  transition:
+    box-shadow 0.2s ease,
+    border-color 0.2s ease;
 }
 
 .calendar-table-card:hover {
@@ -1225,16 +1296,32 @@ body:has(.h2h-layout) #quarto-content {
 /* ─── Dark: Page hero header ─── */
 .quarto-dark .page-header {
   background:
-    radial-gradient(ellipse 50% 90% at 50% 40%, rgba(212, 168, 67, 0.12) 0%, transparent 60%),
-    radial-gradient(ellipse 80% 60% at 15% 70%, rgba(59, 158, 221, 0.05) 0%, transparent 50%),
-    radial-gradient(ellipse 80% 60% at 85% 70%, rgba(46, 204, 113, 0.05) 0%, transparent 50%),
-    linear-gradient(180deg, #12121a 0%, #0e0e14 100%);
-  box-shadow: inset 0 -1px 0 0 rgba(212, 168, 67, 0.1);
+    radial-gradient(
+      ellipse 50% 90% at 50% 40%,
+      rgba(212, 168, 67, 0.18) 0%,
+      transparent 60%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 15% 70%,
+      rgba(59, 158, 221, 0.06) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 85% 70%,
+      rgba(46, 204, 113, 0.06) 0%,
+      transparent 50%
+    ),
+    linear-gradient(180deg, #1a1820 0%, #141218 60%, #0e0e14 100%);
+  box-shadow: inset 0 -1px 0 0 rgba(212, 168, 67, 0.15);
 }
 
 .quarto-dark .page-header::before {
-  border-color: rgba(212, 168, 67, 0.12);
-  background: radial-gradient(ellipse, rgba(212, 168, 67, 0.06) 0%, transparent 70%);
+  border-color: rgba(212, 168, 67, 0.15);
+  background: radial-gradient(
+    ellipse,
+    rgba(212, 168, 67, 0.08) 0%,
+    transparent 70%
+  );
 }
 
 .quarto-dark .page-header::after {
@@ -1245,11 +1332,26 @@ body:has(.h2h-layout) #quarto-content {
   filter: brightness(1.3);
 }
 
-.quarto-dark .page-header .mana-pip-w { color: #d4a843; opacity: 1; }
-.quarto-dark .page-header .mana-pip-u { color: #3b9edd; opacity: 1; }
-.quarto-dark .page-header .mana-pip-b { color: #6a6060; opacity: 1; }
-.quarto-dark .page-header .mana-pip-r { color: #e74c3c; opacity: 1; }
-.quarto-dark .page-header .mana-pip-g { color: #2ecc71; opacity: 1; }
+.quarto-dark .page-header .mana-pip-w {
+  color: #d4a843;
+  opacity: 1;
+}
+.quarto-dark .page-header .mana-pip-u {
+  color: #3b9edd;
+  opacity: 1;
+}
+.quarto-dark .page-header .mana-pip-b {
+  color: #6a6060;
+  opacity: 1;
+}
+.quarto-dark .page-header .mana-pip-r {
+  color: #e74c3c;
+  opacity: 1;
+}
+.quarto-dark .page-header .mana-pip-g {
+  color: #2ecc71;
+  opacity: 1;
+}
 
 .quarto-dark .page-header h1 {
   color: #e8e4dc;
@@ -1330,11 +1432,23 @@ body:has(.h2h-layout) #quarto-content {
   color: #7a7670 !important;
 }
 
+.quarto-dark .score-table .wins-col {
+  color: #2ecc71 !important;
+}
+
+.quarto-dark .score-table .losses-col {
+  color: #e74c3c !important;
+}
+
 /* Podium medals — dark */
 .quarto-dark .score-table .rt-tr-group:nth-child(1) .rt-td:first-child {
   border-left-color: #d4a843;
 }
-.quarto-dark .score-table .rt-tr-group:nth-child(1) .rt-td:first-child .rt-td-inner::before {
+.quarto-dark
+  .score-table
+  .rt-tr-group:nth-child(1)
+  .rt-td:first-child
+  .rt-td-inner::before {
   background: linear-gradient(135deg, #f0d060, #c49630);
   box-shadow: 0 0 6px rgba(212, 168, 67, 0.5);
 }
@@ -1342,20 +1456,36 @@ body:has(.h2h-layout) #quarto-content {
 .quarto-dark .score-table .rt-tr-group:nth-child(2) .rt-td:first-child {
   border-left-color: #8a8a8a;
 }
-.quarto-dark .score-table .rt-tr-group:nth-child(2) .rt-td:first-child .rt-td-inner::before {
+.quarto-dark
+  .score-table
+  .rt-tr-group:nth-child(2)
+  .rt-td:first-child
+  .rt-td-inner::before {
   background: linear-gradient(135deg, #c0c0c0, #808080);
   box-shadow: 0 0 4px rgba(160, 160, 160, 0.4);
 }
 
 /* Podium row backgrounds — override R-generated gradients */
 .quarto-dark .score-table .rt-tr-group:nth-child(1) .rt-tr {
-  background: linear-gradient(90deg, rgba(212, 168, 67, 0.12) 0%, rgba(212, 168, 67, 0.02) 100%) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(212, 168, 67, 0.12) 0%,
+    rgba(212, 168, 67, 0.02) 100%
+  ) !important;
 }
 .quarto-dark .score-table .rt-tr-group:nth-child(2) .rt-tr {
-  background: linear-gradient(90deg, rgba(160, 160, 160, 0.08) 0%, rgba(160, 160, 160, 0.01) 100%) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(160, 160, 160, 0.08) 0%,
+    rgba(160, 160, 160, 0.01) 100%
+  ) !important;
 }
 .quarto-dark .score-table .rt-tr-group:nth-child(3) .rt-tr {
-  background: linear-gradient(90deg, rgba(184, 115, 51, 0.08) 0%, rgba(184, 115, 51, 0.01) 100%) !important;
+  background: linear-gradient(
+    90deg,
+    rgba(184, 115, 51, 0.08) 0%,
+    rgba(184, 115, 51, 0.01) 100%
+  ) !important;
 }
 
 /* Search input */
