@@ -19,14 +19,24 @@ gs4_auth(email = Sys.getenv("GOOGLE_MAIL"))
 
 sheet_url <- "https://docs.google.com/spreadsheets/d/1bq5DXQs1nobk0nu9cN-4UOHPkcPK3fvkTLa2t2lVNKk/edit?usp=sharing"
 
+cube_list <- read_sheet(sheet_url, sheet = "Cube list") |>
+  janitor::clean_names() |>
+  transmute(
+    cube_key = str_to_lower(name),
+    cube_link = if_else(str_detect(link, "^https?://"), link, NA_character_)
+  )
+
 calendar <- read_sheet(sheet_url, sheet = "Cube calendar") |>
   janitor::clean_names() |>
   mutate(
     date = as_date(date),
     cube = str_to_title(cube),
-    host = str_to_title(host)
+    host = str_to_title(host),
+    cube_key = str_to_lower(cube)
   ) |>
   filter(!is.na(cube), cube != "", cube != "NA") |>
+  left_join(cube_list, by = "cube_key") |>
+  select(-cube_key) |>
   arrange(date)
 
 today <- today()
@@ -123,6 +133,14 @@ past = transpose(past_data).map(d => ({
 
   const clean = v => (v === undefined || v === null || v === "undefined" || v === "NA") ? "" : v;
 
+  const cubeCell = e => {
+    const name = clean(e.cube);
+    const link = clean(e.cube_link);
+    if (!name) return "";
+    if (!link) return name;
+    return html`<a href="${link}" target="_blank" rel="noopener">${name}</a>`;
+  };
+
   const nextDate = upcoming.length > 0 ? +upcoming[0].date : null;
   const isNext = d => nextDate !== null && +d === nextDate;
 
@@ -148,7 +166,7 @@ past = transpose(past_data).map(d => ({
           ${upcoming.map(e => html`
             <tr class="${isNext(e.date) ? "calendar-next-event" : ""}">
               <td>${fmtDate(e.date)}</td>
-              <td>${clean(e.cube)}</td>
+              <td>${cubeCell(e)}</td>
               <td>${clean(e.host)}</td>
             </tr>
           `)}
@@ -176,7 +194,7 @@ past = transpose(past_data).map(d => ({
             ${past.map(e => html`
               <tr>
                 <td>${fmtDate(e.date)}</td>
-                <td>${clean(e.cube)}</td>
+                <td>${cubeCell(e)}</td>
                 <td>${clean(e.host)}</td>
                 <td style="text-align: center;">${clean(e.players) || "—"}</td>
               </tr>
